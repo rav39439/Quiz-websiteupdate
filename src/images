@@ -1,0 +1,5 @@
+INSERT INTO `testdb`.`mytable` (`Sno`) VALUES ('1');
+INSERT INTO `testdb`.`mytable` (`Sno`) VALUES ('2');
+INSERT INTO `testdb`.`mytable` (`Sno`) VALUES ('3');
+INSERT INTO `testdb`.`mytable` (`Sno`) VALUES ('4');
+INSERT INTO `testdb`.`mytable` (`Sno`) VALUES ('5');

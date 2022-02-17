@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<%- include('../partials/heading5.hbs') %>
+
+<body>
+
+
+  <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Answer student query here</h1>
+
+<% if(strdata.length!=null){ %> 
+
+  <div id="rat"style="display:none"><%=strdata%></div>
+  <%} %> 
+  <div class="border mb-3"style="height:100px;width:300px;margin-left:500px">
+    <div style="margin-left:60px;border-radius: 8px;">
+      <h4>Your Credentials</h4>
+    <div id="name">Name:<%=name%> </div>
+    <div id="uniquecode">Uniquecode:<%=uniquecode%> </div>
+  
+  </div>
+  </div>
+
+  <% if(typeof(userdata)!='undefined'){ %> 
+<% userdata.forEach(function(elem,index){%>
+
+<% if((name==elem.teachname)&&(uniquecode==elem.tuniquecode)){ %>
+
+  <div class="border mt-4 " id="mynew<%=index%>"style="width:650px;height:auto">
+<div class="border mt-2 mb-2 bg-light"style="height:auto;width:600px">
+
+  <h3>Query asked by student</h3>
+<% if(elem.questionasked){%>
+  <p>
+    <%=elem.questionasked%>
+</p>
+<%} %> 
+    <% if(elem.imageques) { %>
+      <a href="/wholeimage2?image=<%= elem.imageques %>"> <img class="border"style="width:300px;height:300px;" src="<%=elem.imageques %>"alt=""></a>
+
+   <% }%>
+
+<% if(elem.files) {%> 
+
+  <a href="/introfile?file=<%=elem.files%>"><%=elem.files%></a>
+    <% }%>
+
+    <p>
+       topic: <%=elem.topic%>
+       
+    </p>
+    <p>
+      asked by  <%=elem.studentname%>
+       
+    </p>
+
+
+
+    <div id="replies"></div>
+    <button class="btn btn-primary mt-2"type="button"id=<%=index%> onclick="showreply(this)">
+      reply
+    </button>
+    
+    <form id="form<%=index%>"method="POST"style="display:none">
+    <textarea id="reply<%=index%>" rows="3"></textarea>
+    <input type="text" style="display:none" value=<%=name%> id="name<%=index%>" name="name">
+    <input type="number" style="display: none;" value=<%=elem.id%>  id="commentid<%=index%>" name="commentid<%=index%>">
+    <button type="submit">submit reply</button>
+    </form>
+    
+
+    <form id="aform<%=index%>"method="POST">
+      <input type="hidden" value=<%=elem.id%>  id="comment<%=index%>" name="commentid<%=index%>">
+      <button type="submit">getreply</button>
+      </form>
+    
+
+
+  </div>
+
+  <div class="border mt-2 mb-2 bg-light"style="height:auto;width:600px">
+
+<h3>Answer given by teacher</h3>
+
+    <% if(elem.images){%>
+
+      <a href="/wholeimage1?image=<%= elem.images %>"> <img class="border"style="width:300px;height:300px;" src="<%=elem.images %>"alt=""></a>
+    
+    <%} %> 
+
+
+    <% if(elem.tfiles) {%> 
+
+      <a href="/introfile?file=<%=elem.tfiles%>"><%=elem.tfiles%></a>
+        <% }%>
+<p><%=elem.ansgiven%></p>
+<p>topic:<%=elem.topic%></p>
+
+
+<p>answered by<%=elem.teachname%></p>
+
+
+</div>
+
+
+    <form id="myform<%=elem.id %>" method="POST"enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Enter or update your ans to a question here</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"id="ans<%=elem.id%>" style="width:500px"></textarea>
+      </div>
+        <div class="form-group">
+          <input type="hidden" class="form-control" id="exampleInputPassword1<%=elem.id %>" style="width:200px" placeholder="Password"name="id" id="id<%=elem.id%>"value=<%=elem.id%>>
+        </div>
+        <div class="d-inline-flex ml-2">
+        <div class="form-group">
+
+            <button class="btn btn-primary" data-toggle="modal" id="#myModal<%=elem.id %> " type="button"onclick="showdialog(this)">
+                Upload answer
+            </button>
+          </div>
+        <div class="form-group">
+
+            <button class="btn btn-primary ml-2" data-toggle="modal" id="#myModa<%=elem.id %> " type="button"onclick="showdialog1(this)">
+                Upload file
+            </button>
+          </div>
+        </div>
+        <textbox rows="3" id="reply" style="width:200px;display:none"></textbox>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        
+      </form>
+      <button  class="btn btn-primary" id='<%=elem.studentname%>' value='<%=elem.uniquecode%>'onclick="block(this)">block</button>
+     
+        <button  class="btn btn-primary"id='<%=elem.studentname%>'value='<%=elem.uniquecode%>'onclick="unblock(this)">unblock</button>
+        <button  class="btn btn-primary"id='<%=elem.id%>' value='<%=elem.questionasked%>'onclick="clearg(this)">clearquestion</button>
+      <%} %> 
+
+
+
+      <div class="modal fade" id="myModal<%=elem.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel1">
+                Upload Image
+                </h4>
+                <button type="button"class="close"data-dismiss="modal"aria-hidden="true">
+                    x
+                </button>
+            </div>       
+           
+            <div class="modal-body">
+                <form method="POST" action="" enctype="multipart/form-data" id="form-upload<%=elem.id%>">
+                <div class="form-group">
+                    <input type="file" name="file" id="file" class="form-control">
+                </div>
+                <input type="submit"class="btn btn-success" value="Upload">
+                </form>
+              
+            </div>
+        </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="modal fade" id="myModa<%=elem.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel1">
+                Upload file
+                </h4>
+                <button type="button"class="close"data-dismiss="modal"aria-hidden="true">
+                    x
+                </button>
+            </div>       
+           
+            <div class="modal-body">
+                <form method="POST" action="" enctype="multipart/form-data" id="form-uploa<%=elem.id%>">
+                <div class="form-group">
+                    <input type="file" name="file" id="file" class="form-control">
+                </div>
+                <input type="submit"class="btn btn-success" value="Upload">
+                </form>
+              
+            </div>
+        </div>
+        </div>
+      </div>
+
+    </div>
+
+    <%}) %> 
+
+    <%} %> 
+
+  
+
+
+
+
+    <script>
+
+function showreply(data){
+  let id=data.id
+ // document.getElementById(data.id).style.display="block"
+  document.getElementById("form"+data.id).style.display="block"
+}
+
+
+
+ let newdata=document.getElementById("rat").innerText
+  Mydata=JSON.parse(newdata)
+  console.log(Mydata)
+  console.log(Mydata.length)
+let name=document.getElementById("name")
+let uniquecode=document.getElementById("tu")
+let length=0;
+for(let i=0;i<Mydata.length;i++){
+  if((name==Mydata[i].teachname)&&(uniquecode==Mydata[i].tuniquecode)){
+
+    length=length+1
+}
+}
+console.log(length)
+
+function showdialog(data){
+   let myid=data.id
+//console.log("#"+data.id)
+  // for(let j=1;j<=2;j++){
+
+    $(myid).modal("show")
+
+//}
+}
+function showdialog1(data){
+   let myid=data.id
+console.log("#"+data.id)
+  // for(let j=1;j<=2;j++){
+
+    $(myid).modal("show")
+
+//}
+}
+
+
+
+
+$(document).ready(function(){
+ 
+
+for(let j=1;j<=30;j++){
+  
+  
+
+//console.log('#khkj'+j)
+//var myform="myform"+'1'
+$('#myform'+j).on("submit",function(e){  
+  
+  e.preventDefault()
+//console.log(e.target.children[1].children[1])
+    //var now = new Date();
+
+       var formData = {
+      ans: e.target.children[0].children[1].value,
+     id:e.target.children[1].children[0].value,
+  
+     myimageans:imagePath,
+    myfile:filePath,
+ 
+    
+    
+   };
+   alert(formData.ans)
+
+    ///console.log(myquestionimg)
+    
+  //alert("jhvjmhvj")
+        $.ajax({
+            url:"/getquestions",
+            method:"POST",
+            data:formData,
+            success:function(response){
+              $("#file").val('');
+             imagePath=""
+             filePath=""
+             $("#reply"+j).val('')
+              /// alert("question submitted")
+              //formData._id=response._id
+            
+             
+             
+            }
+        })
+        //return false;
+    
+    })
+
+ 
+
+    var imagePath=""
+
+$("#form-upload"+j).on("submit",function(e){
+  
+e.preventDefault()
+alert("sadfg")
+//var myform=new FormData(this)
+//console.log(myform.value)
+//alert(myform)
+$.ajax({
+  url: "/do-uploadprofileimage4",
+  type: "POST",
+  data: new FormData(this),
+  contentType: false,
+  cache:false,
+  processData: false,
+  success:function(response){
+   
+ alert(response)
+  
+    imagePath=response;
+        console.log(imagePath)
+    //$("#myModal").modal("hide")
+  }
+})
+
+})
+
+
+
+var filePath="";
+$("#form-uploa"+j).on("submit",function(e){
+  
+e.preventDefault()
+
+alert("dfatr")
+
+$.ajax({
+  url: "/do-uploadpdffile",
+  type: "POST",
+  data: new FormData(this),
+  contentType: false,
+  cache:false,
+  processData: false,
+  success:function(response){
+   
+    alert(response)
+  
+  //imagePath=response;
+      console.log(filePath)
+  
+    filePath=response;
+        
+    $("#myModal"+j).modal("hide")
+  }
+})
+
+})
+
+
+$("#form"+j).on("submit",function(e){
+
+e.preventDefault()
+
+alert("dsfagaddd")
+let html=""
+var formData={
+  name:$("#name"+j).val(),
+  commentid:$("#commentid"+j).val(),
+  reply:$("#reply"+j).val()
+}
+
+console.log(formData.name)
+console.log(formData.commentid)
+$.ajax({
+url: "/do-reply",
+type: "POST",
+data: formData,
+
+success:function(response){
+ 
+alert(response.data)
+$("#reply"+j).val('')
+
+}
+})
+
+})
+
+
+
+$("#aform"+j).on("click",function(e){
+
+//document.getElementById("reply").style.display="block"
+e.preventDefault()
+
+
+alert("dsfasgf")
+var formData={
+ 
+  commentid:$("#comment"+j).val(),
+  
+}
+
+
+$.ajax({
+url: "/do-getreply",
+type: "POST",
+data: formData,
+
+success:function(response){
+ 
+alert(response.data)
+let html=""
+
+ if(typeof(response.data)!='undefined'){
+   let newdata=JSON.parse(response.data)
+
+   newdata.forEach(function(elem){
+
+     if(formData.commentid==elem.commentid){
+      if(elem.name!=name){
+        html+='<div class="bg-white border mt-1"style="width:400px;border-radius:8px;margin-left:50px"">'
+   html+=`<p>${elem.reply}</p>`
+   html+=`<p>${elem.name}</p>`
+   html+=`<p>${elem.date}</p>`
+   html+=`</div>`
+       }else{
+
+        html+='<div class="bg-white border mt-1"style="width:400px;border-radius:8px;>'
+  html+=`<p>${elem.reply}</p>`
+   html+=`<p> replied by ${elem.name}</p>`
+   html+=`<p>${elem.date}</p>`
+   html+=`</div>`
+       }
+
+}
+
+  document.getElementById("mynew"+j).children[0].children[3].innerHTML=html
+  
+  })
+ }
+  
+}
+})
+
+})
+
+
+
+
+
+
+
+}
+
+})
+
+
+function block(data){
+  console.log(data.id)
+  console.log(data.value)
+  let newdata=document.getElementById("rat").innerText
+console.log(newdata)
+  //e.preventDefault()
+var formData={
+  user:data.id,
+  uniquecode:data.value,
+  alldata:newdata
+
+}
+alert(formData.alldata)
+
+$.ajax({
+  url: "/do-block",
+  type: "POST",
+  data: formData,
+ 
+  success:function(response){
+   
+ alert("user has been blocked")
+  
+    //imagePath=response;
+       // console.log(imagePath)
+    //$("#myModal").modal("hide")
+  }
+
+
+
+
+  
+})
+
+
+
+}
+
+
+
+function unblock(data){
+  console.log(data.id)
+  console.log(data.value)
+  let newdata=document.getElementById("rat").innerText
+
+  //e.preventDefault()
+alert("sadfg")
+var formData={
+  user:data.id,
+  uniquecode:data.value,
+  alldata:newdata
+
+}
+$.ajax({
+  url: "/do-unblock",
+  type: "POST",
+  data: formData,
+ 
+  success:function(response){
+   
+ alert("user unblocked")
+  
+    //imagePath=response;
+     //   console.log(imagePath)
+    //$("#myModal").modal("hide")
+  }
+})
+
+}
+
+function clearg(data){
+  console.log(data.id)
+  console.log(data.value)
+  
+  let newdata=document.getElementById("rat").innerText
+
+ // e.preventDefault()
+alert("sadfg")
+var formData={
+  commentid:data.id,
+
+  questionasked:data.value,
+  alldata:newdata,
+  
+}
+$.ajax({
+  url: "/do-clear",
+  type: "POST",
+  data: formData,
+ 
+  success:function(response){
+   
+ alert("question cleared")
+  
+   // imagePath=response;
+       // console.log(imagePath)
+    //$("#myModal").modal("hide")
+  }
+})
+
+
+}
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+</body>
+</html>

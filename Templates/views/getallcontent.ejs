@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<%- include('../partials/heading1.hbs') %>
+
+
+<body>
+
+    <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Get Your Contents here</h1>
+
+
+<div class="border"style="width:700px;margin-left;400px;border-radius:8px">
+    <div style="margin-left:150px">
+<form action="/getallcontent"method="POST">
+    <div class="form-group">
+        <label for="exampleFormControlSelect1"> select the topic of your content</label>
+        <select class="form-control mt-2" id="content" name="content" style="width:300px" >
+            <% if(typeof(content)!='undefined') {%> 
+                <option value="<%=content%>"><%=content%> </option>
+
+           
+
+            <% } %> 
+            <option value="ssc cgl">ssccgl </option>
+
+            <option value="iitjee">iitjee</option>
+            <option value="bankexams">bankexams</option>
+            <option value="ssccglcontent">ssc formulas</option>
+            <option value="iitjeecotent">iitjee formulas</option>
+            <option value="bankexamscontent">bankexams formulas</option>
+           
+          </select>
+      </div>  
+
+      <button type="submit"class="btn btn-primary mt-2">click to see content</button>
+    
+    </form>
+</div>
+</div>
+
+<% if(typeof(data)!='undefined'){ %> 
+
+
+   
+    <% data.forEach(function(elem){%>
+        <div class="border bg-light"style="border-radius:8px">
+        <% if(elem.content==content){ %> 
+
+<p><%=elem.topic%></p>
+<p><%=elem.content%></p>
+
+<% if(elem.data){ %>
+    <a href="/wholeimage?image=<%= elem.data %>"> <img class="border"style="width:300px;height:300px;" src="<%=elem.data %>"alt=""></a>
+
+<%} %> 
+<% if(elem.filedata){ %>
+
+    <a href="/introfile?file=<%=elem.filedata%>"><%=elem.filedata%></a>
+<%} %> 
+
+<p>uploaded by <%=elem.uploadedby%></p>
+
+<%}%>
+        </div>
+    <%}) %> 
+
+    <%}else{%>
+     
+<h1 class="mt-5"style="font-family: Arial">
+    No contents uploaded
+</h1>
+
+        <%}%>    
+</body>
+</html>

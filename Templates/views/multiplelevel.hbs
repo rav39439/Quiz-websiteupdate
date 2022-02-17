@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+        input[type="text"]::placeholder { 
+                  
+                /* Firefox, Chrome, Opera */
+                text-align: center;
+            }
+        input[type="number"]::placeholder { 
+                  
+                /* Firefox, Chrome, Opera */
+                text-align: center;
+            }
+
+
+</style>
+
+
+<body>
+    {{>heading5}}
+
+          <div class="bg-light mt-5" style="text-align:center">
+
+
+    <form action="/readinfo1" method="GET">
+<div class="form-group">
+    <label for="exampleInputEmail1">Enter Quizname</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Quizname"name="Myname"style="width:500px;margin-left:400px">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Your name</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="name" style="width:500px;margin-left:400px"name="regno1">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Your name</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="name"style="width:500px;margin-left:400px"name="Myquiz">
+  </div>
+
+
+   
+        <button type="submit">Enter multilevel quiz</button>
+    </form>
+
+    </div>
+</body>
+</html>

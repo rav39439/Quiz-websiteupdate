@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<%- include('../partials/heading5.hbs') %>
+
+
+<body>
+    
+<div class="border"style="text-align:center">
+    <form id="myform"method="POST"enctype="multipart/form-data" >
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Enter the details of your content here</label>
+        <textarea class="form-control" id="details" rows="3"name="details"></textarea>
+      </div>
+
+
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1"> select the topic of your content</label>
+        <select class="form-control" id="content" name="content" style="width:600px;margin-left:400px">
+          <option value="ssccgl">ssc cgl</option>
+          <option value="iitjee">iitjee</option>
+          <option value="bankexams">bankexams</option>
+          <option value="ssccglcontent">ssc formulas</option>
+          <option value="iitjeecotent">iitjee formulas</option>
+          <option value="bankexams content">bankexams formulas</option>
+         
+        </select>
+      </div>     
+      
+
+
+      <button class="btn btn-primary mt-2" data-toggle="modal" data-target="#myModal"  id="submitform"type="button"onclick="showdialog(this)">
+        Upload image
+    </button>
+
+
+      <button class="btn btn-primary mt-2" data-toggle="modal" data-target="#myModal1"  id="submitform"type="button"onclick="showdialog1(this)">
+        Upload pdffile
+    </button><br>
+    
+
+    <div class="form-group">
+      <label for="exampleFormControlSelect1"> status of content</label>
+      <select class="form-control" id="status" name="status" onchange="myfunction1()" style="width:600px;margin-left:400px">
+        <option value="public">public</option>
+        <option value="hidden">hidden</option>      
+      </select>
+    </div>     
+      
+
+    <div class="form-group">
+        <p type="hidden" id="pass">Enter the password to secure the content</p>
+        <input class="form-control" style="width:600px;margin-left:400px;display:none" id="secretpass" placeholder="secret password" name="noofquestion" style="width:600px;margin-left:400px">
+      </div>
+    <div class="form-group">
+        <p type="hidden" id="unique">Enter the uniquecode</p>
+        <input class="form-control"style="width:600px; margin-left:400px;display:none" id="uniquecode" placeholder="uniquecode" name="noofquestion" style="width:600px;margin-left:400px">
+      </div>
+    
+<button type="submit" class="btn btn-primary mt-5">Upload</button>
+    </form>
+</div>
+
+
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel1">
+                Upload Image
+                </h4>
+                <button type="button"class="close"data-dismiss="modal"aria-hidden="true">
+                    x
+                </button>
+            </div>       
+           
+            <div class="modal-body">
+                <form method="POST" action="" enctype="multipart/form-data" id="form-upload">
+                <div class="form-group">
+                    <input type="file" name="file" id="file" class="form-control">
+                </div>
+                <input type="submit"class="btn btn-success" value="Upload">
+                </form>
+              
+            </div>
+        </div>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                Upload Image
+                </h4>
+                <button type="button"class="close"data-dismiss="modal"aria-hidden="true">
+                    x
+                </button>
+            </div>       
+           
+            <div class="modal-body">
+                <form method="POST" action="" enctype="multipart/form-data" id="form-upload1">
+                <div class="form-group">
+                    <input type="file" name="file" id="file" class="form-control">
+                </div>
+                <input type="submit"class="btn btn-success" value="Upload">
+                </form>
+              
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+
+
+function showdialog(data){
+   let myid=data.id
+    $("#myModal").modal("show")
+
+}
+function showdialog1(data){
+   let myid=data.id
+    $("#myModal1").modal("show")
+
+}
+
+
+
+$("#myform").on("submit",function(e){  
+  
+  e.preventDefault()
+     alert("ddd")
+
+    //var now = new Date();
+
+       var formData = {
+      details:$("#details").val(),
+     content:$("#content").val(),
+     secretcode:$("#secretpass").val(),
+     uniquecode:$("#uniquecode").val(),
+     status:$("#status").val(),
+    
+  
+     uploadimg:imagePath,
+     myfile:filePath,
+    
+ 
+    
+    
+   };
+   console.log(formData.status)
+   console.log(formData.content)
+   console.log(formData.details)
+   console.log(formData.secretcode)
+   //console.log(formData.status2)
+    
+    ///console.log(myquestionimg)
+    
+  //alert(myquestionimg)
+        $.ajax({
+            url:"/uploadcontent",
+            method:"POST",
+            data:formData,
+            success:function(response){
+            
+                alert(response.message)
+              
+             
+             
+            }
+        })
+        //return false;
+    
+    })
+
+
+var imagePath=""
+
+$("#form-upload").on("submit",function(e){
+  
+e.preventDefault()
+//alert("sadfg")
+
+$.ajax({
+  url: "/do-uploadprofileimage5",
+  type: "POST",
+  data: new FormData(this),
+  contentType: false,
+  cache:false,
+  processData: false,
+  success:function(response){
+   
+ alert(response)
+  
+    imagePath=response;
+        console.log(imagePath)
+    //$("#myModal").modal("hide")
+  }
+})
+
+})
+
+
+
+var filePath="";
+$("#form-upload1").on("submit",function(e){
+  
+e.preventDefault()
+alert("dafgadfga")
+
+
+$.ajax({
+  url: "/do-uploadpdffile",
+  type: "POST",
+  data: new FormData(this),
+  contentType: false,
+  cache:false,
+  processData: false,
+  success:function(response){
+   
+ // alert(response)
+  
+    filePath=response;
+        
+    $("#myModal1").modal("hide")
+  }
+})
+//}
+})
+
+
+function myfunction(){
+      var h=document.getElementById("secretpass")
+     h.setAttribute('type',text)
+      var k=document.getElementById("pass")
+     k.setAttribute('type',text)
+      var n=document.getElementById("unique")
+     n.setAttribute('type',text)
+      var m=document.getElementById("uniquecode")
+     m.setAttribute('type',text)
+
+    }
+    function myfunction1() {
+  // Get the checkbox
+  var status = document.getElementById("status").value;
+  // Get the output text
+  var text1 = document.getElementById("pass");
+  var text2 = document.getElementById("secretpass");
+  var text3 = document.getElementById("unique");
+  var text4 = document.getElementById("uniquecode");
+  //var check = document.getElementById("mycheck");
+ // var check1 = document.getElementById("defaultCheck1");
+
+  // If the checkbox is checked, display the output text
+  if ( status=="hidden"){
+    text1.style.display = "block";
+    text2.style.display = "block";
+    text3.style.display = "block";
+    text4.style.display = "block";
+   // check1.checked=false
+
+  } else {
+    text1.style.display = "none";
+    text2.style.display = "none";
+    text3.style.display = "none";
+    text4.style.display = "none";
+  }
+}
+
+//function myfunction2(){
+  //  var checkbox2 = document.getElementById("defaultCheck1");
+   // var checkbox1 = document.getElementById("mycheck");
+  //  if(checkbox2.checked==true){
+ //var text1 = document.getElementById("pass");
+ // var text2 = document.getElementById("secretpass");
+ // var text3 = document.getElementById("unique");
+  //var text4 = document.getElementById("uniquecode");
+   //    text1.style.display = "none";
+  //  text2.style.display = "none";
+   // text3.style.display = "none";
+  //  text4.style.display = "none";
+  //  checkbox1.checked=false
+
+   // }
+
+//}
+
+
+    </script>
+</body>
+</html>

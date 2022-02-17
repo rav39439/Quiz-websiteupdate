@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<%- include('../partials/heading5.hbs') %>
+
+<body>
+    
+<div class="border"style="text-align:center">
+  <form action="/findyourquizres"method="POST">
+   
+
+
+    <div class="form-group">
+       <label for="exampleInputEmail1">Type Your Quiz name</label>
+       <input type="text" class="form-control" id="yourquiz" style="margin-left:400px;width:500px" aria-describedby="emailHelp" placeholder="Enter Quiz name"name="quizname" >
+     </div>
+<button type="submit" class="btn btn-primary">see result</button>
+</div>
+
+    <table>
+        <tr>
+          <th >name</th>
+          <th style="padding-left:150px">quizname</th>
+          <th style="padding-left:150px">marks</th>
+        </tr>
+<% if(typeof(data)!=='undefined'){ %> 
+  
+        <% data.forEach(function(elem){ %>
+<% if(elem.quizname==quizname){ %> 
+            <tr>
+              <td ><%elem.name%></td>
+              <td style="padding-left:150px"><%elem.quizname%></td>
+              <td style="padding-left:150px"><%elem.marks%></td>
+            </tr>
+            <%}%>
+        <%})%>
+        <%}%>
+       
+      </table>
+
+
+
+
+
+
+    
+</body>
+</html>
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<%- include('../partials/heading1.hbs') %>
+<body>
+
+  <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Get More Quizzes</h1>
+
+
+  <div class="bg-light border"style="border-radius:8px;text-align:center;width:700px;margin-left:300px">
+
+    <form action="/enterquizname" method="POST">
+
+ <label for="exampleInputPassword1" style="margin-top:10px">Enter the uniquecode of tutor</label>
+    <input type="text" class="form-control mt-2" id="exampleInputPassword1"name="uniquecode" placeholder="text" style="width:500px;border-radius: 8px;margin-left:40px">
+ <label for="exampleInputPassword1" style="margin-top:10px">Enter the secretcode</label>
+    <input type="text" class="form-control mt-2" id="exampleInputPassword1"name="secretcode" placeholder="text" style="width:500px;border-radius: 8px;margin-left:40px">
+<button type="submit"class="btn btn-primary mt-2">see result</button>
+</form>
+</div>
+
+<div>
+
+   <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+    </thead>
+ <tbody> 
+   <%if(typeof(data)!='undefined'){%>
+    <% console.log(data)%>
+   <% data.forEach(function(elem){%>
+    <% if((elem.securepass==pass)&&(elem.uniquecode==uniquecode)) {%>
+      <tr>
+      <th scope="row"><%=elem.id%></th>
+      <td><%=elem.examname%></td>
+      <td><%=elem.createdby%></td>
+      <td><%=elem.noofquestions%></td>
+      <td><a href="/enterquiz1?examname=<%=elem.examname%>&createdby=<%=elem.createdby%>&quiz=<%=elem.quizname%>"><%=elem.quizname%></a></td>
+    </tr>
+    <%}%>
+ <% })%>
+ <%}%>
+</tbody>
+    </table>
+
+
+    <% if(typeof(username)!='undefined'){%>
+      <div id="name"style="display:none"><%=username%></div>
+    
+    <%}%>
+</body>
+
+<script>
+   
+   let f= document.getElementById("name").innerText
+ if(f){
+   document.getElementById("myname").innerText=f
+}
+else{
+  document.getElementById("myname").innerText="Anonymous"
+
+ }
+</script>
+</html>

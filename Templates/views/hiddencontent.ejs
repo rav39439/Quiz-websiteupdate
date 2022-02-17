@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<%- include('../partials/heading1.hbs') %>
+
+
+<body>
+    <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Access hidden Contents here</h1>
+
+
+
+<div class="border"style="text-align:center ;width:700px;margin-left:400px;border-radius:8px">
+    <div style="margin-left:100px">
+    <form action="/hiddencontent"method="POST">
+    <div class="form-group">
+        <p type="text" id="unique">Enter the uniquecode of the content writer</p>
+        <input class="form-control mt-2"style="width:400px;" id="uniquecode" placeholder="uniquecode" name="uniquecode" style="width:600px;margin-left:400px">
+      </div>
+    <div class="form-group">
+        <p type="text" id="pass">Enter the securecode of the content</p>
+        <input class="form-control mt-2" style="width:400px;" id="secretpass" placeholder="secret password" name="secretcode" style="width:600px;margin-left:400px">
+      </div>
+    <button type="submit" class="btn btn-primary mt-2">Get data</button>
+    </form>
+</div>
+</div>
+
+<div class="mt-5" style="text-align:center">
+<%if(typeof(data)!='undefined'){%>
+<%data.forEach(function(elem){%> 
+
+
+<% if((elem.secretcode==code)&&(elem.uniquecode==uniquecode)){ %> 
+
+    <div class="border"style="border-radius:8px">
+    <p><%=elem.topic%></p>
+    <p><%=elem.content%></p>
+    
+    <% if(elem.data){ %>
+        <a href="/wholeimage?image=<%= elem.data %>"> <img class="border"style="width:300px;height:300px;" src="<%=elem.data %>"alt=""></a>
+    
+    <%} %> 
+    <% if(elem.filedata){ %>
+    
+        <a href="/introfile?file=<%=elem.filedata%>"><%=elem.filedata%></a>
+    <%} %> 
+    
+    <p>uploaded by <%=elem.uploadedby%></p>
+
+</div>
+    <% } %> 
+
+<% }) %> 
+<% } %> 
+</div>
+
+
+
+</body>
+</html>
