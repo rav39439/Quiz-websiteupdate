@@ -14,16 +14,15 @@
     <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Get Your Contents here</h1>
 <div class="container" style="margin-left:350px">
 
-    <div class="row">
+    
 
 
 
-<div class=" col-lg-4 border"style="margin-left;400px;border-radius:8px">
-    <div style="margin-left:150px">
+    <div style="margin-left:150px ;width:300px" >
 <form action="/getallcontent"method="POST">
     <div class="form-group">
-        <label for="exampleFormControlSelect1"> select the topic of your content</label>
-        <select class="form-control mt-2" id="content" name="content" style="width:300px" >
+        <label> select the topic of your content</label>
+        <select class="form-control mt-2" id="content" name="content" >
             <% if(typeof(content)!='undefined') {%> 
                 <option value="<%=content%>"><%=content%> </option>
 
@@ -48,7 +47,6 @@
 </div>
 
 
-<div class="col-lg-8">
 
 
 <% if(typeof(data)!='undefined'){ %> 
