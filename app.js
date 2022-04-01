@@ -8,6 +8,7 @@ const { DATABASE } = process.env;
 const { PASSWORD } = process.env;
 const { KEYUSER } = process.env;
 const { KEYHOST } = process.env;
+//const PORT = process.env.PORT;
 const date = require('date-and-time')
 const sendgridtransport=require('nodemailer-sendgrid-transport')
 const path = require("path")
@@ -2598,8 +2599,8 @@ newdatan.forEach(function(elem,index){
             })
 ///-----------------------------------------------video-----------------------------------------------
   //---------------------------------------videoupload-------------------------------------------------
-console.log(process.env.API_PORT)
-  server.listen(process.env.API_PORT, () => {
+const PORT=process.env.PORT
+  server.listen(PORT, () => {
     console.log("listening")
 })
 

@@ -84,10 +84,14 @@
 
 <script>
 
+let h="";
+if(document.getElementById('message')){
+   h=document.getElementById('message').innerText
 
-
-let h=document.getElementById('message').innerText
+}
+if(document.getElementById('content')){
 let content=document.getElementById('content').innerText
+}
 let myuniquecode=document.getElementById('myuniquecode')
 let myemail=document.getElementById('myemail')
 if(h){
@@ -100,9 +104,10 @@ myemail.innertext=h
    myuniquecode.innerText=h
  }
 }
-
+if(document.getElementById('name')){
 let f= document.getElementById("name").innerText
-if(f){
+}
+if(typeof(f)!='undefined'){
    document.getElementById("myname").innerText=f
 }
 else{

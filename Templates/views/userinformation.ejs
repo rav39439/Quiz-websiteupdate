@@ -69,9 +69,10 @@
 
 <script>
 
-
+if(document.getElementById("name")){
 let f= document.getElementById("name").innerText
- if(f){
+}
+ if(typeof(f)!='undefined'){
    document.getElementById("myname").innerText=f
 }
 else{
@@ -79,7 +80,11 @@ else{
 
  }
 
- let hj=document.getElementById("newmessage").innerText
+ let hj=""
+ if(document.getElementById("newmessage")){
+   hj=document.getElementById("newmessage").innerText
+
+ }
 let html=``
 if(hj!=null){
  setTimeout(() => {

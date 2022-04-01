@@ -50,7 +50,6 @@
 </div>
 
 
-
 <div id="data"style="display:none">{{usedata}}</div>
 
 <div id="mydata"></div>
@@ -59,7 +58,11 @@
 </html>
 
 <script>
-let c=document.getElementById("data").innerText
+    let c={}
+    if(document.getElementById('data')){
+c=document.getElementById("data").innerText
+
+    }
   Mydata = JSON.parse(c)
 let html="";
 Mydata.forEach(function(elem){

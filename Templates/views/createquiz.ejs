@@ -102,9 +102,11 @@ input[type="number"]::placeholder {
 <%}  %> 
 
   <script>
+let hj=""
+if(document.getElementById("newmessage")){
+ hj=document.getElementById("newmessage").innerText
 
-
-let hj=document.getElementById("newmessage").innerText
+}
 let html=``
 if(hj!=null){
  setTimeout(() => {
