@@ -461,7 +461,7 @@ if(Mydata[i].myfiles){
                     solution_tag='<span class="ff">' + `<img src="${Mydata[i].solutionsimg}" alt="" id=ty1>` + '</span>' + '<br>'
                 }
                 else{
-                    solution_tag=`<textarea rows=3></textarea>`;
+                    solution_tag=`<textarea rows=3>${Mydata[i].solutions}</textarea>`;
                 }
 
 
@@ -566,10 +566,18 @@ for(let t=0;t<b.length;t++){
     }
 
     if(l==b.length){
-      // console.log(l)
-      //  console.log(b.length)
-m=m+1;
+    if(Mydata[i].positivemarks){
+m=m+Mydata[i].positivemarks;
+    } 
+
     }
+else{
+    if(Mydata[i].negativemarks){
+        m=m-Mydata[i].negativemarks;
+    }
+}
+
+
 }
   console.log(b)
 console.log(a)
@@ -594,11 +602,11 @@ m=m+1;
 for(let j=0;j<4;j++){
    
     if(JSON.parse(Mydata[i].answercode)['answer1']==j){
-        
+        console.log("this is the new answer")
     // console.log(JSON.parse(Mydata[i].answercode)['answer1'])
       if(options[i]){
 //console.log(JSON.parse(Mydata[i].answercode)['answer1'])
-       options[i].children[JSON.parse(Mydata[i].answercode)['answer1']].style.backgroundColor="green"
+       options[i].children[j].style.backgroundColor="green"
       }
     }
        //console.log(Object.values(Mydata[i])[h])
@@ -619,7 +627,15 @@ if(Object.values(Mydata[i])[h][0]==JSON.parse(Mydata[i].answercode)['answer1']){
 console.log("runned")
 console.log(Object.values(Mydata[i])[h][0])
 console.log(JSON.parse(Mydata[i].answercode)['answer1'])
-m=m+1;
+if(Mydata[i].positivemarks){
+m=m+Mydata[i].positivemarks;
+}
+
+}
+else{
+    if(Mydata[i].negativemarks){
+        m=m-Mydata[i].negativemarks;
+    }
 }
 }
 

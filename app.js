@@ -4,7 +4,10 @@ const crypto=require('crypto')
 const jwt=require('jsonwebtoken')
 const nodemailer=require('nodemailer')
 const app = express()
-
+const { DATABASE } = process.env;
+const { PASSWORD } = process.env;
+const { KEYUSER } = process.env;
+const { KEYHOST } = process.env;
 const date = require('date-and-time')
 const sendgridtransport=require('nodemailer-sendgrid-transport')
 const path = require("path")
@@ -57,21 +60,24 @@ hbs.registerPartials(pathset)
 //app.use(bodyParser());
 
 //var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+
+//---------------------------------------------------------------------------------------------
 var session=require("express-session")
 
-const MySQLStore = require('express-mysql-session')(session);
-const options = {                 // setting connection options
-    host: 'localhost',
-    user: 'root',
-    password: 'ravrav12@',
-    database: 'testdb',
-};
-const sessionStore = new MySQLStore(options);
-
+// const MySQLStore = require('express-mysql-session')(session);
+// const options = {                 // setting connection options
+//     host: 'localhost',
+//     user: 'root',
+//     password: '',
+//     database: 'testdb',
+// };
+// const sessionStore = new MySQLStore(options);
+//----------------------------------------------------------------------------------------------
 app.use(session({
     key:"admin",
     secret:"any random string",
-    store:sessionStore,
+   // store:sessionStore,
     resave: true, 
     saveUninitialized: true,
     cookie: { maxAge: 6000000 }
@@ -287,7 +293,7 @@ app.post('/createtable',mymiddle,mymiddle2,(req, res) => {
 
     if(req.body.status=="public"){
 
-        var mydat= "INSERT INTO `testdb`.`quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'public','', '');"
+        var mydat= "INSERT INTO `quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'public','', '');"
     connection.query(mydat, function (err, result) {
         if (err) throw err;
 
@@ -296,7 +302,7 @@ app.post('/createtable',mymiddle,mymiddle2,(req, res) => {
 }
     if(req.body.status=="on"){
 
-        var mydat= "INSERT INTO `testdb`.`quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'hidden','" + req.session.uniquecode + "', '" + req.body.secretcode + "');"
+        var mydat= "INSERT INTO `quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'hidden','" + req.session.uniquecode + "', '" + req.body.secretcode + "');"
     connection.query(mydat, function (err, result) {
         if (err) throw err;
 
@@ -359,7 +365,7 @@ app.post('/postquestions', (req, res) => {
     //res.render("postquestions.hbs", { gh: req.body.yourquiz,time:req.body.Mytime,beforetime:req.body.beforetime })
 
 
-    var mydat = "INSERT INTO `testdb`." + req.body.yourquiz + " (`numb`,`question`,`queimg`,`answercode`,`option1`,`option2`,`option3`,`option4`,`solutions`,`solutionsimg`,`myfiles`,`time`,`postquestions`,`negativemarks`) VALUES ('" + req.body.qno + "','" + req.body.myquestion + "','" + req.body.myquestionimg + "','" + req.body.answercode + "','" + req.body.myquestion1 + "','" + req.body.myquestion2 + "','" + req.body.myquestion3 + "','" + req.body.myquestion4 + "','" + req.body.Mysolutions + "','" + req.body.Mysolutionsimg + "', '" + req.body.myfile + "','" + req.body.mytime + "','" + req.body.pm + "','" + req.body.nm + "');";
+    var mydat = "INSERT INTO " + req.body.yourquiz + " (`numb`,`question`,`queimg`,`answercode`,`option1`,`option2`,`option3`,`option4`,`solutions`,`solutionsimg`,`myfiles`,`time`,`postquestions`,`negativemarks`) VALUES ('" + req.body.qno + "','" + req.body.myquestion + "','" + req.body.myquestionimg + "','" + req.body.answercode + "','" + req.body.myquestion1 + "','" + req.body.myquestion2 + "','" + req.body.myquestion3 + "','" + req.body.myquestion4 + "','" + req.body.Mysolutions + "','" + req.body.Mysolutionsimg + "', '" + req.body.myfile + "','" + req.body.mytime + "','" + req.body.pm + "','" + req.body.nm + "');";
 
     connection.query(mydat, function (err, result) {
         if (err) throw err;
@@ -393,7 +399,7 @@ app.post('/postquestions', (req, res) => {
 //console.log(userdata)
 app.post("/storeresult",  (req, res) => {
 
-    var mydata = "UPDATE testdb.new_table1 SET " + req.body.quiz + "='" + req.body.marks + "' WHERE SNo='" + req.body.Myreg + "'";
+    var mydata = "UPDATE new_table1 SET " + req.body.quiz + "='" + req.body.marks + "' WHERE SNo='" + req.body.Myreg + "'";
 
     connection.query(mydata, function (err, result) {
         if (err) throw err;
@@ -958,7 +964,7 @@ app.post("/Mystorage", (req, res) => {
     let a = req.body.Myname
     for (let i = 0; i < a.length; i++) {
 
-        connection.query("UPDATE testdb." + req.body.na + " SET " + req.body.studentname + "='" + req.body.Myname[i] + "' WHERE numb=" + (i + 1) + "", function (err, data) {
+        connection.query("UPDATE " + req.body.na + " SET " + req.body.studentname + "='" + req.body.Myname[i] + "' WHERE numb=" + (i + 1) + "", function (err, data) {
             if (err) { throw (err) }
 
             console.log("data added")
@@ -999,7 +1005,7 @@ app.post("/Mystorage", (req, res) => {
 
     //---------------------------------------------new way-----------------------------------------
 
-    var c = "INSERT INTO dbrav.myresult (`quizname`, `name`,`marks`) VALUES ('" + req.body.na + "','" + req.body.studentname + "','" + req.body.marks + "')";
+    var c = "INSERT INTO myresult (`quizname`, `name`,`marks`) VALUES ('" + req.body.na + "','" + req.body.studentname + "','" + req.body.marks + "')";
      connection.query(c, (err, rows) => {
 
      if (err) {
@@ -1150,7 +1156,7 @@ app.post('/multicreation',mymiddle,mymiddle1, (req, res) => {
     if(req.body.status=="public"){
 
         //var mydat = "INSERT INTO `quiztable` (`quizname`,`createdby`,`examname`,`noofquestions`,`status`) VALUES ('" + req.body.quizname + "','" + req.session.username + "','" + req.body.examname + "'," + req.body.noofquestions + ",'" + req.body.status + "');";
-       var mydat= "INSERT INTO `testdb`.`quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", '" + req.body.status + "', '', '');"
+       var mydat= "INSERT INTO `quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", '" + req.body.status + "', '', '');"
         connection.query(mydat, function (err, result) {
             if (err) {throw err}
             else{
@@ -1164,7 +1170,7 @@ app.post('/multicreation',mymiddle,mymiddle1, (req, res) => {
         else if(req.body.status=="on"){
     
        // var mydat = "INSERT INTO `quiztable` (`quizname`,`createdby`,`examname`,`uniquecode`,`securepass`,`noofquestions`,`status`) VALUES ('" + req.body.quizname + "','" + req.session.username + "','" + req.body.examname + "'," + req.session.uniquecode + ",'" + req.body.secretcode + "'," + req.body.noofquestions+ ",'hidden');";
-        var mydat= "INSERT INTO `testdb`.`quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'hidden','" + req.session.uniquecode + "', '" + req.body.secretcode + "');"
+        var mydat= "INSERT INTO `quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'hidden','" + req.session.uniquecode + "', '" + req.body.secretcode + "');"
         connection.query(mydat, function (err, result) {
             if (err) {throw err}
             else{
@@ -1192,7 +1198,7 @@ app.post('/postmultiques', (req, res) => {
 
 
     //var mydat = "INSERT INTO `testdb`." + req.body.yourquiz + " (`numb`,`question`,`queimg`,`myfiles`,`solutionsimg`,`answercode`,`option1`,`option2`,`option3`,`option4`,`solutions`,`time`,`beforetime`,`postivemark`,`Negativemark`) VALUES (" + req.body.qno + ",'" + req.body.myquestion + "','" + req.body.myquestionimg+ "','" + req.body.myfiles + "','" + req.body.Mysolutionsimg + "','" + req.body.myquestionimg + "','" + req.body.answercode + "','" + req.body.myquestion1 + "','" + req.body.myquestion2 + "','" + req.body.myquestion3 + "','" + req.body.myquestion4 + "','" + req.body.Mysolutions + "','" + req.body.Mytime + "','" + req.body.beforetime + "','" + req.body.pm + "','" + req.body.nm + "')";
-   var mydat= "INSERT INTO `testdb`." + req.body.yourquiz + " (`numb`,`queimg`, `question`, `answercode`, `option1`, `option2`, `option3`, `option4`, `time`, `beforetime`, `sections`, `qsection`, `positivemark`, `Negativemark`, `solutionsimg`,`solutions`,`myfiles`) VALUES (" + req.body.qno + ",'"+req.body.myquestionimg+"','" + req.body.myquestion + "', '" + req.body.answercode + "', '" + req.body.myquestion1 + "', '" + req.body.myquestion2 + "', '" + req.body.myquestion3 + "', '" + req.body.myquestion4 + "', '" + req.body.Mytime + "', '" + req.body.beforetime + "', '" + req.body.sections + "', '" + req.body.qsection + "', '" + req.body.pm + "', '" + req.body.nm + "', '" + req.body.Mysolutionsimg + "','"+req.body.Mysolutions+"','"+req.body.myfiles+"');"
+   var mydat= "INSERT INTO " + req.body.yourquiz + " (`numb`,`queimg`, `question`, `answercode`, `option1`, `option2`, `option3`, `option4`, `time`, `beforetime`, `sections`, `qsection`, `positivemark`, `Negativemark`, `solutionsimg`,`solutions`,`myfiles`) VALUES (" + req.body.qno + ",'"+req.body.myquestionimg+"','" + req.body.myquestion + "', '" + req.body.answercode + "', '" + req.body.myquestion1 + "', '" + req.body.myquestion2 + "', '" + req.body.myquestion3 + "', '" + req.body.myquestion4 + "', '" + req.body.Mytime + "', '" + req.body.beforetime + "', '" + req.body.sections + "', '" + req.body.qsection + "', '" + req.body.pm + "', '" + req.body.nm + "', '" + req.body.Mysolutionsimg + "','"+req.body.Mysolutions+"','"+req.body.myfiles+"');"
     connection.query(mydat, function (err, result) {
         if (err) {throw err}
         else{
@@ -1208,7 +1214,7 @@ app.post('/postmultiques', (req, res) => {
     })
 
 
-    connection.query("UPDATE testdb." + req.body.yourquiz + " SET sections='" + req.body.sections + "',qsection='" + req.body.qsection + "' WHERE numb=" + req.body.no + "", function (err, data) {
+    connection.query("UPDATE " + req.body.yourquiz + " SET sections='" + req.body.sections + "',qsection='" + req.body.qsection + "' WHERE numb=" + req.body.no + "", function (err, data) {
         if (err) { throw (err) }
 
         console.log("multidata added")
@@ -1373,7 +1379,7 @@ app.get("/findyourquizres",function(req,res){
 app.post("/findyourquizres",function(req,res){
 
 
-    connection.query("select * from dbrav.myresult", function (err, data) {
+    connection.query("select * from myresult", function (err, data) {
         if (err) { throw (err) }
        
         else{
@@ -1410,7 +1416,7 @@ else{
 
 app.get("/performance",function(req,res){
 
-    connection.query("select * from dbrav.myresult where uniquecode="+req.session.uniquecode+"", function (err, userdata, fields) {
+    connection.query("select * from myresult where uniquecode="+req.session.uniquecode+"", function (err, userdata, fields) {
         if (err) {
             res.render("nodata.hbs")
         }
@@ -1442,7 +1448,7 @@ res.render("CSIR")
 
 app.post("/SSCCGL",(req,res)=>{
     res.render("SSC")
-    var c = "INSERT INTO testdb.ssccgl (`id`, `question`,`option1`,`option2`,`option3`,`option4`,`solution`) VALUES ( "+ req.body.qno +", " + req.body.question + "," + req.body.option1 + ","+req.body.option2+", "+req.body.option3+", "+req.body.option4+", "+req.body.solution+")"
+    var c = "INSERT INTO ssccgl (`id`, `question`,`option1`,`option2`,`option3`,`option4`,`solution`) VALUES ( "+ req.body.qno +", " + req.body.question + "," + req.body.option1 + ","+req.body.option2+", "+req.body.option3+", "+req.body.option4+", "+req.body.solution+")"
     connection.query(c, (err, rows) => {
 
         if (err) {
@@ -1517,7 +1523,7 @@ let b=[]
 
             }
 console.log(b)
-        connection.query("UPDATE testdb." + req.body.quizname + " SET " + req.body.studentname + "=" + b[i] + " WHERE numb=" + (i + 1) + "", function (err, data) {
+        connection.query("UPDATE " + req.body.quizname + " SET " + req.body.studentname + "=" + b[i] + " WHERE numb=" + (i + 1) + "", function (err, data) {
             if (err) { throw (err) }
 
             console.log("data added")
@@ -1527,7 +1533,7 @@ console.log(b)
 
 
            // try{
-                connection.query("INSERT INTO dbrav.myresult (`quizname`,`name`,`marks`) VALUES('"+req.body.quizname+"','"+req.body.studentname+"',"+req.body.marks+")", function (err, data) {
+                connection.query("INSERT INTO myresult (`quizname`,`name`,`marks`) VALUES('"+req.body.quizname+"','"+req.body.studentname+"',"+req.body.marks+")", function (err, data) {
     
                 
 
@@ -1582,7 +1588,7 @@ console.log(req.body.status)
 
     if(req.body.status=="public"){
 
-        var mydat= "INSERT INTO `testdb`.`quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'public','', '');"
+        var mydat= "INSERT INTO `quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'public','', '');"
     connection.query(mydat, function (err, result) {
         if (err) {throw err}
         else{
@@ -1595,7 +1601,7 @@ console.log(req.body.status)
 }
     else if(req.body.status=="on"){
 
-        var mydat= "INSERT INTO `testdb`.`quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'hidden','" + req.session.uniquecode + "', '" + req.body.secretcode + "');"
+        var mydat= "INSERT INTO `quiztable` (`quizname`, `createdby`, `examname`, `noofquestions`, `status`, `uniquecode`, `securepass`) VALUES ('" + req.body.quizname + "', '" + req.session.username + "', '" + req.body.examname + "', " + req.body.noofquestions + ", 'hidden','" + req.session.uniquecode + "', '" + req.body.secretcode + "');"
     connection.query(mydat, function (err, result) {
         if (err) {throw err}
         else{
@@ -1630,7 +1636,7 @@ app.post("/postmultioptions", (req, res) => {
 
 var newanswerobj=JSON.stringify(answersobj)
     //var mydat = "INSERT INTO `testdb`." + req.body.yourquiz + " (`numb`,`question`,`queimg`,`qsection`,`sections`,`type`,`answercode`,`option1`,`option2`,`option3`,`option4`,`solutions`,`solutionsimg`,`myfiles`,`time`,`beforetime`,`passage`,`passageimg`,`integerans`) VALUES (" + req.body.qno + ",'" + req.body.myquestion + "','" + req.body.myquestionimg + "',"+req.body.qsection+",'"+req.body.section+"','" + req.body.type + "','" + newanswerobj + "','" + req.body.myquestion1 + "','" + req.body.myquestion2 + "','" + req.body.myquestion3 + "','" + req.body.myquestion4 + "','" + req.body.Mysolutions + "','" + req.body.Mysolutionsimg + "','" + req.body.namefile + "'," + req.body.mytime + "," + req.body.beforetime + ",'" + req.body.passage + "','" + req.body.passageimg + "',"+ req.body.myinteger +");"
-    var mydat="INSERT INTO `testdb`.`testquiz` (`numb`,`question`, `queimg`, `type`, `answercode`, `option1`, `option2`, `option3`, `option4`, `solutions`, `solutionsimg`, `myfiles`, `time`, `beforetime`, `qsection`, `sections`, `integerans`, `passage`, `passageimg`,`postivemarks`,negativemarks) VALUES ('"+req.body.qno+"','" + req.body.myquestion + "', '" + req.body.myquestionimg + "', '" + req.body.type + "', '" + newanswerobj + "', '" + req.body.myquestion1 + "', '" + req.body.myquestion2 + "', '" + req.body.myquestion3 + "', '" + req.body.myquestion4 + "', '" + req.body.Mysolutions + "', '" + req.body.Mysolutionsimg + "', '" + req.body.myfiles + "', '" + req.body.mytime + "', '" + req.body.beforetime + "', '" + req.body.qsection + "', '" + req.body.section + "', '" + req.body.beforetime + "', '" + req.body.passage + "', '" + req.body.passageimg + "','" + req.body.pm + "','" + req.body.nm + "');"
+    var mydat="INSERT INTO `" + req.body.yourquiz + "` (`numb`,`question`, `queimg`, `type`, `answercode`, `option1`, `option2`, `option3`, `option4`, `solutions`, `solutionsimg`, `myfiles`, `time`, `beforetime`, `qsection`, `sections`, `integerans`, `passage`, `passageimg`,`positivemarks`,negativemarks) VALUES ('"+req.body.qno+"','" + req.body.myquestion + "', '" + req.body.myquestionimg + "', '" + req.body.type + "', '" + newanswerobj + "', '" + req.body.myquestion1 + "', '" + req.body.myquestion2 + "', '" + req.body.myquestion3 + "', '" + req.body.myquestion4 + "', '" + req.body.Mysolutions + "', '" + req.body.Mysolutionsimg + "', '" + req.body.myfiles + "', '" + req.body.mytime + "', '" + req.body.beforetime + "', '" + req.body.qsection + "', '" + req.body.section + "', '" + req.body.beforetime + "', '" + req.body.passage + "', '" + req.body.passageimg + "','" + req.body.pm + "','" + req.body.nm + "');"
     connection.query(mydat, function (err, result) {
         if (err) {throw err}
 else{
@@ -1649,7 +1655,7 @@ else{
     })
    // console.log("dsafagsfga")
 
-    connection.query("UPDATE testdb." + req.body.yourquiz + " SET sections='" + req.body.sections + "',qsection='" + req.body.qsection + "' WHERE numb=" + req.body.no + "", function (err, data) {
+    connection.query("UPDATE " + req.body.yourquiz + " SET sections='" + req.body.sections + "',qsection='" + req.body.qsection + "' WHERE numb=" + req.body.no + "", function (err, data) {
         if (err) { throw (err) }
 
         console.log("multidata added")
@@ -1769,7 +1775,7 @@ app.get("/deletequiz",function(req,res){
 
 
 function deletemid(req,res,next){
-    var sql = "SELECT * FROM testdb.quiztable";
+    var sql = "SELECT * FROM quiztable";
     connection.query(sql, function (err, result) {
 if(err){
     console.log(err)
@@ -1806,7 +1812,7 @@ app.post("/deletequiz",deletemid,function(req,res){
     newdata.forEach(function(elem){
 
         if(elem.quizname==req.body.quizname){
-            var myd="DELETE FROM testdb.quiztable WHERE id="+elem.id+""
+            var myd="DELETE FROM quiztable WHERE id="+elem.id+""
             connection.query(myd,function(err,result){
                 if(err){
                     throw(err)
@@ -1827,21 +1833,21 @@ app.post("/deletequiz",deletemid,function(req,res){
 
 
 
-app.post("/others",(req,res)=>{
-    res.render("others")
-    var c = "INSERT INTO testdb.others (`id`, `question`,`option1`,`option2`,`option3`,`option4`,`solution`) VALUES (" + req.body.qno + ", '" + req.body.question + "','" + req.body.option1 + "','"+req.body.option2+"', '"+req.body.option3+"', '"+req.body.option4+"', '"+req.body.solution+'");'
-    connection.query(c, (err, rows) => {
+// app.post("/others",(req,res)=>{
+//     res.render("others")
+//     var c = "INSERT INTO others (`id`, `question`,`option1`,`option2`,`option3`,`option4`,`solution`) VALUES (" + req.body.qno + ", '" + req.body.question + "','" + req.body.option1 + "','"+req.body.option2+"', '"+req.body.option3+"', '"+req.body.option4+"', '"+req.body.solution+'");'
+//     connection.query(c, (err, rows) => {
 
-        if (err) {
-            console.log(err)
-        }
-        else {
-            console.log("result is successfully added")
-            //console.log(filename1)
-        }
-    })
+//         if (err) {
+//             console.log(err)
+//         }
+//         else {
+//             console.log("result is successfully added")
+//             //console.log(filename1)
+//         }
+//     })
 
-})
+// })
 
 app.get("/getquizresult",function(req,res){
 
@@ -1850,7 +1856,7 @@ app.get("/getquizresult",function(req,res){
 
 app.post("/getquizresult",function(req,res){
 
-    connection.query("select * from dbrav.myresult ORDER BY marks DESC",function(err,data){
+    connection.query("select * from myresult ORDER BY marks DESC",function(err,data){
 
         if(err){
 
@@ -1879,6 +1885,10 @@ io.on("connection",function(socket){
 
 app.get("/enterquiz",function(req,res){
 
+        res.render("readinfo3.hbs",{Myname:req.session.username,Myreg:req.session.uniquecode})
+})
+app.get("/enterquiz4",function(req,res){
+
         res.render("readinfo2.hbs",{Myname:req.session.username,Myreg:req.session.uniquecode})
 })
 
@@ -1893,7 +1903,7 @@ console.log(req.query.quiz)
 
     }
    
-    if(req.query.quiz=="multisectionexam"){
+    if(req.query.quiz=="Multisectionexam"){
 
         res.render("readinfo2.hbs",{table2:req.query.myquiz,Myname:req.session.username,Myreg:req.session.uniquecode})
 
@@ -2068,7 +2078,7 @@ app.post("/getquestions",function(req,res){
 
     const value = date.format(now,'YYYY/MM/DD HH:mm:ss');
 
-     var mydata = "UPDATE testdb.questionsposted SET ansgiven='" + req.body.ans + "', images='"+req.body.myimageans+"',tfiles='"+req.body.myfile+"',date2='"+value+"' WHERE id='"+req.body.id+"'";
+     var mydata = "UPDATE questionsposted SET ansgiven='" + req.body.ans + "', images='"+req.body.myimageans+"',tfiles='"+req.body.myfile+"',date2='"+value+"' WHERE id='"+req.body.id+"'";
 
     connection.query(mydata, function (err, result) {
         if (err){ throw err}
@@ -2121,21 +2131,24 @@ if(err){
 
 app.post("/newresultmulti",(req,res)=>{
 
-
-    if(req.body.examname=="High level exam"){
+console.log(req.body.examname)
+    if(req.body.examname=="Highlevelexam"){
 
 
 
         connection.query("select * from " + req.body.myquiz + "", function (err, userdata, fields) {
-            if(err.code == 'ER_NO_SUCH_TABLE' || err.errno == 1062)
-            {
-                res.status(404).send("No results found")
+            if(!userdata){
+                if(err.code == 'ER_NO_SUCH_TABLE' || err.errno == 1062)
+                {
+                    res.status(404).send("No results found")
+                }
             }
+          
             else{
 
            
             newdata=JSON.stringify(userdata)
-            
+            //console.log("result")
             res.render("resultfile.hbs",{usedata:newdata,name:req.body.name})
         }
             
@@ -2147,7 +2160,7 @@ else{
         if (err) throw (err)
         
         newdata=JSON.stringify(userdata)
-        
+        console.log("result1")
         res.render("resultfile1.hbs",{usedata:newdata,name:req.body.name})
         
     })
@@ -2344,7 +2357,7 @@ app.get("/getallcontent",function(req,res){
         if(newdata[i].uniquecode==req.body.uniquecode){
 
             console.log(newdata[i].id)
-            var mydata = "UPDATE testdb.questionsposted SET status='blocked' WHERE id='"+newdata[i].id+"'";
+            var mydata = "UPDATE questionsposted SET status='blocked' WHERE id='"+newdata[i].id+"'";
        
 
     connection.query(mydata, function (err, result) {
@@ -2372,7 +2385,7 @@ app.get("/getallcontent",function(req,res){
         if(newdata[i].uniquecode==req.body.uniquecode){
 
             console.log(newdata[i].id)
-            var mydata = "UPDATE testdb.questionsposted SET status='unblocked' WHERE id='"+newdata[i].id+"'";
+            var mydata = "UPDATE questionsposted SET status='unblocked' WHERE id='"+newdata[i].id+"'";
        
 
     connection.query(mydata, function (err, result) {
@@ -2421,7 +2434,7 @@ function getdata(req,res,next){
         if(newdata[i].questionasked==req.body.questionasked){
 
             //console.log(newdata[i].id)
-            var mydata = "DELETE FROM testdb.questionsposted WHERE id='"+newdata[i].id+"'";
+            var mydata = "DELETE FROM questionsposted WHERE id='"+newdata[i].id+"'";
        
 
     connection.query(mydata, function (err, result) {

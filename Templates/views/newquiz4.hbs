@@ -726,19 +726,28 @@
               
 `
             }
+
+             if(typeof(Mydata[1])!='undefined'){
             if ((Mydata[1].sections) && (no1)) {
                 html += `<button id="button6"  name="button1" style="height:30px;width:100px;" onclick="changed(${no1 + 1})">${Mydata[1].sections}</button>`
 
             }
+            }
+
+            
+             if(typeof(Mydata[2])!='undefined'){
             if ((Mydata[2].sections) && (no2)) {
                 html += `<button id="button7"  name="button2" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + 1})">${Mydata[2].sections}</button>`
 
             }
+            }
+
+            if(typeof(Mydata[3])!='undefined'){
             if ((Mydata[3].sections) && (no3)) {
                 html += `<button id="button8"  name="button3" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + no3 + 1})">${Mydata[3].sections}</button>`
 
             }
-
+}
 
             const button5 = document.getElementById('button5')
             const button6 = document.getElementById('button6')

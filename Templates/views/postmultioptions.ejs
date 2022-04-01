@@ -208,11 +208,11 @@
 
   <div class="form-group">
     <label for="exampleInputEmail1">Enter postive marks awarded if any</label>
-    <input type="text" class="form-control" id="beforetime"style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="pm"style="width:700px">
+    <input type="text" class="form-control" id="pm"style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="pm"style="width:700px">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter negative marks if any</label>
-    <input type="text" class="form-control" id="beforetime"style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="nm"style="width:700px">
+    <input type="text" class="form-control" id="nm"style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="nm"style="width:700px">
   </div>
 
                <button type="submit" style="height:50px;width:150px" class="btn btn-primary ">submit the question</button>
@@ -393,6 +393,8 @@ $("#myform").on("submit",function(e){
      type:$("#type").val(),
      mytime:$("#mytime").val(),
      beforetime:$("#beforetime").val(),
+     pm:$("#pm").val(),
+     nm:$("#nm").val(),
      myquestionimg:imagePath,
      Mysolutionsimg:imagePath1,
           passageimg:imagePath2,

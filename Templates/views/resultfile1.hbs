@@ -623,8 +623,16 @@
                 if (Object.values(Mydata[i])[h][0] == Mydata[i].answercode) {
                     console.log("runned")
                     console.log(Object.values(Mydata[i])[h][0])
+                    if(Mydata[i].positivemark){
+                      m = m +Mydata[i].positivemark;
+                    }
                    // console.log((Mydata[i].answercode)
-                    m = m + 1;
+                    
+                }
+                else{
+                    if(Mydata[i].Negativemark){
+                        m=m-Mydata[i].Negativemark
+                    }
                 }
             }
 

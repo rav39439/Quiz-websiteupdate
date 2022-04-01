@@ -690,16 +690,27 @@ let no4=parseInt(Mydata[2].qsection,10)
        if(Mydata[0].sections){
         html=` <button id="button5"   name="button1"  style="height:30px;width:100px;" onclick="changed(0)">${Mydata[0].sections}</button>`
        }
+
+       if(typeof(Mydata[1])!='undefined'){
 if((Mydata[1].sections)&&(no1)){
   html+=`<button id="button6"  name="button1" style="height:30px;width:100px;" onclick="changed(${no1+1})">${Mydata[1].sections}</button>`
 
 }
-if((Mydata[2].sections)&&(no2)){
+}
+if(typeof(Mydata[2])!='undefined'){
+
+if((typeof(Mydata[2].sections)!='undefined')&&(no2)){
  html+=`<button id="button7"  name="button2" style="height:30px;width:100px;"onclick="changed(${no1+no2+1})">${Mydata[2].sections}</button>`
 
 }
+}
+
+if(typeof(Mydata[3])!='undefined'){
+
 if((Mydata[3].sections)&&(no3)){
 html+= `<button id="button8"  name="button3" style="height:30px;width:100px;"onclick="changed(${no1+no2+no3+1})">${Mydata[3].sections}</button>`
+
+}
 
 }
 
