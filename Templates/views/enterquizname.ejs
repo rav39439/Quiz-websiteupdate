@@ -10,11 +10,16 @@
 <%- include('../partials/heading1.hbs') %>
 <body>
 
+  
   <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Get More Quizzes</h1>
+  <div class="container">
+
+    <div class="row">
+
+  <div class="col-lg-4 bg-light border"style="border-radius:8px;text-align:center;width:700px;margin-left:250px">
 
 
-  <div class="bg-light border"style="border-radius:8px;text-align:center;width:700px;margin-left:300px">
-
+  
     <form action="/enterquizname" method="POST">
 
  <label for="exampleInputPassword1" style="margin-top:10px">Enter the uniquecode of tutor</label>
@@ -25,15 +30,15 @@
 </form>
 </div>
 
-<div>
+<div class="col-lg-8 offset-lg-2" style="margin-right:30px;">
 
    <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">id</th>
+      <th scope="col">Examname</th>
+      <th scope="col">createdby</th>
+      <th scope="col">No of questions</th>
     </tr>
     </thead>
  <tbody> 
@@ -59,6 +64,10 @@
       <div id="name"style="display:none"><%=username%></div>
     
     <%}%>
+
+</div>
+  </div>
+</div>
 </body>
 
 <script>

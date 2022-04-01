@@ -12,9 +12,12 @@
 <body>
     <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Access hidden Contents here</h1>
 
+<div class="container">
+    <div class="row">
+  
+        
 
-
-<div class="border"style="text-align:center ;width:700px;margin-left:400px;border-radius:8px">
+<div class="col-lg-4 border"style="text-align:center ;width:700px;margin-left:400px;border-radius:8px">
     <div style="margin-left:100px">
     <form action="/hiddencontent"method="POST">
     <div class="form-group">
@@ -30,7 +33,7 @@
 </div>
 </div>
 
-<div class="mt-5" style="text-align:center">
+<div class="col-lg-8 mt-5" style="text-align:center">
 <%if(typeof(data)!='undefined'){%>
 <%data.forEach(function(elem){%> 
 
@@ -60,6 +63,8 @@
 </div>
 
 
-
+      
+</div>
+</div>
 </body>
 </html>

@@ -12,9 +12,13 @@
 <body>
 
     <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Get Your Contents here</h1>
+<div class="container" style="margin-left:350px">
+
+    <div class="row">
 
 
-<div class="border"style="width:700px;margin-left;400px;border-radius:8px">
+
+<div class=" col-lg-4 border"style="width:600px;margin-left;400px;border-radius:8px">
     <div style="margin-left:150px">
 <form action="/getallcontent"method="POST">
     <div class="form-group">
@@ -42,6 +46,10 @@
     </form>
 </div>
 </div>
+
+
+<div class="col-lg-8">
+
 
 <% if(typeof(data)!='undefined'){ %> 
 
@@ -75,6 +83,10 @@
     No contents uploaded
 </h1>
 
-        <%}%>    
+        <%}%> 
+    </div>  
+        
+    </div>
+</div>
 </body>
 </html>

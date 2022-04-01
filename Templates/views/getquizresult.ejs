@@ -25,9 +25,16 @@
 
 <body>
 
-  <h1 style="margin-left:400px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Get the results of quiz here</h1>
+  <h1 style="margin-left:300px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Get the results of quiz here</h1>
 
-<div class="bg-light border"style="text-align:center;width:700px;border-radius:8px;margin-left:400px">
+<div  class="container"style="margin-right:150px">
+
+  <div class="row">
+
+  
+
+
+<div class="col-lg-4 bg-light border"style="text-align:center;width:700px;border-radius:8px;margin-left:300px">
 
 <form action="/getquizresult" method="POST">
 <label for="exampleInputPassword1" style="margin-top:10px">Enter the quizname</label>
@@ -43,6 +50,8 @@
 
 
     
+
+  <div class="col-lg-8 offset-lg-3">
 <table>
 
     <table class="table">
@@ -75,7 +84,7 @@
 
 </table>
 
-
+</div>
 
 
 
@@ -85,6 +94,12 @@
   <div id="name"style="display:none"><%=username%></div>
 
 <%}%>
+
+
+
+
+</div>
+</div>
 
     </body>
 

@@ -9,8 +9,13 @@
 <%- include('../partials/heading1.hbs') %>
 
 <body>
-  <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Chat with your tutors here</h1>
-<div class="border mb-3"style="height:100px;width:300px;margin-left:500px">
+  <h1 style="margin-left:300px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Chat with your tutors here</h1>
+  <div class="container" style="margin-right:200px">
+
+    <div class="row">
+
+    
+<div class=" col-lg-3 border mb-3"style="height:100px;width:300px;margin-left:500px">
   <div style="margin-left:60px;border-radius: 8px;">
     <h4>Your Credentials</h4>
   <div id="name">Name:<%=name%> </div>
@@ -19,6 +24,9 @@
 
 </div>
 </div>
+
+
+
 <% if(typeof(userdata)!='undefined') {%> 
 
 
@@ -26,7 +34,7 @@
 
 <% if((name==elem.studentname)&&(uniquecode==elem.uniquecode)&&(elem.status!="blocked")){ %> 
 
-  <div class="border mt-4 " id="mynew<%=index%>" style="width:650px;height:auto;border-radius: 8px;">
+  <div class="col-lg-6 border mt-4 " id="mynew<%=index%>" style="width:650px;height:auto;border-radius: 8px;">
 <div class="border mt-2 mb-2 bg-light"style="height:auto;width:600px;border-radius:8px">
 <h3>Answer by teacher</h3>
 <% if(elem.images){%>
@@ -110,9 +118,11 @@
 
     <%})%>    
 <%}%>
+  
+</div>
+</div>
 
-
-<div id="kk"></div>
+<div class="col-lg-3 offset-lg-3"id="kk"></div>
 
       
       <script>
