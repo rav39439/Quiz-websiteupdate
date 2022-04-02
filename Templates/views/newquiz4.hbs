@@ -604,6 +604,7 @@
         let widthValue = 0;
 
         let html1 = ``
+ let no1 = parseInt(Mydata[0].qsection, 10)
 
         function section1() {
             for (let i = 0; i <= Mydata[0].qsection - 1; i++) {
@@ -616,61 +617,113 @@
         }
 
         section1()
+let no2=no1;
+let no3=no1;
+let no4=no1;
+if(parseInt(Mydata[no1].qsection, 10)){
+
+  let no2 = parseInt(Mydata[no1].qsection, 10)
+
+}
+
+
+if(Mydata[no2+no1]){
+    let no3=parseInt(Mydata[no2+no1].qsection, 10)
+}
+
+if(Mydata[no1+no2+no3]){
+
+    let no4 = parseInt(Mydata[no2+no1+no3].qsection, 10)
+}
 
 
 
-        let html2 = ``
-        let no1 = parseInt(Mydata[0].qsection, 10)
-        let no2 = parseInt(Mydata[1].qsection, 10)
-        function section2() {
+
+
+      let html2 = ``
+
+function section2() {
+        if(parseInt(Mydata[no1].qsection, 10)){
+  
+               
             for (let i = no1; i <= (no1 + no2) - 1; i++) {
                 html2 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="return changed(this.id)" style="height:40px;width:40px;">`
 
             }
-            pallette2.innerHTML = html2
 
-
+           
         }
+        else{
+            html2="";
+        }
+        
+           
+           pallette2.innerHTML = html2
+
+       }
 
 
-        section2()
+     section2()
 
 
-        let no3 = parseInt(Mydata[2].qsection, 10)
-        let html3 = ``
 
-        function section3() {
+
+
+ let html3 = ``
+
+function section3() {
+ if(Mydata[no2+no1]){
+       
+       
             for (let i = (no1 + no2); i <= (no1 + no2 + no3) - 1; i++) {
                 html3 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="return changed(this.id)" style="height:40px;width:40px;">`
 
             }
+
+ }
+ else{
+
+     html3=""
+ }
+
+       
             pallette3.innerHTML = html3
 
+//
+       }
 
-        }
 
 
-        section3()
 
-        if (parseInt(Mydata[3].qsection, 10)) {
-            let no4 = parseInt(Mydata[3].qsection, 10)
 
-        }
-        no4 = 0
-        let html4 = ``
+    section3()
 
-        function section4() {
-            for (let i = (no1 + no2 + no3 + 1); i <= (no1 + no2 + no3 + no4); i++) {
+
+
+  let html4 = ``
+
+  function section4() {
+        if (Mydata[no1+no2+no3]) {
+        
+            for (let i = (no1 + no2 + no3 ); i <= (no1 + no2 + no3 + no4)-1; i++) {
                 html4 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="return changed(this.id)" style="height:40px;width:40px;">`
 
             }
+
+
+              }
+
+              else{
+
+                  html4=""
+              }
             pallette4.innerHTML = html4
 
 
-        }
+     }
 
 
-        section4()
+     section4()
 
 
 
@@ -727,26 +780,26 @@
 `
             }
 
-             if(typeof(Mydata[1])!='undefined'){
-            if ((Mydata[1].sections) && (no1)) {
-                html += `<button id="button6"  name="button1" style="height:30px;width:100px;" onclick="changed(${no1 + 1})">${Mydata[1].sections}</button>`
+             if(typeof(Mydata[no1])!='undefined'){
+           // if ((Mydata[1].sections) && (no1)) {
+                html += `<button id="button6"  name="button1" style="height:30px;width:100px;" onclick="changed(${no1 + 1})">${Mydata[no1].sections}</button>`
 
-            }
+          ///  }
             }
 
             
-             if(typeof(Mydata[2])!='undefined'){
-            if ((Mydata[2].sections) && (no2)) {
-                html += `<button id="button7"  name="button2" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + 1})">${Mydata[2].sections}</button>`
+             if(typeof(Mydata[no2+no1])!='undefined'){
+           // if ((Mydata[2].sections) && (no2)) {
+                html += `<button id="button7"  name="button2" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + 1})">${Mydata[no2+no1].sections}</button>`
 
-            }
+         //  }
             }
 
-            if(typeof(Mydata[3])!='undefined'){
-            if ((Mydata[3].sections) && (no3)) {
-                html += `<button id="button8"  name="button3" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + no3 + 1})">${Mydata[3].sections}</button>`
+            if(typeof(Mydata[no3+no1+no2])!='undefined'){
+           // if ((Mydata[3].sections) && (no3)) {
+                html += `<button id="button8"  name="button3" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + no3 + 1})">${Mydata[no3+no1+no2].sections}</button>`
 
-            }
+           // }
 }
 
             const button5 = document.getElementById('button5')
