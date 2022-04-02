@@ -620,7 +620,7 @@
 let no2=no1;
 let no3=no1;
 let no4=no1;
-if(parseInt(Mydata[no1].qsection, 10)){
+if(Mydata[no1]){
 
   let no2 = parseInt(Mydata[no1].qsection, 10)
 
@@ -643,7 +643,7 @@ if(Mydata[no1+no2+no3]){
       let html2 = ``
 
 function section2() {
-        if(parseInt(Mydata[no1].qsection, 10)){
+        if(Mydata[no1]){
   
                
             for (let i = no1; i <= (no1 + no2) - 1; i++) {
