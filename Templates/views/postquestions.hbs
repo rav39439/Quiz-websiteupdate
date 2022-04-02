@@ -24,7 +24,12 @@
 {{>heading5}}
 <body>
 
-      <div class="bg-light mt-5" style="text-align:center">
+
+<div class="container">
+
+  <div class="row">
+ 
+      <div class="col-lg-6 offset-lg-3 bg-light mt-5" style="text-align:center">
     <h2>Enter your questions here</h2>
 
    
@@ -32,15 +37,15 @@
 
  <div class="form-group">
     <label for="exampleInputEmail1">Type Your Quiz name</label>
-    <input type="text" class="form-control" id="yourquiz" style="margin-left:400px;width:auto" aria-describedby="emailHelp" placeholder="Enter Quiz name" name="yourquiz"style="width:700px">
+    <input type="text" class="form-control" id="yourquiz"  aria-describedby="emailHelp" placeholder="Enter Quiz name" name="yourquiz">
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Enter question Number</label>
-    <input type="number" class="form-control" id="qno" style="margin-left:400px;width:auto" placeholder="Password"name="qno"style="width:700px">
+    <input type="number" class="form-control" id="qno" placeholder="Password"name="qno">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Question</label>
-    <input class="form-control" id="myquestion" style="margin-left:400px;width:auto" aria-describedby="emailHelp" placeholder="Enter Question" name="myquestion"style="width:700px">
+    <input class="form-control" id="myquestion"  aria-describedby="emailHelp" placeholder="Enter Question" name="myquestion">
   </div>
   <div class="form-group">
 
@@ -50,23 +55,23 @@
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Answer code</label>
-    <input type="text" class="form-control" id="answercode"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode"style="width:700px">
+    <input type="text" class="form-control" id="answercode"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Option 1</label>
-    <input type="text" class="form-control" id="myquestion1"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter Option1" name="myquestion1"style="width:700px">
+    <input type="text" class="form-control" id="myquestion1"  aria-describedby="emailHelp" placeholder="Enter Option1" name="myquestion1">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Option 2</label>
-    <input type="text" class="form-control" id="myquestion2"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter Option2" name="myquestion2"style="width:700px">
+    <input type="text" class="form-control" id="myquestion2"  aria-describedby="emailHelp" placeholder="Enter Option2" name="myquestion2">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Option 3</label>
-    <input type="text" class="form-control" id="myquestion3"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter Option3" name="myquestion3"style="width:700px">
+    <input type="text" class="form-control" id="myquestion3"  aria-describedby="emailHelp" placeholder="Enter Option3" name="myquestion3">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Option 4</label>
-    <input type="text" class="form-control" id="myquestion4"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter Option4" name="myquestion4"style="width:700px">
+    <input type="text" class="form-control" id="myquestion4"  aria-describedby="emailHelp" placeholder="Enter Option4" name="myquestion4">
   </div>
    <div class="form-group">
 
@@ -76,16 +81,16 @@
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the time for the test</label>
-    <input type="number" class="form-control" id="Mytime"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter totaltime" name="Mytime"style="width:700px">
+    <input type="number" class="form-control" id="Mytime" aria-describedby="emailHelp" placeholder="Enter totaltime" name="Mytime">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter Before time</label>
-    <input type="number" class="form-control" id="beforetime"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="beforetime"style="width:700px">
+    <input type="number" class="form-control" id="beforetime"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="beforetime">
   </div>
 
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Enter the solution</label>
-    <textarea class="form-control" id="Mysolutions" rows="5"name="Mysolutions" style="width:auto;margin:auto"></textarea>
+    <textarea class="form-control" id="Mysolutions" rows="5"name="Mysolutions"></textarea>
   </div>
 
   <div class="form-group">
@@ -96,16 +101,18 @@
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter postive marks awarded if any</label>
-    <input type="number" class="form-control" id="pm"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="pm"style="width:700px">
+    <input type="number" class="form-control" id="pm"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="pm">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter negative marks if any</label>
-    <input type="number" class="form-control" id="nm"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="nm"style="width:700px">
+    <input type="number" class="form-control" id="nm"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="nm">
   </div>
     <button type="submit"class="btn btn-primary">submit</button>
 
 </form>
-
+   
+  </div>
+</div>
  
 </div>
    

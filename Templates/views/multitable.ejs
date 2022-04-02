@@ -21,15 +21,20 @@
   </div>
 
    
- 
-
   <h1>create a multitable</h1>
-      <div class="bg-light mt-5" style="text-align:center">
+
+
+ <div class="container">
+   <div class="row">
+
+  
+
+      <div class=" col-lg-6 offset-lg-3 bg-light mt-5" style="text-align:center">
   
     <form action="/multicreation" method="POST">
   
   <label for="exampleInputPassword1" style="margin-top:10px">Enter the quizname</label>
-    <input type="text" class="form-control" id="exampleInputPassword1"name="quizname" placeholder="text" style="width:500px;margin-left:400px" required>
+    <input type="text" class="form-control" id="exampleInputPassword1"name="quizname" placeholder="text"  required>
 
 <div class="form-check">
   <input class="form-check-input" type="checkbox" value="public" name="status"id="defaultCheck1"onclick="myfunction2()">
@@ -45,7 +50,7 @@
 
 <div class="form-group">
     <label for="exampleFormControlSelect1">Enter the exam type</label>
-    <select class="form-control" id="exampleFormControlSelect1" name="examname" style="width:600px;margin-left:400px"required>
+    <select class="form-control" id="exampleFormControlSelect1" name="examname" required>
       <option value="Highlevelexam">High level exam</option>
       <option value="Multisectionexam">Multi section exam</option>
       <option value="simplequiz">simple quiz</option>
@@ -54,16 +59,16 @@
   </div>
 <div class="form-group">
 <label for="exampleInputPassword1" style="margin-top:10px">Enter the no of questions</label>
-    <input type="number" class="form-control" id="exampleInputPassword1"name="noofquestions" placeholder="text" style="width:auto;margin-left:400px">
+    <input type="number" class="form-control" id="exampleInputPassword1"name="noofquestions" placeholder="text" >
 
 </div>
 <div class="form-group">
     <p type="hidden" id="pass">Enter the password to secure the quiz</p>
-    <input class="form-control" style="width:auto;margin-left:400px;display:none" id="secretpass" placeholder="secret password" name="secretcode" style="width:600px;margin-left:400px">
+    <input class="form-control" style="width:auto;margin-left:400px;display:none" id="secretpass" placeholder="secret password" name="secretcode" >
   </div>
 <div class="form-group">
     <p type="hidden" id="unique">Enter the uniquecode</p>
-    <input class="form-control"style="width:auto; margin-left:400px;display:none" id="uniquecode" placeholder="uniquecode" name="noofquestion" style="width:600px;margin-left:400px">
+    <input class="form-control"style="width:auto; margin-left:400px;display:none" id="uniquecode" placeholder="uniquecode" name="noofquestion" >
   </div>
 <button type="submit"style="margin-top:10px">submit</button><br><br><br>
     </form>
@@ -73,6 +78,11 @@
 <div id="newmessage"style="display:none"><%=message%> </div>
 
 <%}  %> 
+
+
+
+</div>
+</div>
 </body>
 
 

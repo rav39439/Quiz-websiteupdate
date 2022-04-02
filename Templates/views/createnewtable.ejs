@@ -24,7 +24,16 @@ input[type="number"]::placeholder {
                 text-align: center;
             }
 
+@media (max-width:500px){
 
+  .input{
+    width: 150px;
+  }
+  .h2{
+    width: 50px;
+  }
+
+}
 
 
   </style>
@@ -42,7 +51,13 @@ input[type="number"]::placeholder {
 
 
 
-    <div class="bg-light mt-5" style="text-align:center">
+  <div class="container">
+
+<div class="row">
+
+
+
+    <div class=" col-lg-6 offset-lg-3 bg-light mt-5" style="text-align:center">
 
 
 
@@ -50,7 +65,7 @@ input[type="number"]::placeholder {
     <form action="/createnewtable" method="POST">
 
  <label for="exampleInputPassword1" style="margin-top:10px">Enter the quizname</label>
-    <input type="text" class="form-control" id="exampleInputPassword1"name="quizname" placeholder="text" style="width:500px;margin-left:400px" required>
+    <input type="text" class="form-control" id="exampleInputPassword1"name="quizname" placeholder="text" required>
 
 
 <div class="form-check">
@@ -68,7 +83,7 @@ input[type="number"]::placeholder {
 
 <div class="form-group">
     <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleform" name="examname" style="width:600px;margin-left:400px"required>
+    <select class="form-control" id="exampleform" name="examname" required>
       <option value="Highlevelexam">Highlevelexam</option>
       <option value="multisectionexam">multisectionexam</option>
       <option value="simplequiz">simplequiz</option>
@@ -77,16 +92,16 @@ input[type="number"]::placeholder {
   </div>
 <div class="form-group">
 <label for="exampleInputPassword1" style="margin-top:10px">Enter the no of questions</label>
-    <input type="number" class="form-control" id="exampleInputPassword1"name="noofquestions" placeholder="text" style="width:auto;margin-left:400px">
+    <input type="number" class="form-control" id="exampleInputPassword1"name="noofquestions" placeholder="text" >
 
 </div>
 <div class="form-group">
-    <p  id="pass"style="margin-left:400px;width:500px;display:none;">Enter the password to secure the quiz</p>
-    <input class="form-control"style="margin-left:400px;width:500px;display:none;" id="secretpass" placeholder="secret password" name="securepass" style="width:auto;margin-left:400px">
+    <p  id="pass">Enter the password to secure the quiz</p>
+    <input class="form-control" id="secretpass" placeholder="secret password" name="securepass">
   </div>
 <div class="form-group">
     <p id="unique" style="display:none;">Enter the uniquecode</p>
-    <input class="form-control"style="margin-left:400px;width:500px;display:none;" id="uniquecode" placeholder="uniquecode" name="uniquecode" style="width:auto;margin-left:400px">
+    <input class="form-control"style="margin-left:400px;width:500px;display:none;" id="uniquecode" placeholder="uniquecode" name="uniquecode" >
   </div>
 
 
@@ -95,12 +110,33 @@ input[type="number"]::placeholder {
 
 
 </form>
+
+
     </div>
+
+
+  </div>
+
+</div>
+
 
 <% if(typeof(message)!='undefined'){ %> 
 <div id="newmessage"style="display:none"><%=message%> </div>
 
 <%}  %> 
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <script>
       let hj=""

@@ -26,6 +26,23 @@
                 /* Firefox, Chrome, Opera */
                 text-align: center;
             }
+
+            @media only screen and (max-width:300px){
+
+.input{
+  width: 150px;
+  background-color: aqua;
+}
+.h2{
+  width: 50px;
+}
+
+
+}
+
+
+
+
     </style>
 </head>
 <%- include('../partials/heading5.hbs') %>
@@ -34,7 +51,13 @@
 
     <h2>Enter Multisection quiz questions here</h2>
 
-    <div class="bg-light mt-5" style="text-align:center">
+    <div class="container">
+      <div class="row">
+
+
+     
+
+    <div class="col-lg-6 offset-lg-3 bg-light mt-5" style="text-align:center">
 
 
 
@@ -43,43 +66,43 @@
  <div class="form-group">
     <label for="exampleInputEmail1">Type Your Quiz name</label>
     <% if(typeof(yourquiz)!='undefined'){%>
-    <input type="text" class="form-control"  style="margin-left:400px;width:auto" aria-describedby="emailHelp" placeholder="Enter Quiz name"name="yourquiz" id="yourquiz"value=<%=yourquiz%>>
+    <input type="text" class="form-control"   aria-describedby="emailHelp" placeholder="Enter Quiz name"name="yourquiz" id="yourquiz"value=<%=yourquiz%>>
   <%} else{%>
-    <input type="text" class="form-control"  style="margin-left:400px;width:auto" aria-describedby="emailHelp" placeholder="Enter Quiz name"name="yourquiz" id="yourquiz">
+    <input type="text" class="form-control"   aria-describedby="emailHelp" placeholder="Enter Quiz name"name="yourquiz" id="yourquiz">
     <%}%>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Enter section Number</label>
-    <input type="number" class="form-control"  style="margin-left:400px;width:auto" placeholder="Password"name="no"id="no">
+    <input type="number" class="form-control"   placeholder="Password"name="no"id="no">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter section name</label>
 
     <% if(typeof(section)!='undefined'){%>
 
-    <input type="text" class="form-control" style="margin-left:400px;width:auto" aria-describedby="emailHelp" placeholder="Enter section name" name="section"id="section" value=<%=section%> >
+    <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter section name" name="section"id="section" value=<%=section%> >
     <%} else{%>
-      <input type="text" class="form-control" style="margin-left:400px;width:auto" aria-describedby="emailHelp" placeholder="Enter section name" name="section"id="section" >
+      <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter section name" name="section"id="section" >
       <%}%>
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the number of questions in section</label>
     <% if(typeof(queno)!='undefined'){%>
-      <input type="number" class="form-control" style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter no of questions in the section " name="qsection"id="qsection" value=<%=queno%>>
+      <input type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Enter no of questions in the section " name="qsection"id="qsection" value=<%=queno%>>
 
       <%} else{%>
 
-    <input type="number" class="form-control" style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter no of questions in the section " name="qsection"id="qsection">
+    <input type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Enter no of questions in the section " name="qsection"id="qsection">
     <%}%>
 
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the question number</label>
-    <input type="number" class="form-control"style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="qno"id="qn">
+    <input type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="qno"id="qno">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the question </label>
-    <input type="text" class="form-control" style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter the question" name="myquestion"id="myquestio">
+    <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Enter the question" name="myquestion"id="myquestion">
   </div>
  
 
@@ -91,7 +114,7 @@
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the integer answer 1 to 10 </label>
-    <input type="number" class="form-control" style="margin-left:400px;width:auto"  aria-describedby="emailHelp" placeholder="Enter the integer" name="myinteger"id="myinteger"style="width:auto">
+    <input type="number" class="form-control"   aria-describedby="emailHelp" placeholder="Enter the integer" name="myinteger"id="myinteger">
   </div>
 
 
@@ -100,7 +123,7 @@
 
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the passage to be read </label>
-        <textarea class="form-control"  name="passage" rows="5"name="passage" id="passage" style="width:800px;margin:auto"></textarea>
+        <textarea class="form-control"  name="passage" rows="5"name="passage" id="passage" ></textarea>
 </div>
 
 
@@ -114,39 +137,39 @@
   
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the answercode1</label>
-    <input type="number" class="form-control" style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode1" id="answercode1" >
+    <input type="number" class="form-control"   aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode1" id="answercode1" >
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the answercode2</label>
-    <input type="number" class="form-control"style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode2" id="answercode2" >
+    <input type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode2" id="answercode2" >
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the answercode3</label>
-    <input type="number" class="form-control"style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode3" id="answercode3" >
+    <input type="number" class="form-control"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode3" id="answercode3" >
   </div>
 
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Option 1</label>
-    <input type="text" class="form-control" style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Option1" name="myquestion1"id="myquestion1">
+    <input type="text" class="form-control"   aria-describedby="emailHelp" placeholder="Enter Option1" name="myquestion1"id="myquestion1">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Option 2</label>
-    <input type="text" class="form-control" style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Option2" name="myquestion2"id="myquestion2">
+    <input type="text" class="form-control"   aria-describedby="emailHelp" placeholder="Enter Option2" name="myquestion2"id="myquestion2">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Option 3</label>
-    <input type="text" class="form-control" style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Option3" name="myquestion3"id="myquestion3">
+    <input type="text" class="form-control"   aria-describedby="emailHelp" placeholder="Enter Option3" name="myquestion3"id="myquestion3">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the Option 4</label>
-    <input type="text" class="form-control" style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Option4" name="myquestion4"id="myquestion4">
+    <input type="text" class="form-control"   aria-describedby="emailHelp" placeholder="Enter Option4" name="myquestion4"id="myquestion4">
   </div>
 
 
 
 <div class="form-group">
     <label for="exampleFormControlTextarea1">Enter the solution</label>
-    <textarea class="form-control" rows="5"name="Mysolutions"id="Mysolutions" style="margin:auto"></textarea>
+    <textarea class="form-control" rows="5"name="Mysolutions"id="Mysolutions" ></textarea>
   </div>
 <div class="form-group">
 
@@ -168,7 +191,7 @@
 
     <% if(typeof(type)!='undefined'){%>
 
-    <select class="form-control" name="type" id="type" style="margin-left:400px"value=<%=type%>>
+    <select class="form-control" name="type" id="type" value=<%=type%>>
       <option value="multichoice">multichoice</option>
       <option value="integertype">integertype</option>
    
@@ -176,7 +199,7 @@
      
     </select>
     <%}else{%>
-      <select class="form-control" name="type" id="type" style="margin-left:400px">
+      <select class="form-control" name="type" id="type" >
         <option value="multichoice">multichoice</option>
         <option value="integertype">integertype</option>
         <option value="passage">passage</option>
@@ -190,39 +213,40 @@
     <label for="exampleInputEmail1">Enter the time for the test</label>
     <% if(typeof(mytime)!='undefined'){%>
 
-    <input type="number" class="form-control" id="mytime"style="margin-left:400px"  aria-describedby="emailHelp" placeholder="Enter totaltime" name="mytime"value=<%=mytime%>>
+    <input type="number" class="form-control" id="mytime"  aria-describedby="emailHelp" placeholder="Enter totaltime" name="mytime"value=<%=mytime%>>
     <%}else{%>
-      <input type="number" class="form-control" id="mytime"style="margin-left:400px"  aria-describedby="emailHelp" placeholder="Enter totaltime" name="mytime">
+      <input type="number" class="form-control" id="mytime"  aria-describedby="emailHelp" placeholder="Enter totaltime" name="mytime">
       <%}%>
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter Before time</label>
     <% if(typeof(beforetime)!='undefined'){%>
 
-    <input type="number" class="form-control" id="beforetime"style="margin-left:400px"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="beforetime"value=<%=beforetime%>>
+    <input type="number" class="form-control" id="beforetime" aria-describedby="emailHelp" placeholder="Enter beforetime" name="beforetime"value=<%=beforetime%>>
     <%}else{%>
-      <input type="number" class="form-control" id="beforetime"style="margin-left:400px"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="beforetime">
+      <input type="number" class="form-control" id="beforetime"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="beforetime">
 
       <%}%>
   </div>
 
   <div class="form-group">
     <label for="exampleInputEmail1">Enter postive marks awarded if any</label>
-    <input type="text" class="form-control" id="pm"style="margin-left:400px"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="pm"style="width:700px">
+    <input type="text" class="form-control" id="pm"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="pm">
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter negative marks if any</label>
-    <input type="text" class="form-control" id="nm"style="margin-left:400px"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="nm"style="width:700px">
+    <input type="text" class="form-control" id="nm"  aria-describedby="emailHelp" placeholder="Enter beforetime" name="nm">
   </div>
 
-               <button type="submit" style="height:50px;width:150px" class="btn btn-primary ">submit the question</button>
+               <button type="submit"  class="btn btn-primary ">submit the question</button>
 
 </form>
 
  </div>
 
 
- 
+</div>
+</div>
 
    
 <script>
