@@ -467,6 +467,13 @@
         <div class="option_list">
             <!-- Here I've inserted options from JavaScript -->
         </div>
+
+
+
+        <div id="integerquestion" style="display:none">
+    <label for="exampleInputEmail1">Enter the answer in integer</label>
+    <input type="number"  id="myintegerans"style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode3" style="width:700px">
+  </div>
         </section>
 
         <!-- footer of Quiz Box -->
@@ -476,6 +483,7 @@
             </div>
             <button class="next_btn">Next Que</button>
             <button class="prev_btn">prev Que</button>
+            <button style="display:none" class="integer_btn">integer submit</button>
             <button class="clearans_btn">clear answers</button>
             <button class="submit_btn">submit</button>
         </footer>
@@ -524,6 +532,7 @@
         let myquestions = []
         //myquestions.size=8
         let nn = 0
+  let pp=0
 
         let p = 0
         let g = 0
@@ -548,7 +557,10 @@
 
 
         const quiz_box = document.querySelector(".quiz_box");
+        const integerans = document.getElementById("myintegerans");
+        const integerquestion = document.getElementById("integerquestion");
         const namequiz = document.querySelector(".namequiz");
+        const integerbtn = document.querySelector(".integer_btn");
         const result_box = document.querySelector(".result_box");
         const option_list = document.querySelector(".option_list");
         const time_line = document.querySelector("header .time_line");
@@ -1029,13 +1041,14 @@ function section3() {
 
             // getting questions and options from array
             function showQuetions(que_count) {
+                 let que_tag = ""
                 const que_text = document.querySelector(".que_text");
                 console.log(que_count)
 
                 if ((Mydata[que_count].type == "multichoice") || (Mydata[que_count].type == "multi")) {
-
+integerbtn.style.display="none"
                     let img_tag = ""
-                    let que_tag = ""
+                   
                     let pass_img = ""
                     let pass_tag = ""
                     if (Mydata[que_count].queimg) {
@@ -1092,6 +1105,12 @@ function section3() {
 
 
 
+
+
+
+
+
+
                     que_text.innerHTML = que_tag
 
 
@@ -1140,6 +1159,9 @@ function section3() {
    
     </div>`;
                     //adding new span tag inside que_tag
+
+                      option_list.style.display="block"
+                integerquestion.style.display='none'
                     option_list.innerHTML = option_tag; //adding new div tag inside option_tag 
                     const option = option_list.children[0].querySelectorAll(".option");
                     console.log(option)
@@ -1210,20 +1232,37 @@ function section3() {
 
                 // return true;
 
+                  if (Mydata[que_count].type == "integertype") {
+                option_list.style.display="none"
+                integerquestion.style.display='block'
+integerbtn.style.display="block"
+                          que_tag = '<span class="ff">' + Mydata[que_count].numb + ". " + Mydata[que_count].question + '</span>' + '<br>'
+
+               // option_list.innerHTML = option_tag;
+                 que_text.innerHTML = que_tag
+ integerbtn.onclick=()=>{
+        console.log(integerans.value)
+  myquestions[que_count]=integerans.value
+localStorage.setItem("myquestions", JSON.stringify(myquestions))
+   console.log(myquestions)
+  }
+  
+
+ 
+ 
+                
+              
+
+               
+             
+
             }
 
-            if (Mydata[que_count].type == "integertype") {
-                var option_tag = `<div class="form-group">
-    <label for="exampleInputEmail1">Enter the answer in integer</label>
-    <input type="number" class="form-control" id="myintegerans"style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode3" style="width:700px">
-  </div>`
-                option_list.innerHTML = option_tag;
-
-                let myans = document.getElementById('myintegerans')
-                myquestions.push(myans)
-                localStorage.setItem("myquestions", JSON.stringify(myquestions))
 
             }
+
+           
+           
         }
 
 
@@ -1269,7 +1308,7 @@ function section3() {
             let my = JSON.parse(localStorage.getItem("myquestions"))
             console.log(myquestions)
             let m = 0
-
+          
             for (let i = 0; i < Mydata.length; i++) {
                 let a = []
                 let b = []
@@ -1319,11 +1358,17 @@ function section3() {
                             //console.log(myquestions)
                             console.log("they are qual")
 
-                            if (Mydata[i].positivemarks != 'undefined') {
+                            if (Mydata[i].positivemarks !='undefined') {
                                 nn = nn + Mydata[i].positivemarks
 
+                            }
+                            else{
+
+                                //
+                            }
                             } else {
-                                nn = nn + 1
+                               if (Mydata[i].negativemarks !='undefined') {
+                                nn = nn - Mydata[i].negativemarks !='undefined'
                             }
                         }
                     }
@@ -1336,17 +1381,28 @@ function section3() {
 
                 }
 
-                if (Mydata[i].type == "integerans") {
+                if (Mydata[i].type == "integertype") {
+console.log("Integer evaluation is beggining")
+                    if (myquestions[i] == Mydata[i].integerans) {
 
-                    if (myquestions[i] == JSON.parse(Mydata[i].answercode)['answer1']) {
+
+                        if (typeof (Mydata[i].positivemarks) !='undefined') {
+                                                    console.log("Integer evaluation is running")
 
 
-                        if (typeof (Mydata[i].positivemarks) != 'undefined') {
-
-                            m = m + Mydata[i].positivemarks;
+                            pp = pp+ Mydata[i].positivemarks;
+                            console.log(pp)
                         }
-                        else {
-                            m = m + 1
+                       else{
+                           //
+                       }
+
+
+
+                        } else {
+
+                            if (typeof(Mydata[i].negativemarks)!='undefined') {
+                           m=m-Mydata[i].negativemarks
                         }
 
                     }
@@ -1381,10 +1437,15 @@ function section3() {
                             if (typeof (Mydata[i].positivemarks) != 'undefined') {
 
                                 m = m + Mydata[i].positivemarks;
-                            }
+
+                                //-----------------------------------------
+                                //commented out for e
+                         }
                             else {
-                                m = m + 1
-                            }
+                           //
+                       }
+//
+                            //----------------------------------------------
                             //tm=m+nn   
 
                             //console.log(Object.values(Mydata[i])[h][0])
@@ -1393,15 +1454,13 @@ function section3() {
                             if (typeof (Mydata[i].negativemarks) != 'undefined') {
                                 m = m - Mydata[i].negativemarks
                             }
-                            else {
-                                //
-                            }
+                           
 
                         }
                         //}     
 
                     }
-                    tm = m + nn
+                    tm = m + nn+pp
 
                     document.getElementById('marks').value = tm
                 }
@@ -1409,6 +1468,7 @@ function section3() {
             }
             console.log("yoiuru kshdflkjashlrhyour score is" + tm)
         }
+        
 
         ///this isi the doubtful bracket kindly refer it again
             //-------------------------------------------------------------------------------------------------------

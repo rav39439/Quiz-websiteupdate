@@ -416,14 +416,15 @@ let option3=document.getElementById("g")
 
  let option_tag=``;
 let option4=document.getElementById("k")
-let que_tag='';
+
  let img_tag='';
+ let que_tag='';
+     
    //let pass_img='';
     //let pass_tag='';
     for (let i=0;i<length;i++){
 
 
-     
                 
                
                
@@ -493,9 +494,12 @@ if(Mydata[i].myfiles){
    else{
 
             if(Mydata[i].type=="integertype"){
+
+       que_tag = '<span class="ff">' + Mydata[i].numb + ". " + Mydata[i].question + '</span>'+'<br>'
+
    option_tag =`<div class="form-group">
     <label for="exampleInputEmail1">Enter the answer in integer</label>
-    <input type="number" class="form-control" style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Answercode" value=${Mydata[que_count].integerans} style="width:700px">
+    <input type="number" class="form-control" style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Answercode" value=${Mydata[i].integerans} style="width:700px">
   </div>`
     html += que_tag + `<br>`+ option_tag+`<br>`
 
@@ -587,12 +591,22 @@ console.log(a)
 
 
 
-if(Mydata[i].type=="integerans"){
+if(Mydata[i].type=="integertype"){
+console.log("my integer ans is running")
+console.log(Object.values(Mydata[i])[h][0])
+console.log(Mydata[i].integerans)
+if(Object.values(Mydata[i])[h][0]==Mydata[i].integerans){
+if(typeof(Mydata[i].positivemarks)){
+m=m+Mydata[i].positivemarks;
+}
 
-if(JSON.parse(Object.values(Mydata[i])[h])[0]==JSON.parse(Mydata[i].answercode)['answer1']){
 
-m=m+1;
 
+}
+else{
+if(typeof(Mydata[i].negativemarks)){
+m=m+Mydata[i].negativemarks
+}
 }
 }
 

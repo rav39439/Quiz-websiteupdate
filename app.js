@@ -1656,11 +1656,11 @@ else{
     })
    // console.log("dsafagsfga")
 
-    connection.query("UPDATE " + req.body.yourquiz + " SET sections='" + req.body.sections + "',qsection='" + req.body.qsection + "' WHERE numb=" + req.body.no + "", function (err, data) {
-        if (err) { throw (err) }
+    // connection.query("UPDATE " + req.body.yourquiz + " SET sections='" + req.body.section + "',qsection='" + req.body.qsection + "' WHERE numb=" + req.body.no + "", function (err, data) {
+    //     if (err) { throw (err) }
 
         console.log("multidata added")
-    })
+    //})
 
 })
 // /-------------------------------------result of multioptions quiz--------------------------------
