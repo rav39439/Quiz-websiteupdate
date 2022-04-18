@@ -408,7 +408,7 @@ app.post("/storeresult",  (req, res) => {
     })
 })
 
-
+//----------------------------------trying sendgrid------------------------------------------------
 var transporter=nodemailer.createTransport(sendgridtransport({
     
     auth:{
@@ -420,7 +420,26 @@ var transporter=nodemailer.createTransport(sendgridtransport({
 
    
 }))
+//---------------------------------------------trying mailtrap-------------------------------------
 
+
+// var transporter = nodemailer.createTransport({
+//     host: "smtp.mailtrap.io",
+//     port: 2525,
+//     auth: {
+//       user: "f764040d9ae9f9",
+//       pass: "899f7d7a54bf30"
+//     }
+//   });
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------
 
 app.get('/register', (req, res) => {
     res.render("register.ejs",{username:req.session.username})
@@ -451,7 +470,7 @@ if(err){
         })
 
         if(s==0){
-            console.log("dsfsf")
+           // console.log("dsfsf")
             next()
             return
 
@@ -474,7 +493,7 @@ if(err){
 
     let s=0;
    
-        console.log(data)
+       // console.log(data)
         data.forEach(function(elem){
     
            if(elem.email==req.body.email){
@@ -488,7 +507,7 @@ if(err){
         })
 
         if(s==0){
-            console.log("dsfsf")
+           // console.log("dsfsf")
             next()
             return
 
@@ -546,7 +565,7 @@ payload={
         subject:"signup successful",
         html:`<h2>${req.body.name}! Thanks for registering on our site</h2>
         <h4>Please verify your mail to continue</h4>
-        <a href="http//${req.headers.host}/verify-email?token=${token}">verify your email</a>
+        <a href="http://localhost:8700/verify-email?token=${token}">verify your email</a>
         `
     }
     transporter.sendMail(mailOptions,function(error,info){
@@ -555,7 +574,8 @@ payload={
            console.log(error)
         }else{
             res.render("verify-email.ejs",{token:token})
-           // console.log("verificartion email is sent")
+            console.log("verificartion email is sent")
+            console.log(req.body.email)
 
          // res.send("please check your mail and verify to register")
         }
@@ -595,7 +615,7 @@ username=decodedToken.username
 
     bcrypt.genSalt(10, function(err, salt) {
         bcrypt.hash(password, salt, function(err, hash) {
-    var c = "INSERT INTO `users` ( `Name`,`email`,`password`,`uniquecode`,`admin`,`isverified`,`token`) VALUES ('" +username+ "','" +email+ "','" + hash + "','" +uniquecode + "','false','false','"+req.query.token+"')";
+    var c = "INSERT INTO `users` ( `Name`,`email`,`password`,`uniquecode`,`admin`,`isverified`,`token`) VALUES ('" +username+ "','" +email+ "','" + hash + "','" +uniquecode + "','true','true','"+req.query.token+"')";
     connection.query(c, (err, rows) => {
     if(err){
     console.log(err)
