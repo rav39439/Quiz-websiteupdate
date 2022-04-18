@@ -565,7 +565,7 @@ payload={
         subject:"signup successful",
         html:`<h2>${req.body.name}! Thanks for registering on our site</h2>
         <h4>Please verify your mail to continue</h4>
-        <a href="http://localhost:8700/verify-email?token=${token}">verify your email</a>
+        <a href="https://neweducationworld.herokuapp.com/verify-email?token=${token}">verify your email</a>
         `
     }
     transporter.sendMail(mailOptions,function(error,info){
