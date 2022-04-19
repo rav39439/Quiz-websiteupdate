@@ -34,13 +34,7 @@ const {v4:uuidV4}=require('uuid');
 
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-//const io = require('socket.io-client')(server);
-//const { ExpressPeerServer } = require('peer');
-///const peerServer = ExpressPeerServer(server, {
- // debug: true
-//});
-//app.use('/peerjs', peerServer);
-//const fetch = require("node-fetch");
+
 const url = require('url');
 //var bodyParser = require('body-parser')
 
@@ -2620,7 +2614,7 @@ newdatan.forEach(function(elem,index){
 ///-----------------------------------------------video-----------------------------------------------
   //---------------------------------------videoupload-------------------------------------------------
 const PORT=process.env.PORT
-  server.listen(PORT, () => {
+  server.listen(PORT||8800, () => {
     console.log("listening")
 })
 

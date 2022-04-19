@@ -14,11 +14,75 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
-    .quizenter{
-        width: 200px;
-        height: 100px;
-        
+    
+#mylogin{
+  margin-left:200px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  font-size:60px;
+}
+    .new1{
+text-align: center;
+      border-radius:8px;
+      width: 500px;
+      height:auto;
+      margin-left:80px;
+      height:400px;
+      background-color:aliceblue;
+      margin-top: 40px;
+      border: solid;
     }
+   .new2{
+margin-top: 90px;
+
+   }
+   #uniquecode{
+ margin-left: 100px;
+ width: 300px;
+ margin-top: 20px;
+   }
+
+
+   #password{
+ margin-left: 100px;
+ width: 300px;
+ margin-top: 20px;
+   }
+
+   #info{
+     margin-top: 20px;
+   }
+
+    @media only screen and (max-width: 500px) {
+ 
+ .new1{
+ 
+     height: 400px;
+    width:320px;
+    margin-left:10px;
+ }
+ .new2{
+     margin-right: 40px;
+ }
+ #password{
+   width: 230px;
+   margin-left: 30px;
+ }
+ #uniquecode{
+  width: 230px;
+
+   margin-left: 30px;
+ }
+ #mylogin{
+  margin-left:100px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  font-size:60px;
+}
+
+ }
+
+
 </style>
 <body>
   <%- include('../partials/heading.hbs') %>
@@ -30,19 +94,18 @@
     <% } %> 
  
   
-    <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Login</h1>
-    <div class="mt-5 border"style="border-radius:8px;height:auto;width:500px;margin-left:300px;height:400px;background-color:blue">
-      <div style="margin:20px;padding-top:30px;background-color: white;width:470;height: 350px;text-align: center;">
-
+    <h1 id="mylogin">Login</h1>
+    <div class="new1">
+<div class="new2">
 <form action="/login" method="POST">
   <div class="form-group">
-    <label for="exampleInputEmail1">Email your uniquecode</label>
-    <input type="text" class="form-control" id="uniquecode" name="uniquecode" aria-describedby="emailHelp" placeholder="Enter your uniquecode" style="width:400px">
-    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    <label for="exampleInputEmail1">Enter your accesscode</label>
+    <input type="text" class="form-control" id="uniquecode" name="uniquecode" aria-describedby="emailHelp" placeholder="Enter your uniquecode">
   </div>
+
   <div class="form-group">
     <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" id="password" name="password"placeholder="password"style="width:400px">
+    <input type="password" class="form-control" id="password" name="password"placeholder="password">
   </div>
   
   <button type="submit" class="btn btn-primary" id="info">Submit</button>
@@ -69,9 +132,9 @@
 
 <script>
 
-if(document.getElementById("name")){
+
 let f= document.getElementById("name").innerText
-}
+
  if(typeof(f)!='undefined'){
    document.getElementById("myname").innerText=f
 }
