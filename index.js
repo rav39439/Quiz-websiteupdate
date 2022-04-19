@@ -1,4 +1,4 @@
-const mysql=require('mysql2');
+const mysql=require('mysql');
 const express=require('express');
 const bodyparser = require('body-parser');
 const { DATABASE } = process.env;
