@@ -2322,7 +2322,7 @@ app.post("/do-uploadprofileimage6",function(req,res){
 
 app.get("/getallcontent",function(req,res){
 
-    res.render("getallcontent.ejs")
+    res.render("getallcontent.ejs",{username:req.session.username})
 })
 
 

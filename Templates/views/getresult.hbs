@@ -19,7 +19,90 @@
                 text-align: center;
             }
 
+
+#mylogin{
+ margin-left:370px;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size:60px
+}
+    .new1{
+text-align: center;
+      border-radius:8px;
+      width: 400px;
+      height:350px;
+      background-color:aliceblue;
+      margin-top: 40px;
+      border: solid;
+      margin-left:300px
+    }
+   .new2{
+margin-top: 90px;
+
+   }
+   #name{
+ margin-left: 30px;
+ width: 300px;
+ margin-top: 20px;
+   }
+
+
+   #myquiz{
+ margin-left: 30px;
+ width: 300px;
+ margin-top: 20px;
+   }
+
+   #examname{
+ margin-left: 30px;
+ width: 300px;
+ margin-top: 20px;
+   }
+
+   #info{
+     margin-top: 20px;
+   }
+
+    @media only screen and (max-width: 500px) {
+ 
+ .new1{
+ 
+     height: 400px;
+    width:320px;
+    margin-left:10px;
+ }
+ 
+ #name{
+   width: 200px;
+   margin-left: 15px;
+ }
+ #myquiz{
+  width: 200px;
+
+   margin-left: 15px;
+ }
+ #examname{
+  width: 200px;
+
+   margin-left: 15px;
+ }
+ #mylogin{
+  margin-left:100px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  font-size:60px;
+}
+
+ }
+
+
+
+
+
+
     </style>
+
+
+
 </head>
 
 
@@ -28,31 +111,30 @@
 
 
        
-   <h1 style="margin-left:370px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">See your result here</h1>
+   <h1 id="mylogin">See your result here</h1>
 
 
-<div class="container" style="margin-right:300px">
+<div class="new1">
 
-  <div class="row">
 
 
   
-  <div class="col-lg-6 bg-light mt-5 border offset-lg-4">
+  <div class="new">
 
     
     <form action="/newresultmulti" method="POST">
   
 <div class="form-group">
     <label for="exampleInputEmail1">Email Quizname</label>
-    <input type="text" class="form-control mt-2"  aria-describedby="emailHelp" placeholder="Enter Quizname"name="myquiz" required>
+    <input type="text" class="form-control mt-2"  id="myquiz"aria-describedby="emailHelp" placeholder="Enter Quizname"name="myquiz" required>
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1">Your name</label>
-    <input type="text" class="form-control mt-2" placeholder="name" name="name" required>
+    <input type="text" class="form-control mt-2" id="name" placeholder="name" name="name" required>
   </div>
 <div class="form-group">
     <label >Enter the exam type</label>
-    <select class="form-control mt-2" name="examname" required>
+    <select class="form-control mt-2" id="examname" name="examname" required>
       <option value="Highlevelexam">High level exam</option>
       <option value="Multisectionexam">Multi section exam</option>
       <option value="simplequiz">simple quiz</option>
@@ -65,13 +147,15 @@
     
     </form>
 
-    </div>
 
-    <div class="col-lg-6" id="name"style="display:none">{{username}}</div>
+    <div  id="name"style="display:none">{{username}}</div>
 
 
 
 </div>
+
+
+
 </div>
 
 </body>

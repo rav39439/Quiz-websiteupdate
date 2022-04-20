@@ -5,32 +5,154 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+
+<style>
+
+#mylogin{
+ margin-left:370px;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size:60px
+}
+    .new1{
+text-align: center;
+      border-radius:8px;
+      width: 400px;
+      height:350px;
+      background-color:aliceblue;
+      margin-top: 40px;
+      border: solid;
+      margin-left:300px
+    }
+    .new2{
+        border-radius:8px;
+text-align: center;
+margin-top: 90px;
+width: 300px;
+border-radius:8px;
+text-align:center;
+     
+      margin-top: 40px;
+    }
+
+
+
+   .new3{
+     margin-top: 10px;
+     margin-right:30px;
+     width: 650px;
+     margin-left: 200px;
+
+   }
+  
+
+
+   
+
+   #secretcode{
+ margin-left: 30px;
+ width: 200px;
+ margin-top: 20px;
+   }
+
+   #uniquecode{
+    width: 200px;
+    margin-left: 30px;
+
+     margin-top: 20px;
+   }
+
+    @media only screen and (max-width: 600px) {
+ 
+ .new1{
+ 
+     height: 400px;
+    width:350px;
+    margin-left:10px;
+ }
+ 
+.new2{
+
+  width:300px ;
+  margin-left: 0px;
+}
+ 
+.new3{
+     margin-top: 10px;
+     margin-right:30px;
+     width: 350px;
+     margin-left: 10px;
+
+   }
+  
+   #secretcode{
+ margin-left: 30px;
+ width: 150px;
+ margin-top: 20px;
+   }
+
+   #uniquecode{
+    width: 150px;
+    margin-left: 30px;
+
+     margin-top: 20px;
+   }
+ 
+  
+ #mylogin{
+  margin-left:50px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  font-size:30px;
+}
+
+ }
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+    
 </head>
 
 <%- include('../partials/heading1.hbs') %>
 <body>
 
   
-  <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Get More Quizzes</h1>
-  <div class="container">
+  <h1 id="mylogin">Get More Quizzes</h1>
+  <div class="new1">
 
-    <div class="row">
+  
 
-  <div class="col-lg-4 bg-light border"style="border-radius:8px;text-align:center;width:700px;margin-left:250px">
+  <div class="new2">
 
 
   
     <form action="/enterquizname" method="POST">
 
  <label for="exampleInputPassword1" style="margin-top:10px">Enter the uniquecode of tutor</label>
-    <input type="text" class="form-control mt-2" id="exampleInputPassword1"name="uniquecode" placeholder="text" style="width:500px;border-radius: 8px;margin-left:40px">
+    <input type="text" class="form-control mt-2" id="uniquecode"name="uniquecode" placeholder="text" >
  <label for="exampleInputPassword1" style="margin-top:10px">Enter the secretcode</label>
-    <input type="text" class="form-control mt-2" id="exampleInputPassword1"name="secretcode" placeholder="text" style="width:500px;border-radius: 8px;margin-left:40px">
+    <input type="text" class="form-control mt-2" id="secretcode"name="secretcode" placeholder="text" >
 <button type="submit"class="btn btn-primary mt-2">see result</button>
 </form>
 </div>
 
-<div class="col-lg-8 offset-lg-2" style="margin-right:30px;">
+</div>
+
+
+
+
+<div class="new3">
 
    <table class="table">
   <thead class="thead-dark">
@@ -66,8 +188,8 @@
     <%}%>
 
 </div>
-  </div>
-</div>
+
+
 </body>
 
 <script>

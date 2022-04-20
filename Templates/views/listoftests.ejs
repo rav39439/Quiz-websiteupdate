@@ -20,6 +20,80 @@
     input[type="text"]{
   outline: none;
 }
+
+
+
+
+.new1{
+  width:750px;
+  height:150px;
+  border-radius: 8px;
+  display:inline-block
+}
+
+#quiz{
+   width: 230px;
+   margin-left: 20px;
+   margin-top: 10px;
+   outline: none;
+ }
+
+ #name{
+  width: 230px;
+  outline: none;
+   margin-left: 20px;
+   margin-top: 10px;
+ }
+
+
+
+#mylogin{
+  margin-left:200px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  font-size:60px;
+}
+
+@media only screen and (max-width: 700px) {
+ 
+ .new1{
+ 
+     height: 150px;
+    width:400px;
+    margin-left:0px;
+ }
+ 
+ #quiz{
+   width: 100px;
+   margin-left: 0px;
+   margin-top: 0px;
+   outline: none;
+ }
+ #name{
+  width: 100px;
+  outline: none;
+   margin-left: 0px;
+   margin-top: 0px;
+ }
+ #mylogin{
+  margin-left:150px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  font-size:60px;
+}
+
+ }
+
+
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 
@@ -28,7 +102,12 @@
 <body>
 
 
-  <h1 style="margin-left:440px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:60px">Free Quizzes</h1>
+
+
+
+
+
+  <h1 id="#mylogin">Free Quizzes</h1>
 
 
 <br><br>
@@ -38,14 +117,13 @@
 
 <% quizdata.forEach(function(elem,index){ %> 
 
-       <div class="mt-4 border bg-light" id="mydiv<%=index%>" style="width:700px;height:150px;border-radius: 8px;display:inline-block">
+       <div class="mt-4 border bg-light new1" id="mydiv<%=index%>">
         <div class="ml-4" style="margin:10px;display:inline-flex">
 <form id="myform<%index%>" action="/enterquiz1" method="GET">
 <div class="mt-1" style="display:block;width: 200px;">
-    <input readonly class="quiz" style="margin-top: 20px;outline: none;"name="myquiz" value="<%=elem.quizname%>">
+    <input readonly class="quiz" id="name"name="myquiz" value="<%=elem.quizname%>">
 
-
-  <input readonly name="quiz"style="margin-top: 20px;outline: none;" value="<%=elem.examname%>"> 
+  <input readonly name="quiz"id="quiz" value="<%=elem.examname%>"> 
 </div>
 </div>
 <div style="float:right">
