@@ -19,6 +19,18 @@ const bcrypt = require('bcryptjs');
 var bodyParser=require("body-parser")
 app.use(bodyParser.urlencoded())
 app.use(bodyParser.json())
+
+var http=require("http").createServer(app)
+
+var io=require("socket.io")(http, {
+    cors: {
+     // origin: "https://neweducationworld.herokuapp.com/",
+      origin: "http://localhost:8700",
+      credentials: true
+    }
+  })
+
+
   //app.use(bodyParser.json())
 //var cookieParser = require('cookie-parser');
 //
@@ -32,8 +44,8 @@ const {v4:uuidV4}=require('uuid');
 
 
 
-const server = require('http').Server(app)
-const io = require('socket.io')(server)
+// const server = require('http').Server(app)
+// const io = require('socket.io')(server)
 
 const url = require('url');
 //var bodyParser = require('body-parser')
@@ -2611,10 +2623,55 @@ newdatan.forEach(function(elem,index){
 
                 res.render("contactme.ejs")
             })
+
+
+            app.get("/chat",function(req,res){
+
+                res.render("room.ejs")
+            })
+
+
+
+
+
+
+
+            app.post("/enterchat",function(req,res){
+                res.render('startchat.ejs',{username:req.body.username,roomid:req.body.roomid})   
+            
+            })
+
+            io.on("connection",function(socket){
+               // console.log(socket.id)
+
+                socket.on("message",function(chat,file){
+
+                    let buff = new Buffer.from(file);
+                 let base64data = buff.toString('base64');
+                // console.log(buff)
+                // console.log(base64data)
+
+            io.emit('newdata',chat,base64data)
+
+                    //console.log(chat)
+                   //console.log(file)
+                    
+                })
+
+            })
+
+
+
+
+
+
+
+
+
 ///-----------------------------------------------video-----------------------------------------------
   //---------------------------------------videoupload-------------------------------------------------
 const PORT=process.env.PORT
-  server.listen(PORT||8800, () => {
+  http.listen(PORT||8800, () => {
     console.log("listening")
 })
 
