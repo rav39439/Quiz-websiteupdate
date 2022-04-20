@@ -24,8 +24,8 @@ var http=require("http").createServer(app)
 
 var io=require("socket.io")(http, {
     cors: {
-     //origin: "https://neweducationworld.herokuapp.com",
-     origin: "http://localhost:8700",
+    origin: "https://neweducationworld.herokuapp.com",
+     //origin: "http://localhost:8700",
       credentials: true
     }
   })
