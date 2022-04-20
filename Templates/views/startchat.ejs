@@ -49,7 +49,7 @@
 
 <script>
 //const socket = io('http://localhost:8700')      
-var socket = io('https://neweducationworld.herokuapp.com/', { transports: ['websocket', 'polling', 'flashsocket'] });
+const socket = io('https://neweducationworld.herokuapp.com', { transports: ['websocket', 'polling', 'flashsocket'] });
 
 
 let html=""
@@ -111,7 +111,8 @@ socket.on('newdata',function(chat,base64String){
     //console.log(base64String)
 html+=`
 <div> ${chat} </div>
-<img src="data:image/jpeg;base64,${base64String}"" alt="">`
+<img src="data:image/jpeg;base64,${base64String}"" alt="" width="400" 
+     height="500"/>`
 document.getElementById("dd").innerHTML=html
 
 
