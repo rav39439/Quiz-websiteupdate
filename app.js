@@ -24,8 +24,8 @@ var http=require("http").createServer(app)
 
 var io=require("socket.io")(http, {
     cors: {
-     origin: "https://neweducationworld.herokuapp.com",
-     //origin: "http://localhost:8700",
+     //origin: "https://neweducationworld.herokuapp.com",
+     origin: "http://localhost:8700",
       credentials: true
     }
   })
@@ -2643,18 +2643,29 @@ newdatan.forEach(function(elem,index){
 
             io.on("connection",function(socket){
                // console.log(socket.id)
+               socket.on('join-room',function(roomid,cb){
+                socket.join(roomid)
+                ///cb(`joined ${room}`)
 
-                socket.on("message",function(chat,file){
 
-                    let buff = new Buffer.from(file);
-                 let base64data = buff.toString('base64');
-                // console.log(buff)
-                // console.log(base64data)
+                io.to(roomid).emit('new_message',`${cb} has joined`)
+            })
+                socket.on("message",function(username,chat,fileinfo){
 
-            io.emit('newdata',chat,base64data)
+                    if(fileinfo!=""){
+                        let buff = new Buffer.from(fileinfo);
+                        let base64data = buff.toString('base64');
+                    io.to(roomid).emit('newdata',username,chat,base64data)
+                    }
+                    else{
 
-                    //console.log(chat)
-                   //console.log(file)
+
+                        io.emit('newdata',username,chat,fileinfo)
+                    }
+
+                  
+
+                   
                     
                 })
 

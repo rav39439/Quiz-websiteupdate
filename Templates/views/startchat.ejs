@@ -17,8 +17,8 @@
 <body>
     
 
-<h1><%=roomid%> </h1>
-<h1><%=username%> </h1>
+<h1 id="roomid"><%=roomid%> </h1>
+<h1 id="username"><%=username%> </h1>
 
 <div id="dd">
 
@@ -48,10 +48,15 @@
 
 
 <script>
-//const socket = io('http://localhost:8700')      
-const socket = io('https://neweducationworld.herokuapp.com', { transports: ['websocket', 'polling', 'flashsocket'] });
+const socket = io('http://localhost:8700')      
+//const socket = io('https://neweducationworld.herokuapp.com', { transports: ['websocket', 'polling', 'flashsocket'] });
 
-
+let roomid=document.getElementById('roomid').innerText
+let username=document.getElementById('username').innerText
+socket.emit('join-room', roomid, username )
+socket.on('new_message',function(message){
+    console.log(message)
+})
 let html=""
 
 $( "#myform" ).submit(function( e ) {
@@ -79,7 +84,7 @@ function Uploaded(newdata) {
 		imageBase64Stringsep = base64String;
        
        //console.log(base64String)
-       localStorage.setItem('data',base64String)
+      ///localStorage.setItem('data',base64String)
 	}
     //console.log(base64String)
 
@@ -88,32 +93,55 @@ function Uploaded(newdata) {
     
 }
 let image=""
-image=localStorage.getItem('data')
+//image=localStorage.getItem('data')
 
 
-
-
-//console.log(imgdata)
+var encoded=atob(image)
+console.log(encoded)
 
 // var obj={
 // "message":chat,
 // "data":imgdata
 
-//}
-//console.log(obj)
-socket.emit("message",chat,fileinfo)
+//console.log(fileinfo)
+
+if(fileinfo){
+
+
+    console.log(fileinfo.size)
+    socket.emit("message",username,chat,fileinfo)
+
+}
+else{
+fileinfo=""
+socket.emit("message",username,chat,fileinfo)
+
+}
 
 })
 
 
-socket.on('newdata',function(chat,base64String){
-    console.log(chat)
-    //console.log(base64String)
-html+=`
-<div> ${chat} </div>
+socket.on('newdata',function(username,chat,base64String){
+    if(base64String!=""){
+
+        html+=`
+<div>${username}: ${chat} </div>
 <img src="data:image/jpeg;base64,${base64String}"" alt="" width="400" 
      height="500"/>`
 document.getElementById("dd").innerHTML=html
+
+
+    }
+    else{
+
+        html+=`
+<div> ${username}:${chat} </div>`
+
+document.getElementById("dd").innerHTML=html
+
+    }
+
+
 
 
 })
