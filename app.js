@@ -2641,21 +2641,23 @@ newdatan.forEach(function(elem,index){
             
             })
 
+
+            let room;
             io.on("connection",function(socket){
                // console.log(socket.id)
                socket.on('join-room',function(roomid,cb){
                 socket.join(roomid)
                 ///cb(`joined ${room}`)
+                 room=roomid
 
-
-                io.to(roomid).emit('new_message',`${cb} has joined`)
+                io.to(room).emit('new_message',`${cb} has joined`)
             })
                 socket.on("message",function(roomid,username,chat,fileinfo){
 
                     if(fileinfo!=""){
                         let buff = new Buffer.from(fileinfo);
                         let base64data = buff.toString('base64');
-                    io.to(roomid).emit('newdata',username,chat,base64data)
+                    io.to(room).emit('newdata',username,chat,base64data)
                     }
                     else{
 
