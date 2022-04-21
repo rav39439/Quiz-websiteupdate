@@ -24,8 +24,8 @@ var http=require("http").createServer(app)
 
 var io=require("socket.io")(http, {
     cors: {
-    origin: "https://neweducationworld.herokuapp.com",
-     //origin: "http://localhost:8700",
+   origin: "https://neweducationworld.herokuapp.com",
+    // origin: "http://localhost:8700",
       credentials: true
     }
   })
@@ -2650,7 +2650,7 @@ newdatan.forEach(function(elem,index){
 
                 io.to(roomid).emit('new_message',`${cb} has joined`)
             })
-                socket.on("message",function(username,chat,fileinfo){
+                socket.on("message",function(roomid,username,chat,fileinfo){
 
                     if(fileinfo!=""){
                         let buff = new Buffer.from(fileinfo);
