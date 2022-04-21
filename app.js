@@ -627,7 +627,7 @@ username=decodedToken.username
     console.log(err)
     }
     else{
-        res.render("userinformation.ejs",{message:"You are not admin .Please message me:I want to become admin: at my email in contact details if you are student and if you are a teacher then contact me at my number in contact details"})
+        res.render("userinformation.ejs",{message:"You have successfully registered. Now you can proceed to login"})
     }
 
 })
