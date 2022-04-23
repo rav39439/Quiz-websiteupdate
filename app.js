@@ -18,17 +18,9 @@ const bcrypt = require('bcryptjs');
 //const { urlencoded } = require('body-parser')
 var bodyParser=require("body-parser")
 app.use(bodyParser.urlencoded())
-app.use(bodyParser.json())
+//app.use(bodyParser.json())
 
-var http=require("http").createServer(app)
 
-var io=require("socket.io")(http, {
-    cors: {
-   origin: "https://neweducationworld.herokuapp.com",
-    // origin: "http://localhost:8700",
-      credentials: true
-    }
-  })
 
 
   //app.use(bodyParser.json())
@@ -67,7 +59,15 @@ hbs.registerPartials(pathset)
 //app.use(bodyParser());
 
 //var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var http=require("http").createServer(app)
 
+var io=require("socket.io")(http, {
+    cors: {
+   origin: "https://neweducationworld.herokuapp.com",
+    // origin: "http://localhost:8700",
+      credentials: true
+    }
+  })
 
 //---------------------------------------------------------------------------------------------
 var session=require("express-session")
@@ -108,18 +108,18 @@ console.log(setpath)
 app.set("view engine", "hbs")
 app.set("view engine", "ejs")
 app.set("views", setpath)
-function getUser(id,callBack){
-    database.collection("users").findOne({
-        "id":ObjectId(id)
-    },function(error,user){
+// function getUser(id,callBack){
+//     database.collection("users").findOne({
+//         "id":ObjectId(id)
+//     },function(error,user){
 
-callBack(user)
-    });
+// callBack(user)
+//     });
 
-}
+// }
 
 
-myobj = { name: "abhis", job: "consultant" }
+// myobj = { name: "abhis", job: "consultant" }
 
 //app.use("/public",express.static(__dirname +"../public"))
 app.use("/public",express.static(__dirname +"/public"))
