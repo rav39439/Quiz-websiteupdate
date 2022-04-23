@@ -34,7 +34,7 @@
     "nodemon": "^2.0.15",
     "peer": "^0.6.1",
     "sendgrid": "^5.2.3",
-    "socket.io": "^4.1.2",
+    "socket.io": "^1.7.0",
     "uuid": "^3.4.0"
   },
   "description": ""
