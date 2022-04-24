@@ -87,7 +87,7 @@ app.use(session({
    // store:sessionStore,
     resave: true, 
     saveUninitialized: true,
-    cookie: { maxAge: 6000000 }
+    cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }))
 
 //const multer  = require('multer')
