@@ -498,8 +498,9 @@ if(Mydata[i].myfiles){
        que_tag = '<span class="ff">' + Mydata[i].numb + ". " + Mydata[i].question + '</span>'+'<br>'
 
    option_tag =`<div class="form-group">
-    <label for="exampleInputEmail1">Enter the answer in integer</label>
-    <input type="number" class="form-control" style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Answercode" value=${Mydata[i].integerans} style="width:700px">
+    <label for="exampleInputEmail1">Enter the answer in integer</label><br>
+    <input type="number" class="form-control" style="margin-left:200px;width:200px"  aria-describedby="emailHelp" placeholder="Enter Answercode" value=${Mydata[i].integerans} >
+    <input type="number" class="newinteger" id="newinteger" style="margin-left:200px;width:200px"  aria-describedby="emailHelp" placeholder="Enter Answercode">
   </div>`
     html += que_tag + `<br>`+ option_tag+`<br>`
 
@@ -595,6 +596,7 @@ if(Mydata[i].type=="integertype"){
 console.log("my integer ans is running")
 console.log(Object.values(Mydata[i])[h][0])
 console.log(Mydata[i].integerans)
+document.getElementById("newinteger").value=Object.values(Mydata[i])[h][0];
 if(Object.values(Mydata[i])[h][0]==Mydata[i].integerans){
 if(typeof(Mydata[i].positivemarks)){
 m=m+Mydata[i].positivemarks;

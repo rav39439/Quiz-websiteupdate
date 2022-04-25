@@ -471,9 +471,10 @@
 
 
         <div id="integerquestion" style="display:none">
-    <label for="exampleInputEmail1">Enter the answer in integer</label>
-    <input type="number"  id="myintegerans"style="margin-left:400px;width:500px"  aria-describedby="emailHelp" placeholder="Enter Answercode" name="answercode3" style="width:700px">
-  </div>
+            <label for="exampleInputEmail1">Your answer in integer</label><br>
+            <input type="number" id="myintegerans" style="margin-left:100px;width:200px" aria-describedby="emailHelp"
+                placeholder="Enter Answercode" name="answercode3">
+        </div>
         </section>
 
         <!-- footer of Quiz Box -->
@@ -532,7 +533,7 @@
         let myquestions = []
         //myquestions.size=8
         let nn = 0
-  let pp=0
+
 
         let p = 0
         let g = 0
@@ -542,7 +543,7 @@
         let rat = document.getElementById("rat").innerText
         console.log(rat)
         Mydata = JSON.parse(rat)
-       // console.log(Mydata[0])
+        // console.log(Mydata[0])
         //console.log(Mydata[1].option2)
 
         let option2 = []
@@ -616,7 +617,7 @@
         let widthValue = 0;
 
         let html1 = ``
- let no1 = parseInt(Mydata[0].qsection, 10)
+        let no1 = parseInt(Mydata[0].qsection, 10)
 
         function section1() {
             for (let i = 0; i <= Mydata[0].qsection - 1; i++) {
@@ -629,113 +630,113 @@
         }
 
         section1()
-let no2=no1;
-let no3=no1;
-let no4=no1;
-if(Mydata[no1]){
+        let no2 = no1;
+        let no3 = no1;
+        let no4 = no1;
+        if (Mydata[no1]) {
 
-  let no2 = parseInt(Mydata[no1].qsection, 10)
+            let no2 = parseInt(Mydata[no1].qsection, 10)
 
-}
-
-
-if(Mydata[no2+no1]){
-    let no3=parseInt(Mydata[no2+no1].qsection, 10)
-}
-
-if(Mydata[no1+no2+no3]){
-
-    let no4 = parseInt(Mydata[no2+no1+no3].qsection, 10)
-}
+        }
 
 
+        if (Mydata[no2 + no1]) {
+            let no3 = parseInt(Mydata[no2 + no1].qsection, 10)
+        }
+
+        if (Mydata[no1 + no2 + no3]) {
+
+            let no4 = parseInt(Mydata[no2 + no1 + no3].qsection, 10)
+        }
 
 
 
-      let html2 = ``
 
-function section2() {
-        if(Mydata[no1]){
-  
-               
-            for (let i = no1; i <= (no1 + no2) - 1; i++) {
-                html2 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="return changed(this.id)" style="height:40px;width:40px;">`
+
+        let html2 = ``
+
+        function section2() {
+            if (Mydata[no1]) {
+
+
+                for (let i = no1; i <= (no1 + no2) - 1; i++) {
+                    html2 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="return changed(this.id)" style="height:40px;width:40px;">`
+
+                }
+
 
             }
-
-           
-        }
-        else{
-            html2="";
-        }
-        
-           
-           pallette2.innerHTML = html2
-
-       }
-
-
-     section2()
-
-
-
-
-
- let html3 = ``
-
-function section3() {
- if(Mydata[no2+no1]){
-       
-       
-            for (let i = (no1 + no2); i <= (no1 + no2 + no3) - 1; i++) {
-                html3 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="return changed(this.id)" style="height:40px;width:40px;">`
-
+            else {
+                html2 = "";
             }
 
- }
- else{
 
-     html3=""
- }
+            pallette2.innerHTML = html2
 
-       
+        }
+
+
+        section2()
+
+
+
+
+
+        let html3 = ``
+
+        function section3() {
+            if (Mydata[no2 + no1]) {
+
+
+                for (let i = (no1 + no2); i <= (no1 + no2 + no3) - 1; i++) {
+                    html3 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="return changed(this.id)" style="height:40px;width:40px;">`
+
+                }
+
+            }
+            else {
+
+                html3 = ""
+            }
+
+
             pallette3.innerHTML = html3
 
-//
-       }
+            //
+        }
 
 
 
 
 
-    section3()
+        section3()
 
 
 
-  let html4 = ``
+        let html4 = ``
 
-  function section4() {
-        if (Mydata[no1+no2+no3]) {
-        
-            for (let i = (no1 + no2 + no3 ); i <= (no1 + no2 + no3 + no4)-1; i++) {
-                html4 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="return changed(this.id)" style="height:40px;width:40px;">`
+        function section4() {
+            if (Mydata[no1 + no2 + no3]) {
+
+                for (let i = (no1 + no2 + no3); i <= (no1 + no2 + no3 + no4) - 1; i++) {
+                    html4 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="return changed(this.id)" style="height:40px;width:40px;">`
+
+                }
+
 
             }
 
+            else {
 
-              }
-
-              else{
-
-                  html4=""
-              }
+                html4 = ""
+            }
             pallette4.innerHTML = html4
 
 
-     }
+        }
 
 
-     section4()
+        section4()
 
 
 
@@ -792,27 +793,27 @@ function section3() {
 `
             }
 
-             if(typeof(Mydata[no1])!='undefined'){
-           // if ((Mydata[1].sections) && (no1)) {
+            if (typeof (Mydata[no1]) != 'undefined') {
+                // if ((Mydata[1].sections) && (no1)) {
                 html += `<button id="button6"  name="button1" style="height:30px;width:100px;" onclick="changed(${no1 + 1})">${Mydata[no1].sections}</button>`
 
-          ///  }
+                ///  }
             }
 
-            
-             if(typeof(Mydata[no2+no1])!='undefined'){
-           // if ((Mydata[2].sections) && (no2)) {
-                html += `<button id="button7"  name="button2" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + 1})">${Mydata[no2+no1].sections}</button>`
 
-         //  }
+            if (typeof (Mydata[no2 + no1]) != 'undefined') {
+                // if ((Mydata[2].sections) && (no2)) {
+                html += `<button id="button7"  name="button2" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + 1})">${Mydata[no2 + no1].sections}</button>`
+
+                //  }
             }
 
-            if(typeof(Mydata[no3+no1+no2])!='undefined'){
-           // if ((Mydata[3].sections) && (no3)) {
-                html += `<button id="button8"  name="button3" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + no3 + 1})">${Mydata[no3+no1+no2].sections}</button>`
+            if (typeof (Mydata[no3 + no1 + no2]) != 'undefined') {
+                // if ((Mydata[3].sections) && (no3)) {
+                html += `<button id="button8"  name="button3" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + no3 + 1})">${Mydata[no3 + no1 + no2].sections}</button>`
 
-           // }
-}
+                // }
+            }
 
             const button5 = document.getElementById('button5')
             const button6 = document.getElementById('button6')
@@ -995,8 +996,8 @@ function section3() {
                 document.getElementById('myquiz').style.display = "none"
                 document.getElementById("mysections").style.display = "none"
                 option_list.style.display = "none"
-                 integerquestion.style.display='none'
-integerbtn.style.display="none"
+                integerquestion.style.display = 'none'
+                integerbtn.style.display = "none"
             }
 
 
@@ -1043,14 +1044,14 @@ integerbtn.style.display="none"
 
             // getting questions and options from array
             function showQuetions(que_count) {
-                 let que_tag = ""
+                let que_tag = ""
                 const que_text = document.querySelector(".que_text");
                 console.log(que_count)
 
                 if ((Mydata[que_count].type == "multichoice") || (Mydata[que_count].type == "multi")) {
-integerbtn.style.display="none"
+                    integerbtn.style.display = "none"
                     let img_tag = ""
-                   
+
                     let pass_img = ""
                     let pass_tag = ""
                     if (Mydata[que_count].queimg) {
@@ -1162,8 +1163,8 @@ integerbtn.style.display="none"
     </div>`;
                     //adding new span tag inside que_tag
 
-                      option_list.style.display="block"
-                integerquestion.style.display='none'
+                    option_list.style.display = "block"
+                    integerquestion.style.display = 'none'
                     option_list.innerHTML = option_tag; //adding new div tag inside option_tag 
                     const option = option_list.children[0].querySelectorAll(".option");
                     console.log(option)
@@ -1234,37 +1235,37 @@ integerbtn.style.display="none"
 
                 // return true;
 
-                  if (Mydata[que_count].type == "integertype") {
-                option_list.style.display="none"
-                integerquestion.style.display='block'
-integerbtn.style.display="block"
-                          que_tag = '<span class="ff">' + Mydata[que_count].numb + ". " + Mydata[que_count].question + '</span>' + '<br>'
+                if (Mydata[que_count].type == "integertype") {
+                    option_list.style.display = "none"
+                    integerquestion.style.display = 'block'
+                    integerbtn.style.display = "block"
+                    que_tag = '<span class="ff">' + Mydata[que_count].numb + ". " + Mydata[que_count].question + '</span>' + '<br>'
 
-               // option_list.innerHTML = option_tag;
-                 que_text.innerHTML = que_tag
- integerbtn.onclick=()=>{
-        console.log(integerans.value)
-  myquestions[que_count]=integerans.value
-localStorage.setItem("myquestions", JSON.stringify(myquestions))
-   console.log(myquestions)
-  }
-  
+                    // option_list.innerHTML = option_tag;
+                    que_text.innerHTML = que_tag
+                    integerbtn.onclick = () => {
+                        console.log(integerans.value)
+                        myquestions[que_count] = integerans.value
+                        localStorage.setItem("myquestions", JSON.stringify(myquestions))
+                        console.log(myquestions)
+                    }
 
- 
- 
-                
-              
 
-               
-             
+
+
+
+
+
+
+
+
+                }
+
 
             }
 
 
-            }
 
-           
-           
         }
 
 
@@ -1310,7 +1311,7 @@ localStorage.setItem("myquestions", JSON.stringify(myquestions))
             let my = JSON.parse(localStorage.getItem("myquestions"))
             console.log(myquestions)
             let m = 0
-          
+            let pp = 0
             for (let i = 0; i < Mydata.length; i++) {
                 let a = []
                 let b = []
@@ -1360,17 +1361,17 @@ localStorage.setItem("myquestions", JSON.stringify(myquestions))
                             //console.log(myquestions)
                             console.log("they are qual")
 
-                            if (Mydata[i].positivemarks !='undefined') {
+                            if (Mydata[i].positivemarks != 'undefined') {
                                 nn = nn + Mydata[i].positivemarks
 
                             }
-                            else{
+                            else {
 
                                 //
                             }
-                            } else {
-                               if (Mydata[i].negativemarks !='undefined') {
-                                nn = nn - Mydata[i].negativemarks !='undefined'
+                        } else {
+                            if (Mydata[i].negativemarks != 'undefined') {
+                                nn = nn - Mydata[i].negativemarks != 'undefined'
                             }
                         }
                     }
@@ -1384,27 +1385,28 @@ localStorage.setItem("myquestions", JSON.stringify(myquestions))
                 }
 
                 if (Mydata[i].type == "integertype") {
-console.log("Integer evaluation is beggining")
+                    console.log("Integer evaluation is beggining")
                     if (myquestions[i] == Mydata[i].integerans) {
 
 
-                        if (typeof (Mydata[i].positivemarks) !='undefined') {
-                                                    console.log("Integer evaluation is running")
+                        if (typeof (Mydata[i].positivemarks) != 'undefined') {
+                            console.log("Integer evaluation is running")
 
 
-                            pp = pp+ Mydata[i].positivemarks;
-                            console.log(pp)
+                            pp = pp + Mydata[i].positivemarks;
+                            m = m + pp
+                            /// localStorage.setItem('integerscore',pp)
                         }
-                       else{
-                           //
-                       }
+                        else {
+                            //
+                        }
 
 
 
-                        } else {
+                    } else {
 
-                            if (typeof(Mydata[i].negativemarks)!='undefined') {
-                           m=m-Mydata[i].negativemarks
+                        if (typeof (Mydata[i].negativemarks) != 'undefined') {
+                            m = m - Mydata[i].negativemarks
                         }
 
                     }
@@ -1442,11 +1444,11 @@ console.log("Integer evaluation is beggining")
 
                                 //-----------------------------------------
                                 //commented out for e
-                         }
+                            }
                             else {
-                           //
-                       }
-//
+                                //
+                            }
+                            //
                             //----------------------------------------------
                             //tm=m+nn   
 
@@ -1456,80 +1458,83 @@ console.log("Integer evaluation is beggining")
                             if (typeof (Mydata[i].negativemarks) != 'undefined') {
                                 m = m - Mydata[i].negativemarks
                             }
-                           
+
 
                         }
                         //}     
 
                     }
-                    tm = m + nn+pp
+                    console.log(pp)
+                    //let jm=localStorage.getItem('integerscore')
+                    tm = m + nn + pp
 
-                    document.getElementById('marks').value = tm
+                   
                 }
 
+                //end of muliplechoice if ---
+
             }
-            console.log("yoiuru kshdflkjashlrhyour score is" + tm)
+            fs=tm+pp
+             document.getElementById('marks').value = fs
+            console.log("yoiuru kshdflkjashlrhyour score is" + fs)
         }
-        
+
 
         ///this isi the doubtful bracket kindly refer it again
-            //-------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------
 
 
 
-            // if (myquestions[i] == actualans.answer1) {
-            //console.log("matched")
-            //  userScore1 = userScore1 + 1
+        // if (myquestions[i] == actualans.answer1) {
+        //console.log("matched")
+        //  userScore1 = userScore1 + 1
 
 
 
 
-            // document.getElementById("myform").innerHTML = ``
+        // document.getElementById("myform").innerHTML = ``
 
 
-            //             for (let i = 0; i < myquestions.length; i++) {
-            //                 document.getElementById("myform").innerHTML += `<input type="number" name=Myname value=${myquestions[i]}><br>
-            // `
+        //             for (let i = 0; i < myquestions.length; i++) {
+        //                 document.getElementById("myform").innerHTML += `<input type="number" name=Myname value=${myquestions[i]}><br>
+        // `
 
-            //             }
-            // document.getElementById("myform").innerHTML += `<input type="text" name=na value={{table2}}>`
-            // document.getElementById("myform").innerHTML += `<input type="number" name=registation value={{reg}}>`
-            // document.getElementById("myform").innerHTML += `<input type="number" name=marks value=${userScore1}>`
-            // document.getElementById("myform").innerHTML += `<input type="text" name=studentname value={{name2}}>`
-            // document.getElementById("myform").submit()
-            //-------------------------------using ajax to send myquestions to server------------------------------
+        //             }
+        // document.getElementById("myform").innerHTML += `<input type="text" name=na value={{table2}}>`
+        // document.getElementById("myform").innerHTML += `<input type="number" name=registation value={{reg}}>`
+        // document.getElementById("myform").innerHTML += `<input type="number" name=marks value=${userScore1}>`
+        // document.getElementById("myform").innerHTML += `<input type="text" name=studentname value={{name2}}>`
+        // document.getElementById("myform").submit()
+        //-------------------------------using ajax to send myquestions to server------------------------------
 
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-                $("#myform").on("submit", function (e) {
-                    e.preventDefault()
-                    var studentname = $("#studentname").val()
-                    var quizname = $("#quizname").val()
-                    var regno = $("#regno").val()
-                    var marks = $("#marks").val()
-                    var responses = myquestions
-                    console.log(tm)
-                    alert("submitting")
+            $("#myform").on("submit", function (e) {
+                e.preventDefault()
+                var studentname = $("#studentname").val()
+                var quizname = $("#quizname").val()
+                var regno = $("#regno").val()
+                var marks = $("#marks").val()
+                var responses = myquestions
+                console.log(tm)
+                alert("submitting")
 
-                    $.ajax({
-                        type: "POST",
-                        url: '/newquiz4result',
-                        data: { studentname: studentname, quizname: quizname, regno: regno, responses: JSON.stringify(myquestions), marks: marks },
-                        success: function (response) {
+                $.ajax({
+                    type: "POST",
+                    url: '/newquiz4result',
+                    data: { studentname: studentname, quizname: quizname, regno: regno, responses: JSON.stringify(myquestions), marks: marks },
+                    success: function (response) {
 
-                            alert(response.message)
+                        alert(response.message)
 
-                        }
-                    });
-                    //return false;
-
+                    }
                 });
+                //return false;
+
             });
+        });
 
-            // document.getElementById("myform").submit()
-
-
-
+        // document.getElementById("myform").submit()
 
 
 
@@ -1539,114 +1544,117 @@ console.log("Integer evaluation is beggining")
 
 
 
-            //-------------------------------------------------------------------------------------------------------
 
 
 
-            ///////////// }
-
-            //let marks1=document.querySelector(".marks")
-            //myreg.classList.add("activereg")
-            //marks1.classList.add("activemarks")
-            //myage.classList.add("activeage")
-            //quiz.classList.add("activequiz")
-
-            //quizna.value={{quizname}}
-            //myreg.value={{reg}}
-            //myage.value={{student}}
-            //marks1.value=userScore1
-            //console.log(userScore1)
-            //console.log(marks1.value)
-
-            // solution_btn.classList.add("showsolutionbtn")
-            //button1.classList.add("activatebutton1")
-            //button2.classList.add("activebutton2")
-            ///button3.classList.add("activebutton3")
-            // }
+        //-------------------------------------------------------------------------------------------------------
 
 
 
+        ///////////// }
+
+        //let marks1=document.querySelector(".marks")
+        //myreg.classList.add("activereg")
+        //marks1.classList.add("activemarks")
+        //myage.classList.add("activeage")
+        //quiz.classList.add("activequiz")
+
+        //quizna.value={{quizname}}
+        //myreg.value={{reg}}
+        //myage.value={{student}}
+        //marks1.value=userScore1
+        //console.log(userScore1)
+        //console.log(marks1.value)
+
+        // solution_btn.classList.add("showsolutionbtn")
+        //button1.classList.add("activatebutton1")
+        //button2.classList.add("activebutton2")
+        ///button3.classList.add("activebutton3")
+        // }
 
 
 
 
 
-            let count;
-            let b = localStorage.getItem('storagekey')
-            console.log(b)
-            if (b == null) {
-                count = Mydata[1].time
-                //console.log("restart")
+
+
+
+        let count;
+        let b = localStorage.getItem('storagekey')
+        console.log(b)
+        if (b == null) {
+            count = Mydata[1].time
+            //console.log("restart")
+        }
+        else {
+            count = b
+
+        }
+        startTimer(count);
+
+
+        document.addEventListener("visibilitychange", function () {
+            document.title = document.visibilityState;
+            if (document.title == 'hidden') {
+                clearInterval(counter)
+
+
+                showResult()
+
             }
-            else {
-                count = b
-
-            }
-            startTimer(count);
 
 
-            document.addEventListener("visibilitychange", function () {
-                document.title = document.visibilityState;
-                if (document.title == 'hidden') {
-                    clearInterval(counter)
+        })
 
+
+        function startTimer(count) {
+            counter = setInterval(timer, 1000);
+            function timer() {
+
+                //window.addEventListener("beforeunload", function (e) {
+                //var confirmationMessage = "\o/";
+
+                //(e || window.event).returnValue = confirmationMessage; //Gecko + IE
+                //return confirmationMessage;                            //Webkit, Safari, Chrome
+                //});
+                timeCount.textContent = count; //changing the value of timeCount with time value
+                count--; //decrement the time value
+                localStorage.setItem('storagekey', count)
+                count = localStorage.getItem('storagekey')
+                if (count < 9) { //if timer is less than 9
+                    let addZero = timeCount.textContent;
+                    timeCount.textContent = "0" + addZero; //add a 0 before time value
+                }
+                if (count < 0) { //if timer is less than 0
+                    clearInterval(counter); //clear counter
+                    timeText.textContent = "Time Off"; //change the time text to time off
+                    //quiz_box.style.display="none"
+                    //document.getElementById('myform').style.display="block"
+                    document.getElementById('myform').style.display = "block"
+                    document.getElementById('mysect').style.display = "none"
+                    document.getElementById('myfoot').style.display = "none"
+                    document.getElementById('myquiz').style.display = "none"
+                    document.getElementById("mysections").style.display = "none"
+                    option_list.style.display = "none"
 
                     showResult()
+                    solution_btn.classList.add("showsolutionbtn")
+                    next_btn.classList.add("show"); //show the next button if user selected any option
+
 
                 }
-
-
-            })
-
-
-            function startTimer(count) {
-                counter = setInterval(timer, 1000);
-                function timer() {
-
-                    //window.addEventListener("beforeunload", function (e) {
-                    //var confirmationMessage = "\o/";
-
-                    //(e || window.event).returnValue = confirmationMessage; //Gecko + IE
-                    //return confirmationMessage;                            //Webkit, Safari, Chrome
-                    //});
-                    timeCount.textContent = count; //changing the value of timeCount with time value
-                    count--; //decrement the time value
-                    localStorage.setItem('storagekey', count)
-                    count = localStorage.getItem('storagekey')
-                    if (count < 9) { //if timer is less than 9
-                        let addZero = timeCount.textContent;
-                        timeCount.textContent = "0" + addZero; //add a 0 before time value
-                    }
-                    if (count < 0) { //if timer is less than 0
-                        clearInterval(counter); //clear counter
-                        timeText.textContent = "Time Off"; //change the time text to time off
-                        //quiz_box.style.display="none"
-                        //document.getElementById('myform').style.display="block"
-                        document.getElementById('myform').style.display = "block"
-                        document.getElementById('mysect').style.display = "none"
-                        document.getElementById('myfoot').style.display = "none"
-                        document.getElementById('myquiz').style.display = "none"
-                        document.getElementById("mysections").style.display = "none"
-                        option_list.style.display = "none"
-
-                        showResult()
-                        solution_btn.classList.add("showsolutionbtn")
-                        next_btn.classList.add("show"); //show the next button if user selected any option
-
-
-                    }
-                }
             }
+        }
 
-            //startTimer(10);
+        //startTimer(10);
 
 
-            function queCounter(index) {
-                //creating a new span tag and passing the question number and total question
-                let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + Mydata.length + '</p> Questions</span>';
-                bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
-            }
-   
+        function queCounter(index) {
+            //creating a new span tag and passing the question number and total question
+            let totalQueCounTag = '<span><p>' + index + '</p> of <p>' + Mydata.length + '</p> Questions</span>';
+            bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
+        }
+
 //console.log(html)
 
 
