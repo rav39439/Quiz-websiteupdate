@@ -112,7 +112,7 @@ margin-top: 90px;
 
        
    <h1 id="mylogin">See your result here</h1>
-
+ <div  id="name"style="display:none">{{username}}</div>
 
 <div class="new1">
 
@@ -148,7 +148,7 @@ margin-top: 90px;
     </form>
 
 
-    <div  id="name"style="display:none">{{username}}</div>
+   
 
 
 
@@ -162,7 +162,7 @@ margin-top: 90px;
 <script>
 
   let f= document.getElementById("name").innerText
- if(f){
+  if(typeof(f)!='undefined'){
    document.getElementById("myname").innerText=f
 }
 else{

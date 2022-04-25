@@ -33,4 +33,15 @@ connection.connect((err)=>{
 //     }
 //     return console.log(results)
 // })
+
+connection.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+          console.log("server is not working")                    // lost due to either server restart, or a
+    } else {                                      // connnection idle timeout (the wait_timeout
+      throw err;                                  // server variable configures this)
+    }
+  });
+
+
 module.exports=connection

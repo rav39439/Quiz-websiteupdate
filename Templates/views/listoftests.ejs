@@ -108,7 +108,7 @@
 
 
   <h1 id="#mylogin">Free Quizzes</h1>
-
+  <div id="name"style="display:none"><%=username%></div>
 
 <br><br>
        <div id="tables" style="display:none">
@@ -135,16 +135,18 @@
        </div>
         
 <%  }) %> 
-  <div id="name"style="display:none"><%=username%> </div>
 
 
 
+</body>
       <script>
 
 
 
 let f= document.getElementById("name").innerText
- if(f){
+console.log(f)
+if(typeof(f)!='undefined'){
+  
    document.getElementById("myname").innerText=f
 }
 else{
@@ -239,5 +241,5 @@ else{
         
    
     </script>
-</body>
+
 </html>
