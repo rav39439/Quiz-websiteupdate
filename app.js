@@ -2295,7 +2295,7 @@ formData.parse(req,function(error,fields,files){
   console.log(newPath)
   fs.copyFile(oldPath, newPath, function(err){
      // res.render("admin/posts",{imagepath:newPath})
-     res.send("/"+ newPath)
+     res.send(files.file.name)
   })
 })
 })
@@ -2518,10 +2518,29 @@ newdatan.forEach(function(elem,index){
 
         console.log(file)
 
-        //var myfile=`public/files/${file}`;
             var filestream = fs.createReadStream(`./public/files/${file}`);                  
             res.writeHead(200, {
                 "Content-Type":"application/pdf","Content-Transfer-Encoding": "binary"});
+        
+            filestream.on('data', function(chunk) {                     
+                res.write(chunk);
+                //console.log(chunk.toString())
+            });
+            filestream.on('end', function() {
+                res.end();
+            });
+        
+        })
+
+    app.get("/images/:filename",function(req,res){
+        console.log("introfile is running")
+        var file=req.params.filename;
+
+        console.log(file)
+
+            var filestream = fs.createReadStream(`./public/uploadedimages/${file}`);                  
+            res.writeHead(200, {
+            });
         
             filestream.on('data', function(chunk) {                     
                 res.write(chunk);

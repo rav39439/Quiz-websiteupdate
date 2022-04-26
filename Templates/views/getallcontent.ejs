@@ -152,15 +152,16 @@ width: 500px;
 
 
    
-    <% data.forEach(function(elem){%>
+    <% data.forEach(function(elem,index){%>
         <% if(elem.content==content){ %> 
 
 <p><%=elem.topic%></p>
 <p><%=elem.content%></p>
 
 <% if(elem.data){ %>
-  <%=elem.data%> 
-    <a href="/wholeimage?image=<%= elem.data %>"> <img class="border"style="width:300px;height:300px;" src="/public/uploadedimages/bb (1).jpg"alt=""></a>
+ <div id="newimg" style="display: none;"><%=elem.data%></div>
+
+    <a href="/wholeimage?image=<%= elem.data %>"> <img class="border" style="width:300px;height:300px;" src="/images/<%=elem.data%>" alt=""></a>
 
 <%} %> 
 <% if(elem.filedata){ %>
@@ -193,6 +194,19 @@ width: 500px;
 
 
 <script>
+
+// let newimg=document.getElementById('newimg').innerText;
+
+// for(let i=0;i<3;i++){
+//   let str=`/images/${newimg}`;
+//   console.log(document.getElementById(`${i}`))
+// document.getElementById(`${i}`).src=str
+// }
+
+
+
+
+
 if((typeof(document.getElementById("name"))!='undefined')&&(document.getElementById("name")!=null)){
 
   let f= document.getElementById("name").innerText
