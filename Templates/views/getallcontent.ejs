@@ -67,7 +67,7 @@ width: 500px;
  
 .new2{
 
-  width:350px ;
+  width:340px ;
   margin-left: 20px;
 }
  
@@ -146,13 +146,14 @@ width: 500px;
 
 
 
-<div class="border bg-light new2">
+
 
 <% if(typeof(data)!='undefined'){ %> 
 
-
+ 
    
     <% data.forEach(function(elem,index){%>
+      <div class="border bg-light new2">
         <% if(elem.content==content){ %> 
 
 <p><%=elem.topic%></p>
@@ -172,7 +173,7 @@ width: 500px;
 <p>uploaded by <%=elem.uploadedby%></p>
 
 <%}%>
-       
+</div> <br>
     <%}) %> 
 
     <%}else{%>
@@ -182,7 +183,8 @@ width: 500px;
 </h1>
 
         <%}%> 
-    </div>  
+   
+
     <% if(typeof(username)!=='undefined'){ %> 
     <div id="name"style="display:block"><%=username%></div>
 <% } %> 
