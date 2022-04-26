@@ -2349,6 +2349,7 @@ app.get("/getallcontent",function(req,res){
             throw(err)
         }
         else{
+            console.log(uploadedcontent)
             res.render("getallcontent.ejs",{data:uploadedcontent,content:req.body.content})
         }
     })
