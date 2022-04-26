@@ -122,7 +122,10 @@ app.set("views", setpath)
 // myobj = { name: "abhis", job: "consultant" }
 
 //app.use("/public",express.static(__dirname +"../public"))
-app.use("/public",express.static(__dirname +"/public"))
+//app.use("/public",express.static(__dirname +"/public"))
+
+app.get('/public', express.static('public'));
+
 
 
 app.get('/myhome', function (req, res) {
@@ -2306,7 +2309,7 @@ formData.parse(req,function(error,fields,files){
   console.log(newPath)
   fs.copyFile(oldPath, newPath, function(err){
      // res.render("admin/posts",{imagepath:newPath})
-     res.send("/"+ newPath)
+     res.send(files.file.name)
   })
 })
 })
@@ -2515,11 +2518,11 @@ newdatan.forEach(function(elem,index){
 
         console.log(file)
 
-        var myfile=`C:\\Users\\Dell\\OneDrive\\Desktop\\node js\\myquizapp\\${file}`;
-            var filestream = fs.createReadStream(myfile);                  
+        //var myfile=`public/files/${file}`;
+            var filestream = fs.createReadStream(`./public/files/${file}`);                  
             res.writeHead(200, {
-               
-            });
+                "Content-Type":"application/pdf","Content-Transfer-Encoding": "binary"});
+        
             filestream.on('data', function(chunk) {                     
                 res.write(chunk);
                 //console.log(chunk.toString())
