@@ -2559,6 +2559,12 @@ newdatan.forEach(function(elem,index){
                 res.render("newimage.ejs",{myimage:req.query.image})
             })
 
+        app.get("/customimage",function(req,res){
+            image="/public/uploadedimages/"+req.query.image
+               // console.log(req.query.image)
+                res.render("newimage1.ejs",{myimage:req.query.image})
+            })
+
 
         app.get("/wholeimage1",function(req,res){
             image="/public/askedquestion/"+req.query.image

@@ -124,7 +124,45 @@
         </div>
     </div>
 
+
+
+    <h1>Upload files to database</h1>
+    <img src="" id="newimage" style="width:200px;height:200px;"><br>
+    <input type="file" id="photo" /><br>
+    <label >Enter details</label><br>
+    <input type="text" id="infodata"><br>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1"> select the topic of your content</label>
+      <select class="form-control" id="content1" name="content" style="width:600px;margin-left:400px">
+        <option value="ssccgl">ssc cgl</option>
+        <option value="iitjee">iitjee</option>
+        <option value="bankexams">bankexams</option>
+        <option value="ssccglcontent">ssc formulas</option>
+        <option value="iitjeecotent">iitjee formulas</option>
+        <option value="bankexams content">bankexams formulas</option>
+       
+      </select>
+    </div>     
+    <button onclick="uploadImage()">Upload Image</button>
+
+
+
+
+
+
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+
+
     <script>
+
+
+
+
+// Initialize Firebase
+;
 
 
 function showdialog(data){
@@ -300,8 +338,105 @@ function myfunction(){
    // }
 
 //}
+const firebaseConfig = {
+    apiKey: "AIzaSyAZ9x_QbhCfY9aEsqxEiYhWtfIRNGl_qeo",
+    authDomain: "mynewproject-ae49a.firebaseapp.com",
+    projectId: "mynewproject-ae49a",
+    storageBucket: "mynewproject-ae49a.appspot.com",
+    messagingSenderId: "939005557600",
+    appId: "1:939005557600:web:ee766070db4bd2dadfbc05",
+    measurementId: "G-YFKTT151SN"
+  };
+
+firebase.initializeApp(firebaseConfig);
+    console.log(firebase);
+
+
+    async function uploadImage() {
+     
+      const ref = firebase.storage().ref();
+      const file = document.querySelector("#photo").files[0];
+      const name = +new Date() + "-" + file.name;
+      const metadata = {
+        contentType: file.type
+      };
+     // function mydata(callback){
+         try{
+      await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+            newurl=url
+
+            callback(url)
+            //localStorage.setItem("url",url)
+          //console.log(url);
+         
+        })
+    }
+    catch(err){
+        console.log(err)
+    }
+
+   // }
+
+   function callback(url){
+       console.log(url)
+       newcallback(url)
+     //newurl=url
+   }
+    }
+    
+function newcallback(url){
+
+  let data= document.getElementById("infodata").value
+  let data1= document.getElementById("content1").value
+
+    
+    
+    document.getElementById("newimage").src = url;
+    let newurl=url;
+
+    var formData = {
+      details:data,
+     content:data1,
+     secretcode:"null",
+     uniquecode:"null",
+     status:"newpublic",
+    
+  
+     uploadimg:newurl,
+     myfile:"",
+    
+ 
+    
+    
+   };
+
+   $.ajax({
+            url:"/uploadcontent",
+            method:"POST",
+            data:formData,
+            success:function(response){
+            
+                alert(response.message)
+              
+             
+             
+            }
+        })
+
+
+}
+    
+
+
+
+
+
+
+
+
 
 
     </script>
-</body>
+
 </html>

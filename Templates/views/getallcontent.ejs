@@ -160,9 +160,14 @@ width: 500px;
 <p><%=elem.content%></p>
 
 <% if(elem.data){ %>
- <div id="newimg" style="display: none;"><%=elem.data%></div>
+<% if(elem.status=='newpublic'){%>
 
-    <a href="/wholeimage?image=<%= elem.data %>"> <img class="border" style="width:300px;height:300px;" src="/images/<%=elem.data%>" alt=""></a>
+  <a href="/customimage?image=<%= elem.data %>"> <img class="border" style="width:300px;height:300px;" src="<%=elem.data%>" alt=""></a>
+
+<%} else{%>
+<a href="/wholeimage?image=<%= elem.data %>"> <img class="border" style="width:300px;height:300px;" src="/images/<%=elem.data%>" alt=""></a>
+<%} %> 
+
 
 <%} %> 
 <% if(elem.filedata){ %>
