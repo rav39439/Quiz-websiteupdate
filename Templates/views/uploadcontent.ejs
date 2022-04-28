@@ -143,6 +143,15 @@
        
       </select>
     </div>     
+    <div class="form-group">
+      <label for="exampleFormControlSelect1"> select the status</label>
+      <select class="form-control" id="content2" name="content" style="width:300px;margin-left:400px">
+        <option value="newpublic">newpublic</option>
+        <option value="publicfile">publicfile</option>
+
+
+         </select>
+    </div>     
     <button onclick="uploadImage()">Upload Image</button>
 
 
@@ -389,6 +398,7 @@ function newcallback(url){
 
   let data= document.getElementById("infodata").value
   let data1= document.getElementById("content1").value
+  let data2= document.getElementById("content2").value
 
     
     
@@ -400,7 +410,7 @@ function newcallback(url){
      content:data1,
      secretcode:"null",
      uniquecode:"null",
-     status:"newpublic",
+     status:data2,
     
   
      uploadimg:newurl,

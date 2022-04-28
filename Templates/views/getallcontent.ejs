@@ -163,12 +163,15 @@ width: 500px;
 <% if(elem.status=='newpublic'){%>
 
   <a href="/customimage?image=<%= elem.data %>"> <img class="border" style="width:300px;height:300px;" src="<%=elem.data%>" alt=""></a>
+ 
+<%} else if(elem.status=='publicfile'){%>
 
-<%} else{%>
-<a href="/wholeimage?image=<%= elem.data %>"> <img class="border" style="width:300px;height:300px;" src="/images/<%=elem.data%>" alt=""></a>
-<%} %> 
+  <a href="<%=elem.data%>">filepdf</a>
 
+<%} else {%>
+  <a href="/wholeimage?image==<%= elem.data %>"> <img class="border" style="width:300px;height:300px;" src="/images/<%=elem.data%>" alt=""></a>
 
+  <%} %>
 <%} %> 
 <% if(elem.filedata){ %>
 

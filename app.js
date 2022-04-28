@@ -2532,6 +2532,9 @@ newdatan.forEach(function(elem,index){
         
         })
 
+
+        
+
     app.get("/images/:filename",function(req,res){
         console.log("introfile is running")
         var file=req.params.filename;
