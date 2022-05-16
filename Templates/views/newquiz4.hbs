@@ -457,14 +457,14 @@
                 <div class="passage" id="passage"></div>
                 <img src="" alt="" class="passimg" id="passimg">
                 <img src="" alt="" id="queimg">
-                <div class="que_text">
+                <div class="que_text bg-light border "style="length:400px;width:700px">
                     <!-- Here I've inserted question from JavaScript -->
 
 
                 </div>
                 <img src="" class="myimgtag" id="myimgtag" alt="">
         </div>
-        <div class="option_list">
+        <div class="option_list"style="margin-left:80px">
             <!-- Here I've inserted options from JavaScript -->
         </div>
 
@@ -1281,6 +1281,8 @@
             for (let i = 0; i < Mydata.length; i++) {
 
                 let que_tag = '<span class="ff">' + Mydata[i].numb + ". " + Mydata[i].question + '</span>';
+
+
                 let img_tag = `<img.src="${Mydata[i].myfiles}" alt="" >`
                 let option_tag = `<div class="optiongr">
                    
