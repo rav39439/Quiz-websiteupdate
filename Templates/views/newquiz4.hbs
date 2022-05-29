@@ -496,26 +496,26 @@
         <div class="icon">
             <i class="fas fa-crown"></i>
         </div>
-        <div class="complete_text">You've completed the Quiz!</div>
+        <div class="complete_text">You've completed the exam . Kindly submit your responses</div>
         <div class="score_text">
             <!-- Here I've inserted Score Result from JavaScript -->
         </div>
         <div class="buttons">
-            <button class="restart">Replay Quiz</button>
-            <button class="quit">Quit Quiz</button>
+           <!--- <button class="restart">Replay Quiz</button>
+            <button class="quit">Quit Quiz</button>-->
         </div>
     </div>
 
-    <button class="solution_btn">click to see solutions</button><br><br>
+    <!--<button class="solution_btn">click to see solutions</button><br><br>-->
     <div class="solution"></div>
 
     <form action="/newquiz4result" method="POST" class="myform" id="myform" enctype="multipart/form-data">
 
-        <input type="text" name="na" value={{table2}} id="quizname">
-        <input type="number" name="registation" value={{reg}} id="regno"><br>
-        <input type="number" name="marks" id="marks"><br>
+        <input type="hidden" name="na" value={{table2}} id="quizname">
+        <input type="hidden" name="registation" value={{reg}} id="regno"><br>
+        <input type="hidden" name="marks" id="marks"><br>
 
-        <input type="text" name="studentname" value={{name2}} id="studentname"><br>
+        <input type="hidden" name="studentname" value={{name2}} id="studentname"><br>
         <button type="submit" style="width:300px;height:40px" class="btn btn-primary">submit your responses</button>
 
 
@@ -998,39 +998,41 @@
                 option_list.style.display = "none"
                 integerquestion.style.display = 'none'
                 integerbtn.style.display = "none"
+
+                localStorage.removeItem('storagekey');
             }
 
 
-
-            solution_btn.onclick = () => {
-                solution.innerHTML = html
-
-
-                let i = 0;
-                let j = 0
-                const option = solution.querySelectorAll(".optiongr");
-                console.log(option)
-                for (j = 0; j < Mydata.length; j++) {
-                    for (i = 0; i < 4; i++) {
+//----------------------------------------------------------------------------------------------------
+           // solution_btn.onclick = () => {
+               // solution.innerHTML = html
 
 
+             //   let i = 0;
+             ///   let j = 0
+              //  const option = solution.querySelectorAll(".optiongr");
+             //   console.log(option)
+             //   for (j = 0; j < Mydata.length; j++) {
+                 //   for (i = 0; i < 4; i++) {
 
-                        if (myquestions[j] == i) {
 
-                            console.log("mavhed")
+//
+                 //       if (myquestions[j] == i) {
+
+                     //       console.log("mavhed")
                             // console.log(option[i])
-                            option[j].children[i].classList.add('green')
+                     //       option[j].children[i].classList.add('green')
                             //console.log(option[i].children.innerText)
-                        }
-                        if (Mydata[j].answercode == i) {
-                            option[j].children[i].classList.add('red')
-                        }
+                     //   }
+                 //       if (Mydata[j].answercode == i) {
+                     //       option[j].children[i].classList.add('red')
+                //        }
 
-                    }
+                //    }
 
-                }
-                Myresult.value = mm + html
-                console.log(Myresult.value)
+            //    }
+            //    Myresult.value = mm + html
+            //    console.log(Myresult.value)
                 // textarea = document.querySelector(".solutions");
                 ///textarea.addEventListener('input', autoResize, false);
 
@@ -1040,8 +1042,8 @@
                 //}
 
 
-            }
-
+           // }
+//--------------------------------------------------------------------------------------------------
             // getting questions and options from array
             function showQuetions(que_count) {
                 let que_tag = ""
@@ -1619,7 +1621,11 @@
                 //(e || window.event).returnValue = confirmationMessage; //Gecko + IE
                 //return confirmationMessage;                            //Webkit, Safari, Chrome
                 //});
-                timeCount.textContent = count; //changing the value of timeCount with time value
+ const sec = parseInt(count, 10);
+                 let hours   = Math.floor(count / 3600); // get hours
+                  let minutes = Math.floor((count - (hours * 3600)) / 60); // get minutes
+                let seconds = sec - (hours * 3600) - (minutes * 60); 
+                timeCount.textContent = hours +":"+minutes +":"+seconds; //changing the value of timeCount with time value
                 count--; //decrement the time value
                 localStorage.setItem('storagekey', count)
                 count = localStorage.getItem('storagekey')
@@ -1630,8 +1636,9 @@
                 if (count < 0) { //if timer is less than 0
                     clearInterval(counter); //clear counter
                     timeText.textContent = "Time Off"; //change the time text to time off
-                    //quiz_box.style.display="none"
-                    //document.getElementById('myform').style.display="block"
+                                    //localStorage.removeItem('storagekey');
+
+                    
                     document.getElementById('myform').style.display = "block"
                     document.getElementById('mysect').style.display = "none"
                     document.getElementById('myfoot').style.display = "none"

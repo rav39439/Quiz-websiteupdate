@@ -12,18 +12,35 @@
     <title>Document</title>
 </head>
 <body>
-    
+     
+  
 
     <h3>Pleases read the information carefully before starting the quiz</h3>
+<p>Your quiz consists of multiple choice questions which has only one answer. There may be some questions 
+which might have multiple correct answers and instructions will be mentioned . There also may be some questions 
+which you have to answer in integer. Kindly read the instruction in the questions properly before answering any question
+You would be provided with required amount of time to answer each question but do not spend much time on each question
+Select a option dillegently before submitting it. There are four buttons  'prev','clear','next' and submit.
+'prev' will get you back to prev question ,'clear' will clear your response for a particular question ,'next' will lead you to 
+next question and 'submit' will save your responses and terminate the exam.
+ 
+</p>
+<p> Kindly verify your credentials below before starting the exam
+</p>
+
+<p style="font-size:18px ;"><strong>{{Myname}}</strong></p>
+<p style="font-size:18px ;"><strong>{{Myreg}}</strong></p>
+<p style="font-size:18px ;"><strong>{{table2}}</strong></p>
 
 
 
-    <h3>This is your information</h3>
+
+
 
     <form action="/newquiz4" method="POST">
-    <input type="text" name="Myname2" class="Myname2" value={{Myname}}><br>
-    <input type="text" name="registration" class="registration" value={{Myreg}}><br>
-    <input type="text" name="Mytable2" class="Mytable2" value={{table2}}>
+    <input type="hidden" name="Myname2" class="Myname2" value={{Myname}}><br>
+    <input type="hidden" name="registration" class="registration" value={{Myreg}}><br>
+    <input type="hidden" name="Mytable2" class="Mytable2" value={{table2}}>
     <button type="submit">start</button>
     </form>
 </body>
