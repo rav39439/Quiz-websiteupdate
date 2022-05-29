@@ -1182,7 +1182,11 @@ if(option[g]){
                 //(e || window.event).returnValue = confirmationMessage; //Gecko + IE
                 //return confirmationMessage;                            //Webkit, Safari, Chrome
                 //});
-                timeCount.textContent = count; //changing the value of timeCount with time value
+                const sec = parseInt(count, 10);
+                 let hours   = Math.floor(count / 3600); // get hours
+                  let minutes = Math.floor((count - (hours * 3600)) / 60); // get minutes
+                let seconds = sec - (hours * 3600) - (minutes * 60); 
+                timeCount.textContent = hours +":"+minutes +":"+seconds; //ch//changing the value of timeCount with time value
                 count--; //decrement the time value
                 localStorage.setItem('storagekey', count)
                 count = localStorage.getItem('storagekey')
@@ -1193,6 +1197,7 @@ if(option[g]){
                 if (count < 0) { //if timer is less than 0
                     clearInterval(counter); //clear counter
                     timeText.textContent = "Time Off"; //change the time text to time off
+                    localStorage.removeItem('storagekey')
 
                     showResult()
                     solution_btn.classList.add("showsolutionbtn")

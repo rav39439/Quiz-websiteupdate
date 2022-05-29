@@ -999,7 +999,7 @@
                 integerquestion.style.display = 'none'
                 integerbtn.style.display = "none"
 
-                localStorage.removeItem('storagekey');
+                //localStorage.removeItem('storagekey');
             }
 
 
@@ -1621,7 +1621,7 @@
                 //(e || window.event).returnValue = confirmationMessage; //Gecko + IE
                 //return confirmationMessage;                            //Webkit, Safari, Chrome
                 //});
- const sec = parseInt(count, 10);
+                  const sec = parseInt(count, 10);
                  let hours   = Math.floor(count / 3600); // get hours
                   let minutes = Math.floor((count - (hours * 3600)) / 60); // get minutes
                 let seconds = sec - (hours * 3600) - (minutes * 60); 
@@ -1636,7 +1636,7 @@
                 if (count < 0) { //if timer is less than 0
                     clearInterval(counter); //clear counter
                     timeText.textContent = "Time Off"; //change the time text to time off
-                                    //localStorage.removeItem('storagekey');
+                                    localStorage.removeItem('storagekey');
 
                     
                     document.getElementById('myform').style.display = "block"
