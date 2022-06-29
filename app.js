@@ -2659,7 +2659,7 @@ newdatan.forEach(function(elem,index){
 
             app.get("/chat",function(req,res){
 
-                res.render("room.ejs")
+                res.render("room.ejs",{username:req.session.username})
             })
 
 
