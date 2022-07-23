@@ -3,6 +3,9 @@ const express = require('express')
 const crypto=require('crypto')
 const jwt=require('jsonwebtoken')
 const nodemailer=require('nodemailer')
+//const { v4: uuidV4 } = require('uuid')
+const Qs = require('query-string');
+//const nodemailer=require('./public/')
 const app = express()
 const { DATABASE } = process.env;
 const { PASSWORD } = process.env;
@@ -20,8 +23,15 @@ var bodyParser=require("body-parser")
 app.use(bodyParser.urlencoded())
 //app.use(bodyParser.json())
 
+app.engine('html', require('ejs').renderFile);
 
-
+const {
+    userJoin,
+    getCurrentUser,
+    userLeave,
+    getRoomUsers
+  } = require('./utils/users');
+  const formatMessage = require('./utils/messeges');
 
   //app.use(bodyParser.json())
 //var cookieParser = require('cookie-parser');
@@ -64,7 +74,7 @@ var http=require("http").createServer(app)
 var io=require("socket.io")(http, {
     cors: {
    origin: "https://neweducationworld.herokuapp.com",
-    // origin: "http://localhost:8700",
+   //  origin: "http://localhost:8700",
       credentials: true
     }
   })
@@ -2702,18 +2712,139 @@ newdatan.forEach(function(elem,index){
                    
                     
                 })
+//------------------------------------video chat------------------------------------------------------------
+const botName = 'ChatCord Bot';
 
+
+socket.on('joinRoom', ({ username, room }) => {
+    const user = userJoin(socket.id, username, room);
+
+    socket.join(user.room);
+    //import id from './public/js/main'
+    //console.log(id)
+    //const f=require('./public/js/main')
+    //console.log(f)
+
+
+
+    socket.emit('message', formatMessage(botName, 'Welcome to Mycoaching!'));
+
+
+    socket.broadcast
+    .to(user.room)
+    .emit(
+      'message',
+      formatMessage(botName, `${user.username} has joined the chat`)
+    );
+    io.to(user.room).emit('roomUsers', {
+      room: user.room });
+   })
+
+
+   socket.on("peerid",function(id,room){
+    console.log(id)
+    console.log("sdafffffffffffffffffffffffffffffffffffffffff"+room)
+  
+    io.to(room).emit("mypeerid",id,room)
+  })
+
+
+
+   socket.on('chatMessage', msg => {
+    const user = getCurrentUser(socket.id);
+
+    io.to(user.room).emit('message', formatMessage(user.username, msg));
+  });
+    //socket.broadcast.to(roomId).emit('user-connected', id)
+
+   // socket.on('disconnect', () => {
+      //console.log("gggg")
+     // socket.broadcast.to(roomId).emit('user-disconnected', id)
+
+     socket.on('disconnect', () => {
+      const user = userLeave(socket.id);
+  
+      if (user) {
+        io.to(user.room).emit(
+          'message',
+          formatMessage(botName, `${user.username} has left the chat`)
+        );
+  
+        // Send users and room info
+        io.to(user.room).emit('roomUsers', {
+          room: user.room,
+          users: getRoomUsers(user.room)
+        });
+      }
+    });
+
+socket.on('yourstream',function(event,mroom,id){
+console.log('this isssssssssssssssclick' +" "+event,mroom)
+  io.to(mroom).emit("allstream",event,id)
+})
+
+
+
+
+      socket.on('chat', message => {
+       io.emit('chat',message)
+      })
+
+
+      
+      socket.on("refresh",()=>{
+        console.log("fgzagf")
+        
+        io.emit("pagerefresh");
+           
+           
+        })
+
+      socket.on('mouse', (data) => socket.broadcast.emit('mouse', data))
+
+     // socket.on('disconnect', () => console.log('Client has disconnected'))
+     
+      socket.on('answer', ({x,y, input}) => {
+        console.log(x,y)
+     io.emit('answer1',({x,y,input}))
+     })
+
+     io.emit('reload');
+     
+                     
             })
 
+//-------------------------------------------------------------------------------------------------------
 
 
 
-
+            app.get("/entervideochat",function(req,res){
+                
+                res.render('Newchat.html');
+                })
+    
+            app.post("/entervideochat",function(req,res){
+            
+                res.render('chat.html',{user:req.body.username,room:req.body.room});
+                })
+    
 
 
 
 
 ///-----------------------------------------------video-----------------------------------------------
+
+
+
+
+
+
+  
+
+
+
+
+
   //---------------------------------------videoupload-------------------------------------------------
 const PORT=process.env.PORT
   http.listen(PORT||8800, () => {
