@@ -11,8 +11,7 @@
 
 <style>
   .video {
-    width: 100%;
-      height: 100%;
+   
       object-fit: cover;
     }
   .myvideo {
@@ -52,17 +51,25 @@
     display: grid;
       grid-template-columns: repeat(auto-fill, 300px);
       grid-auto-rows: 300px;
-
   } */
-  #remotevideo{
-   height: 700px;
-   width:1100px;
+  .rvideo{
+   height: 900px;
+   width:1400px;
    z-index: 100;
-   margin-left: 200px;
-   display:none;
+   margin-left: 100px;
+   
 
   }
-  #ourvideo{
+
+
+  .ourvideo{
+    display: flex;
+height: 300px;
+width: 300px;
+border: 2px solid black;
+  }
+
+  #ovideo{
     display: flex;
 height: 300px;
 width: 300px;
@@ -182,9 +189,10 @@ border: 2px solid black;
 <h2>THis is heading</h2>
   <h3 id='show-peer'></h3>
   
-    <div id=ourvideo></div>
-    <div id="remotevideo"></div>
-    <div id="screenvideo"></div>
+    <div class="avideo"id="ourvideo"></div>
+    <div class="bvideo" id="remotevideo"></div>
+   <video src="" id="myvid"></video> 
+    <div class="cvideo" id="screenvideo"></div>
   
   <input id="peerID" placeholder="Peer ID">
   <button id="call-peer" >call screen</button>
@@ -271,549 +279,682 @@ border: 2px solid black;
   <script>
 const socket = io('https://neweducationworld.herokuapp.com', { transports: ['websocket', 'polling', 'flashsocket'] });
     
-    window.addEventListener('load', (event) => {
-      var peer = new Peer()
-      var myStream;
-      var currentPeer;
-      var peerlist = []
-      peer.on('open', function (id) {
-    //console.log(id)
-    let room=document.getElementById('use').innerText;
-    let myuser=document.getElementById('usera').innerText
-    document.getElementById('show-peer').innerHTML =id
+    //const socket=io('http://localhost:8700')
     
-              //console.log(id)
-                    console.log(room)
-                    if(myuser=='rav'){
-
-                  
-                    socket.emit("peerid",id,room)
-                  }
-        //socket.emit('join-room', ROOM_ID, id)
-      })
-     // module.exports={id}
-      peer.on('call', function (call) {
-        //const start=async()=>{
+    
+    let roomi=document.getElementById('myroom').innerText
+   // console.log(socket)
+    console.log("hggggggggggggggggggggg")
+    socket.emit("room",roomi)
+    
+    
+    var allpeers=[]
+    var peerscreenshare=[]
+    
+        window.addEventListener('load', (event) => {
+          var peer = new Peer()
+          var myStream;
+          var currentPeer;
+          var peerlist = []
+          var mypeers=[]
         
+          var screenpeer=""
+          let screensharing=false
     
+          peer.on('open', function (id) {
+            console.log("thisssssssshdfhafkhkfhadh"+id)
+        let room=document.getElementById('use').innerText;
+        let myuser=document.getElementById('usera').innerText
+        document.getElementById('show-peer').innerHTML =id
+        
+
+        socket.emit("user joined",{id:id,room:room})
+                
+                        console.log(room)
+                        if(myuser=='rav'){
+    
+                      
+                        socket.emit("peerid",id,room)
+                      }
+          })
+          peer.on('call', function (call) {
+            
+    
+           navigator.mediaDevices.getUserMedia(
+              { video:true, audio: true})
+              .then((stream) => {
+               myStream = stream
+             //addourvideo(stream) //(myvideo on my side)
+                call.answer(stream)
+                call.on('stream', function (remotestream) {
+                if(!peerlist.includes(call.peer)){
+        
+                    //---------------------------------------------
+                //addremotevideo(remotestream)///(users video on my side)
+                    currentPeer=call.peerConnection
+        peerlist.push(call.peer)
+        mypeers.push(call.peerConnection)
+        let peerid= document.getElementById("peerID").value;
+    
+        var data={
+          id:peerid,
+          peer:call.peerConnection,
+          mypeer:call
+        }
+    
+        allpeers.push(data)
+                  }
+        
+                      
+        
+               })
+        
+        
+        
+        
+        
+              }).catch((err) => {
+                console.log(err + "unable to get media")
+              })
+          })
+        
+        //---------------------------ikdhfihsegi--------------------------
+          socket.on("mypeerid",function(id,room){
+            console.log(id)
+            document.getElementById('peerID').value=id
+           // callScreen(id)
+          })
+        
+        
+          //-------------------------------------------------------
+          socket.on('user-disconnected', id => {
+            console.log(id)
+        if (peerlist[id]) peerlist[id].close()
+        
+        })
+          document.getElementById("call-peer").addEventListener('click', (e) => {
+            let remotePeerId = document.getElementById("peerID").value;
+        
+            
+           
+              document.getElementById('show-peer').innerHTML = "connecting" + remotePeerId;
+              
+              callPeer(remotePeerId,e)
+              
+          
+           
+          })
+    
+          document.getElementById("refresh").addEventListener('click', (e) => {
+            let remotePeerId = document.getElementById("peerID").value;
+            socket.on('reload', function (remotePeerId) {
+              location.reload();
+          });
+          })
          
+          document.getElementById("sharescreen").addEventListener('click', (e) => {
+          
+          
     
     
-    
-    
-      
-       navigator.mediaDevices.getUserMedia(
-          { video:true, audio: true})
-          .then((stream) => {
-           myStream = stream
-         //addourvideo(stream) //(myvideo on my side)
-            call.answer(stream)
-            call.on('stream', function (remotestream) {
-            if(!peerlist.includes(call.peer)){
-    
-                //---------------------------------------------
-             // addremotevideo(remotestream)///(users video on my side)
-                currentPeer=call.peerConnection
-    peerlist.push(call.peer)
-              }
+            let remotePeerId = document.getElementById("peerID").value;
+            let roomid=document.getElementById('use').innerText;
+            screenpeer=remotePeerId
+            socket.emit("screeningdata",{screenid:screenpeer,room:roomid})
+            document.getElementById('show-peer').innerHTML = "connecting" + remotePeerId;
+            // socket.on("mypeerid",function(id,room){
+            //      alert("dfgaggadfgadsf")
+            //      document.getElementById('peerID').value=id
+                 
+           // callScreen(id)
+        
+             // })
+             //callScreen(remotePeerId)
+        
+           
+           navigator.mediaDevices.getDisplayMedia({video:{
+             cursor:"always"
+           },
+           audio:{
+             echoCancellation:true,
+             noiseSupression:true
+           }
+           }).then((stream)=>{
+           // document.getElementById("remotevideo").classList.remove('video')
+           // document.getElementById("remotevideo").classList.remove('bvideo')
+    //         var myVideo = document.getElementById('remotevideo')
+    // myVideo.style.height="200px";
+    // myVideo.style.width="200px";
     
             
-             
+        let videoTrack=stream.getVideoTracks()[0];
+        videoTrack.onnded=function(){
+        stopscreenshare()
     
-             // socket.on('user-connected', id => {
-               // console.log(id)
-               ///connectToNewUser(id, stream)
-              //})
-    
-           })
-    
-    
-    
-    
-    
-          }).catch((err) => {
-            console.log(err + "unable to get media")
-          })
-      })
-    
-    //---------------------------ikdhfihsegi--------------------------
-      socket.on("mypeerid",function(id,room){
-        console.log(id)
-        document.getElementById('peerID').value=id
-       // callScreen(id)
-      })
-    
-    
-      //-------------------------------------------------------
-      socket.on('user-disconnected', id => {
-        console.log(id)
-    if (peerlist[id]) peerlist[id].close()
-    
-    })
-      document.getElementById("call-peer").addEventListener('click', (e) => {
-        let remotePeerId = document.getElementById("peerID").value;
-    
-        
-       
-          document.getElementById('show-peer').innerHTML = "connecting" + remotePeerId;
-          
-          callPeer(remotePeerId,e)
-          
-      
-       
-      })
-
-      document.getElementById("refresh").addEventListener('click', (e) => {
-        let remotePeerId = document.getElementById("peerID").value;
-        socket.on('reload', function (remotePeerId) {
-          location.reload();
-      });
-      })
-     
-      document.getElementById("sharescreen").addEventListener('click', (e) => {
-        let remotePeerId = document.getElementById("peerID").value;
-        document.getElementById('show-peer').innerHTML = "connecting" + remotePeerId;
-        // socket.on("mypeerid",function(id,room){
-        //      alert("dfgaggadfgadsf")
-        //      document.getElementById('peerID').value=id
-             
-        // callScreen(id)
-    
-         // })
-         // callScreen(remotePeerId)
-    
-    
-       navigator.mediaDevices.getDisplayMedia({video:{
-         cursor:"always"
-       },
-       audio:{
-         echoCancellation:true,
-         noiseSupression:true
-       }
-       }).then((stream)=>{
-    let videoTrack=stream.getVideoTracks()[0];
-    videoTrack.onnded=function(){
-    stopscreenshare()
-    }
-    let sender=currentPeer.getSenders().find(function(s){
-    return s.track.kind==videoTrack.kind
-    })
-    
-    sender.replaceTrack(videoTrack)
-       }).catch((err)=>{
-    console.log("unable to get media "+err)
-       })
-    
-      })
-    
-
-
-      socket.on('allstream',function(event,id){
-        let user=document.getElementById('usera').innerText
-
-if(user!='rav'){
-
-document.getElementById('ourvideo').style.display="none"
-document.getElementById('remotevideo').style.display="block"
-document.getElementById("defaultCanvas0").style.display = "none";
-
-document.getElementById('ourvideo').style.marginLeft="300px"
-
-callPeer(id,event)
-}
-})
-
-
-
-
-      function callPeer(id,event) {
-        navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: true
-        }).then((stream) => {
-          myStream = stream
-          //-------------------------------------
-          let mroom=document.getElementById('use').innerText;
-          let myname=document.getElementById('usera').innerText
-          if(myname=='rav'){
-
-           
-            addourvideo(stream)//(user video on users side)
-            socket.emit("yourstream",event,mroom,id)
-          }
-          
-          let call = peer.call(id, stream)
-          call.on('stream', function (remotestream) {
-    
-          if(!peerlist.includes(call.peer)){
-          //  socket.on('allstream',function(event){
-              addremotevideo(remotestream)  //(myvideo on users side)
-
-           // })
-              currentPeer=call.peerConnection
-              peerlist.push(call.peer)
-            }
-           
-    
-          })
-          //call.on('close',()=>{
-    //video.remove()
-         // })
-          
-        }).catch((err) => {
-          console.log(err + "unabel to get media")
-    
-        })
-    
-      }
-    
-    
-      function stopscreenshare(){
-        let videoTrack=myStream.getVideoTracks()[0]
-        var sender=currentPeer.getSenders().find(function(s){
-          return s.track.kind=videoTrack.kind
-         
-        })
-        sender.replaceTrack(videoTrack)
-      }
-      function addremotevideo(stream) {
-        let video = document.createElement("video")
-        video.classList.add("video")
-        video.srcObject = stream
-        video.play()
-        document.getElementById('remotevideo').append(video)
-      }
-      function addourvideo(stream) {
-        let video = document.createElement("video")
-        video.classList.add("video")
-        video.srcObject = stream
-        video.play()
-        document.getElementById('ourvideo').append(video)
-      }
-    })
-    
-    
-    //------------------------------------------chat portion-------------------------------------------------
-    
-    
-    
-    
-    
-    const chat = document.querySelector('.chat-form')
-    const Input = document.querySelector('.chat-input')
-    const roomName = document.getElementById('myroom');
-    
-let room =roomName.innerText
-    let username=document.getElementById('usera').innerText
-    // const { username, room } = Qs.parse(location.search, {
-    //   ignoreQueryPrefix: true,
-    // });
-    
-    socket.emit('joinRoom', { username, room });
-    
-    
-    
-    
-    socket.on('roomUsers', ({ room}) => {
-      outputRoomName(room);
-     // outputUsers(users);
-    });
-    
-    socket.on('message', (message) => {
-      console.log(message);
-      outputMessage(message);
-    
-      // Scroll down
-      //chatMessages.scrollTop = chatMessages.scrollHeight;
-    });
-    
-    
-    
-    
-    chat.addEventListener('submit', event => {
-    event.preventDefault()
-    let msg = event.target.elements.msg.value;
-    
-    msg = msg.trim();
-    
-    if (!msg) {
-      return false;
-    }
-    
-    socket.emit('chatMessage', msg);
-    
-      // Clear input
-      event.target.elements.msg.value = '';
-      event.target.elements.msg.focus();
-    });
-    
-    ///socket.emit('chat', Input.value)
-    //Input.value = ''
-    
-    
-    
-    
-    const chatWindow = document.querySelector('.chat-window')
-    
-    const renderMessage = message => {
-    const div = document.createElement('div')
-    div.classList.add('render-message')
-    div.innerText = message
-    chatWindow.appendChild(div)
-    }
-    
-    function outputMessage(message) {
-      const div = document.createElement('div');
-      div.classList.add('message');
-      const p = document.createElement('p');
-      p.classList.add('meta');
-      p.innerText = message.username;
-      p.innerHTML += `<span>${message.time}</span>`;
-      div.appendChild(p);
-      const para = document.createElement('p');
-      para.classList.add('text');
-      para.innerText = message.text;
-      div.appendChild(para);
-      document.querySelector('.chat-messages').appendChild(div);
-    }
-    
-    function outputRoomName(room) {
-      roomName.innerText = room;
-    }
-    //socket.on('chat', message => {
-    // make sure to modify this
-    //renderMessage(message)
-    //})
-    
-    
-    
-    
-    
-    function disableF5(e) {
-      
-      if(typeof(e)!=='undefined'){
-      if (e.keyCode == 116 ) 
-      
-      e.preventDefault();
-    }
-    }
-    
-    
-    //-------------------------------drawing tool------------------------------------------------------------
-    if(username!="rav"){
-      disableF5()
-    
-    }
-    //
-    
-    
-    let color = '#FFF'
-    let strokeWidth = 4
-    
-    function setup() {
-      // Creating canvas
-      const cv = createCanvas(1200, 600)
-      cv.position(600, 40)
-      cv.background(200)
-    
-    
-      $('#mybutton').click(function(e) {
-        //alert("reagre")
-        socket.emit("refresh")
-        
-        
-        
-        })
-    
-    
-    
-    
-    
-    
-      socket.on("pagerefresh",()=>{
-    
-        //alert("asdfsfadf")
-        location.reload()   
-    })
-    
-    
-    
-    
-    
-    
-      socket.on("answer1",({ x, y,input }) => {
-    
-        
-        let myPTag = createDiv(input);
-      myPTag.position(x, y);
-      myPTag.size(500,100)
-      myPTag.style('color', '#ff0000');
-      myPTag.style('font-size','18px')
-      })
-    
-    
-      const chat2 = document.querySelector('.myform')
-    const myinput = document.getElementById('mytext')
-    const xposition=document.getElementById("xposition")
-    const yposition=document.getElementById("yposition")
-      chat2.addEventListener('submit', event => {
-     event.preventDefault()
-     console.log(xposition,yposition,myinput.value)
-     socket.emit('answer', {x:xposition.value,y:yposition.value,input:myinput.value})
-     myinput.value = ''
-    //togglebtn=createButton("Toggle erase")
-    //togglebtn.position(30,60)
-    //togglebtn.mouseClicked(toggleErase)
-    
-      })
-    
-      
-    
-    
-      let data1 = localStorage.getItem("mydata");
-      data2=JSON.parse(data1)
-    
-      if(!Array.isArray(data2))
-      {
-        console.log("no value")
-      }
-      else{
-     for(let i=0;i<data2.length;i++){
-        line(data2[i].x,data2[i].y,data2[i].px,data2[i].py)
-     }
-    
-      }
-      // Callback function
-      socket.on('mouse', data => {
-        stroke(data.color)
-        strokeWeight(data.strokeWidth)
-        line(data.x, data.y, data.px, data.py)
-      })
-      
-      // Getting our buttons and the holder through the p5.js dom
-      const color_picker = select('#pickcolor')
-      const color_btn = select('#color-btn')
-      const color_holder = select('#color-holder')
-    
-      const stroke_width_picker = select('#stroke-width-picker')
-      const stroke_btn = select('#stroke-btn')
-    
-      // Adding a mousePressed listener to the button
-      color_btn.mousePressed(() => {
-        // Checking if the input is a valid hex color
-        if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color_picker.value())) {
-          color = color_picker.value()
-          color_holder.style('background-color', color)
         }
-        else {console.log('Enter a valid hex value')}
-      })
     
-      // Adding a mousePressed listener to the button
-      stroke_btn.mousePressed(() => {
-        const width = parseInt(stroke_width_picker.value())
-        if (width > 0) strokeWidth = width
-      })
+    let senders=[]
+    mypeers.forEach((peer)=>{
+    senders.push(peer.getSenders().find(function(s){
+      return s.track.kind==videoTrack.kind
+    }))
+    })
+    
+        // let sender=currentPeer.getSenders().find(function(s){
+        // return s.track.kind==videoTrack.kind
+        // })
+        
+    
+        //sender.replaceTrack(videoTrack)
+    senders.forEach(function(connection){
+      
+      connection.replaceTrack(videoTrack)
+    })
+    
+           }).catch((err)=>{
+        console.log("unable to get media "+err)
+           })
+        
+          })
+        
+    
+    
+          socket.on('allstream',function(event,id){
+            let user=document.getElementById('usera').innerText
+    
+    if(user!='rav'){
+    
+    //document.getElementById('ourvideo').style.display="none"
+    document.getElementById('remotevideo').style.display="block"
+    document.getElementById("defaultCanvas0").style.display = "block";
+    
+    document.getElementById('ourvideo').style.marginLeft="300px"
+    
+    callPeer(id,event)
     }
-    
-    //function toggleErase(){
-    
-      //if(eraseEnable){
-      //  noErase();
-        //eraseEnable=false;
-     // }
-     // else{
-       // erase()
-      //  eraseEnable=true;
-     // }
-    //}
-    
-    
-    function mouseDragged() {
-      // Draw
-      stroke(color)
-      strokeWeight(strokeWidth)
-      line(mouseX, mouseY, pmouseX, pmouseY)
-    
-      // Send the mouse coordinates
-      sendmouse(mouseX, mouseY, pmouseX, pmouseY)
-    }
-    
-    
-    // Sending data to the socket
-    function sendmouse(x, y, pX, pY) {
-      const data = {
-        x: x,
-        y: y,
-        px: pX,
-        py: pY,
-        color: color,
-        strokeWidth: strokeWidth,
-      }
-    
-     let objdata
-      let data1 = localStorage.getItem("mydata");
-        if (data1 == null) {
-          objdata = [];
-        } else {
-         objdata = JSON.parse(data1);
-       }
-     objdata.push(data)
-      localStorage.setItem("mydata",JSON.stringify(objdata))
-    
-    //console.log(data2.length)
-    
-    //console.log(JSON.parse(data1))
-    //console.log(data)
-    //for(let i=0;i<data1.length;i++){
-     // console.log(data1[i])
-    
-    
-    //}
-      socket.emit('mouse', data)
-    
-    }
-    
-    let clearm=document.getElementById('dd')
-    clearm.addEventListener('click',function(){
-      localStorage.clear()
     })
     
     
     
-    //function draw(){
-     
     
-      
-    //}
     
-    //-------------------------------------ourscreeen-----------------------------------------------------
     
-     //remotePeerId = document.getElementById("peerID").value;
-            //document.getElementById('show-peer').innerHTML = "connecting" + remotePeerId;
-     
-     //callScreen(remotePeerid)
     
-              function callScreen(id) {
-            navigator.mediaDevices.getDisplayMedia({
-              video: {MediaSource:"screen"},
+    
+          function callPeer(id,event) {
+            navigator.mediaDevices.getUserMedia({
+              video: true,
               audio: true
             }).then((stream) => {
               myStream = stream
-              addscreenvideo(stream)
+              //-------------------------------------
+              let mroom=document.getElementById('use').innerText;
+              let myname=document.getElementById('usera').innerText
+              if(myname=='rav'){
+    
+               
+                addourvideo(stream)//(user video on users side)
+                socket.emit("yourstream",event,mroom,id)
+              }
+              
               let call = peer.call(id, stream)
               call.on('stream', function (remotestream) {
-                addremotevideo(remotestream)
+        
+              if(!peerlist.includes(call.peer)){
+              //  socket.on('allstream',function(event){
+                  addremotevideo(remotestream)  //(myvideo on users side)
+    
+               // })
+                  currentPeer=call.peerConnection
+                  peerlist.push(call.peer)
+                  mypeers.push(call.peerConnection)
+    
+                  let peerid= document.getElementById("peerID").value;
+    
+    var data={
+      id:peerid,
+      peer:call.peerConnection,
+      mypeer:call
+    }
+    
+    allpeers.push(data)
+    
+                }
+               
+        
+              })
+            
+              
+            }).catch((err) => {
+              console.log(err + "unabel to get media")
+        
             })
-            })
+        
           }
-     
-          function addscreenvideo(stream) {
+        
+        
+          function stopscreenshare(){
+            let videoTrack=myStream.getVideoTracks()[0]
+            var sender=currentPeer.getSenders().find(function(s){
+              return s.track.kind=videoTrack.kind
+             
+            })
+            sender.replaceTrack(videoTrack)
+          }
+    
+    
+    
+          function addremotevideo(stream) {
             let video = document.createElement("video")
-            video.classList.add("video")
+         
+              video.classList.add("video")
+    
+          
+         
+            video.srcObject = stream
+            video.play()
+           
+              document.getElementById('remotevideo').append(video)
+    
+            
+          }
+          function addourvideo(stream) {
+            let video = document.createElement("video")
+            video.classList.add("ourvideo")
             video.srcObject = stream
             video.play()
             document.getElementById('ourvideo').append(video)
-          } 
+          }
+        })
+        
+    
+    
+    //     socket.on("changesize",function(){
+    //       let video = document.createElement("video")
+    //      console.log("ventsdaaaaaaaaaaaaaaaaaaaaaaaa")
+    //           video.classList.add("rvideo")
+    // //video.setAttribute("id","myvid")
+          
+         
+    //         video.srcObject = stream
+    //         video.play()
+           
+    //           document.getElementById('remotevideo').append(video)
+    
+            
+          
+    //     })
+    
+    //     function mychange(stream){
+    
+    //       let video = document.createElement("video")
+    //      console.log("ventsdaaaaaaaaaaaaaaaaaaaaaaaa")
+    //           video.classList.add("rvideo")
+    // //video.setAttribute("id","myvid")
+          
+         
+    //         video.srcObject = stream
+    //         video.play()
+           
+    //           document.getElementById('remotevideo').append(video)
+    
+    //     }
+    
+    
+    
+    ///----------------------vvvvv1 this event will execute for all the connected users-------------------------
+    const remoteVideo = document.getElementById("screenvideo");
+    
+        socket.on('screening',function(screenid){
+          document.getElementById("defaultCanvas0").style.display = "none";
+    
+          document.getElementById('screenvideo').classList.add('rvideo')
+         document.getElementById('remotevideo').classList.add('rvideo')
+          console.log("the screen id is"+screenid)
+    
+          allpeers.forEach(function(peer){
+            if(peer.id==screenid){
+             // console.log(peer)
+             peerscreenshare.push(peer)
+             callback(peerscreenshare)
+            }
+          })
+         // console.log(peerconnection)
+        })
+        
+    
+       function callback(peerscreenshare){
+     
+        
+    peerscreenshare[0].mypeer.peerConnection.addEventListener('track', async (event) => {
+        const [remoteStream] = event.streams;
+       callScreen(remoteStream)
+        remoteVideo.srcObject = remoteStream;
+    });
+    }
+    
+        //------------------------------------------chat portion-------------------------------------------------
+        
+        
+        
+        
+        
+        const chat = document.querySelector('.chat-form')
+        const Input = document.querySelector('.chat-input')
+        const roomName = document.getElementById('myroom');
+        
+    let room =roomName.innerText
+        let username=document.getElementById('usera').innerText
+        // const { username, room } = Qs.parse(location.search, {
+        //   ignoreQueryPrefix: true,
+        // });
+        
+        socket.emit('joinRoom', { username, room });
+        
+        
+        
+        
+        socket.on('roomUsers', ({ room}) => {
+          outputRoomName(room);
+         // outputUsers(users);
+        });
+        
+        socket.on('message', (message) => {
+          console.log(message);
+          outputMessage(message);
+        
+          // Scroll down
+          //chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+        
+        
+        
+        
+        chat.addEventListener('submit', event => {
+        event.preventDefault()
+        let msg = event.target.elements.msg.value;
+        
+        msg = msg.trim();
+        
+        if (!msg) {
+          return false;
+        }
+        
+        socket.emit('chatMessage', msg);
+        
+          // Clear input
+          event.target.elements.msg.value = '';
+          event.target.elements.msg.focus();
+        });
+        
+        ///socket.emit('chat', Input.value)
+        //Input.value = ''
+        
+        
+        
+        
+        const chatWindow = document.querySelector('.chat-window')
+        
+        const renderMessage = message => {
+        const div = document.createElement('div')
+        div.classList.add('render-message')
+        div.innerText = message
+        chatWindow.appendChild(div)
+        }
+        
+        function outputMessage(message) {
+          const div = document.createElement('div');
+          div.classList.add('message');
+          const p = document.createElement('p');
+          p.classList.add('meta');
+          p.innerText = message.username;
+          p.innerHTML += `<span>${message.time}</span>`;
+          div.appendChild(p);
+          const para = document.createElement('p');
+          para.classList.add('text');
+          para.innerText = message.text;
+          div.appendChild(para);
+          document.querySelector('.chat-messages').appendChild(div);
+        }
+        
+        function outputRoomName(room) {
+          roomName.innerText = room;
+        }
+        //socket.on('chat', message => {
+        // make sure to modify this
+        //renderMessage(message)
+        //})
+        
+        
+        
+        
+        
+        function disableF5(e) {
+          
+          //if(typeof(e)!=='undefined'){
+          if (e.keyCode == 116 ) 
+          
+          e.preventDefault();
+        }
+       // }
+        
+        
+        //-------------------------------drawing tool------------------------------------------------------------
+        if(username!="rav"){
+          disableF5()
+        
+        }
+        //
+        
+        
+        let color = '#FFF'
+        let strokeWidth = 4
+        
+        function setup() {
+          // Creating canvas
+          const cv = createCanvas(1200, 600)
+          cv.position(600, 40)
+          cv.background(200)
+        
+        
+          $('#mybutton').click(function(e) {
+            //alert("reagre")
+            socket.emit("refresh")
+            
+            
+            
+            })
+        
+        
+        
+        
+        
+        
+          socket.on("pagerefresh",()=>{
+        
+            //alert("asdfsfadf")
+            location.reload()   
+        })
+        
+        
+        
+        
+        
+        
+          socket.on("answer1",({ x, y,input }) => {
+        
+            
+            let myPTag = createDiv(input);
+          myPTag.position(x, y);
+          myPTag.size(500,100)
+          myPTag.style('color', '#ff0000');
+          myPTag.style('font-size','18px')
+          })
+        
+        
+          const chat2 = document.querySelector('.myform')
+        const myinput = document.getElementById('mytext')
+        const xposition=document.getElementById("xposition")
+        const yposition=document.getElementById("yposition")
+          chat2.addEventListener('submit', event => {
+         event.preventDefault()
+         console.log(xposition,yposition,myinput.value)
+         socket.emit('answer', {x:xposition.value,y:yposition.value,input:myinput.value})
+         myinput.value = ''
+        //togglebtn=createButton("Toggle erase")
+        //togglebtn.position(30,60)
+        //togglebtn.mouseClicked(toggleErase)
+        
+          })
+        
+          
+        
+        
+          let data1 = localStorage.getItem("mydata");
+          data2=JSON.parse(data1)
+        
+          if(!Array.isArray(data2))
+          {
+            console.log("no value")
+          }
+          else{
+         for(let i=0;i<data2.length;i++){
+            line(data2[i].x,data2[i].y,data2[i].px,data2[i].py)
+         }
+        
+          }
+          // Callback function
+          socket.on('mouse', data => {
+            stroke(data.color)
+            strokeWeight(data.strokeWidth)
+            line(data.x, data.y, data.px, data.py)
+          })
+          
+          // Getting our buttons and the holder through the p5.js dom
+          const color_picker = select('#pickcolor')
+          const color_btn = select('#color-btn')
+          const color_holder = select('#color-holder')
+        
+          const stroke_width_picker = select('#stroke-width-picker')
+          const stroke_btn = select('#stroke-btn')
+        
+          // Adding a mousePressed listener to the button
+          color_btn.mousePressed(() => {
+            // Checking if the input is a valid hex color
+            if (/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(color_picker.value())) {
+              color = color_picker.value()
+              color_holder.style('background-color', color)
+            }
+            else {console.log('Enter a valid hex value')}
+          })
+        
+          // Adding a mousePressed listener to the button
+          stroke_btn.mousePressed(() => {
+            const width = parseInt(stroke_width_picker.value())
+            if (width > 0) strokeWidth = width
+          })
+        }
+        
+        //function toggleErase(){
+        
+          //if(eraseEnable){
+          //  noErase();
+            //eraseEnable=false;
+         // }
+         // else{
+           // erase()
+          //  eraseEnable=true;
+         // }
+        //}
+        
+        
+        function mouseDragged() {
+          // Draw
+          stroke(color)
+          strokeWeight(strokeWidth)
+          line(mouseX, mouseY, pmouseX, pmouseY)
+        
+          // Send the mouse coordinates
+          sendmouse(mouseX, mouseY, pmouseX, pmouseY)
+        }
+        
+        
+        // Sending data to the socket
+        function sendmouse(x, y, pX, pY) {
+          const data = {
+            x: x,
+            y: y,
+            px: pX,
+            py: pY,
+            color: color,
+            strokeWidth: strokeWidth,
+          }
+        
+         let objdata
+          let data1 = localStorage.getItem("mydata");
+            if (data1 == null) {
+              objdata = [];
+            } else {
+             objdata = JSON.parse(data1);
+           }
+         objdata.push(data)
+          localStorage.setItem("mydata",JSON.stringify(objdata))
+        
+        //console.log(data2.length)
+        
+        //console.log(JSON.parse(data1))
+        //console.log(data)
+        //for(let i=0;i<data1.length;i++){
+         // console.log(data1[i])
+        
+        
+        //}
+          socket.emit('mouse', data)
+        
+        }
+        
+        let clearm=document.getElementById('dd')
+        clearm.addEventListener('click',function(){
+          localStorage.clear()
+        })
+        
+        
+        
+        //function draw(){
+         
+        
+          
+        //}
+        
+        //-------------------------------------ourscreeen-----------------------------------------------------
+        
+         //remotePeerId = document.getElementById("peerID").value;
+                //document.getElementById('show-peer').innerHTML = "connecting" + remotePeerId;
+         
+         //callScreen(remotePeerid)
+        
+                  function callScreen(id) {
+                navigator.mediaDevices.getDisplayMedia({
+                  video: {MediaSource:"screen"},
+                  audio: true
+                }).then((stream) => {
+                  myStream = stream
+                  addscreenvideo(stream)
+                  let call = peer.call(id, stream)
+                  call.on('stream', function (remotestream) {
+                    addremotevideo(remotestream)
+                })
+                })
+              }
+         
+              function addscreenvideo(stream) {
+                let video = document.createElement("video")
+                console.log("sadfffffffffffffffffffffffffffffffffffffsagfafdsasdffsdfdsa")
+                video.classList.add("video")
+                video.srcObject = stream
+                video.play()
+                document.getElementById('screenvideo').append(video)
+              } 
  </script>
 
 

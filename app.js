@@ -74,7 +74,7 @@ var http=require("http").createServer(app)
 var io=require("socket.io")(http, {
     cors: {
    origin: "https://neweducationworld.herokuapp.com",
-   //  origin: "http://localhost:8700",
+    //origin: "http://localhost:8700",
       credentials: true
     }
   })
@@ -2672,21 +2672,21 @@ newdatan.forEach(function(elem,index){
                 res.render("room.ejs",{username:req.session.username})
             })
 
-
-
-
-
-
-
             app.post("/enterchat",function(req,res){
                 res.render('startchat.ejs',{username:req.body.username,roomid:req.body.roomid})   
             
             })
 
 
+
+
+            const rooms={}
+
+            const botName = 'ChatCord Bot';
+            
             let room;
             io.on("connection",function(socket){
-               // console.log(socket.id)
+               console.log("kjhgkjgjkhgkjgkjhg")
                socket.on('join-room',function(roomid,cb){
                 socket.join(roomid)
                 ///cb(`joined ${room}`)
@@ -2694,8 +2694,122 @@ newdatan.forEach(function(elem,index){
 
                 io.to(room).emit('new_message',`${cb} has joined`)
             })
-                socket.on("message",function(roomid,username,chat,fileinfo){
 
+            //------------------------------------------video chat-----------------------------------------
+            socket.on("room",function(roomi){
+                console.log("thefdsssssssssssss")
+                socket.join(roomi)
+                })
+
+
+
+                socket.on('user joined',function(data){
+                    //console.log("My new peer is "+data.id)
+                    //console.log(id)
+                   // if(rooms[data.room]){
+                     // rooms[data.room].push(data.id)
+                  
+                   // }
+                   // else{
+                      rooms[data.room]=data.id
+                    //}
+                    console.log(rooms)
+                  })
+
+                  socket.on('joinRoom', ({ username, room }) => {
+                    const user = userJoin(socket.id, username, room);
+                
+                   // socket.join(user.room);
+                    //import id from './public/js/main'
+                    //console.log(id)
+                    //const f=require('./public/js/main')
+                    //console.log(f)
+                
+                
+                
+                    socket.emit('message', formatMessage(botName, 'Welcome to Mycoaching!'));
+                
+                
+                    socket.broadcast
+                    .to(user.room)
+                    .emit(
+                      'message',
+                      formatMessage(botName, `${user.username} has joined the chat`)
+                    );
+                    io.to(user.room).emit('roomUsers', {
+                      room: user.room });
+                   })
+                
+                
+                   socket.on("peerid",function(id,room){
+                    console.log(id)
+                    console.log("sdafffffffffffffffffffffffffffffffffffffffff"+room)
+                  
+                    io.to(room).emit("mypeerid",id,room)
+                  })
+                
+                  socket.on('chatMessage', msg => {
+                    const user = getCurrentUser(socket.id);
+                console.log("myyyyyyyy")
+                    io.to(user.room).emit('message', formatMessage(user.username, msg));
+                  });
+
+                  socket.on('disconnect', () => {
+                    const user = userLeave(socket.id);
+                
+                    if (user) {
+                      io.to(user.room).emit(
+                        'message',
+                        formatMessage(botName, `${user.username} has left the chat`)
+                      );
+                
+                      // Send users and room info
+                      io.to(user.room).emit('roomUsers', {
+                        room: user.room,
+                        users: getRoomUsers(user.room)
+                      });
+                    }
+                  });
+                  socket.on('yourstream',function(event,mroom,id){
+                    console.log('this isssssssssssssssclick' +" "+event,mroom)
+                      io.to(mroom).emit("allstream",event,id)
+                    })
+                    
+                    
+                    
+                    
+                          socket.on('chat', message => {
+                           io.emit('chat',message)
+                          })
+                    
+                    
+                          
+                          socket.on("refresh",()=>{
+                            console.log("fgzagf")
+                            
+                            io.emit("pagerefresh");
+                               
+                               
+                            })
+                    
+                            socket.on('screeningdata',function(data){
+                                io.to(data.room).emit('screening',data.screenid)
+                              })
+                      
+                            socket.on('mouse', (data) => socket.broadcast.emit('mouse', data))
+                      
+                           // socket.on('disconnect', () => console.log('Client has disconnected'))
+                           
+                            socket.on('answer', ({x,y, input}) => {
+                              console.log(x,y)
+                           io.emit('answer1',({x,y,input}))
+                           })
+                           io.emit('reload');       
+                  
+//------------------------------------------------------------------------------------------------------
+
+                socket.on("message",function(roomid,username,chat,fileinfo){
+console.log("file is emitted")
                     if(fileinfo!=""){
                         let buff = new Buffer.from(fileinfo);
                         let base64data = buff.toString('base64');
@@ -2703,7 +2817,7 @@ newdatan.forEach(function(elem,index){
                     }
                     else{
 
-
+console.log("no file is emitted")
                         io.emit('newdata',username,chat,fileinfo)
                     }
 
@@ -2711,108 +2825,38 @@ newdatan.forEach(function(elem,index){
 
                    
                     
-                })
+              
 //------------------------------------video chat------------------------------------------------------------
-const botName = 'ChatCord Bot';
-
-
-socket.on('joinRoom', ({ username, room }) => {
-    const user = userJoin(socket.id, username, room);
-
-    socket.join(user.room);
-    //import id from './public/js/main'
-    //console.log(id)
-    //const f=require('./public/js/main')
-    //console.log(f)
 
 
 
-    socket.emit('message', formatMessage(botName, 'Welcome to Mycoaching!'));
-
-
-    socket.broadcast
-    .to(user.room)
-    .emit(
-      'message',
-      formatMessage(botName, `${user.username} has joined the chat`)
-    );
-    io.to(user.room).emit('roomUsers', {
-      room: user.room });
-   })
-
-
-   socket.on("peerid",function(id,room){
-    console.log(id)
-    console.log("sdafffffffffffffffffffffffffffffffffffffffff"+room)
-  
-    io.to(room).emit("mypeerid",id,room)
-  })
 
 
 
-   socket.on('chatMessage', msg => {
-    const user = getCurrentUser(socket.id);
+   
 
-    io.to(user.room).emit('message', formatMessage(user.username, msg));
-  });
+
+   
     //socket.broadcast.to(roomId).emit('user-connected', id)
 
    // socket.on('disconnect', () => {
       //console.log("gggg")
      // socket.broadcast.to(roomId).emit('user-disconnected', id)
 
-     socket.on('disconnect', () => {
-      const user = userLeave(socket.id);
-  
-      if (user) {
-        io.to(user.room).emit(
-          'message',
-          formatMessage(botName, `${user.username} has left the chat`)
-        );
-  
-        // Send users and room info
-        io.to(user.room).emit('roomUsers', {
-          room: user.room,
-          users: getRoomUsers(user.room)
-        });
-      }
-    });
-
-socket.on('yourstream',function(event,mroom,id){
-console.log('this isssssssssssssssclick' +" "+event,mroom)
-  io.to(mroom).emit("allstream",event,id)
-})
+    
 
 
-
-
-      socket.on('chat', message => {
-       io.emit('chat',message)
-      })
-
-
+        // socket.on('shar',function(){
+        //   console.log("this is the event")
+        //   io.emit("changesize")
+        // })
       
-      socket.on("refresh",()=>{
-        console.log("fgzagf")
-        
-        io.emit("pagerefresh");
-           
-           
-        })
-
-      socket.on('mouse', (data) => socket.broadcast.emit('mouse', data))
-
-     // socket.on('disconnect', () => console.log('Client has disconnected'))
+   
      
-      socket.on('answer', ({x,y, input}) => {
-        console.log(x,y)
-     io.emit('answer1',({x,y,input}))
-     })
-
-     io.emit('reload');
-     
-                     
-            })
+   
+  })
+  
+})
 
 //-------------------------------------------------------------------------------------------------------
 
@@ -2824,7 +2868,7 @@ console.log('this isssssssssssssssclick' +" "+event,mroom)
                 })
     
             app.post("/entervideochat",function(req,res){
-            
+         
                 res.render('chat.html',{user:req.body.username,room:req.body.room});
                 })
     
