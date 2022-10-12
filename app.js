@@ -2337,6 +2337,12 @@ app.get("/getallcontent",function(req,res){
 })
 
 
+app.get("/Getallcontent",function(req,res){
+
+    res.render("Getmycontents.ejs",{username:req.session.username})
+})
+
+
   app.post("/getallcontent",function(req,res){
 
 
