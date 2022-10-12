@@ -33,28 +33,13 @@ const {
   } = require('./utils/users');
   const formatMessage = require('./utils/messeges');
 
-  //app.use(bodyParser.json())
-//var cookieParser = require('cookie-parser');
-//
-//const { API_PORT } = process.env;
-//const port = process.env.API_PORT;
-//const ejs = require("hbs")
+  
 const formidable=require('formidable')
-//var {getVideoDuration}=require('get-video-duration')
 const {v4:uuidV4}=require('uuid');
-//var webshot=require("webshot")
 
-
-
-// const server = require('http').Server(app)
-// const io = require('socket.io')(server)
 
 const url = require('url');
-//var bodyParser = require('body-parser')
 
-//app.use(express.json())
-//app.use(express.urlencoded())
-//var Parser = require('node-html-parser');
 
 const connection = require('./index')
 const fs = require('fs')
@@ -64,11 +49,7 @@ const pathset = path.join(__dirname, "/Templates/partials")
 const setpath = path.join(__dirname, "/Templates/views")
 hbs.registerPartials(pathset)
 
-//var router = express.Router()
-//app.use(express.urlencoded({ extended: false }))
-//app.use(bodyParser());
 
-//var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var http=require("http").createServer(app)
 
 var io=require("socket.io")(http, {
@@ -222,24 +203,10 @@ app.post('/login',newmiddle,newmiddle1, (req, res) => {
   }
 
   
-   // console.log(req.session.username)
-    ///res.redirect('/')
-    // connection.query("select * from usercomments", function (err, userdata, fields) {
-    //     if (err) { throw (err) }
-    //    // data = JSON.parse(userdata)
-    //     console.log(userdata)
-    // res.render("index.ejs",{userdata:userdata,username:req.session.username})
-   
-
-//})
-
+ 
 
 })
 app.get('/Mysecrets', (req, res) => {
-
-    
-       // res.render("createquiz.hbs")
-    
 
     if(req.session.username){
         connection.query('select * from quiztable', function (err, userdata, fields) {
@@ -255,10 +222,29 @@ app.get('/Mysecrets', (req, res) => {
             "status":"You are not loggedin.Please login to access content"
         })
     }
-        //console.log(req.session.username)
-        //console.log(req.query.Age)
+       
    
 })
+
+
+
+app.get('/secrets', (req, res) => {
+
+   
+        connection.query('select * from quiztable', function (err, userdata, fields) {
+            if (err) { throw (err) }
+            data = JSON.stringify(userdata)
+            res.render("newlistoftests.ejs",{username:req.session.username,quizdata:userdata})
+           
+           
+})
+})
+
+
+
+
+
+
 
 
 app.get('/Explaination', (req, res) => {
@@ -2672,6 +2658,11 @@ newdatan.forEach(function(elem,index){
                 res.render("room.ejs",{username:req.session.username})
             })
 
+            app.get("/gchat",function(req,res){
+
+                res.render("room.ejs",{username:req.session.username})
+            })
+
             app.post("/enterchat",function(req,res){
                 res.render('startchat.ejs',{username:req.body.username,roomid:req.body.roomid})   
             
@@ -2686,7 +2677,6 @@ newdatan.forEach(function(elem,index){
             
             let room;
             io.on("connection",function(socket){
-               console.log("kjhgkjgjkhgkjgkjhg")
                socket.on('join-room',function(roomid,cb){
                 socket.join(roomid)
                 ///cb(`joined ${room}`)
@@ -2697,7 +2687,6 @@ newdatan.forEach(function(elem,index){
 
             //------------------------------------------video chat-----------------------------------------
             socket.on("room",function(roomi){
-                console.log("thefdsssssssssssss")
                 socket.join(roomi)
                 })
 
@@ -2742,8 +2731,7 @@ newdatan.forEach(function(elem,index){
                 
                 
                    socket.on("peerid",function(id,room){
-                    console.log(id)
-                    console.log("sdafffffffffffffffffffffffffffffffffffffffff"+room)
+                   
                   
                     io.to(room).emit("mypeerid",id,room)
                   })
@@ -2770,6 +2758,9 @@ newdatan.forEach(function(elem,index){
                       });
                     }
                   });
+
+
+
                   socket.on('yourstream',function(event,mroom,id){
                     console.log('this isssssssssssssssclick' +" "+event,mroom)
                       io.to(mroom).emit("allstream",event,id)
