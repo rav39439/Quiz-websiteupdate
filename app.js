@@ -2337,7 +2337,7 @@ app.get("/getallcontent",function(req,res){
 })
 
 
-app.get("/Getallcontent",function(req,res){
+app.get("/Getallcontents",function(req,res){
 
     res.render("Getmycontents.ejs",{username:req.session.username})
 })
@@ -2349,13 +2349,19 @@ app.get("/Getallcontent",function(req,res){
     var mydat="select * from uploadtab";
     connection.query(mydat,function(err,uploadedcontent,fields){
 
-
+let b=[]
         if(err){
             throw(err)
         }
         else{
-            console.log(uploadedcontent)
-            res.render("getallcontent.ejs",{data:uploadedcontent,content:req.body.content})
+console.log(req.body.content)
+            uploadedcontent.map(function(elem){
+                if(elem.content==req.body.content){
+                    b.push(elem)
+                }
+            })
+            console.log(b)
+            res.render("getallcontent.ejs",{data:b,content:req.body.content})
         }
     })
   })  
