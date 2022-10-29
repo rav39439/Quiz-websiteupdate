@@ -3,25 +3,20 @@ const express = require('express')
 const crypto=require('crypto')
 const jwt=require('jsonwebtoken')
 const nodemailer=require('nodemailer')
-//const { v4: uuidV4 } = require('uuid')
 const Qs = require('query-string');
-//const nodemailer=require('./public/')
 const app = express()
 const { DATABASE } = process.env;
 const { PASSWORD } = process.env;
 const { KEYUSER } = process.env;
 const { KEYHOST } = process.env;
-//const PORT = process.env.PORT;
 const date = require('date-and-time')
 const sendgridtransport=require('nodemailer-sendgrid-transport')
 const path = require("path")
 const hbs = require("hbs")
 require('dotenv').config()
 const bcrypt = require('bcryptjs');
-//const { urlencoded } = require('body-parser')
 var bodyParser=require("body-parser")
 app.use(bodyParser.urlencoded())
-//app.use(bodyParser.json())
 
 app.engine('html', require('ejs').renderFile);
 
@@ -136,7 +131,7 @@ app.get('/', function (req, res) {
     res.render("index.ejs",{userdata:userdata,username:req.session.username})
 
 })
-console.log(req.session.username)
+//console.log(req.session.username)
 
 })
 
