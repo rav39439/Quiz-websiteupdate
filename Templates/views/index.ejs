@@ -22,10 +22,6 @@
 <body>
 
   <%- include('../partials/heading.hbs') %>
-
-
-    
-
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
@@ -48,27 +44,8 @@
   </a> 
 </div>
 
-
-
-    
-
-<% userdata.forEach(function(elem){ %>
-  <div class="media mt-5 border bg-light" style="display:inline-flex;margin-bottom:20px;margin-left:20px;width:600px;height:200px;overflow-y: scroll;">
-    <img class="align-self-start mr-3" src="https://images.unsplash.com/photo-1523287562758-66c7fc58967f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8c3VjY2Vzc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60" style="height:40px;width:40px" alt="Generic placeholder image">
-    <div class="media-body mb-5" style="margin-left:10px;">
-      <h5 class="mt-0"><%=elem.username%></h5>
-      <p><%=elem.usercomment%></p>
-    </div>
-  </div>
-  <br>
-  <%})%>
-
-
   <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;font-size:40px">Leave your comment here</h1>
-
 <form action="/submitcomment" method="POST"id="myform1">
-  
-
 
  <div class="form-group">
     <label for="exampleFormControlTextarea1">Enter your comment</label>
@@ -82,57 +59,29 @@
   <div id="name"style="display:none"><%=username%></div>
 
   <script>
-//if(document.getElementById("name")){
 
   let f= document.getElementById("name").innerText
-//}
  if(typeof(f)!='undefined'){
    document.getElementById("myname").innerText=f
 }
 else{
   document.getElementById("myname").innerText="Anonymous"
-
  }
 
-$(document).ready(function () {
-    
+$(document).ready(function () {   
     $("#myform1").on("submit",function(e){
  e.preventDefault()
- 
   var usercomment= $("#usercomment").val()
   var username= $("#username").val()
-
-//
 $.ajax({
         type: "POST",
         url: '/submitcomment',
         data: {usercomment:usercomment,username:username},
         success: function(response)
         {
-         // alert(response.message)
-
-
           location.reload()
-// let html=""
-// html+='<div>'
-//   html+=`<img src=${response.image} alt="">`
-//   html+=response.usercomment;
-
-// html+='</div>'
-
-// $("#usercomment").html(html)
-            // user is logged in successfully in the back-end
-            // let's redirect
-        
-            
-       
-        
-
-    
        }
-   });
-   //return false;
-   
+   });   
  });
 });
 

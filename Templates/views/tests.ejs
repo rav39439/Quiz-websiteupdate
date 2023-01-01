@@ -81,28 +81,12 @@
 
   font-size:60px;
 }
-
  }
-
-
-
-
-
-
-
-
-
 
 
     </style>
 </head>
-
-<% if(data.isadmin){ %> 
 <%- include('../partials/heading1.hbs') %>
-<% } else {%> 
-  <%- include('../partials/heading.hbs') %>
-
-  <% } %> 
 <body>
   <h1 id="#mylogin">Free Quizzes</h1>
   <div id="name"style="display:none"><%=username%></div>
@@ -121,7 +105,8 @@
           <h5 class="card-title">Based on <%=elem.quizname%> </h5>
 
           <p class="card-text">   
-            Try to solve as many as possible </p>
+            Some quick example text to build on the card title and make up the 
+            bulk of the card's content.</p>
 
             <input readonly id="name"name="myquiz" type="hidden" value="<%=elem.quizname%>">
           <input readonly type="hidden" name="quiz"id="quiz" value="<%=elem.examname%>"> 

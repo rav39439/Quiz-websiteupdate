@@ -108,9 +108,15 @@
 
   <div class="form-group">
 
-    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal"  id="submitform"type="button"onclick="showdialog(this)">
+    <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#myModal"  id="submitform"type="button"onclick="showdialog(this)">
         Upload questionimage
-    </button>
+    </button> -->
+
+    Upload questions Image <input type="file" id="photo3" />
+    <button type="button" onclick="uploadImage3()">Upload Solution image</button>
+
+
+
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the integer answer 1 to 10 </label>
@@ -129,9 +135,13 @@
 
 <div class="form-group">
 
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal2"  id="submitform2"type="button"onclick="showdialog2(this)">
+                    <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#myModal2"  id="submitform2"type="button"onclick="showdialog2(this)">
                         Upload passageimage
-                    </button>
+                    </button> -->
+
+                    Upload passage Image <input type="file" id="photo2" />
+                    <button type="button"onclick="uploadImage2()">Upload Solution image</button>
+                
                 </div>
 
   
@@ -173,19 +183,41 @@
   </div>
 <div class="form-group">
 
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal1"  id="submitform1"type="button"onclick="showdialog1(this)">
+                    <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#myModal1"  id="submitform1"type="button"onclick="showdialog1(this)">
                         Upload solutionimage
-                    </button>
+                    </button> -->
+
+                    Upload solutions Image <input type="file" id="photo1" />
+                    <button type="button" onclick="uploadImage1()">Upload Solution image</button>
+                    
+                  </div>  
+                  
+              
+              
+                </div>
+
                 </div>
 
 
 
   <div class="form-group">
 
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal3"  id="submitform3"type="button"onclick="showdialogm(this)">
+                    <!-- <button class="btn btn-primary" data-toggle="modal" data-target="#myModal3"  id="submitform3"type="button"onclick="showdialogm(this)">
                         Upload question accompanigying image
-                    </button>
+                    </button> -->
+
+                  </div>  
+                  
+                  Upload Question accompanying image <input type="file" id="photo" />
+                  <button type="button" onclick="uploadImage()">Upload Question accompanying image</button>
+              
                 </div>
+
+
+                </div>
+
+
+
   <div class="form-group">
     <label for="exampleFormControlSelect1">question type</label>
 
@@ -211,12 +243,9 @@
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter the time for the test</label>
-    <% if(typeof(mytime)!='undefined'){%>
-
-    <input type="number" class="form-control" id="mytime"  aria-describedby="emailHelp" placeholder="Enter totaltime" name="mytime"value=<%=mytime%>>
-    <%}else{%>
+  
       <input type="number" class="form-control" id="mytime"  aria-describedby="emailHelp" placeholder="Enter totaltime" name="mytime">
-      <%}%>
+      
   </div>
   <div class="form-group">
     <label for="exampleInputEmail1">Enter Before time</label>
@@ -360,6 +389,10 @@
   </div>
 </div>
 
+
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+
 <script>
 
 //------------------------------------------------------------------------------------------------
@@ -368,6 +401,7 @@ function showdialog(data){
     $("#myModal").modal("show")
 
 }
+
 function showdialog1(data){
    let myid=data.id
     $("#myModal1").modal("show")
@@ -386,10 +420,7 @@ function showdialogm(data){
 
 
 
-//let Mysolutionsimg=""
-//let myfiles=""
-//let myquestionimg=""
-//let passageimg=""
+
 $("#myform").on("submit",function(e){  
   
   e.preventDefault()
@@ -429,20 +460,21 @@ $("#myform").on("submit",function(e){
     
    };
     
-    ///console.log(myquestionimg)
-    
-  //alert(myquestionimg)
+   
         $.ajax({
             url:"/postmultioptions",
             method:"POST",
             data:formData,
             success:function(response){
               
-              $("#file").val('');
+              $("#photo1").val('');
+              $("#photo2").val('');
+              $("#photo3").val('');
+              $("#photo").val('');
              imagePath=""
              imagePath1=""
              imagePath2=""
-             
+             imagePath3=""
              alert(response.message)
              
             }
@@ -458,121 +490,395 @@ $("#myform").on("submit",function(e){
 
 
 
-//-------------------------------------------------------------------------------------------------
+//--------------------------------------using local space-----------------------------------------------------------
 
-var imagePath=""
+// var imagePath=""
 
-$("#form-upload").on("submit",function(e){
+// $("#form-upload").on("submit",function(e){
   
-e.preventDefault()
-alert("sadfg")
-//var myform=new FormData(this)
-//console.log(myform.value)
-//alert(myform)
-$.ajax({
-  url: "/do-uploadprofileimage",
-  type: "POST",
-  data: new FormData(this),
-  contentType: false,
-  cache:false,
-  processData: false,
-  success:function(response){
+// e.preventDefault()
+
+// $.ajax({
+//   url: "/do-uploadprofileimage",
+//   type: "POST",
+//   data: new FormData(this),
+//   contentType: false,
+//   cache:false,
+//   processData: false,
+//   success:function(response){
    
- alert(response)
+//  alert(response)
   
-    imagePath=response;
-        console.log(imagePath)
-    //$("#myModal").modal("hide")
-  }
-})
+//     imagePath=response;
+//         console.log(imagePath)
+//   }
+// })
 
-})
+// })
 
-var imagePath1=""
+// var imagePath1=""
 
-$("#form-upload1").on("submit",function(e){
+// $("#form-upload1").on("submit",function(e){
   
-e.preventDefault()
-alert("sadfg")
-//var myform=new FormData(this)
-//console.log(myform.value)
-//alert(myform)
-$.ajax({
-  url: "/do-uploadprofileimage1",
-  type: "POST",
-  data: new FormData(this),
-  contentType: false,
-  cache:false,
-  processData: false,
-  success:function(response){
+// e.preventDefault()
+
+// $.ajax({
+//   url: "/do-uploadprofileimage1",
+//   type: "POST",
+//   data: new FormData(this),
+//   contentType: false,
+//   cache:false,
+//   processData: false,
+//   success:function(response){
    
- alert(response)
+//  alert(response)
   
-    imagePath1=response;
+//     imagePath1=response;
         
-    ///$("#myModal1").modal("hide")
-  }
-})
+//   }
+// })
 
-})
+// })
 
-var imagePath2=""
+// var imagePath2=""
 
-$("#form-upload2").on("submit",function(e){
+// $("#form-upload2").on("submit",function(e){
   
-e.preventDefault()
-alert("sadfg")
-//var myform=new FormData(this)
-//console.log(myform.value)
-//alert(myform)
-$.ajax({
-  url: "/do-uploadprofileimage2",
-  type: "POST",
-  data: new FormData(this),
-  contentType: false,
-  cache:false,
-  processData: false,
-  success:function(response){
+// e.preventDefault()
+// alert("sadfg")
+
+// $.ajax({
+//   url: "/do-uploadprofileimage2",
+//   type: "POST",
+//   data: new FormData(this),
+//   contentType: false,
+//   cache:false,
+//   processData: false,
+//   success:function(response){
    
- // alert(response)
   
-    imagePath2=response;
+//     imagePath2=response;
         
-   //$("#myModal2").modal("hide")
-  }
-})
-
-})
-
-var imagePath3=""
-
-$("#form-upload3").on("submit",function(e){
   
-e.preventDefault()
-alert("sadfg")
-//var myform=new FormData(this)
-//console.log(myform.value)
-//alert(myform)
-$.ajax({
-  url: "/do-uploadprofileimage3",
-  type: "POST",
-  data: new FormData(this),
-  contentType: false,
-  cache:false,
-  processData: false,
-  success:function(response){
+//   }
+// })
+
+// })
+
+// var imagePath3=""
+
+// $("#form-upload3").on("submit",function(e){
+  
+// e.preventDefault()
+
+// $.ajax({
+//   url: "/do-uploadprofileimage3",
+//   type: "POST",
+//   data: new FormData(this),
+//   contentType: false,
+//   cache:false,
+//   processData: false,
+//   success:function(response){
    
-alert("uploaded")
+// alert("uploaded")
   
-    imagePath3=response;
+//     imagePath3=response;
         
-    //$("#myModal3").modal("hide")
-  }
-})
+//     //$("#myModal3").modal("hide")
+//   }
+// })
 
-})
+// })
 
 
+
+//-------------------------------------------------------------------------------------------
+//-----------------------------Using firebase to store images and questions----------------------///
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAZ9x_QbhCfY9aEsqxEiYhWtfIRNGl_qeo",
+    authDomain: "mynewproject-ae49a.firebaseapp.com",
+    projectId: "mynewproject-ae49a",
+    storageBucket: "mynewproject-ae49a.appspot.com",
+    messagingSenderId: "939005557600",
+    appId: "1:939005557600:web:ee766070db4bd2dadfbc05",
+    measurementId: "G-YFKTT151SN"
+  };
+
+firebase.initializeApp(firebaseConfig);
+
+
+    async function uploadImage() {
+     
+      const ref = firebase.storage().ref();
+      const file = document.querySelector("#photo").files[0];
+      const name = +new Date() + "-" + file.name;
+      const metadata = {
+        contentType: file.type
+      };
+         try{
+      await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+            newurl=url
+
+            callback(url)
+          
+         
+        })
+    }
+    catch(err){
+        console.log(err)
+    }
+
+
+
+   function callback(url){
+       console.log(url)
+       newcallback(url)
+   }
+    }
+    
+
+
+    var imagePath3=""
+
+function newcallback(url){
+
+    
+    
+    let newurl=url;
+
+    var formData = {
+    
+     uploadimg:newurl,
+   
+   };
+
+
+
+
+   $.ajax({
+
+          url: "/do-uploadprofileimage3",
+             method:"POST",
+            data:formData,
+            success:function(response){
+            
+                alert(response.message)
+                imagePath3=response;
+
+             
+             
+            }
+        })
+
+
+}
+
+
+
+    async function uploadImage1() {
+     
+      const ref = firebase.storage().ref();
+      const file = document.querySelector("#photo1").files[0];
+      const name = +new Date() + "-" + file.name;
+      const metadata = {
+        contentType: file.type
+      };
+         try{
+      await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+            newurl=url
+
+            callback1(url)
+          
+         
+        })
+    }
+    catch(err){
+        console.log(err)
+    }
+
+
+
+   function callback1(url){
+       console.log(url)
+       newcallback1(url)
+   }
+    }
+    
+
+
+    var imagePath1=""
+
+function newcallback1(url){
+
+    
+    
+    let newurl=url;
+
+    var formData = {
+    
+     uploadimg:newurl,
+   
+   };
+
+
+
+
+   $.ajax({
+
+          url: "/do-uploadprofileimage3",
+             method:"POST",
+            data:formData,
+            success:function(response){
+            
+                alert(response.message)
+                imagePath1=response;
+
+             
+             
+            }
+        })
+
+
+}
+    
+    async function uploadImage2() {
+     
+      const ref = firebase.storage().ref();
+      const file = document.querySelector("#photo2").files[0];
+      const name = +new Date() + "-" + file.name;
+      const metadata = {
+        contentType: file.type
+      };
+         try{
+      await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+            newurl=url
+
+            callback2(url)
+          
+         
+        })
+    }
+    catch(err){
+        console.log(err)
+    }
+
+
+
+   function callback2(url){
+       console.log(url)
+       newcallback2(url)
+   }
+    }
+    
+
+
+    var imagePath2=""
+
+function newcallback2(url){
+
+    
+    
+    let newurl=url;
+
+    var formData = {
+    
+     uploadimg:newurl,
+   
+   };
+
+
+
+
+   $.ajax({
+
+          url: "/do-uploadprofileimage3",
+             method:"POST",
+            data:formData,
+            success:function(response){
+            
+                alert(response.message)
+                imagePath2=response;
+
+             
+             
+            }
+        })
+
+
+}
+    
+    async function uploadImage3() {
+     
+      const ref = firebase.storage().ref();
+      const file = document.querySelector("#photo3").files[0];
+      const name = +new Date() + "-" + file.name;
+      const metadata = {
+        contentType: file.type
+      };
+         try{
+      await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+            newurl=url
+
+            callback3(url)
+          
+         
+        })
+    }
+    catch(err){
+        console.log(err)
+    }
+
+
+
+   function callback3(url){
+       console.log(url)
+       newcallback3(url)
+   }
+    }
+    
+
+
+    var imagePath=""
+
+function newcallback3(url){
+
+    
+    
+    let newurl=url;
+
+    var formData = {
+    
+     uploadimg:newurl,
+   
+   };
+
+
+
+
+   $.ajax({
+
+          url: "/do-uploadprofileimage3",
+             method:"POST",
+            data:formData,
+            success:function(response){
+            
+                alert(response.message)
+                imagePath=response;
+
+             
+             
+            }
+        })
+
+
+}
+    
 
 
 

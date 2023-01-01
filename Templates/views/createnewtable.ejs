@@ -62,13 +62,20 @@ input[type="number"]::placeholder {
 
 
     <h2> Full quiz</h2>
+
+
+
     <form action="/createnewtable" method="POST">
 
+
+      <label for="exampleInputPassword1" style="margin-top:10px">Enter the Examname</label>
+      <input type="text" class="form-control" id="exampleInputPassword1"name="exam" placeholder="text" required>
+  <div class="form-check">
+    
  <label for="exampleInputPassword1" style="margin-top:10px">Enter the quizname</label>
     <input type="text" class="form-control" id="exampleInputPassword1"name="quizname" placeholder="text" required>
 
-
-<div class="form-check">
+   
   <input class="form-check-input" type="checkbox" value="public" name="status"id="check"onclick="myFunction1()">
   <label class="form-check-label" for="check">
     Public

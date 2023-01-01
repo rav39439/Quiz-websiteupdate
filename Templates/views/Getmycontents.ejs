@@ -123,12 +123,8 @@ width: 500px;
         <select class="form-control mt-2" id="content" name="content" >
             <% if(typeof(content)!='undefined') {%> 
                 <option value="<%=content%>"><%=content%> </option>
-
-           
-
             <% } %> 
             <option value="ssccgl">ssccgl </option>
-
             <option value="iitjee">iitjee</option>
             <option value="bankexams">bankexams</option>
             <option value="ssccglcontent">ssc formulas</option>
@@ -137,28 +133,15 @@ width: 500px;
            
           </select>
       </div>  
-
-      <button type="submit"class="btn btn-primary mt-2">click to see content</button>
-    
+      <button type="submit"class="btn btn-primary mt-2">click to see content</button>    
     </form>
-
 </div>
-
-
-
-
-
-<% if(typeof(data)!='undefined'){ %> 
-
- 
-   
+<% if(typeof(data)!='undefined'){ %>  
     <% data.forEach(function(elem,index){%>
       <div class="border bg-light new2">
         <% if(elem.content==content){ %> 
-
 <p><%=elem.topic%></p>
 <p><%=elem.content%></p>
-
 <% if(elem.data){ %>
 <% if(elem.status=='newpublic'){%>
 

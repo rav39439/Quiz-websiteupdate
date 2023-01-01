@@ -97,8 +97,6 @@
         </div>
         </div>
       </div>
-
-
       <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"aria-hidden="true">
         <div class="modal-dialog">
         <div class="modal-content">
@@ -109,24 +107,18 @@
                 <button type="button"class="close"data-dismiss="modal"aria-hidden="true">
                     x
                 </button>
-            </div>       
-           
+            </div>                  
             <div class="modal-body">
                 <form method="POST" action="" enctype="multipart/form-data" id="form-upload1">
                 <div class="form-group">
                     <input type="file" name="file" id="file1" class="form-control">
                 </div>
                 <input type="submit"class="btn btn-success" value="Upload">
-                </form>
-              
+                </form>             
             </div>
         </div>
         </div>
-    </div>
-
-
-
-    
+    </div>   
     <div class="border bg-light mt-5" style="margin-left:30px">
       <h1>Upload files to database</h1>
     <img src="" id="newimage" style="width:200px;height:200px;"><br>
@@ -141,8 +133,7 @@
         <option value="bankexams">bankexams</option>
         <option value="ssccglcontent">ssc formulas</option>
         <option value="iitjeecotent">iitjee formulas</option>
-        <option value="bankexams content">bankexams formulas</option>
-       
+        <option value="bankexams content">bankexams formulas</option>      
       </select>
     </div>     
     <div class="form-group">
@@ -150,17 +141,10 @@
       <select class="form-control" id="content2" name="content" style="width:200px;">
         <option value="newpublic">newpublic</option>
         <option value="publicfile">publicfile</option>
-
-
          </select>
     </div>     
     <button onclick="uploadImage()">Upload Image</button>
-
   </div>
-
-
-
-
 </body>
 
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
@@ -192,9 +176,7 @@ function showdialog1(data){
 $("#myform").on("submit",function(e){  
   
   e.preventDefault()
-     alert("ddd")
 
-    //var now = new Date();
 
        var formData = {
       details:$("#details").val(),
@@ -242,7 +224,6 @@ var imagePath=""
 $("#form-upload").on("submit",function(e){
   
 e.preventDefault()
-//alert("sadfg")
 
 $.ajax({
   url: "/do-uploadprofileimage5",
@@ -258,7 +239,6 @@ $.ajax({
     imagePath=response;
         console.log(imagePath)
         document.getElementById('file').value=""
-    //$("#myModal").modal("hide")
   }
 })
 
@@ -270,7 +250,6 @@ var filePath="";
 $("#form-upload1").on("submit",function(e){
   
 e.preventDefault()
-alert("dafgadfga")
 
 
 $.ajax({
@@ -290,7 +269,6 @@ $.ajax({
     $("#myModal1").modal("hide")
   }
 })
-//}
 })
 
 
@@ -360,7 +338,6 @@ const firebaseConfig = {
   };
 
 firebase.initializeApp(firebaseConfig);
-    console.log(firebase);
 
 
     async function uploadImage() {
@@ -371,68 +348,48 @@ firebase.initializeApp(firebaseConfig);
       const metadata = {
         contentType: file.type
       };
-     // function mydata(callback){
          try{
       await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
             newurl=url
 
             callback(url)
-            //localStorage.setItem("url",url)
-          //console.log(url);
+          
          
         })
     }
     catch(err){
         console.log(err)
     }
-
-   // }
-
    function callback(url){
        console.log(url)
        newcallback(url)
-     //newurl=url
    }
     }
     
 function newcallback(url){
 
+  
   let data= document.getElementById("infodata").value
   let data1= document.getElementById("content1").value
   let data2= document.getElementById("content2").value
-
-    
-    
-   // document.getElementById("newimage").src = url;
     let newurl=url;
-
     var formData = {
       details:data,
      content:data1,
      secretcode:"null",
      uniquecode:"null",
      status:data2,
-    
-  
      uploadimg:newurl,
      myfile:"",
-    
- 
-    
-    
    };
-
+   console.log(formData)
    $.ajax({
             url:"/uploadcontent",
             method:"POST",
             data:formData,
-            success:function(response){
-            
-                alert(response.message)
-              
-             
-             
+            success:function(response){          
+                alert(response.message)            
             }
         })
 
