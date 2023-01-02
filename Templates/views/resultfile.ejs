@@ -1072,17 +1072,17 @@
                         options[i].children[JSON.parse(Mydata[i].answercode)['answer3']].style.backgroundColor = "green"
 
                     }
-                    if (response.answers[i].answer1) {
+                    if (response.answers[i]?.answer1) {
 
                         a.push(response.answers[i].answer1)
                         options[i].children[response.answers[i].answer1].style.backgroundColor = "red"
                     }
-                    if (response.answers[i].answer2) {
+                    if (response.answers[i]?.answer2) {
 
                         a.push(response.answers[i].answer2)
                         options[i].children[response.answers[i].answer2].style.backgroundColor = "red"
                     }
-                    if (response.answers[i].answer3) {
+                    if (response.answers[i]?.answer3) {
 
                         a.push(response.answers[i].answer3)
                         options[i].children[response.answers[i].answer3].style.backgroundColor = "red"
@@ -1111,12 +1111,12 @@
 
                 //--------------------------------------------------------------------------------------------
                 //-----------------------------------integer type---------------------------------------
-                if (Mydata[i].type == "integertype") {
+                if (Mydata[i].type =="integertype") {
                     console.log("my integer ans is running")
                     console.log(response.answers[i])
                     console.log(Mydata[i].integerans)
                     document.getElementById("newinteger").value = response.answers[i];
-                    if (response.answers[i] == Mydata[i].integerans) {
+                    if (response.answers[i] == parseInt(Mydata[i].integerans)) {
                         if (typeof (Mydata[i].postivemarks)) {
                             m = m + parseInt(Mydata[i].postivemarks);
                         }

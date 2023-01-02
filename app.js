@@ -807,7 +807,7 @@ app.post("/newresultmulti",(req,res)=>{
 
 app.post("/postmultioptions", (req, res) => {
 
-
+console.log("here are the questions")
     console.log(req.body)
 
 
@@ -1418,7 +1418,7 @@ formData.parse(req,function(error,fields,files){
 
 app.post("/do-uploadprofileimage3",function(req,res){
   console.log("upload image is runing")
-
+res.send(req.body.uploadimg)
 })
 
 

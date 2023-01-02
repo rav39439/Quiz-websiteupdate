@@ -1035,10 +1035,10 @@ console.log(g)
                 //---------------------------Evaluation of integertype questions----------------------------
                 if (Mydata[i].type == "integertype") {
                     console.log("Integer evaluation is beggining")
-                    if (myquestions[i] == Mydata[i].integerans) {
+                    if (myquestions[i] == parseInt(Mydata[i].integerans)) {
                         if (typeof (Mydata[i].postivemarks) != 'undefined') {
                             console.log("Integer evaluation is running")
-                            pp = pp + parseInt(Mydata[i].postivemarks)
+                            pp = pp + parseInt(Mydata[i].positivemarks)
                             mymarks+=1
                             m = m + pp
                         }
