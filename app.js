@@ -751,6 +751,13 @@ console.log(req.body)
     // } 
      })
 
+var arrayRankTransform=arr=>{
+    const sorted=[...arr].sort((a,b)=>b.marks-a.marks)
+    return arr.map((x)=>sorted.indexOf(x)+1)
+}
+
+
+
 //middleware 
 app.post("/newresultmulti",(req,res)=>{
 
@@ -763,9 +770,44 @@ app.post("/newresultmulti",(req,res)=>{
             blog.collection("Quizzes").findOne({"quizname":req.body.myquiz}, function(error,quiz){
 
                let userresponses= quiz.quizattempters.find(elem=>elem.name==req.body.name)
-               console.log(userresponses)
 
-                res.render("resultfile.ejs",{usedata:JSON.stringify(quiz.quizquestions),name:req.body.name,mydata:quiz.quizattempters,responses:JSON.stringify(userresponses),quizname:req.body.myquiz})
+const arrayranked=quiz.quizattempters.sort((a,b)=>b.marks-a.marks)
+quiz.quizattempters.map((elem,index)=>{
+    console.log("ranks are equzal")
+    if(quiz.quizattempters[index]?.marks==quiz.quizattempters[index-1]?.marks){
+        quiz.quizattempters[index-1]?.rank==index
+        quiz.quizattempters[index]?.rank==index
+
+    }
+})
+
+// console.log("ranks are")
+
+
+// console.log(quiz.quizattempters)
+let allmarks=[]
+let studentranks=[]
+quiz.quizattempters.forEach((elem)=>{
+allmarks.push(elem.marks)
+})
+
+//console.log(marks)
+const arr = [50, 39, 39, 32, 31];
+const findRanks = (arr = []) => {
+   const { length } = arr;
+   let sortArray = arr.slice();
+   sortArray.sort((a,b) => b - a);
+   const result = [];
+   for(let i = 0; i < length; i++){
+      const j = sortArray.indexOf(arr[i])
+      result.push(j + 1);
+   }
+   return result;
+};
+studentranks=findRanks(allmarks)
+console.log(findRanks(allmarks));
+
+                res.render("resultfile.ejs",{usedata:JSON.stringify(quiz.quizquestions),name:req.body.name,mydata:quiz.quizattempters,responses:JSON.stringify(userresponses),quizname:req.body.myquiz,ranks:studentranks})
 
                     })
 
@@ -923,7 +965,6 @@ console.log(a)
 
      let json = json_arr;
         b[i]=json
-              // console.log(b[i])
 
             }
             else{
@@ -947,7 +988,8 @@ blog.collection("Quizzes").updateOne({
         "quizattempters":{
         name:req.body.studentname,
         answers:g,
-        marks:req.body.marks
+        marks:req.body.marks,
+        rank:""
 
         }
     }
@@ -1252,12 +1294,26 @@ app.post("/deletequiz",function(req,res){
 
 app.get("/getquizresult",function(req,res){
 
-    res.render("getquizresult.ejs",{username:req.session.username})
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+
+        blog.collection("Quizzes").find().sort({_id:1}).toArray(function(error,quizzes){
+
+
+            
+    res.render("getquizresult.ejs",{quizdata:quizzes})
+
+    })
 })
 
-app.post("/getquizresult",function(req,res){
+
+
+
+
 //------------------------------------sql operation--------------------------------------
-    // connection.query("select * from myresult ORDER BY marks DESC",function(err,data){
+  
+
+// connection.query("select * from myresult ORDER BY marks DESC",function(err,data){
 
     //     if(err){
 
@@ -1272,6 +1328,59 @@ app.post("/getquizresult",function(req,res){
 
     //-------------------------------------------------------------------------------------
 })
+
+
+app.post("/getquizresult",function(req,res){
+
+    console.log(req.body.quizname)
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+  
+        blog.collection("Quizzes").findOne({"quizname":req.body.quizname}, function(error,quiz){
+            res.render("newresultfile.ejs",{Mydata:JSON.stringify(quiz.quizquestions),quizname:req.body.quizname})
+
+    })
+    })
+    })
+
+app.get("/updatequiz",function(req,res){
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+
+        blog.collection("Quizzes").find().sort().toArray(function(error,quizzes){
+
+            
+    res.render("updatelist.ejs",{quizdata:quizzes,username:req.session.username,data:req.session})
+
+    })
+    })
+
+    
+
+})
+
+    app.post("/updatequiz",function(req,res){
+console.log(req.body.status)
+        MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+            var blog=client.db("blog")
+    
+        blog.collection("Quizzes").updateOne({
+            "quizname":req.body.myquiz
+        },{
+            $set:{
+                "status":req.body.status
+            }
+        },function(err,data){
+            res.json({
+                "message":"quiz result is public"
+            })
+        })
+        })
+
+    })
+
+
 
 //------------------------------------------------socket----------------------------------------
 
@@ -1318,12 +1427,17 @@ console.log(req.body.Mytable2)
               else if(parseInt(data.nsection)==3){
                 section1length=data.quizquestions[0].qsection
              section2length=data.quizquestions[section1length].qsection
+             console.log("these are the lengths")
+             console.log(section2length)
+             console.log(section1length)
+
+             console.log(data.quizquestions[section2length+section1length])
                 section3length=data.quizquestions[section2length].qsection
               }
               else if(parseInt(data.nsection)==2){
 
-             section1length=data.quizquestions[0].qsection
-             section2length=data.quizquestions[section1length].qsection
+             section1length=data.quizquestions[0]?.qsection
+             section2length=data.quizquestions[section1length]?.qsection
               }
               else{
 

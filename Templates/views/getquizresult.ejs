@@ -115,85 +115,35 @@ margin-top: 90px;
 
     </style>
 </head>
-<%- include('../partials/heading1.hbs') %>
+<%- include('../partials/heading.hbs') %>
 
 <body>
 
   <h1 id="mylogin">Get the results of quiz here</h1>
 
 <div  class="new1">
-
-
-  
-
-
-
 <form action="/getquizresult" method="POST">
-<label for="exampleInputPassword1" style="margin-top:10px">Enter the quizname</label>
-<input type="text" class="form-control"id="quizname"name="quizname" placeholder="text" required>
+<label for="exampleInputPassword1" style="margin-top:10px">Select your Quiz</label>
+<select class="form-select" aria-label="Default select example" name="quizname">
+  <% quizdata.forEach(function(elem){  %> 
+<% if(elem.status=="public") {%> 
+  <option value=<%=elem.quizname%> ><%=elem.quizname%> </option>
+<% } %> 
+  <% }) %>
+</select>
+
+<!-- <input type="text" class="form-control"id="quizname"name="quizname" placeholder="text" required> -->
 <button type="submit" class="btn-btn primary">submit to see result</button>
 </form>
 </div>
 
 
-
-
-
-</div >
-
-  <div class="new2">
-<table>
-
-    <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">quizname</th>
-            <th scope="col">name</th>
-            <th scope="col">marks</th>
-          </tr>
-        </thead>
-
-        <tbody>
-            <%if(typeof(mydata)!='undefined'){ %>
-            <% mydata.forEach(function(elem,index){%>
-              <%if(elem.quizname==quizname){%>
-            <tr>
-              <th scope="row"><%=elem.id%></th>
-              <th scope="row"><%=index+1%></th>
-              <td><%=elem.quizname%></td>
-              <td><%=elem.name%></td>
-              <td><%=elem.marks%></td>
-            </tr>
-            <%}%>
-            <%})%>
-       <%}%>
-        </tbody>
-
-
-
-</table>
-
-</div>
-
-
-
-
-
-<% if(typeof(username)!='undefined'){%>
-  <div id="name"style="display:none"><%=username%></div>
-
-<%}%>
-
-
-
-
-</div>
-</div>
-
     </body>
 
     <script>
+
+
+
 let f= document.getElementById("name").innerText
  if(f){
    document.getElementById("myname").innerText=f

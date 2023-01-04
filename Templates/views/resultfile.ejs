@@ -544,10 +544,10 @@
                                     <%=elem.name%>
                                 </th>
                                 <th scope="row">
-                                    <%=index+1%>
+                                    <%=ranks[index]%>
                                 </th>
                                 <%if (elem.name==name){%>
-                                    <td style="background-color: #004085;">
+                                    <td style="background-color: #a9b5c2;">
                                         <%=elem.name%>
                                     </td>
                                     <%} else { %>
@@ -961,9 +961,9 @@
                     }
 
 
-                    if (Mydata[i].myfiles) {
+                    if (Mydata[i].myfile) {
 
-                        img_tag = '<span class="ff">' + `<img src="${Mydata[i].myfiles}" alt="" id="ty2" style="width:200;height:100;">` + '</span>' + '<br>'
+                        img_tag = '<span class="ff">' + `<img src="${Mydata[i].myfile}" alt="" id="ty2" style="width:200;height:100;">` + '</span>' + '<br>'
                         //imgtag.innerHTML=img_tag
 
                     } else {
@@ -1175,6 +1175,8 @@
                 k.innerText = m
 
             }
+
+
 
 
 
