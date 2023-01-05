@@ -1415,34 +1415,31 @@ console.log(req.body.Mytable2)
               let section2length=0;
             let  section3length=0
               let section4length=0
-              console.log(data.nsection)
 
               if(parseInt(data.nsection)==4){
                  section1length=data.quizquestions[0].qsection
                  section2length=data.quizquestions[section1length].qsection
-                 section3length=data.quizquestions[section2length].qsection
-                 section4length=data.quizquestions[section3length].qsection
-          
+                 section3length=data.quizquestions[parseInt(section2length)+parseInt(section1length)].qsection
+                 section4length=data.quizquestions[parseInt(section2length)+parseInt(section1length)+parseInt(section3length)].qsection
+                 console.log(section4length)
+          console.log(parseInt(section2length)+parseInt(section1length)+parseInt(section3length))
               }
               else if(parseInt(data.nsection)==3){
                 section1length=data.quizquestions[0].qsection
              section2length=data.quizquestions[section1length].qsection
              console.log("these are the lengths")
-             console.log(section2length)
-             console.log(section1length)
-
-             console.log(data.quizquestions[section2length+section1length])
-                section3length=data.quizquestions[section2length].qsection
+            //console.log(parseInt(section2length)+parseInt(section1length))
+             console.log(data.quizquestions[14])
+                section3length=data.quizquestions[parseInt(section2length)+parseInt(section1length)].qsection
               }
-              else if(parseInt(data.nsection)==2){
 
+              else if(parseInt(data.nsection)==2){
              section1length=data.quizquestions[0]?.qsection
              section2length=data.quizquestions[section1length]?.qsection
               }
+
               else{
-
              section1length=data.quizquestions[0].qsection
-
               }
      
               res.render("readinfo3.ejs", { 
@@ -1491,13 +1488,12 @@ formData.parse(req,function(error,fields,files){
     var newPath="public/newimages/"+files.file.name;
     console.log(newPath)
     fs.copyFile(oldPath, newPath, function(err){
-       // res.render("admin/posts",{imagepath:newPath})
        res.send("/"+ newPath)
     })
+})    
 })
-      
 
-})
+
 app.post("/do-uploadprofileimage1",function(req,res){
     console.log("upload image is runing")
     var formData = new formidable.IncomingForm();
@@ -1509,8 +1505,7 @@ formData.parse(req,function(error,fields,files){
        // res.render("admin/posts",{imagepath:newPath})
        res.send("/"+ newPath)
     })
-})
-      
+})     
 })
 
 
@@ -1556,7 +1551,6 @@ formData.parse(req,function(error,fields,files){
 
 
 app.post("/do-uploadprofileimage5",function(req,res){
-  //  var formData = new formidable.IncomingForm();
   console.log("upload image is runing")
   var formData = new formidable.IncomingForm();
 formData.parse(req,function(error,fields,files){
@@ -1564,7 +1558,6 @@ formData.parse(req,function(error,fields,files){
   var newPath="public/uploadedimages/"+files.file.name;
   console.log(newPath)
   fs.copyFile(oldPath, newPath, function(err){
-     // res.render("admin/posts",{imagepath:newPath})
      res.send(files.file.name)
   })
 })

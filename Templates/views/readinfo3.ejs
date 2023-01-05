@@ -71,10 +71,10 @@ no marks for incorrect response.
 
 
           <h2>Section3</h2>
-          <h3><%=quiz.quizquestions[section3length]?.section%></h3>
+          <h3><%=quiz.quizquestions[parseInt(section1length)+parseInt(section2length)]?.section%></h3>
           <p> there are  <%=section3length%> questions in 3rd section</p>
-          <p>For each correct answer in this section you will get <%=quiz.quizquestions[section3length]?.postivemarks %> and for incorrect answer 
-            <%=quiz.quizquestions[section3length]?.negativemarks %> will be deducted
+          <p>For each correct answer in this section you will get <%=quiz.quizquestions[parseInt(section3length)+parseInt(section2length)]?.postivemarks %> and for incorrect answer 
+            <%=quiz.quizquestions[parseInt(section3length)+parseInt(section2length)]?.negativemarks %> will be deducted
           </p>        
           <% } %> 
 
@@ -83,10 +83,10 @@ no marks for incorrect response.
 
 
             <h2>Section4</h2>
-            <h3><%=quiz.quizquestions[section4length]?.section%></h3>
+            <h3><%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.section%></h3>
             <p> there are  <%=section4length%> questions in 4th section</p>
-            <p>For each correct answer in this section you will get <%=quiz.quizquestions[section4length]?.postivemarks %> and for incorrect answer
-              <%=quiz.quizquestions[section4length]?.negativemarks %> will be deducted
+            <p>For each correct answer in this section you will get <%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.postivemarks %> and for incorrect answer
+              <%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.negativemarks %> will be deducted
             </p>        
             <% } %> 
   

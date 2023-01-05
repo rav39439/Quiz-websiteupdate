@@ -583,7 +583,7 @@
         let counterLine;
         let widthValue = 0;
         let html1 = ``
-        let no1 = parseInt(Mydata[0].qsection, 10)
+        let no1 = parseInt(Mydata[0].qsection)
         function section1() {
             for (let i = 0; i <= Mydata[0].qsection - 1; i++) {
                 html1 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="changeoption(this.id)" style="height:40px;width:40px;">`
@@ -592,22 +592,32 @@
         }
 
         section1()
-        let no2 = no1;
-        let no3 = no1;
-        let no4 = no1;
-        if (Mydata[no1]) {
-            let no2 = parseInt(Mydata[no1].qsection, 10)
-        }
-        if (Mydata[no2 + no1]) {
-            let no3 = parseInt(Mydata[no2 + no1].qsection, 10)
-        }
-        if (Mydata[no1 + no2 + no3]) {
-            let no4 = parseInt(Mydata[no2 + no1 + no3].qsection, 10)
-        }
+        //let no2 = no1;
+     //  let no3 = no1;
+      // let no4 = no1;
+
+      //  if (Mydata[no1]) {
+            let no2 = parseInt(Mydata[no1].qsection)
+                                    console.log(no1)
+
+                        console.log("value of no2"+" "+no2+no1)
+
+        //}
+      //  if (Mydata[no2 + no1]) {
+
+            let no3 = parseInt(Mydata[no2 + no1].qsection)
+                                    console.log(no3)
+
+       // }
+    //    if (Mydata[no1 + no2 + no3]) {
+                                    console.log(Mydata[no2 + no1+no3].qsection)
+
+            let no4 = parseInt(Mydata[no2 + no1 + no3].qsection)
+      //  }
         let html2 = ``
         function section2() {
             if (Mydata[no1]) {
-                for (let i = no1; i <= (no1 + no2) - 1; i++) {
+                for (let i = parseInt(no1); i <= (parseInt(no1) + parseInt(no2))- 1; i++) {
                     html2 += `<input type="submit" value=${i + 1} id=${i} class="pots" onclick="changeoption(this.id)" style="height:40px;width:40px;">`
                 }
             }
