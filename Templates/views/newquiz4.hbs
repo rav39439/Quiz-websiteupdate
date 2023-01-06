@@ -451,6 +451,7 @@
             <section id="mysect" style="width: 100%;">
                 <div class="passage" id="passage" style="width:90%"></div>
                 <img src="" alt="" class="passimg" id="passimg">
+                <div class="messagetop"id="messagetop"></div>
                 <img src="" alt="" id="queimg">
                 <div class="que_text bg-light border " style="display:flex; width:100%">
                     <!-- Here I've inserted question from JavaScript -->
@@ -597,7 +598,7 @@
       // let no4 = no1;
 //---------------------------------------------------------------------------------------------
       //  if (Mydata[no1]) {
-            let no2 = parseInt(Mydata[no1].qsection)
+            let no2 = parseInt(Mydata[no1]?.qsection)
                                     console.log(no1)
 
                         console.log("value of no2"+" "+no2+no1)
@@ -605,16 +606,18 @@
         //}
       //  if (Mydata[no2 + no1]) {
 
-            let no3 = parseInt(Mydata[no2 + no1].qsection)
+            let no3 = parseInt(Mydata[no2 + no1]?.qsection)
                                     console.log(no3)
 
        // }
     //    if (Mydata[no1 + no2 + no3]) {
-                                    console.log(Mydata[no2 + no1+no3].qsection)
+                                   // console.log(Mydata[no2 + no1+no3]?.qsection)
 
-            let no4 = parseInt(Mydata[no2 + no1 + no3].qsection)
+            let no4 = parseInt(Mydata[no2 + no1 + no3]?.qsection)
       //  }
-
+      console.log("the ranges are")
+console.log(no1+no2+no3)
+console.log(no1+no2+no3+no4)
 
       //---------------------------------------------------------------------------
         let html2 = ``
@@ -739,7 +742,6 @@
                    // g = myanswers[que_numb - 1]
                    g=myanswers[que_count]
                     const option = option_list.children[0].querySelectorAll(".option");
-console.log(g)
                     showpallet()
                     if (Array.isArray(myanswers[que_count])) {
                         for (let i = 0; i < myanswers[que_count].length; i++) {
@@ -777,8 +779,6 @@ console.log(g)
             }
 
             prev_btn.onclick = () => {
-                console.log("question backward")
-                                        console.log(que_count)
                 let myanswers = JSON.parse(localStorage.getItem("myquestions"))
                 let b = [];
                 if (que_count < Mydata.length) {
@@ -839,12 +839,21 @@ console.log(g)
             function showQuetions(que_count) {
                 let que_tag = ""
                 const que_text = document.querySelector(".que_text");
-                //console.log(que_count)
                 if ((Mydata[que_count].type == "multichoice") || (Mydata[que_count].type == "multi")) {
                     integerbtn.style.display = "none"
                     let img_tag = ""
                     let pass_img = ""
                     let pass_tag = ""
+                    let message=``
+                    if(Mydata[que_count].type == "multi"){
+                        message=`<p>Multiple option may be correct</p> <br>`
+                        document.getElementById('messagetop').innerHTML=message
+
+                    } else{
+                        message=``
+                     document.getElementById('messagetop').innerHTML=message
+
+                    }
                     if (Mydata[que_count].queimg) {
                         que_tag = '<span class="ff">' + Mydata[que_count].numb + ". " + `<img src="${Mydata[que_count].queimg}" id="ty"  alt="" >` + '</span>' + '<br>'
                     }
@@ -860,11 +869,18 @@ console.log(g)
 
                     if (Mydata[que_count].passageimg != null) {
                         pass_img = Mydata[que_count].passageimg;
+                        message=`<p>Read the passage and answer questions</p> <br>`
+                       // document.getElementById('messagetop').innerHTML=message
                     } else {
                         pass_img = ""
+                        message=``
+                        
                     }
                     if (Mydata[que_count].passage != null) {
-                        pass_tag = `<textarea readonly class="form-control" id="pass" style="width:100%;overflow-y:scroll;height:auto;margin:auto">${Mydata[que_count].passage}</textarea>`;
+                        pass_tag = `
+                        <textarea readonly class="form-control" id="pass" 
+                        style="width:100%;overflow-y:scroll;height:auto;margin:auto">
+                        ${Mydata[que_count].passage}</textarea>`;
                     } else {
                         pass_tag = ""
                     }
@@ -953,6 +969,7 @@ console.log(g)
                     option_list.style.display = "none"
                     integerquestion.style.display = 'block'
                     integerbtn.style.display = "block"
+                
                     que_tag = '<span class="ff">' + Mydata[que_count].numb + ". " + Mydata[que_count].question + '</span>' + '<br>'
                     que_text.innerHTML = que_tag
                     integerbtn.onclick = () => {

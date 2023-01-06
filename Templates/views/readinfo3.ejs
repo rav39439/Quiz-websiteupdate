@@ -47,7 +47,7 @@ no marks for incorrect response.
 
        <% if(section1length!=0){ %>
                 <h2>Section1</h2>
-        <h3><%=quiz.quizquestions[section1length]?.section%></h3>
+        <h3><%=quiz.quizquestions[0]?.section%></h3>
         <p> there are  <%=section1length%> questions in 1st section</p>
         <p>For each correct answer in this section you will get <%=quiz.quizquestions[section1length]?.postivemarks %> and for incorrect answer 
           <%=quiz.quizquestions[section1length]?.negativemarks %>will be deducted
@@ -58,10 +58,10 @@ no marks for incorrect response.
 <% if(section2length!=0){ %>
 
         <h2>Section2</h2>
-        <h3><%=quiz.quizquestions[section2length]?.section%></h3>
+        <h3><%=quiz.quizquestions[section1length]?.section%></h3>
         <p> there are  <%=section2length%> questions in 2nd section</p>
-        <p>For each correct answer in this section you will get <%=quiz.quizquestions[section2length]?.postivemarks %> for incorrect answer
-          <%=quiz.quizquestions[section2length]?.negativemarks %> will be deducted
+        <p>For each correct answer in this section you will get <%=quiz.quizquestions[section1length]?.postivemarks %> for incorrect answer
+          <%=quiz.quizquestions[section1length]?.negativemarks %> will be deducted
         </p>        
         <% } %> 
 
