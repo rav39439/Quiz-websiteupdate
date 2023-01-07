@@ -660,16 +660,55 @@ app.post("/getallcontent",function(req,res){
 
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
+        blog.collection("studymaterial").find().toArray(function(error,materials){
+            let length1
+            let length2
+            let length3
+            let length4
+            let length5
 
-    blog.collection("studymaterial").find({
-        "content":req.body.content
-        
-           }).toArray(function(error,content){
-        
-        console.log(content)
-            res.render("getallcontent.ejs",{data:content,myfriendlist:JSON.stringify(req.session.friendlist)})
+
+            console.log(materials)
+   materials.forEach((elem)=>{
+    if(elem.content=="govexams"){
+        length1+=1
+       
+
+    }
+    else if(elem.content=="entranceexams"){
+length2+=1
+    }
+    else if(elem.content=="bankexams"){
+length3+=1
+    }
+    else if(elem.content=="managementexams"){
+length4+=1
+    }
+    else {
+        length5+=1
+
+    }
+   })
+ res.render("getallcontent.ejs",{materials:materials,length1:length1,length2:length2,length3:length3
+,length4:length4,length5:length5
+})         
         })
         })
+
+
+
+
+
+
+    // blog.collection("studymaterial").find({
+    //     "content":req.body.content
+        
+    //        }).toArray(function(error,content){
+        
+    //     console.log(content)
+    //         res.render("getallcontent.ejs",{data:content,myfriendlist:JSON.stringify(req.session.friendlist)})
+    //     })
+    //     })
 
     //------------------------------------------------------------------------------------
 //     var mydat="select * from uploadtab";
@@ -696,6 +735,23 @@ app.post("/getallcontent",function(req,res){
   })  
 
 
+  app.get("/studyinfo",function(req,res){
+    console.log(req.query.data)
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+
+     blog.collection("studymaterial").find({
+        "content":req.query.data
+        
+           }).toArray(function(error,content){
+        
+        console.log(content)
+            res.render("allstudymaterials.ejs",{data:content})
+        })
+        })
+    
+  })
+
 app.post("/uploadcontent" ,function(req,res){  
 
     // if(req.body.status=="newpublic"){
@@ -708,12 +764,10 @@ console.log(req.body)
                 "topic":req.body.details,
                 "content":req.body.content,
                 "uploadedby":req.session.username,
-                "uniquecode":req.session.uniquecode,
-               
                 "data":req.body.uploadimg,
                 "filedata":req.body.myfile,
                 "status":req.body.status,
-                "secretcode":"",             
+                "details":req.body.newdetails
             },function(err,data){
                     res.json({
                        "message":"success",
