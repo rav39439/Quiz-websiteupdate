@@ -449,6 +449,9 @@
                 {{!-- <div class="time_line"></div> --}}
             </header>
             <section id="mysect" style="width: 100%;">
+                <div id="passtop"></div>
+                                <div id="passtop1"></div>
+
                 <div class="passage" id="passage" style="width:90%"></div>
                 <img src="" alt="" class="passimg" id="passimg">
                 <div class="messagetop"id="messagetop"></div>
@@ -845,19 +848,23 @@ console.log(no1+no2+no3+no4)
                     let pass_img = ""
                     let pass_tag = ""
                     let message=``
+                    let message1=``
+                                        let message2=``
+
                     if(Mydata[que_count].type == "multi"){
-                        message=`<p>Multiple option may be correct</p> <br>`
-                        document.getElementById('messagetop').innerHTML=message
+                        message1=`<p>Multiple option may be correct</p> <br>`
+                        document.getElementById('messagetop').innerHTML=message1
 
                     } else{
-                        message=``
-                     document.getElementById('messagetop').innerHTML=message
+                        message1=``
+                     document.getElementById('messagetop').innerHTML=message1
 
                     }
                     if (Mydata[que_count].queimg) {
                         que_tag = '<span class="ff">' + Mydata[que_count].numb + ". " + `<img src="${Mydata[que_count].queimg}" id="ty"  alt="" >` + '</span>' + '<br>'
                     }
                     else {
+                       // document.getElementById("queimg").style.display="none"
                         que_tag = '<span class="ff">' + Mydata[que_count].numb + ". " + Mydata[que_count].question + '</span>' + '<br>'
                     }
 
@@ -867,46 +874,61 @@ console.log(no1+no2+no3+no4)
                         img_tag = ""
                     }
 
-                    if (Mydata[que_count].passageimg != null) {
+                    if (Mydata[que_count].passageimg.length!= 0) {
                         pass_img = Mydata[que_count].passageimg;
                         message=`<p>Read the passage and answer questions</p> <br>`
-                       // document.getElementById('messagetop').innerHTML=message
+                     document.getElementById('passtop').innerHTML=message
                     } else {
                         pass_img = ""
                         message=``
+                    document.getElementById('passtop').innerHTML=message
+
                         
                     }
-                    if (Mydata[que_count].passage != null) {
+                    if (Mydata[que_count].passage.length!= 0) {
                         pass_tag = `
                         <textarea readonly class="form-control" id="pass" 
                         style="width:100%;overflow-y:scroll;height:auto;margin:auto">
                         ${Mydata[que_count].passage}</textarea>`;
+                         message=`<p>Read the passage and answer questions</p> <br>`
+                     document.getElementById('passtop').innerHTML=message
+                  document.getElementById('passage').innerHTML=pass_tag
+                  console.log( document.getElementById('passage').innerHTML)
+
                     } else {
                         pass_tag = ""
+                          message=``
+                    document.getElementById('passtop').innerHTML=message
+
+                document.getElementById('passage').innerHTML=pass_tag
+                                  console.log(pass_tag)
+
+
                     }
                     que_text.innerHTML = que_tag
                     if (img_tag == null) {
                         myimgtag.setAttribute("src", img_tag)
                     }
                     else {
-                        
+                        message=`<p>Read the passage and answer questions</p> <br>`
+
                         myimgtag.setAttribute("src", img_tag)
                     }
-                    if (pass_img == null) {
+                    if (pass_img.length != 0) {
+                        message2=`<p>Read the passage and answer questions</p> <br>`
+                    document.getElementById('passtop1').innerHTML=message2
+
                         mypassimg.setAttribute("src", pass_img)
 
                     } else {
-                     
+                       message2=``
+
                         mypassimg.setAttribute("src", pass_img)
+                    document.getElementById('passtop1').innerHTML=message2
+
                     }
 
-                    if (pass_tag != "") {
-                        mypasstag.innerHTML = pass_tag;
-                    }
-                    else {
-                        console.log(pass_tag)
-                        mypasstag.classList.add('hu')
-                    }
+                   
                     let option_tag = `<div class="optiongr">
                  
         <div class="option"  id=0>${Mydata[que_count].option1} </div>
