@@ -15,9 +15,9 @@
         <div class="card border-dark mb-3" style="width:80%;height:auto;">
             <div class="card-header"><center><h2><%=elem?.content %></h2> </center></div>
             <div class="card-body text-dark" style="text-align: center;">
-              <h5 class="card-title"style="font-size: 32px;"><%=elem?.details %> </h5>
+              <h5 class="card-title"style="font-size:32px;"><%=elem?.details %> </h5>
               
-              <p class="card-text" style="font-size: 27px;"><%=elem?.topic %> </p>
+              <p class="card-text" style="font-size: 27px;font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-style: italic;"><%=elem?.topic %> </p>
 
               <% if(elem.data){ %>
                 <% if(elem.status=='newpublic'){%>
@@ -28,7 +28,7 @@
                  
                 <%} else if(elem.status=='publicfile'){%>
                 
-                  <a href="<%=elem.data%>">filepdf</a>
+                  <a href="<%=elem.data%>"><%=elem.content%></a>
                 
                 <%} else {%>
                   <a href="/wholeimage?image==<%= elem.data %>"> <img class="border" style="width:300px;height:300px;" src="/images/<%=elem.data%>" alt=""></a>

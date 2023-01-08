@@ -825,28 +825,13 @@ app.post("/newresultmulti",(req,res)=>{
 
                let userresponses= quiz.quizattempters.find(elem=>elem.name==req.body.name)
 
-const arrayranked=quiz.quizattempters.sort((a,b)=>b.marks-a.marks)
-quiz.quizattempters.map((elem,index)=>{
-    console.log("ranks are equzal")
-    if(quiz.quizattempters[index]?.marks==quiz.quizattempters[index-1]?.marks){
-        quiz.quizattempters[index-1]?.rank==index
-        quiz.quizattempters[index]?.rank==index
 
-    }
-})
-
-// console.log("ranks are")
-
-
-// console.log(quiz.quizattempters)
 let allmarks=[]
 let studentranks=[]
 quiz.quizattempters.forEach((elem)=>{
 allmarks.push(elem.marks)
 })
 
-//console.log(marks)
-const arr = [50, 39, 39, 32, 31];
 const findRanks = (arr = []) => {
    const { length } = arr;
    let sortArray = arr.slice();
@@ -861,7 +846,14 @@ const findRanks = (arr = []) => {
 studentranks=findRanks(allmarks)
 console.log(findRanks(allmarks));
 
-                res.render("resultfile.ejs",{usedata:JSON.stringify(quiz.quizquestions),name:req.body.name,mydata:quiz.quizattempters,responses:JSON.stringify(userresponses),quizname:req.body.myquiz,ranks:studentranks})
+
+if(userresponses){
+    res.render("resultfile.ejs",{usedata:JSON.stringify(quiz.quizquestions),name:req.body.name,mydata:quiz.quizattempters,responses:JSON.stringify(userresponses),quizname:req.body.myquiz,ranks:studentranks})
+
+}
+else{
+    res.send("No such user has attempted the Exam")
+}
 
                     })
 
@@ -1156,6 +1148,7 @@ app.get("/createnewtable",function(req,res){
 //mymiddle, mymiddle3
 app.post("/createnewtable",function(req,res){
 
+    console.log(req.body)
 //--------------------------------------inserting data in mongodb-------------------------------------------------
 
 MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
@@ -1171,15 +1164,16 @@ blog.collection("Quizzes").insertOne
     "exam":req.body.exam,
     "examname":req.body.examname,
     "noofquestions":req.body.noofquestions,
-    "status":"public",
+    "status":req.body.status,
+    "desc":req.body.desc,
     "quizquestions":[],
-    "quizattempters":[]
+    "quizattempters":[],
+    "nsection":req.body.nsection
 
 },
 
 function(error,document){
 
-res.redirect("/")
 
 
 })
@@ -1471,20 +1465,20 @@ console.log(req.body.Mytable2)
               let section4length=0
 
               if(parseInt(data.nsection)==4){
-                 section1length=data.quizquestions[0].qsection
-                 section2length=data.quizquestions[section1length].qsection
-                 section3length=data.quizquestions[parseInt(section2length)+parseInt(section1length)].qsection
-                 section4length=data.quizquestions[parseInt(section2length)+parseInt(section1length)+parseInt(section3length)].qsection
+                 section1length=data.quizquestions[0]?.qsection
+                 section2length=data.quizquestions[section1length]?.qsection
+                 section3length=data.quizquestions[parseInt(section2length)+parseInt(section1length)]?.qsection
+                 section4length=data.quizquestions[parseInt(section2length)+parseInt(section1length)+parseInt(section3length)]?.qsection
                  console.log(section4length)
           console.log(parseInt(section2length)+parseInt(section1length)+parseInt(section3length))
               }
               else if(parseInt(data.nsection)==3){
-                section1length=data.quizquestions[0].qsection
-             section2length=data.quizquestions[section1length].qsection
+                section1length=data.quizquestions[0]?.qsection
+             section2length=data.quizquestions[section1length]?.qsection
              console.log("these are the lengths")
             //console.log(parseInt(section2length)+parseInt(section1length))
              console.log(data.quizquestions[14])
-                section3length=data.quizquestions[parseInt(section2length)+parseInt(section1length)].qsection
+                section3length=data.quizquestions[parseInt(section2length)+parseInt(section1length)]?.qsection
               }
 
               else if(parseInt(data.nsection)==2){
@@ -1493,7 +1487,7 @@ console.log(req.body.Mytable2)
               }
 
               else{
-             section1length=data.quizquestions[0].qsection
+             section1length=data.quizquestions[0]?.qsection
               }
      
               res.render("readinfo3.ejs", { 

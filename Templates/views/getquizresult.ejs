@@ -119,25 +119,37 @@ margin-top: 90px;
 
 <body>
 
-  <h1 id="mylogin">Get the results of quiz here</h1>
+  <h3 style="color:red">Solutions of the attempted quizzes</h3>
 
-<div  class="new1">
-<form action="/getquizresult" method="POST">
-<label for="exampleInputPassword1" style="margin-top:10px">Select your Quiz</label>
-<select class="form-select" aria-label="Default select example" name="quizname">
-  <% quizdata.forEach(function(elem){  %> 
-<% if(elem.status=="public") {%> 
-  <option value=<%=elem.quizname%> ><%=elem.quizname%> </option>
-<% } %> 
-  <% }) %>
-</select>
 
-<!-- <input type="text" class="form-control"id="quizname"name="quizname" placeholder="text" required> -->
-<button type="submit" class="btn-btn primary">submit to see result</button>
-</form>
+
+
+<% quizdata.forEach(function(elem){  %> 
+  <% if(elem.status=="public") {%> 
+
+<div class="card" style="width:50%;margin-top: 40px;background-color: rgb(178, 197, 236);">
+  <div class="card-body">
+    <form action="/getquizresult" method="POST">
+      <input type="hidden" class="form-control"id="quizname"name="quizname" placeholder="text" required value=<%=elem.quizname%> >
+      <div style="display:grid; grid-template-columns: 50% 50%;">
+        <span style="font-size: large;font-weight: 600;">Name of the quiz</span style="font-size: large;font-weight: 600;"> 
+        <h5 class="card-title"><%=elem.quizname %> </h5>
+      </div>
+      <div style="display:grid; grid-template-columns: 50% 50%;">
+
+   <span style="font-size: large;font-weight: 600;">Number of sections in a quiz</span style="font-size: large;font-weight: 600;">  
+   <p class="card-text"><%=elem.nsection %> </p>
+   </div>
+      <div style="display:grid; grid-template-columns: 50% 50%;">
+
+   <span style="font-size: large;font-weight: 600;">Description of the quiz</span style="font-size: large;font-weight: 600;">  
+   <p class="card-text"><%=elem.desc %> </p>
+   </div>
+    <button type="submit" class="btn btn-primary " style="margin-top: 20px;">Get Solutions</button>
+  </div>
 </div>
-
-
+<% } %> 
+<% }) %> 
     </body>
 
     <script>

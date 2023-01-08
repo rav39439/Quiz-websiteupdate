@@ -28,12 +28,11 @@ font-size:60px
     .new1{
 text-align: center;
       border-radius:8px;
-      width: 400px;
+width:60%  ;
       height:350px;
       background-color:aliceblue;
       margin-top: 40px;
       border: solid;
-      margin-left:300px
     }
    .new2{
 margin-top: 90px;
@@ -62,15 +61,34 @@ margin-top: 90px;
      margin-top: 20px;
    }
 
-    @media only screen and (max-width: 500px) {
+
+input {
+margin-left: 360px !important;
+width: 40% !important;
+}
+
+select{
+  margin-left: 360px !important;
+  width: 40% !important;
+}
+    @media only screen and (max-width: 1000px) {
  
  .new1{
  
      height: 400px;
-    width:320px;
-    margin-left:10px;
+width:60%  ;
+  margin-left:10px;
  }
  
+ input {
+margin-left: 55px !important;
+width: 60% !important;
+}
+
+select{
+  margin-left: 55px !important;
+  width: 60% !important;
+}
  #name{
    width: 200px;
    margin-left: 15px;
@@ -111,21 +129,20 @@ margin-top: 90px;
 
 
        
-   <h1 id="mylogin">See your result here</h1>
  <div  id="name"style="display:none">{{username}}</div>
 
-<div class="new1">
+<div class="new1" style="width: 80%;">
 
 
 
   
-  <div class="new">
+  <div class="new" style="text-align:center">
 
-    
-    <form action="/newresultmulti" method="POST">
+<h3 style="color:red;">Search Your Result Here</h3>
+    <form action="/newresultmulti" method="POST" style="text-align:center">
   
 <div class="form-group">
-    <label for="exampleInputEmail1">Email Quizname</label>
+    <label for="exampleInputEmail1">Enter the Quizname from the list of quizzes</label>
     <input type="text" class="form-control mt-2"  id="myquiz"aria-describedby="emailHelp" placeholder="Enter Quizname"name="myquiz" required>
   </div>
   <div class="form-group">
@@ -136,8 +153,8 @@ margin-top: 90px;
     <label >Enter the exam type</label>
     <select class="form-control mt-2" id="examname" name="examname" required>
       <option value="Highlevelexam">High level exam</option>
-      <option value="Multisectionexam">Multi section exam</option>
-      <option value="simplequiz">simple quiz</option>
+      {{!-- <option value="Multisectionexam">Multi section exam</option>
+      <option value="simplequiz">simple quiz</option> --}}
      
     </select>
   </div>
