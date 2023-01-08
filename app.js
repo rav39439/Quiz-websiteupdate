@@ -1385,7 +1385,8 @@ app.post("/getquizresult",function(req,res){
         var blog=client.db("blog")
   
         blog.collection("Quizzes").findOne({"quizname":req.body.quizname}, function(error,quiz){
-            res.render("newresultfile.ejs",{Mydata:JSON.stringify(quiz.quizquestions),quizname:req.body.quizname})
+            console.log(quiz)
+            res.render("newresultfile.ejs",{Mydata:JSON.stringify(quiz?.quizquestions),quizname:req.body.quizname})
 
     })
     })
