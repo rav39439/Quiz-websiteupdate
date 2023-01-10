@@ -385,7 +385,7 @@ app.post('/postquestions', (req, res) => {
 var transporter=nodemailer.createTransport(sendgridtransport({
     
     auth:{
-          api_key:'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',
+          api_key:'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',
     },
 
    
@@ -1168,7 +1168,10 @@ blog.collection("Quizzes").insertOne
     "desc":req.body.desc,
     "quizquestions":[],
     "quizattempters":[],
-    "nsection":req.body.nsection
+    "nsection":req.body.nsection,
+
+    "time":req.body.time
+
 
 },
 
@@ -1342,6 +1345,7 @@ app.post("/deletequiz",function(req,res){
 
 app.get("/getquizresult",function(req,res){
 
+    console.log(req.body)
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
 
@@ -1380,7 +1384,6 @@ app.get("/getquizresult",function(req,res){
 
 app.post("/getquizresult",function(req,res){
 
-    console.log(req.body.quizname)
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
   
@@ -1470,15 +1473,12 @@ console.log(req.body.Mytable2)
                  section2length=data.quizquestions[section1length]?.qsection
                  section3length=data.quizquestions[parseInt(section2length)+parseInt(section1length)]?.qsection
                  section4length=data.quizquestions[parseInt(section2length)+parseInt(section1length)+parseInt(section3length)]?.qsection
-                 console.log(section4length)
-          console.log(parseInt(section2length)+parseInt(section1length)+parseInt(section3length))
+              
               }
               else if(parseInt(data.nsection)==3){
                 section1length=data.quizquestions[0]?.qsection
              section2length=data.quizquestions[section1length]?.qsection
-             console.log("these are the lengths")
-            //console.log(parseInt(section2length)+parseInt(section1length))
-             console.log(data.quizquestions[14])
+           
                 section3length=data.quizquestions[parseInt(section2length)+parseInt(section1length)]?.qsection
               }
 
@@ -1500,9 +1500,6 @@ console.log(req.body.Mytable2)
             ,section3length:section3length,section4length:section4length })
             })
                   })
-
-
-
     }
    
     if(req.query.quiz=="Multisectionexam"){

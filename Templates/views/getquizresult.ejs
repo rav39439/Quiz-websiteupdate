@@ -18,8 +18,6 @@
                 /* Firefox, Chrome, Opera */
                 text-align: center;
             }
-
-
             #mylogin{
  margin-left:370px;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -28,18 +26,16 @@ font-size:60px
     .new1{
 text-align: center;
       border-radius:8px;
-      width: 400px;
+      width:70%; 
       height:350px;
       background-color:aliceblue;
       margin-top: 40px;
       border: solid;
-      margin-left:300px
+      
     }
     .new2{
 text-align: center;
 margin-top: 90px;
-
-   
       width: auto;
       height:auto;
       background-color:rgb(223, 228, 232);
@@ -49,12 +45,7 @@ margin-top: 90px;
    .newbutton{
      margin-left: 30px;
      margin-top: 10px;
-
    }
-  
-
-
-   
 
    #quizname{
  margin-left: 30px;
@@ -66,50 +57,35 @@ margin-top: 90px;
      margin-top: 20px;
    }
 
-    @media only screen and (max-width: 500px) {
- 
+    @media only screen and (max-width: 600px) {
  .new1{
- 
      height: 400px;
-    width:320px;
-    margin-left:10px;
+     width:70%; 
+     text-align: center;
+     margin-left:10px;
  }
- 
-.new2{
 
+.new2{
   width:300px ;
   margin-left: 20px;
 }
- 
  #quizname{
   width: 200px;
 
-   margin-left: 60px;
+   margin-right: 300px;
  }
-
  .newbutton{
      margin-left: 15px;
      margin-top: 10px;
    }
-  
  #mylogin{
   margin-left:50px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
   font-size:30px;
 }
 
+
  }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -118,44 +94,40 @@ margin-top: 90px;
 <%- include('../partials/heading.hbs') %>
 
 <body>
+<div  class="new1">
+  <h3 id="" style="color: red;">Get the results of quiz here</h3>
 
-  <h3 style="color:red">Solutions of the attempted quizzes</h3>
-
-
-
-
-<% quizdata.forEach(function(elem){  %> 
-  <% if(elem.status=="public") {%> 
-
-<div class="card" style="width:50%;margin-top: 40px;background-color: rgb(178, 197, 236);">
-  <div class="card-body">
-    <form action="/getquizresult" method="POST">
-      <input type="hidden" class="form-control"id="quizname"name="quizname" placeholder="text" required value=<%=elem.quizname%> >
-      <div style="display:grid; grid-template-columns: 50% 50%;">
-        <span style="font-size: large;font-weight: 600;">Name of the quiz</span style="font-size: large;font-weight: 600;"> 
-        <h5 class="card-title"><%=elem.quizname %> </h5>
-      </div>
-      <div style="display:grid; grid-template-columns: 50% 50%;">
-
-   <span style="font-size: large;font-weight: 600;">Number of sections in a quiz</span style="font-size: large;font-weight: 600;">  
-   <p class="card-text"><%=elem.nsection %> </p>
-   </div>
-      <div style="display:grid; grid-template-columns: 50% 50%;">
-
-   <span style="font-size: large;font-weight: 600;">Description of the quiz</span style="font-size: large;font-weight: 600;">  
-   <p class="card-text"><%=elem.desc %> </p>
-   </div>
-    <button type="submit" class="btn btn-primary " style="margin-top: 20px;">Get Solutions</button>
-  </div>
+<form action="/getquizresult" method="POST">
+<label for="exampleInputPassword1" style="margin-top:10px">Enter the quizname</label>
+<div class="">
+  <select class="form-select" aria-label="Default select example"name="quizname" id="quizname">
+    <% quizdata.forEach(function(elem){%>
+        <option value=<%=elem.quizname %> ><%=elem.quizname %> </option>
+        
+    <% }) %> 
+    </select>
 </div>
-<% } %> 
-<% }) %> 
+
+<!-- <input type="text" class="form-control"id="quizname"name="quizname" placeholder="text" required> -->
+<button type="submit" class="btn-btn primary">submit to see result</button>
+</form>
+</div>
+</div >
+ 
+<% if(typeof(username)!='undefined'){%>
+  <div id="name"style="display:none"><%=username%></div>
+
+<%}%>
+
+
+
+
+</div>
+</div>
+
     </body>
 
     <script>
-
-
-
 let f= document.getElementById("name").innerText
  if(f){
    document.getElementById("myname").innerText=f
