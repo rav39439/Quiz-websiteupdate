@@ -1184,6 +1184,8 @@ blog.collection("Quizzes").insertOne
     "quizquestions":[],
     "quizattempters":[],
     "nsection":req.body.nsection,
+    "marks":req.body.marks,
+
 
     "time":time
 
