@@ -471,6 +471,7 @@
 
     .usermarks {
         background-color: #007bff !important;
+
     }
     .option{
         width: 70%;
@@ -482,33 +483,29 @@
 <div style="width: 50%;">
     <h1>Solution of <%=quizname %>
     </h1>
-    <div class="quiz_box" style="top:10px;left:10px;">
-
+    <div class="quiz_box" >
         <section>
             <div id="name">
                 <h1>
                 </h1>
             </div>
             <div id="marks"></div><br><br>
-
-
             <div id="passage"></div>
             <div id="passimg"></div>
             <div id="myqueimg"></div>
             <div id="imgtag" style="height:60px;width:200px;"></div>
-
         </section>
-
         <!-- footer of Quiz Box -->
         <footer>
-            <div class="total_que">
+            <div class="total_que" style="margin-top: 20px;">
                 <!-- Here I've inserted Question Count Number from JavaScript -->
             </div>
-
+            <br>
+            <br>
         </footer>
     </div>
     <div class="bb"></div>
-    <div class="solution"></div>
+    <div class="solution mt-4"></div>
     <div id="rat" style="display:none">
         <%=Mydata%>
     </div>
@@ -588,13 +585,13 @@
     <div id="Mysolutions"></div>
     </div>`;
 
-                html += que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`
+                html +=`<div style="background-color: #dfe4ea;border-radius:25px">`+ que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`+`<br>`+`</div>`+`<br>`+`<br>`;
             }
             else {
 
                 if (Mydata[i].type == "integertype") {
 
-                    que_tag = '<span class="ff">' + Mydata[i].numb + ". " + Mydata[i].question + '</span>' + '<br>'
+                    que_tag = '<span class="ff">' + `<b>`+ Mydata[i].numb + `</b>`+". " + Mydata[i].question + '</span>' + '<br>'
 
                     option_tag = `<div class="form-group">
     <label for="exampleInputEmail1">Enter the answer in integer</label><br>

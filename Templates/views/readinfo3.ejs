@@ -26,10 +26,12 @@
     border-left-style: hidden;
     border-bottom-style: groove;
     background-color: #eee;
+    width: 70%;
   }
 
   .no-outline:focus {
     outline: none;
+    width: 70%;
   }
 </style>
 
@@ -78,10 +80,10 @@
         <h1 style="color: blue;"> Sections in this Quiz</h1>
         <ul style="list-style-type: upper-roman;
         ">
+            <% if(section1length!=0){ %>
 
           <li>
           <div style="text-align: left;">
-            <% if(section1length!=0){ %>
 
 
               <div class="text-left">
@@ -95,13 +97,15 @@
                     and for incorrect answer
                     <%=quiz.quizquestions[section1length]?.negativemarks %>will be deducted
               </p>
-              <% } %>
           </div>
           </li>
+          <% } %>
+
+          <% if(section2length!=0){ %>
+
           <li>
           <div style="text-align: left;">
 
-            <% if(section2length!=0){ %>
               <div class="text-left">
 
                 <h3>
@@ -113,15 +117,17 @@
                   <%=quiz.quizquestions[section1length]?.postivemarks %> for incorrect answer
                     <%=quiz.quizquestions[section1length]?.negativemarks %> will be deducted
               </p>
-              <% } %>
           </div>
 
           </li>
+          <% } %>
+
+
+          <% if(section3length!=0){ %>
 
           <li>
           <div style="text-align: left;">
 
-            <% if(section3length!=0){ %>
 
               <div class="text-left">
 
@@ -136,15 +142,16 @@
                     <%=quiz.quizquestions[parseInt(section3length)+parseInt(section2length)]?.negativemarks %> will be
                       deducted
               </p>
-              <% } %>
 
           </div>
           </li>
+          <% } %>
+
+          <% if(section4length!=0){ %>
 
           <li>
           <div style="text-align: left;">
 
-            <% if(section4length!=0){ %>
 
               <div class="text-left">
 
@@ -160,10 +167,11 @@
                     <%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.negativemarks
                       %> will be deducted
               </p>
-              <% } %>
 
           </div>
         </li>
+        <% } %>
+
           </ul>
       </div>
       <hr>

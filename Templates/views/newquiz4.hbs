@@ -417,16 +417,34 @@
         flex-direction: row;
         width: 90%
     }
+    .passage{
+        background-color: white !important;
+    }
+  #mysections{
+            display:flex;
+            flex-direction: row;
+            gap: 10px;
+            margin-left:87px;
+            background-color:blue;
+            padding:15px;
+    border-radius: 10px 10px 10px 10px
+        }
 
     @media only screen and (max-width: 600px) {
-
-
-
-
         .new1 {
             display: flex;
             flex-direction: column;
             width: 90%
+        }
+
+        #mysections{
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            margin-left:87px;
+            background-color:blue;
+            padding:15px;
+    border-radius: 10px 10px 10px 10px
         }
 
     }
@@ -437,12 +455,14 @@
         height:auto;
         width:80%
     }
+
+
 </style>
 
 <body>
     <br>
     <br>
-    <div id="mysections" style="margin-left:40px">
+    <div id="mysections">
     </div>
     <div class="namequiz">{{mdata}}</div>
     <div class="mycontainer new1">
@@ -480,11 +500,13 @@
                 <div class="total_que">
                     <!-- Here I've inserted Question Count Number from JavaScript -->
                 </div>
-                <button class="next_btn">Next</button>
-                <button class="prev_btn">prev</button>
-                <button style="display:none" class="integer_btn">integer submit</button>
-                <button class="clearans_btn">clear</button>
-                <button class="submit_btn">submit</button>
+                <div class="" style="margin-left: 25px;">
+                <button class="next_btn btn btn-primary">Next</button>
+                <button class="prev_btn btn btn-primary">prev</button>
+                <button style="display:none" class="integer_btn btn btn-primary">integer submit</button>
+                <button class="clearans_btn btn btn-primary">clear</button>
+                <button class="submit_btn btn btn-primary">submit</button>
+                </div>
             </footer>
         </div>
         <div class="palletes" style="width:50%">
@@ -688,21 +710,25 @@ console.log(no1+no2+no3+no4)
                         
             let html = ``;
             if (Mydata[0].section) {
-                html = ` <button id="button5"   name="button1"  style="height:30px;width:100px;" onclick="changed(0)">${Mydata[0].section}</button>`
+                html = ` <button id="button5"   name="button1"  style="height:30px;width:20%; color:white;
+                margin-left:12px;background-color:blue;border:none" onclick="changed(0)">${Mydata[0].section}</button>`
             }
 
             if (typeof (Mydata[no1]) != 'undefined') {
-                html += `<button id="button6"  name="button1" style="height:30px;width:100px;" onclick="changed(${no1 + 1})">${Mydata[no1].section}</button>`
+                html += `<button id="button6"  name="button1" style="height:30px;width:20%; color:white;
+                 margin-left:12px;background-color:blue;border:none" onclick="changed(${no1 + 1})">${Mydata[no1].section}</button>`
             }
 
 
             if (typeof (Mydata[no2 + no1]) != 'undefined') {
-                html += `<button id="button7"  name="button2" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + 1})">${Mydata[no2 + no1].section}</button>`
+                html += `<button id="button7"  name="button2" style="height:30px;width:20%;
+                margin-left:12px; background-color:blue; color:white;border:none"onclick="changed(${no1 + no2 + 1})">${Mydata[no2 + no1].section}</button>`
 
             }
 
             if (typeof (Mydata[no3 + no1 + no2]) != 'undefined') {
-                html += `<button id="button8"  name="button3" style="height:30px;width:100px;"onclick="changed(${no1 + no2 + no3 + 1})">${Mydata[no3 + no1 + no2].section}</button>`
+                html += `<button id="button8"  name="button3" style="height:30px;width:20%;
+                margin-left:12px; background-color:blue; color:white;border:none"onclick="changed(${no1 + no2 + no3 + 1})">${Mydata[no3 + no1 + no2].section}</button>`
             }
             const button5 = document.getElementById('button5')
             const button6 = document.getElementById('button6')
@@ -893,7 +919,7 @@ console.log(no1+no2+no3+no4)
                     }
                     if (Mydata[que_count].passage.length!= 0) {
                         pass_tag = `
-                        <textarea readonly class="form-control" id="pass" 
+                        <textarea readonly class="" rows=17  id="pass" 
                         style="width:100%;overflow-y:scroll;height:auto;margin:auto">
                         ${Mydata[que_count].passage}</textarea>`;
                          message=`<p>Read the passage and answer questions</p> <br>`

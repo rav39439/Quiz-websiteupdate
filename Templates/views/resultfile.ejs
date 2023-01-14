@@ -980,7 +980,7 @@
     <div id="Mysolutions"></div>
     </div>`;
 
-                html += que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`
+                html += `<div style="background-color: #dfe4ea;border-radius:25px">`+que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`+`<br>`+`</div>`+`<br>`+`<br>`
 
                 //if((typeof(pass_img)!='undefined')&&((typeof(img_tag)!='undefined'))){
                 //  html +=pass_img+`<br>`+ que_tag + `<br>` + img_tag +`<br>` + option_tag+`<br>`
@@ -1000,14 +1000,14 @@
 
                 if (Mydata[i].type == "integertype") {
 
-                    que_tag = '<span class="ff">' + Mydata[i].numb + ". " + Mydata[i].question + '</span>' + '<br>'
+                    que_tag = '<span class="ff">' + `<b>`+ Mydata[i].numb +`<b>`+ ". " + Mydata[i].question + '</span>' + '<br>'
 
                     option_tag = `<div class="form-group">
     <label for="exampleInputEmail1">Enter the answer in integer</label><br>
     <input type="number" class="form-control" style="margin-left:200px;width:200px"  aria-describedby="emailHelp" placeholder="Enter Answercode" value=${Mydata[i].integerans} >
     <input type="number" class="newinteger" id="newinteger" style="margin-left:200px;width:200px"  aria-describedby="emailHelp" placeholder="Enter Answercode">
   </div>`
-                    html += que_tag + `<br>` + option_tag + `<br>`
+                    html += que_tag + `<br>` + option_tag + `<br>`+`<br>`+`<br>`;
 
                 }
             }

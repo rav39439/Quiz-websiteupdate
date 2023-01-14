@@ -37,11 +37,13 @@
     }
 
     input {
-      width: 100% !important;
+      width: 60% !important;
     }
-
+button{
+  width: 60% !important;
+}
     select {
-      width: 100% !important;
+      width: 60% !important;
     }
 
   </style>
@@ -52,18 +54,20 @@
   <div id="name" style="display:none">{{username}}</div>
 
   <div class="new1" style="width: 80%;">
+
+    <div style="width: 100%; display: flex;flex-direction:column; justify-contents:center ;align-items:center">
     <h3 style="color:red;">Search Your Result Here</h3>
-    <form action="/newresultmulti" method="POST" style="text-align:center">
-      <div class="" style="display: flex;flex-direction:column; align-items: center;justify-content:center;">
+    <form action="/newresultmulti" method="POST" style="text-align:center;width:70%">
+      <div class="" style="display: flex;flex-direction:column; justify-contents:center ">
 
         <div class="form-group">
           <label for="exampleInputEmail1">Enter the Quizname from the list of quizzes</label>
-          <input type="text" class="form-control mt-2" id="myquiz" aria-describedby="emailHelp"
-            placeholder="Enter Quizname" name="myquiz" required>
+          <input type="text" class="form-control mt-2" id="myquiz" 
+            name="myquiz" required>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Your name</label>
-          <input type="text" class="form-control mt-2" id="name" placeholder="name" name="name" required>
+          <input type="text" class="form-control mt-2" id="name"  name="name" required>
         </div>
         <div class="form-group">
           <label>Enter the exam type</label>
@@ -75,7 +79,7 @@
         <button type="submit" class="btn btn-primary mt-2">Result</button>
       </div>
     </form>
-
+</div>
 
 
   </div>
