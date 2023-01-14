@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<style>
 
-#mylogin{
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+    /* #mylogin{
  margin-left:370px;
 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 font-size:60px
@@ -89,22 +90,29 @@ width: 500px;
   font-size:30px;
 }
 
- }
+ } */
 
-</style>
+ img{
+  height: 20%;
+  width: 20%;
+ }
+ button{
+  /* width: 10%; */
+ }
+  </style>
 
 
 
 
 
 </head>
-<%- include('../partials/heading.hbs') %>
 
 
 <body>
+  <%- include('../partials/heading.hbs') %>
 
-   
-  <div class="card" style="width:60%; margin-left: 100px;">
+<div style="width: 100%;">
+  <div class="card">
     <div class="card-header">
       <h1>Featured</h1>
     </div>
@@ -113,135 +121,140 @@ width: 500px;
 
 
       <li class="list-group-item border">
-        
-        
+
+
         <div class="media">
-          <img class="mr-3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE58xSGTxKFYOcA-xwcc5XGQ8JOYzJA_O_PO5PG3f-vA&s">
+          <img class="mr-3"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE58xSGTxKFYOcA-xwcc5XGQ8JOYzJA_O_PO5PG3f-vA&s">
           <div class="media-body">
-            <h5 class="mt-0">GovermentExam Prepartion</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            <h5 class="mt-0">Goverment Exam Prepartion</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
+            vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
+            lacinia congue felis in faucibus.
           </div>
-          <button  class="btn btn-primary"><a href="/studyinfo?data=govexams" style="color:white;text-decoration:none"> get study material </a>
+          <button class="btn btn-primary"><a href="/studyinfo?data=govexams" style="color:white;text-decoration:none">
+            open            
+          </a>
           </button>
         </div>
 
       </li>
 
       <li class="list-group-item border">
-        
-        
+
+
         <div class="media">
-          <img class="mr-3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3leMOJSEzIYNdFaKuQb79_4xDOT-kBs_yVUagtXLmuQ&s">
+          <img class="mr-3"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3leMOJSEzIYNdFaKuQb79_4xDOT-kBs_yVUagtXLmuQ&s">
           <div class="media-body">
             <h5 class="mt-0">BankExam Prepartion</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
+            vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
+            lacinia congue felis in faucibus.
           </div>
-          <button  class="btn btn-primary"><a href="/studyinfo?data=bankexams" style="color:white;text-decoration:none"> get study material </a>
+          <button class="btn btn-primary"><a href="/studyinfo?data=bankexams" style="color:white;text-decoration:none">
+            open            
+          </a>
           </button>
         </div>
       </li>
-
-      <li class="list-group-item border">       
-        <div class="media">
-          <img class="mr-3" src="data:image/jpeg;base64,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">
-          <div class="media-body">
-            <h5 class="mt-0">Management Exams Prepartion</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
-          <button  class="btn btn-primary"><a href="/studyinfo?data=managementexams" style="color:white;text-decoration:none"> get study material </a>
-          </button>
-        </div>
-      </li>
-
-      <li class="list-group-item border">       
-        <div class="media">
-          <img class="mr-3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2sxPn3kcXDe4g0O9PkFuMVdU1V-JeQP7CRnCvmHV7DA&s">
-          <div class="media-body">
-            <h5 class="mt-0">Entrance Exam Prepartion</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
-          <button  class="btn btn-primary"><a href="/studyinfo?data=entranceexams" style="color:white;text-decoration:none"> get study material </a>
-          </button>
-        </div>
-      </li>
-
-      <li class="list-group-item border">       
-        <div class="media">
-          <img class="mr-3" src="data:image/jpeg;base64,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" alt="Generic placeholder image">
-          <div class="media-body">
-            <h5 class="mt-0">Any other exam Preparation</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
-          <button  class="btn btn-primary"><a href="/studyinfo?data=others"style="color:white;text-decoration:none">get study material </a>
-          </button>
-        </div>
-      </li>
-
-
-
-      <!-- <li class="list-group-item border">
- 
-        <div class="media ">
-          <img class="mr-3" src="data:image/jpeg;base64,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" alt="Generic placeholder image">
-          <div class="media-body">
-            <h5 class="mt-0">Media heading</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-          </div>
-        </div>
-
-      </li>
-
-
 
       <li class="list-group-item border">
         <div class="media">
-          <img class="mr-3" src="data:image/jpeg;base64,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" alt="Generic placeholder image">
+          <img class="mr-3"
+            src="data:image/jpeg;base64,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">
           <div class="media-body">
-            <h5 class="mt-0">Media heading</h5>
-            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+            <h5 class="mt-0">Management Exams Prepartion</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
+            vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
+            lacinia congue felis in faucibus.
           </div>
+          <button class="btn btn-primary"><a href="/studyinfo?data=managementexams"
+              style="color:white;text-decoration:none"> 
+              
+             open            
+            </a>
+          </button>
         </div>
+      </li>
 
+      <li class="list-group-item border">
+        <div class="media">
+          <img class="mr-3"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2sxPn3kcXDe4g0O9PkFuMVdU1V-JeQP7CRnCvmHV7DA&s">
+          <div class="media-body">
+            <h5 class="mt-0">Entrance Exam Prepartion</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
+            vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
+            lacinia congue felis in faucibus.
+          </div>
+          <button class="btn btn-primary"><a href="/studyinfo?data=entranceexams"
+              style="color:white;text-decoration:none">              open            
+            </a>
+          </button>
+        </div>
+      </li>
 
-      </li> -->
+      <li class="list-group-item border">
+        <div class="media">
+          <img class="mr-3"
+            src="data:image/jpeg;base64,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"
+            alt="Generic placeholder image">
+          <div class="media-body">
+            <h5 class="mt-0;">Any other exam Preparation</h5>
+            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio,
+            vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
+            lacinia congue felis in faucibus.
+          </div>
+          <button class="btn btn-primary"><a href="/studyinfo?data=others" style="color:white;text-decoration:none">
+            open            
+          </a>
+          </button>
+        </div>
+      </li>
     </ul>
-  </div> 
+  </div>
+</div>
 </body>
 
 
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <script>
 
-// let newimg=document.getElementById('newimg').innerText;
+  // let newimg=document.getElementById('newimg').innerText;
 
-// for(let i=0;i<3;i++){
-//   let str=`/images/${newimg}`;
-//   console.log(document.getElementById(`${i}`))
-// document.getElementById(`${i}`).src=str
-// }
-
-
+  // for(let i=0;i<3;i++){
+  //   let str=`/images/${newimg}`;
+  //   console.log(document.getElementById(`${i}`))
+  // document.getElementById(`${i}`).src=str
+  // }
 
 
 
-if((typeof(document.getElementById("name"))!='undefined')&&(document.getElementById("name")!=null)){
 
-  let f= document.getElementById("name").innerText
-}
-//}
- if(typeof(f)!='undefined'){
-   document.getElementById("myname").innerText=f
-}
-else{
-  document.getElementById("myname").innerText="Anonymous"
 
- }
+  if ((typeof (document.getElementById("name")) != 'undefined') && (document.getElementById("name") != null)) {
+
+    let f = document.getElementById("name").innerText
+  }
+  //}
+  if (typeof (f) != 'undefined') {
+    document.getElementById("myname").innerText = f
+  }
+  else {
+    document.getElementById("myname").innerText = "Anonymous"
+
+  }
 
 
 
 
 </script>
+
 </html>

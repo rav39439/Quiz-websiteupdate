@@ -611,6 +611,7 @@ app.get('/Mysecrets', (req, res) => {
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
 
+
         blog.collection("Quizzes").find().sort({_id:1}).toArray(function(error,quizzes){
            // console.log(quizzes)
             res.render("listoftests.ejs",{quizdata:quizzes,username:req.session.username,data:req.session})
@@ -1145,11 +1146,25 @@ app.get("/createnewtable",function(req,res){
     res.render("createnewtable.ejs")
 })
 
+
+function secondsToHms(d) {
+    d = Number(d);
+    var h = Math.floor(d / 3600);
+    var m = Math.floor(d % 3600 / 60);
+    var s = Math.floor(d % 3600 % 60);
+
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour " : " hours ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+    return hDisplay + mDisplay + sDisplay; 
+}
 //mymiddle, mymiddle3
 app.post("/createnewtable",function(req,res){
 
     console.log(req.body)
 //--------------------------------------inserting data in mongodb-------------------------------------------------
+var time=secondsToHms(req.body.time)
+
 
 MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
   var blog=client.db("blog")
@@ -1170,7 +1185,7 @@ blog.collection("Quizzes").insertOne
     "quizattempters":[],
     "nsection":req.body.nsection,
 
-    "time":req.body.time
+    "time":time
 
 
 },
@@ -1467,7 +1482,8 @@ console.log(req.body.Mytable2)
               let section2length=0;
             let  section3length=0
               let section4length=0
-
+let time=secondsToHms(data.time)
+let noofquizattemts=data.quizattempters.length
               if(parseInt(data.nsection)==4){
                  section1length=data.quizquestions[0]?.qsection
                  section2length=data.quizquestions[section1length]?.qsection
@@ -1497,7 +1513,7 @@ console.log(req.body.Mytable2)
                 Myreg: req.session.uniquecode,
                 section1length:section1length,
                 section2length:section2length
-            ,section3length:section3length,section4length:section4length })
+            ,section3length:section3length,section4length:section4length ,time:time,quizattempts:noofquizattemts})
             })
                   })
     }
@@ -1662,7 +1678,6 @@ app.get("/Getallcontents",function(req,res){
         console.log("introfile is running")
         var file=req.query.file;
 
-        console.log(file)
 
             var filestream = fs.createReadStream(`./public/files/${file}`);                  
             res.writeHead(200, {

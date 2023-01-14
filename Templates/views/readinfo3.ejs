@@ -1,105 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+<style>
+  input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #eee;
+  }
+
+  .no-outline:focus {
+    outline: none;
+  }
+</style>
+
 <body>
-     
 
-<div class="card" style="width:60%; margin-bottom: 10px; border: 2px solid black;margin-left:130px;font-size:x-large;">
-  <!-- <img class="card-img-top"src="data:image/jpeg;base64,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" alt="Card image cap"> -->
-  <div class="card-body">
-    <h1 class="card-title">
-      
-      Instructions</h1>
-    <p class="card-text">
-      
-       Your quiz consists of multiple choice questions which has only one answer. There may be some questions 
-which might have multiple correct answers and instructions will be mentioned . There also may be some questions 
-which you have to answer in integer. Kindly read the instruction in the questions properly before answering any question
-You would be provided with required amount of time to answer each question but do not spend much time on each question
-Select a option dillegently before submitting it. There are four buttons  'prev','clear','next' and submit.
-'prev' will get you back to prev question ,'clear' will clear your response for a particular question ,'next' will lead you to 
-next question and 'submit' will save your responses and terminate the exam. You will be awarded +2 marks for correct response and awarded 
-no marks for incorrect response.
 
- 
+  <div class="card"
+    style="width:60%; margin-bottom: 10px; border: 2px solid black;margin-left:130px;font-size:x-large;">
+    <!-- <img class="card-img-top"src="data:image/jpeg;base64,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" alt="Card image cap"> -->
+    <div class="card-body">
+      <div style="text-align: center;">
+        <h1 class="card-title" style="color: blue;">Instructions</h1>
+        <div style="text-align: left;">
+          <p class="card-text">
+
+            This quiz consists of multiple choice questions which has only one answer. There may be some questions
+            which might have multiple correct answers and instructions will be mentioned . There also may be some
+            questions
+            which you have to answer in integer. Kindly read the instruction in the questions properly before answering
+            any
+            question
+            You would be provided with required amount of time to answer each question but do not spend much time on
+            each
+            question
+            Select a option dillegently before submitting it. There are four buttons 'prev','clear','next' and submit.
+            'prev' will get you back to prev question ,'clear' will clear your response for a particular question
+            ,'next'
+            will lead you to
+            next question and 'submit' will save your responses and terminate the exam.
+
+        </div>
+        </p>
+      </div>
+      <p style="font-weight:bold;"> Total no of quesitons in the quiz is <%=quiz.quizquestions.length %>
+      </p>
+      <p style="font-weight:bold;"> Total time alloted for this quiz is <%=time %>
 
       </p>
 
-      <p> Total no of quesitons in the quiz is <%=quiz.quizquestions.length %> 
-       </p>
-       <p> Total time alloted for this quiz is <%=quiz.quizquestions[0].time %> 
-              
-       </p>
-    
-       <p>There are two sections in this quiz</p>
+      <p style="font-weight:bold;">There are <%=quiz.nsection%> sections in this quiz</p>
 
-<hr>
-
-       <% if(section1length!=0){ %>
-                <h2>Section1</h2>
-        <h3><%=quiz.quizquestions[0]?.section%></h3>
-        <p> there are  <%=section1length%> questions in 1st section</p>
-        <p>For each correct answer in this section you will get <%=quiz.quizquestions[section1length]?.postivemarks %> and for incorrect answer 
-          <%=quiz.quizquestions[section1length]?.negativemarks %>will be deducted
-        </p>        
-        <% } %> 
-        
-<hr>
-<% if(section2length!=0){ %>
-
-        <h2>Section2</h2>
-        <h3><%=quiz.quizquestions[section1length]?.section%></h3>
-        <p> there are  <%=section2length%> questions in 2nd section</p>
-        <p>For each correct answer in this section you will get <%=quiz.quizquestions[section1length]?.postivemarks %> for incorrect answer
-          <%=quiz.quizquestions[section1length]?.negativemarks %> will be deducted
-        </p>        
-        <% } %> 
-
-        <hr>
-
-        <% if(section3length!=0){ %>
+      <hr>
 
 
-          <h2>Section3</h2>
-          <h3><%=quiz.quizquestions[parseInt(section1length)+parseInt(section2length)]?.section%></h3>
-          <p> there are  <%=section3length%> questions in 3rd section</p>
-          <p>For each correct answer in this section you will get <%=quiz.quizquestions[parseInt(section3length)+parseInt(section2length)]?.postivemarks %> and for incorrect answer 
-            <%=quiz.quizquestions[parseInt(section3length)+parseInt(section2length)]?.negativemarks %> will be deducted
-          </p>        
-          <% } %> 
+      <div style="text-align: center;">
+        <h1 style="color: blue;"> Sections in this Quiz</h1>
+        <ul style="list-style-type: upper-roman;
+        ">
 
-      
-          <% if(section4length!=0){ %>
+          <li>
+          <div style="text-align: left;">
+            <% if(section1length!=0){ %>
 
 
-            <h2>Section4</h2>
-            <h3><%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.section%></h3>
-            <p> there are  <%=section4length%> questions in 4th section</p>
-            <p>For each correct answer in this section you will get <%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.postivemarks %> and for incorrect answer
-              <%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.negativemarks %> will be deducted
-            </p>        
-            <% } %> 
-  
-          
+              <div class="text-left">
+                <h3>
+                  <%=quiz.quizquestions[0]?.section%>
+                </h3>
+              </div>
+              <p> There are <%=section1length%> questions in 1st section For each correct answer in this section you
+                  will
+                  get <%=quiz.quizquestions[section1length]?.postivemarks %>
+                    and for incorrect answer
+                    <%=quiz.quizquestions[section1length]?.negativemarks %>will be deducted
+              </p>
+              <% } %>
+          </div>
+          </li>
+          <li>
+          <div style="text-align: left;">
 
-        <h2>Your details</h2>
-      <form action="/newquiz4" method="POST">
-        <span>Enter Your Name:  </span> <input type="text" name="Myname2" class="Myname2" value=<%=Myname %> ><br>
-        <span>Name of the quiz:  </span> <input type="text" readonly name="Mytable2" class="Mytable2" value=<%=table2 %> >
-        <button type="submit">start</button>
-        </form>
+            <% if(section2length!=0){ %>
+              <div class="text-left">
+
+                <h3>
+                  <%=quiz.quizquestions[section1length]?.section%>
+                </h3>
+              </div>
+              <p> There are <%=section2length%> questions in 2nd section
+                  For each correct answer in this section you will get
+                  <%=quiz.quizquestions[section1length]?.postivemarks %> for incorrect answer
+                    <%=quiz.quizquestions[section1length]?.negativemarks %> will be deducted
+              </p>
+              <% } %>
+          </div>
+
+          </li>
+
+          <li>
+          <div style="text-align: left;">
+
+            <% if(section3length!=0){ %>
+
+              <div class="text-left">
+
+                <h3>
+                  <%=quiz.quizquestions[parseInt(section1length)+parseInt(section2length)]?.section%>
+                </h3>
+              </div>
+              <p> There are <%=section3length%> questions in 3rd section
+                  For each correct answer in this section you will get
+                  <%=quiz.quizquestions[parseInt(section3length)+parseInt(section2length)]?.postivemarks %> and for
+                    incorrect answer
+                    <%=quiz.quizquestions[parseInt(section3length)+parseInt(section2length)]?.negativemarks %> will be
+                      deducted
+              </p>
+              <% } %>
+
+          </div>
+          </li>
+
+          <li>
+          <div style="text-align: left;">
+
+            <% if(section4length!=0){ %>
+
+              <div class="text-left">
+
+                <h3>
+                  <%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.section%>
+                </h3>
+              </div>
+              <p> There are <%=section4length%> questions in 4th section For each correct answer in this section you
+                  will
+                  get
+                  <%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.postivemarks
+                    %> and for incorrect answer
+                    <%=quiz.quizquestions[parseInt(section3length)+parseInt(section1length)+parseInt(section2length)]?.negativemarks
+                      %> will be deducted
+              </p>
+              <% } %>
+
+          </div>
+        </li>
+          </ul>
+      </div>
+      <hr>
+
+
+      <% if(quizattempts<40){ %>
+        <div class="text-center">
+
+          <h1 style="color: blue;">Your details</h1>
+
+          <form action="/newquiz4" method="POST">
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+              <label for="">Enter Your Name:</label>
+              <span> </span> <input type="text" name="Myname2" class="Myname2 ml-3" value=<%=Myname %> ><br>
+            </div>
+
+            <div style="display:flex;flex-direction:column;align-items:center;justify-content:center">
+
+              <label for="">Name of the quiz:</label>
+
+              <span> </span> <input type="text" readonly name="Mytable2" class="no-outline ml-3" value=<%=table2 %> >
+            </div>
+            <button class="mt-3 btn btn-primary" type="submit">start</button>
+          </form>
+          <% } else{%>
+            <h3 style="color: red;font-style: italic;">Quiz is Longer Active </h3>
+            <% } %>
+        </div>
+
+    </div>
   </div>
-</div>
 
 
 
@@ -135,18 +230,18 @@ no marks for incorrect response.
 
 
 
-  
+
 </body>
 
 
 
 <script>
 
-if(localStorage.getItem('storagekey')){
+  if (localStorage.getItem('storagekey')) {
 
     localStorage.removeItem('storagekey')
 
-}
+  }
 </script>
 
 </html>

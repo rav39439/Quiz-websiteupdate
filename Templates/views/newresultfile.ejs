@@ -472,14 +472,18 @@
     .usermarks {
         background-color: #007bff !important;
     }
+    .option{
+        width: 70%;
+    }
 </style>
 
 <body>
-
-
-    <h1>Solution of <%=quizname %> </h1>
+<div style="margin-left:20px;">
+<div style="width: 50%;">
+    <h1>Solution of <%=quizname %>
+    </h1>
     <div class="quiz_box" style="top:10px;left:10px;">
-    
+
         <section>
             <div id="name">
                 <h1>
@@ -508,73 +512,74 @@
     <div id="rat" style="display:none">
         <%=Mydata%>
     </div>
-        <a href="/">
-            <h1>Go back</h1>
-        </a>
+    <a href="/">
+        <h1>Go back</h1>
+    </a>
+</div>
+</div>
+    <script>
 
-        <script>
+        //---------------------------------------new part-------------------------------------------------
+        let h;
+        let rat = document.getElementById("rat").innerText
+        Mydata = JSON.parse(rat)
+        var length = Object.keys(Mydata).length;
+        Object.keys(JSON.stringify(Mydata[1]))
+        let name = document.getElementById("name").innerText
+        let html = ``
+        let quest = document.querySelector(".que_text")
+        let solution = document.querySelector(".solution")
+        let option = document.querySelector(".option_list")
 
-            //---------------------------------------new part-------------------------------------------------
-            let h;
-            let rat = document.getElementById("rat").innerText
-            Mydata = JSON.parse(rat)
-            var length = Object.keys(Mydata).length;
-            Object.keys(JSON.stringify(Mydata[1]))
-            let name = document.getElementById("name").innerText
-            let html = ``
-            let quest = document.querySelector(".que_text")
-            let solution = document.querySelector(".solution")
-            let option = document.querySelector(".option_list")
-         
-            let option3 = document.getElementById("g")
-            const mypasstag = document.getElementById('passage')
-            const mypassimg = document.getElementById('passimg')
-            var imgtag = document.getElementById("imgtag")
-            let option_tag = ``;
-            let option4 = document.getElementById("k")
-            let img_tag = '';
-            let que_tag = '';
-            for (let i = 0; i < length; i++) {
+        let option3 = document.getElementById("g")
+        const mypasstag = document.getElementById('passage')
+        const mypassimg = document.getElementById('passimg')
+        var imgtag = document.getElementById("imgtag")
+        let option_tag = ``;
+        let option4 = document.getElementById("k")
+        let img_tag = '';
+        let que_tag = '';
+        for (let i = 0; i < length; i++) {
 
-                if ((Mydata[i].type == "multichoice") || (Mydata[i].type == "multi")) {
+            if ((Mydata[i].type == "multichoice") || (Mydata[i].type == "multi")) {
 
-                    if (Mydata[i].queimg) {
-                        que_tag = '<span class="ff">' + Mydata[i].numb + ". " + `<img src="${Mydata[i].queimg}" id="ty3"alt=""  style="width:70;height:50;">` + '</span>' + '<br>'
+                if (Mydata[i].queimg) {
+                    que_tag = '<span class="ff">' + Mydata[i].numb + ". " + `<img src="${Mydata[i].queimg}" id="ty3"alt=""  style="width:70;height:50;">` + '</span>' + '<br>'
 
-                    } else {
-                        que_tag = '<span class="ff">' + Mydata[i].numb + ". " + Mydata[i].question + '</span>' + '<br>'
+                } else {
+                    que_tag = '<span class="ff">' + Mydata[i].numb + ". " + Mydata[i].question + '</span>' + '<br>'
 
-                    }
+                }
 
 
-                    if (Mydata[i].myfile) {
+                if (Mydata[i].myfile) {
 
-                        img_tag = '<span class="ff">' + `<img src="${Mydata[i].myfile}" alt="" id="ty2" style="width:200;height:100;">` + '</span>' + '<br>'
+                    img_tag = '<span class="ff">' + `<img src="${Mydata[i].myfile}" alt="" id="ty2" style="width:200;height:100;">` + '</span>' + '<br>'
 
-                    } else {
-                        img_tag = ""
-                    }
+                } else {
+                    img_tag = ""
+                }
 
-                    if (Mydata[i].passage) {
-                        let pass_tag = `<textarea class="form-control" rows="5" style="width:300px;margin:auto">${Mydata[i].passage}</textarea>`;
-                    }
-                    if (Mydata[i].passageimg) {
-                        let pass_img = `<img src="${Mydata[i].passageimg}" alt="" id="ty" style="width:100;height:50;">`;
-                    }
-                    else {
-                    }
-                    if (Mydata[i].solutionsimg) {
-                        solution_tag = '<span class="ff">' + `<img src="${Mydata[i].solutionsimg}" alt="" id=ty1>` + '</span>' + '<br>'
-                    }
-                    else {
+                if (Mydata[i].passage) {
+                    let pass_tag = `<textarea class="form-control" rows="5" style="width:300px;margin:auto">${Mydata[i].passage}</textarea>`;
+                }
+                if (Mydata[i].passageimg) {
+                    let pass_img = `<img src="${Mydata[i].passageimg}" alt="" id="ty" style="width:100;height:50;">`;
+                }
+                else {
+                }
+                if (Mydata[i].solutionsimg) {
+                    solution_tag = '<span class="ff">' + `<img src="${Mydata[i].solutionsimg}" alt="" id=ty1>` + '</span>' + '<br>'
+                }
+                else {
 
-                        solution_tag = ` <p> Solution</p> <br>
+                    solution_tag = ` <p> Solution</p> <br>
                     <textarea rows=20 class="qsol">
                         ${Mydata[i].solutions}</textarea>`;
-                    }
+                }
 
 
-                    option_tag = `<div class="optiongr">
+                option_tag = `<div class="optiongr">
            
         <div class="option" >${Mydata[i].option1} </div>
     <div class="option" >${Mydata[i].option2} </div>
@@ -583,102 +588,102 @@
     <div id="Mysolutions"></div>
     </div>`;
 
-                    html += que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`
-                }
-                else {
+                html += que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`
+            }
+            else {
 
-                    if (Mydata[i].type == "integertype") {
+                if (Mydata[i].type == "integertype") {
 
-                        que_tag = '<span class="ff">' + Mydata[i].numb + ". " + Mydata[i].question + '</span>' + '<br>'
+                    que_tag = '<span class="ff">' + Mydata[i].numb + ". " + Mydata[i].question + '</span>' + '<br>'
 
-                        option_tag = `<div class="form-group">
+                    option_tag = `<div class="form-group">
     <label for="exampleInputEmail1">Enter the answer in integer</label><br>
     <input type="number" class="form-control" style="margin-left:200px;width:200px"  aria-describedby="emailHelp" placeholder="Enter Answercode" value=${Mydata[i].integerans} >
     <input type="number" class="newinteger" id="newinteger" style="margin-left:200px;width:200px"  aria-describedby="emailHelp" placeholder="Enter Answercode">
   </div>`
-                        html += que_tag + `<br>` + option_tag + `<br>`
+                    html += que_tag + `<br>` + option_tag + `<br>`
 
-                    }
                 }
             }
+        }
 
-            solution.innerHTML = html
-            const options = solution.querySelectorAll(".optiongr");
-            let m = 0
+        solution.innerHTML = html
+        const options = solution.querySelectorAll(".optiongr");
+        let m = 0
 
 
-            for (let i = 0; i < length; i++) {
+        for (let i = 0; i < length; i++) {
 
-                let kk = document.getElementById("Mysolutions")
-                if (Mydata[i].Mysolutionsimg) {
+            let kk = document.getElementById("Mysolutions")
+            if (Mydata[i].Mysolutionsimg) {
+            }
+
+            let a = []
+            let b = []
+            let l = 0
+            ///----------------------------------question evaluation----------------------------------
+            //------------------------------multiple answers questions------------------
+            if (Mydata[i].type == "multi") {
+                console.log(JSON.parse(Mydata[i].answercode))
+                if (JSON.parse(Mydata[i].answercode)['answer1'] != '') {
+                    b.push(JSON.parse(Mydata[i].answercode)['answer1'])
+                    options[i].children[JSON.parse(Mydata[i].answercode)['answer1']].style.backgroundColor = "green"
+                }
+                if (JSON.parse(Mydata[i].answercode)['answer2'] != '') {
+                    b.push(JSON.parse(Mydata[i].answercode)['answer2'])
+                    options[i].children[JSON.parse(Mydata[i].answercode)['answer2']].style.backgroundColor = "green"
+                }
+                if (JSON.parse(Mydata[i].answercode)['answer3'] != '') {
+                    b.push(JSON.parse(Mydata[i].answercode)['answer3'])
+                    options[i].children[JSON.parse(Mydata[i].answercode)['answer3']].style.backgroundColor = "green"
+
                 }
 
-                let a = []
-                let b = []
-                let l = 0
-                ///----------------------------------question evaluation----------------------------------
-                //------------------------------multiple answers questions------------------
-                if (Mydata[i].type == "multi") {
-                    console.log(JSON.parse(Mydata[i].answercode))
-                    if (JSON.parse(Mydata[i].answercode)['answer1'] != '') {
-                        b.push(JSON.parse(Mydata[i].answercode)['answer1'])
-                        options[i].children[JSON.parse(Mydata[i].answercode)['answer1']].style.backgroundColor = "green"
-                    }
-                    if (JSON.parse(Mydata[i].answercode)['answer2'] != '') {
-                        b.push(JSON.parse(Mydata[i].answercode)['answer2'])
-                        options[i].children[JSON.parse(Mydata[i].answercode)['answer2']].style.backgroundColor = "green"
-                    }
-                    if (JSON.parse(Mydata[i].answercode)['answer3'] != '') {
-                        b.push(JSON.parse(Mydata[i].answercode)['answer3'])
-                        options[i].children[JSON.parse(Mydata[i].answercode)['answer3']].style.backgroundColor = "green"
+            }
 
-                    }
+            //--------------------------------------------------------------------------------------------
+            //-----------------------------------integer type---------------------------------------
+            if (Mydata[i].type == "integertype") {
+                console.log("my integer ans is running")
+                console.log(response.answers[i])
+                console.log(Mydata[i].integerans)
+                document.getElementById("newinteger").value = response.answers[i];
 
-                }
+            }
 
-                //--------------------------------------------------------------------------------------------
-                //-----------------------------------integer type---------------------------------------
-                if (Mydata[i].type =="integertype") {
-                    console.log("my integer ans is running")
-                    console.log(response.answers[i])
-                    console.log(Mydata[i].integerans)
-                    document.getElementById("newinteger").value = response.answers[i];
-                  
-                }
+            //--------------------------------------------------------------------------------------
+            //--------------------------Multichoice questions------------------------------
+            if (Mydata[i].type == "multichoice") {
+                for (let j = 0; j < 4; j++) {
+                    if (JSON.parse(Mydata[i].answercode)['answer1'] == j) {
+                        console.log("this is the new answer")
+                        // console.log(JSON.parse(Mydata[i].answercode)['answer1'])
+                        if (options[i]) {
+                            //console.log(JSON.parse(Mydata[i].answercode)['answer1'])
+                            options[i].children[j].style.backgroundColor = "green"
+                            console.log("question color changed to green")
 
-                //--------------------------------------------------------------------------------------
-                //--------------------------Multichoice questions------------------------------
-                if (Mydata[i].type == "multichoice") {
-                    for (let j = 0; j < 4; j++) {
-                        if (JSON.parse(Mydata[i].answercode)['answer1'] == j) {
-                            console.log("this is the new answer")
-                            // console.log(JSON.parse(Mydata[i].answercode)['answer1'])
-                            if (options[i]) {
-                                //console.log(JSON.parse(Mydata[i].answercode)['answer1'])
-                                options[i].children[j].style.backgroundColor = "green"
-                                console.log("question color changed to green")
-
-                            }
                         }
-                      
                     }
-                  
+
                 }
 
-              
             }
 
-        </script>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
-            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 
 
 </body>

@@ -1,142 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
 
-    <style>
+  <style>
+    input[type="text"]::placeholder {
+      text-align: center;
+    }
 
-  input[type="text"]::placeholder { 
-                  
-                /* Firefox, Chrome, Opera */
-                text-align: center;
-            }
-            #mylogin{
- margin-left:370px;
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-font-size:60px
+   
+select{
+  width: 50% !important;
+
 }
-    .new1{
-text-align: center;
-      border-radius:8px;
-      width:70%; 
-      height:350px;
-      background-color:aliceblue;
+    .new1 {
+      text-align: center;
+      border-radius: 8px;
+      width: 70%;
+      height: 350px;
+      background-color: aliceblue;
       margin-top: 40px;
       border: solid;
-      
+
     }
-    .new2{
-text-align: center;
-margin-top: 90px;
+
+    /* .new2 {
+      text-align: center;
+      margin-top: 90px;
       width: auto;
-      height:auto;
-      background-color:rgb(223, 228, 232);
+      height: auto;
+      background-color: rgb(223, 228, 232);
       margin-top: 40px;
-      margin-left:300px
+      margin-left: 300px
+    } */
+
+    /* .newbutton {
+      margin-left: 30px;
+      margin-top: 10px;
     }
-   .newbutton{
-     margin-left: 30px;
-     margin-top: 10px;
-   }
 
-   #quizname{
- margin-left: 30px;
- width: 300px;
- margin-top: 20px;
-   }
+    #quizname {
+      margin-left: 30px;
+      width: 300px;
+      margin-top: 20px;
+    }
 
-   #info{
-     margin-top: 20px;
-   }
+    #info {
+      margin-top: 20px;
+    } */
 
     @media only screen and (max-width: 600px) {
- .new1{
-     height: 400px;
-     width:70%; 
-     text-align: center;
-     margin-left:10px;
- }
+      .new1 {
+        height: 400px;
+        width: 70%;
+        text-align: center;
+        margin-left: 10px;
+      }
 
-.new2{
-  width:300px ;
-  margin-left: 20px;
-}
- #quizname{
-  width: 200px;
+      /* .new2 {
+        width: 300px;
+        margin-left: 20px;
+      } */
 
-   margin-right: 300px;
- }
- .newbutton{
-     margin-left: 15px;
-     margin-top: 10px;
-   }
- #mylogin{
-  margin-left:50px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size:30px;
-}
+      /* #quizname {
+        width: 200px;
+
+        margin-right: 300px;
+      }
+
+      .newbutton {
+        margin-left: 15px;
+        margin-top: 10px;
+      } */
 
 
- }
-
-
-
-    </style>
+    }
+  </style>
 </head>
 <%- include('../partials/heading.hbs') %>
 
-<body>
-<div  class="new1">
-  <h3 id="" style="color: red;">Get the results of quiz here</h3>
+  <body>
+    <div class="new1">
+    <h3 id="" style="color: red;">Get the results of quiz here</h3>
 
-<form action="/getquizresult" method="POST">
-<label for="exampleInputPassword1" style="margin-top:10px">Enter the quizname</label>
-<div class="">
-  <select class="form-select" aria-label="Default select example"name="quizname" id="quizname">
-    <% quizdata.forEach(function(elem){%>
-        <option value=<%=elem.quizname %> ><%=elem.quizname %> </option>
-        
-    <% }) %> 
-    </select>
-</div>
+    <form action="/getquizresult" method="POST">
+      <div class="" style="display: flex;flex-direction:column; align-items: center;justify-content:center;">
 
-<!-- <input type="text" class="form-control"id="quizname"name="quizname" placeholder="text" required> -->
-<button type="submit" class="btn-btn primary">submit to see result</button>
-</form>
-</div>
-</div >
- 
-<% if(typeof(username)!='undefined'){%>
-  <div id="name"style="display:none"><%=username%></div>
+        <label for="exampleInputPassword1" class="mt-4">Enter the quizname</label>
+        <select class="form-select mt-4"" aria-label="Default select example" name="quizname" id="quizname">
+          <% quizdata.forEach(function(elem){%>
+            <option value=<%=elem.quizname %> ><%=elem.quizname %>
+            </option>
 
-<%}%>
+            <% }) %>
+        </select>
+      <button type="submit" class="btn-btn primary mt-4"">submit to see result</button>
+    </div>
+
+    </form>
+  </div>
+
+    <% if(typeof(username)!='undefined' ){%>
+      <div id="name" style="display:none">
+        <%=username%>
+      </div>
+
+      <%}%>
 
 
 
 
-</div>
-</div>
 
-    </body>
+  </body>
 
-    <script>
-let f= document.getElementById("name").innerText
- if(f){
-   document.getElementById("myname").innerText=f
-}
-else{
-  document.getElementById("myname").innerText="Anonymous"
+  <script>
+    let f = document.getElementById("name").innerText
+    if (f) {
+      document.getElementById("myname").innerText = f
+    }
+    else {
+      document.getElementById("myname").innerText = "Anonymous"
 
- }
+    }
 
-    </script>
-    </html>
+  </script>
 
+</html>

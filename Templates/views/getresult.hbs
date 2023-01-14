@@ -1,190 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
 
-    <style>
+  <style>
+    input[type="text"]::placeholder {
 
-  input[type="text"]::placeholder { 
-                  
-                /* Firefox, Chrome, Opera */
-                text-align: center;
-            }
+      /* Firefox, Chrome, Opera */
+      text-align: center;
+    }
 
 
-#mylogin{
- margin-left:370px;
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-font-size:60px
-}
-    .new1{
-text-align: center;
-      border-radius:8px;
-width:60%  ;
-      height:350px;
-      background-color:aliceblue;
+    .new1 {
+      text-align: center;
+      border-radius: 8px;
+      height: 350px;
+      background-color: aliceblue;
       margin-top: 40px;
       border: solid;
     }
-   .new2{
-margin-top: 90px;
 
-   }
-   #name{
- margin-left: 30px;
- width: 300px;
- margin-top: 20px;
-   }
+    input {
+      width: 100% !important;
+    }
 
+    select {
+      width: 100% !important;
+    }
 
-   #myquiz{
- margin-left: 30px;
- width: 300px;
- margin-top: 20px;
-   }
-
-   #examname{
- margin-left: 30px;
- width: 300px;
- margin-top: 20px;
-   }
-
-   #info{
-     margin-top: 20px;
-   }
-
-
-input {
-margin-left: 360px !important;
-width: 40% !important;
-}
-
-select{
-  margin-left: 360px !important;
-  width: 40% !important;
-}
-    @media only screen and (max-width: 1000px) {
- 
- .new1{
- 
-     height: 400px;
-width:60%  ;
-  margin-left:10px;
- }
- 
- input {
-margin-left: 55px !important;
-width: 60% !important;
-}
-
-select{
-  margin-left: 55px !important;
-  width: 60% !important;
-}
- #name{
-   width: 200px;
-   margin-left: 15px;
- }
- #myquiz{
-  width: 200px;
-
-   margin-left: 15px;
- }
- #examname{
-  width: 200px;
-
-   margin-left: 15px;
- }
- #mylogin{
-  margin-left:100px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
-  font-size:60px;
-}
-
- }
-
-
-
-
-
-
-    </style>
-
-
-
+  </style>
 </head>
+{{>heading}}
 
-
-{{>heading1}}
 <body>
+  <div id="name" style="display:none">{{username}}</div>
 
-
-       
- <div  id="name"style="display:none">{{username}}</div>
-
-<div class="new1" style="width: 80%;">
-
-
-
-  
-  <div class="new" style="text-align:center">
-
-<h3 style="color:red;">Search Your Result Here</h3>
+  <div class="new1" style="width: 80%;">
+    <h3 style="color:red;">Search Your Result Here</h3>
     <form action="/newresultmulti" method="POST" style="text-align:center">
-  
-<div class="form-group">
-    <label for="exampleInputEmail1">Enter the Quizname from the list of quizzes</label>
-    <input type="text" class="form-control mt-2"  id="myquiz"aria-describedby="emailHelp" placeholder="Enter Quizname"name="myquiz" required>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Your name</label>
-    <input type="text" class="form-control mt-2" id="name" placeholder="name" name="name" required>
-  </div>
-<div class="form-group">
-    <label >Enter the exam type</label>
-    <select class="form-control mt-2" id="examname" name="examname" required>
-      <option value="Highlevelexam">High level exam</option>
-      {{!-- <option value="Multisectionexam">Multi section exam</option>
-      <option value="simplequiz">simple quiz</option> --}}
-     
-    </select>
-  </div>
+      <div class="" style="display: flex;flex-direction:column; align-items: center;justify-content:center;">
 
-    <button type="submit" class="btn btn-primary mt-2">Result</button>
-    
-    
+        <div class="form-group">
+          <label for="exampleInputEmail1">Enter the Quizname from the list of quizzes</label>
+          <input type="text" class="form-control mt-2" id="myquiz" aria-describedby="emailHelp"
+            placeholder="Enter Quizname" name="myquiz" required>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Your name</label>
+          <input type="text" class="form-control mt-2" id="name" placeholder="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label>Enter the exam type</label>
+          <select class="form-control mt-2" id="examname" name="examname" required>
+            <option value="Highlevelexam">High level exam</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Result</button>
+      </div>
     </form>
 
 
-   
+
+  </div>
 
 
 
-</div>
-
-
-
-</div>
 
 </body>
 <script>
 
-  let f= document.getElementById("name").innerText
-  if(typeof(f)!='undefined'){
-   document.getElementById("myname").innerText=f
-}
-else{
-  document.getElementById("myname").innerText="Anonymous"
+  let f = document.getElementById("name").innerText
+  if (typeof (f) != 'undefined') {
+    document.getElementById("myname").innerText = f
+  }
+  else {
+    document.getElementById("myname").innerText = "Anonymous"
 
- }
+  }
 </script>
+
 </html>
