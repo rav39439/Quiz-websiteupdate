@@ -932,6 +932,10 @@ blog.collection("Quizzes").updateOne({
             myfile:req.body.myfiles,
             time:req.body.mytime,
             qsection:req.body.qsection,
+            optionImg1:req.body.optionImg1,
+            optionImg2:req.body.optionImg2,
+            optionImg3:req.body.optionImg3,
+            optionImg4:req.body.optionImg4,
 section:req.body.section,
 integerans:req.body.myinteger,
 passage:req.body.passage,
@@ -1362,7 +1366,6 @@ app.post("/deletequiz",function(req,res){
 
 app.get("/getquizresult",function(req,res){
 
-    console.log(req.body)
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
 
@@ -1533,7 +1536,19 @@ let noofquizattemts=data.quizattempters.length
 
 
 app.get("/getresult",function(req,res){
-    res.render("getresult.hbs",{username:req.session.username})
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+
+        blog.collection("Quizzes").find().sort({_id:1}).toArray(function(error,quizzes){
+
+
+            
+            res.render("getresult.ejs",{quizdata:quizzes,username:req.session.username})
+
+    })
+    })
+
 })
 
 

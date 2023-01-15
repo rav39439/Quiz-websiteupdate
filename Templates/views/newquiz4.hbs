@@ -455,7 +455,10 @@
         height:auto;
         width:80%
     }
+.optionimg{
 
+background-color: red !important;
+}
 
 </style>
 
@@ -961,14 +964,37 @@ console.log(no1+no2+no3+no4)
                     }
 
                    
-                    let option_tag = `<div class="optiongr">
-                 
+//--------------------option images------------------------------------------------------------
+let option_tag=``
+if((typeof(Mydata[que_count].optionImg1)!='undefined')&& (Mydata[que_count].optionImg1!=""))
+
+{
+
+ option_tag = `<div class="optiongr">               
+        <div class="option"id=0  style="width:100%;height:250px" ><img src="${Mydata[que_count].optionImg1}" alt="" style="width:100%;height:100% ;background:red" id=0> </div>
+    <div class="option"  id=1  style="width:100%;height:250px" ><img src="${Mydata[que_count].optionImg2}" alt="" style="width:100%;height:100%" id=1> </div>
+    <div class="option"  id=2  style="width:100%;height:250px" ><img src="${Mydata[que_count].optionImg3}" alt="" style="width:100%;height:100%" id=2> </div>
+    <div class="option"  id=3  style="width:100%;height:250px" > <img src="${Mydata[que_count].optionImg4}" alt="" style="width:100%;height:100%" id=3> </div>
+    </div>`;
+
+}
+
+else{
+
+
+ option_tag = `<div class="optiongr">               
         <div class="option"  id=0>${Mydata[que_count].option1} </div>
     <div class="option"  id=1>${Mydata[que_count].option2} </div>
     <div class="option"  id=2>${Mydata[que_count].option3} </div>
     <div class="option"  id=3> ${Mydata[que_count].option4} </div>
    
     </div>`;
+
+}
+                  
+
+
+    //------------------------------------------------------------------------------
                     option_list.style.display = "block"
                     integerquestion.style.display = 'none'
                     option_list.innerHTML = option_tag; //adding new div tag inside option_tag 
@@ -988,6 +1014,7 @@ console.log(no1+no2+no3+no4)
                             option[i].onclick = () => {
                                 if (h.includes(option[i].getAttribute('id'))) {
                                     option[i].classList.remove("green")
+
                                     let index = h.findIndex(elem => elem == option[i].getAttribute('id'))
                                     h.splice(index, 1)
                                 }
@@ -995,7 +1022,6 @@ console.log(no1+no2+no3+no4)
                                     h.push(option[i].getAttribute('id'))
                                     option[i].classList.add("green")
                                     myquestions[que_count] = h
-                                    console.log(myquestions[que_count])
                                 }
                             }
                         }
@@ -1006,10 +1032,18 @@ console.log(no1+no2+no3+no4)
                                 myquestions[que_count] = (option[i].getAttribute('id'))
                                 for (let j = 0; j < 4; j++) {
                                     if (myquestions[que_count] == option[j].getAttribute('id')) {
-                                        option[j].classList.add("green")
+                                        option[j]?.classList.add("green")
+                                        console.log(  option[j]?.children[0])
+                                option[j]?.children[0]?.classList.add('optionimg')
+                                     //option[j]?.children[0]?.style.display="block"
+
+
                                     }
                                     if (myquestions[que_count] != option[j].getAttribute('id')) {
-                                        option[j].classList.remove("green")
+                                        option[j]?.classList.remove("green")
+                                 option[j]?.children[0]?.classList.remove('optionimg')
+                                 
+
                                     }
                                 }
                             }

@@ -48,10 +48,10 @@ button{
 
   </style>
 </head>
-{{>heading}}
+<%- include('../partials/heading.hbs') %>
 
 <body>
-  <div id="name" style="display:none">{{username}}</div>
+  <div id="name" style="display:none"><%=username %></div>
 
   <div class="new1" style="width: 80%;">
 
@@ -62,8 +62,16 @@ button{
 
         <div class="form-group">
           <label for="exampleInputEmail1">Enter the Quizname from the list of quizzes</label>
-          <input type="text" class="form-control mt-2" id="myquiz" 
-            name="myquiz" required>
+         <select class="form-select mt-4" aria-label="Default select example" name="myquiz" id="myquiz">
+          <% quizdata.forEach(function(elem){%>
+              <option value=<%=elem.quizname %> ><%=elem.quizname %>
+            </option>
+
+
+            <% }) %>
+        </select>
+
+
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Your name</label>

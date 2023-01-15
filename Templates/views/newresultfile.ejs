@@ -483,7 +483,7 @@
 <div style="width: 50%;">
     <h1>Solution of <%=quizname %>
     </h1>
-    <div class="quiz_box" >
+    <div class="quiz_box" style="margin-top: -230px;" >
         <section>
             <div id="name">
                 <h1>
@@ -575,17 +575,35 @@
                         ${Mydata[i].solutions}</textarea>`;
                 }
 
+//-----------------------------option Image-------------------------------------------------------------
 
-                option_tag = `<div class="optiongr">
-           
-        <div class="option" >${Mydata[i].option1} </div>
-    <div class="option" >${Mydata[i].option2} </div>
-    <div class="option" >${Mydata[i].option3} </div>
-    <div class="option" > ${Mydata[i].option4} </div>
-    <div id="Mysolutions"></div>
+let option_tag=``
+if((typeof(Mydata[i].optionImg1)!='undefined')&& (Mydata[i].optionImg1!=""))
+
+{
+
+ option_tag = `<div class="optiongr">               
+        <div class="option"id=0  style="width:100%;height:250px" ><img src="${Mydata[i].optionImg1}" alt="" style="width:100%;height:100%" id=0> </div>
+    <div class="option"  id=1  style="width:100%;height:250px" ><img src="${Mydata[i].optionImg2}" alt="" style="width:100%;height:100%" id=1> </div>
+    <div class="option"  id=2  style="width:100%;height:250px" ><img src="${Mydata[i].optionImg3}" alt="" style="width:100%;height:100%" id=2> </div>
+    <div class="option"  id=3  style="width:100%;height:250px" > <img src="${Mydata[i].optionImg4}" alt="" style="width:100%;height:100%" id=3> </div>
     </div>`;
 
-                html +=`<div style="background-color: #dfe4ea;border-radius:25px">`+ que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`+`<br>`+`</div>`+`<br>`+`<br>`;
+}
+
+else{
+ option_tag = `<div class="optiongr">               
+        <div class="option"  id=0>${Mydata[i].option1} </div>
+    <div class="option"  id=1>${Mydata[i].option2} </div>
+    <div class="option"  id=2>${Mydata[i].option3} </div>
+    <div class="option"  id=3> ${Mydata[i].option4} </div>  
+    </div>`;
+
+}
+
+              
+//------------------------------------------------------------------------------------------
+                html +=`<div style="border:1px solid black;border-radius:15px">`+ que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`+`<br>`+`</div>`+`<br>`+`<br>`;
             }
             else {
 
