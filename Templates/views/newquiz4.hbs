@@ -850,9 +850,9 @@ console.log(no1+no2+no3+no4)
             clear_btn.onclick = () => {
                 const index = myquestions.indexOf(que_count);
                 myquestions.splice(index - 1, 1)
-                console.log(myquestions)
                 let b = JSON.stringify(myquestions)
                 localStorage.setItem("myquestions", b)
+                showQuetions(que_count)
             }
 
             submitbtn.onclick = () => {
@@ -1178,8 +1178,7 @@ console.log(no1+no2+no3+no4)
                 var regno = $("#regno").val()
                 var marks = $("#marks").val()
                 var responses = myquestions
-                console.log("this is the marks")
-                console.log(marks)
+               
                 $.ajax({
                     type: "POST",
                     url: '/newquiz4result',
