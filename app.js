@@ -149,15 +149,44 @@ app.get('/myhome', function (req, res) {
 })
 app.get('/', function (req, res) {
 
-    // connection.query("select * from usercomments", function (err, userdata, fields) {
-    //     if (err) { throw (err) }
-    //     console.log(userdata)
-    // res.render("index.ejs",{userdata:userdata,username:req.session.username})
-    // connection.end()
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+        blog.collection("studymaterial").find({type:"Government Exams"}).toArray(function(error,materials){
+            let length1
+            let length2
+            let length3
+            let length4
+            let length5
 
-//})
-//console.log(req.session.username)
-    res.render("index.ejs",{username:req.session.username})
+
+            console.log(materials)
+   materials.forEach((elem)=>{
+    if(elem.content=="govexams"){
+        length1+=1
+       
+
+    }
+    else if(elem.content=="entranceexams"){
+length2+=1
+    }
+    else if(elem.content=="bankexams"){
+length3+=1
+    }
+    else if(elem.content=="managementexams"){
+length4+=1
+    }
+    else {
+        length5+=1
+
+    }
+   })
+ res.render("index.ejs",{materials:materials,username:req.session.username,length1:length1,length2:length2,length3:length3
+,length4:length4,length5:length5,examname:"Government Exams"
+})         
+        })
+        })
+
+
 
 })
 
@@ -614,7 +643,7 @@ app.get('/Mysecrets', (req, res) => {
 
         blog.collection("Quizzes").find().sort({_id:1}).toArray(function(error,quizzes){
            // console.log(quizzes)
-            res.render("listoftests.ejs",{quizdata:quizzes,username:req.session.username,data:req.session})
+            res.render("listoftests.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes), username:req.session.username,data:req.session})
 
 
 
@@ -653,6 +682,57 @@ app.get('/secrets', (req, res) => {
             res.render("tests.ejs",{quizdata:quizzes,username:req.session.username})
     })
     })
+})
+
+
+app.get('/filterexam', (req, res) => {
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+
+
+        blog.collection("Quizzes").find({"quizname":req.query.exam}).sort({_id:1}).toArray(function(error,quizzes){
+            res.render("tests.ejs",{quizdata:quizzes,username:req.session.username,data:req.session})
+    })
+    })
+})
+
+app.get('/ExamFilter', (req, res) => {
+    if(req.query.test==null &&req.query.exam!=null){
+
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+        blog.collection("studymaterial").find({"type":req.query.exam}).sort({_id:1}).toArray(function(error,materials){
+            res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
+            
+            ,examname:req.query.exam,test:"Government Exams"})
+    })
+    })
+}
+else{
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+        blog.collection("studymaterial").find({
+
+      
+            $and: [
+                {'type':req.query.exam},
+                {'content':req.query.test}
+            ]
+        }
+          
+            
+            ).sort({_id:1}).toArray(function(error,materials){
+            res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
+            
+            ,examname:req.query.exam,test:req.query.test})
+    })
+    }) 
+}
+
+
 })
 
 
@@ -753,6 +833,11 @@ length4+=1
     
   })
 
+
+
+
+
+
 app.post("/uploadcontent" ,function(req,res){  
 
     // if(req.body.status=="newpublic"){
@@ -763,12 +848,13 @@ console.log(req.body)
             blog.collection("studymaterial").insertOne({
         
                 "topic":req.body.details,
-                "content":req.body.content,
-                "uploadedby":req.session.username,
-                "data":req.body.uploadimg,
+                "content":req.body.examname,
+                "type":req.body.examtype,
+                "data":req.body.uploadPreview,
                 "filedata":req.body.myfile,
                 "status":req.body.status,
-                "details":req.body.newdetails
+                "details":req.body.details,
+                "MaterialType":req.body.MaterialType
             },function(err,data){
                     res.json({
                        "message":"success",

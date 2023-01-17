@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <style>
-  #name{
-    display:none
+  #name {
+    display: none
   }
 </style>
+
 <body>
 
   <%- include('../partials/heading.hbs') %>
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img class="d-block " src="https://media.istockphoto.com/photos/stairs-concept-the-next-step-picture-id1286232663?b=1&k=20&m=1286232663&s=170667a&w=0&h=RsUkRAiPrisvJ3Mcj4CZfuy0fAnsKkVZ_JZ7Gepi49E=" alt="First slide"style="width:100%;height:600px">
@@ -42,69 +52,449 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a> 
-</div>
+</div> -->
+    <!-----------------------------------------Government exams--------------------------------------->
 
-  
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- Container wrapper -->
+      <div class="container-fluid">
+        <!-- Toggle button -->
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+          data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+
+          <!-- Left links -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item " style="margin-left:20pxpx;">
+              <a class="nav-link" href="/ExamFilter?exam=Government Exams"><button style="border:none;">Government
+                  Exams</button></a>
+            <li class="nav-item " style="margin-left: 150px;">
+              <a class="nav-link" href="/ExamFilter?exam=Management Exams"><button style="border:none;">Management
+                  Exams</button></a>
+            </li>
+            <li class="nav-item " style="margin-left: 150px;">
+              <a class="nav-link" href="/ExamFilter?exam=Bank Exams"><button style="border:none;">Bank
+                  Exams</button></a>
+            </li>
+            <li class="nav-item " style="margin-left: 150px;">
+              <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams"><button
+                  style="border:none;">Engineering Entrance Exams</button></a>
+            </li>
+
+            <li class="nav-item " style="margin-left: 150px;">
+              <a class="nav-link" href="/ExamFilter?exam=Other Exams"><button style="border:none;">Other
+                  Exams</button></a>
+            </li>
+
+          </ul>
+          <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+
+        <!-- Right elements -->
+
+        <!-- Avatar -->
+
+      </div>
+      <!-- Right elements -->
+      </div>
+      <!-- Container wrapper -->
+    </nav>
+
+    <h1>
+      <%=examname %>
+    </h1>
+    <% if(examname=="Government Exams" ) {%>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container-fluid">
+          <!-- Toggle button -->
+          <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item " style="margin-left:20pxpx;">
+                <a class="nav-link" href="/ExamFilter?exam=Government Exams&&test=SSC CGL"><button
+                    style="border:none;">SSC CGL</button></a>
+              <li class="nav-item " style="margin-left: 150px;">
+                <a class="nav-link" href="/ExamFilter?exam=Government Exams&&test=CET"><button
+                    style="border:none;">CET</button></a>
+              </li>
+              <li class="nav-item " style="margin-left: 150px;">
+                <a class="nav-link" href="/ExamFilter?exam=Government Exams&&test=Railways"><button
+                    style="border:none;">Railways</button></a>
+              </li>
+              <li class="nav-item " style="margin-left: 150px;">
+                <a class="nav-link" href="/ExamFilter?exam=Government Exams&&test=NNN"><button
+                    style="border:none;">NNN</button></a>
+              </li>
 
 
-  <div id="name"style="display:none"><%=username%></div>
 
-  <script>
+            </ul>
+            <!-- Left links -->
+          </div>
+          <!-- Collapsible wrapper -->
 
-  let f= document.getElementById("name").innerText
- if(typeof(f)!='undefined'){
-   document.getElementById("myname").innerText=f
-}
-else{
-  document.getElementById("myname").innerText="Anonymous"
- }
+          <!-- Right elements -->
 
-$(document).ready(function () {   
-    $("#myform1").on("submit",function(e){
- e.preventDefault()
-  var usercomment= $("#usercomment").val()
-  var username= $("#username").val()
-$.ajax({
-        type: "POST",
-        url: '/submitcomment',
-        data: {usercomment:usercomment,username:username},
-        success: function(response)
-        {
-          location.reload()
-       }
-   });   
- });
-});
+          <!-- Avatar -->
 
+        </div>
+        <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+      </nav>
 
+      <% } %>
+        <% if(examname=="Management Exams" ) {%>
 
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+              <!-- Toggle button -->
+              <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+              </button>
 
+              <!-- Collapsible wrapper -->
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Navbar brand -->
 
-
-</script>
-
-
-
-
-
-<script>
-
-
-   
-// $('.carousel').carousel({
-//   interval: 200
-// })
-
-
-
-$('.carousel').on('click', '.carousel-control[data-slide]', function (ev) {
-    ev.preventDefault();
-    $('.carousel').carousel($(this).data('slide'));
-});
-</script>
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item " style="margin-left:20pxpx;">
+                    <a class="nav-link" href="/ExamFilter?exam=Management Exams&&test=GMAT"><button
+                        style="border:none;">GMAT</button></a>
+                  <li class="nav-item " style="margin-left: 150px;">
+                    <a class="nav-link" href="/ExamFilter?exam=Management Exams&&test=CAT"><button
+                        style="border:none;">CAT</button></a>
+                  </li>
+                  <li class="nav-item " style="margin-left: 150px;">
+                    <a class="nav-link" href="/ExamFilter?exam=Management Exams&&test=SNAP"><button
+                        style="border:none;">SNAP</button></a>
+                  </li>
+                  <li class="nav-item " style="margin-left: 150px;">
+                    <a class="nav-link" href="/ExamFilter?exam=Management Exams&&test=XAT"><button
+                        style="border:none;">XAT</button></a>
+                  </li>
 
 
 
+                </ul>
+                <!-- Left links -->
+              </div>
+              <!-- Collapsible wrapper -->
+
+              <!-- Right elements -->
+
+              <!-- Avatar -->
+
+            </div>
+            <!-- Right elements -->
+            </div>
+            <!-- Container wrapper -->
+          </nav>
+
+          <% } %>
+            <% if(examname=="Bank Exams" ) {%>
+
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <!-- Container wrapper -->
+                <div class="container-fluid">
+                  <!-- Toggle button -->
+                  <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                  </button>
+
+                  <!-- Collapsible wrapper -->
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Navbar brand -->
+
+                    <!-- Left links -->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item " style="margin-left:20pxpx;">
+                        <a class="nav-link" href="/ExamFilter?exam=Bank Exams&&test=IBPS"><button
+                            style="border:none;">IBPS</button></a>
+                      <li class="nav-item " style="margin-left: 150px;">
+                        <a class="nav-link" href="/ExamFilter?exam=Bank Exams&&test=CanaraBank"><button
+                            style="border:none;">CANARA BANK</button></a>
+                      </li>
+                      <li class="nav-item " style="margin-left: 150px;">
+                        <a class="nav-link" href="/ExamFilter?exam=Bank Exams&&test=SBI-PO"><button
+                            style="border:none;">SBI-PO</button></a>
+                      </li>
+                      <li class="nav-item " style="margin-left: 150px;">
+                        <a class="nav-link" href="/ExamFilter?exam=Bank Exams&&test=INDIAN BANK"><button
+                            style="border:none;">INDIAN BANK</button></a>
+                      </li>
+
+
+
+                    </ul>
+                    <!-- Left links -->
+                  </div>
+                  <!-- Collapsible wrapper -->
+
+                  <!-- Right elements -->
+
+                  <!-- Avatar -->
+
+                </div>
+                <!-- Right elements -->
+                </div>
+                <!-- Container wrapper -->
+              </nav>
+
+              <% } %>
+                <% if(examname=="Engineering Entrance Exams" ) {%>
+
+                  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+                      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                      </button>
+
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item " style="margin-left:20pxpx;">
+                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=IIT"><button
+                                style="border:none;">IIT-JEE</button></a>
+                          <li class="nav-item " style="margin-left: 150px;">
+                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=NEE"><button
+                                style="border:none;">NEE</button></a>
+                          </li>
+                          <li class="nav-item " style="margin-left: 150px;">
+                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=KITJEE"><button
+                                style="border:none;">KITJEE</button></a>
+                          </li>
+                          <li class="nav-item " style="margin-left: 150px;">
+                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=NIT"><button
+                                style="border:none;">NIT</button></a>
+                          </li>
+
+
+
+                        </ul>
+                      </div>
+
+
+
+                    </div>
+                    </div>
+                  </nav>
+
+                  <% } %>
+                    <!-- <div style="display:grid;grid-template-columns:auto auto auto auto auto ;gap:0px"> -->
+                    <div class="panel panel-primary bg-light m-4" id="result_panel" style="height:auto;">
+                      <div class="panel-body">
+                        <ul class="list-group">
+                          <h2>Updates</h2>
+
+                          <% materials.forEach(function(elem){%>
+                            <% if(elem.MaterialType=="Notification" ){ %>
+
+                              <!-- <div class="panel-heading"><h3 class="panel-title">Result List</h3>
+                              </div> -->
+                              <li class="list-group-item"><strong>
+
+                                  <div style="display: grid;grid-template-columns: 20% 60% 20%;gap:3px">
+                                    <p>
+                                      <%=elem.content %>
+                                    </p>
+                                    <p>
+                                      <%=elem.details %>
+                                    </p>
+                                    <div style="width:100%;">
+                                      <a href="<%=elem.data%>">
+                                        <%=elem.content%>
+                                      </a>
+                                    </div>
+
+                                  </div>
+
+                              </li>
+
+                              <% }%>
+
+
+
+                                <%}) %>
+                        </ul>
+
+                      </div>
+                    </div>
+                    <!-- </div> -->
+
+                    <div class="bg-light m-4" style="height: auto;">
+                      <h2>Study Materials</h2>
+
+                      <% materials.forEach(function(elem){%>
+
+                        <% if(elem.MaterialType=="StudyMaterial" ){ %>
+                          <div class="card" style="width:100%;height: 130px;">
+
+                            <div style="display:grid;grid-template-columns:20% 60% 20% ;gap:0px;padding-bottom: 20px;">
+
+                              <div>
+                                <img class="border" style="width:50%;height:110px; margin:0px"
+                                  src="https://images.unsplash.com/photo-1673877980197-c3ce24a8ab17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
+                                  alt="">
+                              </div>
+                              <div style="width: auto;">
+                                <div class="card-body" style="width: 50%; margin-left: 100px;">
+                                  <h5 class="card-title">
+                                    <%=elem.content %>
+                                  </h5>
+                                  <p class="card-text">
+                                    <%=elem.details %>
+                                  </p>
+                                </div>
+                              </div>
+                              <div class="mt-2">
+
+                                <a href="<%=elem.data%>" style="width:100%;">
+                                  <%=elem.content%>
+                                </a>
+                              </div>
+
+                            </div>
+                          </div>
+
+                          <% }%>
+                            <%}) %>
+
+
+                    </div>
+
+
+                    <div class="bg-light m-4" style="height: auto;">
+
+                    <h2>Solved Papers</h2>
+
+                    <% materials.forEach(function(elem){%>
+
+                      <% if(elem.MaterialType=="SolvedPapers" ){ %>
+
+
+                        <div class="card" style="width:100%;height: 130px;">
+
+                          <div style="display:grid;grid-template-columns:20% 60% 20% ;gap:0px;padding-bottom: 20px;">
+
+                            <div>
+                              <img class="border" style="width:50%;height:110px; margin:0px"
+                                src="https://images.unsplash.com/photo-1673877980197-c3ce24a8ab17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
+                                alt="">
+                            </div>
+                            <div style="width: auto;">
+                              <div class="card-body" style="width: 50%;margin-left: 100px;">
+                                <h5 class="card-title">
+                                  <%=elem.content %>
+                                </h5>
+                                <p class="card-text">
+                                  <%=elem.details %>
+                                </p>
+                              </div>
+                            </div>
+                            <div class="mt-2">
+
+                              <a href="<%=elem.data%>" style="width:100%;">
+                                <%=elem.content%>
+                              </a>
+                            </div>
+
+                          </div>
+                        </div>
+
+                        <% }%>
+                          <%}) %>
+
+                    </div>
+                            <!-------------------------------------------------------------------------------------------->
+                            <!-----------------------------------------Management exams--------------------------------------->
+
+
+                            <!-------------------------------------------------------------------------------------------->
+                            <div id="name" style="display:none">
+                              <%=username%>
+                            </div>
+
+                            <!-- Navbar -->
+
+                            <script>
+
+                              let f = document.getElementById("name").innerText
+                              if (typeof (f) != 'undefined') {
+                                document.getElementById("myname").innerText = f
+                              }
+                              else {
+                                document.getElementById("myname").innerText = "Anonymous"
+                              }
+
+                              $(document).ready(function () {
+                                $("#myform1").on("submit", function (e) {
+                                  e.preventDefault()
+                                  var usercomment = $("#usercomment").val()
+                                  var username = $("#username").val()
+                                  $.ajax({
+                                    type: "POST",
+                                    url: '/submitcomment',
+                                    data: { usercomment: usercomment, username: username },
+                                    success: function (response) {
+                                      location.reload()
+                                    }
+                                  });
+                                });
+                              });
+
+
+
+
+
+
+                            </script>
+
+
+
+
+
+                            <script>
+
+
+
+                              // $('.carousel').carousel({
+                              //   interval: 200
+                              // })
+
+
+
+                              $('.carousel').on('click', '.carousel-control[data-slide]', function (ev) {
+                                ev.preventDefault();
+                                $('.carousel').carousel($(this).data('slide'));
+                              });
+                            </script>
 
 
 
@@ -112,13 +502,19 @@ $('.carousel').on('click', '.carousel-control[data-slide]', function (ev) {
 
 
 
-   
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous">
-    </script>
+
+
+
+
+                            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                              integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                              crossorigin="anonymous">
+                              </script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                              integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+                              crossorigin="anonymous">
+                              </script>
 
 </body>
+
 </html>
