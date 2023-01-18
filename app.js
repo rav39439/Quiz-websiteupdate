@@ -691,8 +691,8 @@ app.get('/filterexam', (req, res) => {
         var blog=client.db("blog")
 
 
-        blog.collection("Quizzes").find({"quizname":req.query.exam}).sort({_id:1}).toArray(function(error,quizzes){
-            res.render("tests.ejs",{quizdata:quizzes,username:req.session.username,data:req.session})
+        blog.collection("Quizzes").find({"examname":req.query.exam}).sort({_id:1}).toArray(function(error,quizzes){
+            res.render("listoftests.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes),username:req.session.username,data:req.session})
     })
     })
 })
@@ -1562,7 +1562,7 @@ app.get("/enterquiz4",function(req,res){
 
 app.get("/enterquiz1",function(req,res){
 
-    if(req.query.quiz=="Highlevelexam"){
+   // if(req.query.quiz=="Highlevelexam"){
 console.log(req.body.Mytable2)
         MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
             var blog=client.db("blog")
@@ -1607,17 +1607,17 @@ let noofquizattemts=data.quizattempters.length
             ,section3length:section3length,section4length:section4length ,time:time,quizattempts:noofquizattemts})
             })
                   })
-    }
+  //  }
    
-    if(req.query.quiz=="Multisectionexam"){
+    // if(req.query.quiz=="Multisectionexam"){
 
-        res.render("readinfo2.hbs",{table2:req.query.myquiz,Myname:req.session.username,Myreg:req.session.uniquecode})
+    //     res.render("readinfo2.hbs",{table2:req.query.myquiz,Myname:req.session.username,Myreg:req.session.uniquecode})
 
-    }
-    if(req.query.quiz=="simplequiz"){
+    // }
+    // if(req.query.quiz=="simplequiz"){
 
-        res.render("readinfo1.hbs",{table2:req.query.myquiz,Myname:req.session.username,Myreg:req.session.uniquecode})
-    }  
+    //     res.render("readinfo1.hbs",{table2:req.query.myquiz,Myname:req.session.username,Myreg:req.session.uniquecode})
+    // }  
 })
 
 
