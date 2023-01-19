@@ -259,19 +259,15 @@
 
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                           <li class="nav-item " style="margin-left:20pxpx;">
-                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=IIT"><button
-                                style="border:none;">IIT-JEE</button></a>
+                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=IIT">IIT-JEE></a>
                           <li class="nav-item " style="margin-left: 150px;">
-                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=NEE"><button
-                                style="border:none;">NEE</button></a>
+                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=NEE">NEE</a>
                           </li>
                           <li class="nav-item " style="margin-left: 150px;">
-                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=KITJEE"><button
-                                style="border:none;">KITJEE</button></a>
+                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=KITJEE">KITJEE</a>
                           </li>
                           <li class="nav-item " style="margin-left: 150px;">
-                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=NIT"><button
-                                style="border:none;">NIT</button></a>
+                            <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=NIT">NIT</a>
                           </li>
 
 
@@ -286,27 +282,27 @@
                   </nav>
 
                   <% } %>
-                  <h1>
+                  <h1 style="color:red">
                     <%=examname %>
                   </h1>
                     <!-- <div style="display:grid;grid-template-columns:auto auto auto auto auto ;gap:0px"> -->
-                    <div class="panel panel-primary bg-light m-4" id="result_panel" style="height:auto;">
-                      <div class="panel-body">
+                    <div class="panel panel-primary  bg-light m-4" id="result_panel" style="height:auto;border:1px solid black;">
+                      <div class="panel-body " style="background-color: rgb(131, 173, 205);">
                         <ul class="list-group">
-                          <h2>Updates</h2>
-
+                          <h2 style="color:black">Updates</h2>
+                      
                           <% materials.forEach(function(elem){%>
                             <% if(elem.MaterialType=="Notification" ){ %>
 
                               <!-- <div class="panel-heading"><h3 class="panel-title">Result List</h3>
                               </div> -->
-                              <li class="list-group-item"><strong>
+                              <li class="list-group-item" style="background-color: rgb(255, 255, 255);"><strong>
 
                                   <div style="display: grid;grid-template-columns: 20% 60% 20%;gap:3px">
                                     <p>
                                       <%=elem.content %>
                                     </p>
-                                    <p style="margin-left: 100px;">
+                                    <p >
                                       <%=elem.details %>
                                     </p>
                                     <div style="width:100%;">
@@ -330,8 +326,11 @@
                     </div>
                     <!-- </div> -->
 
-                    <div class="bg-light m-4" style="height: auto; border-radius: 9px;">
-                      <h2>Study Materials</h2>
+                    <div class="bg-light m-4" style="height: auto; border:1px solid black;">
+                      <div style="width: 100%;background-color: rgb(131, 173, 205);padding-bottom: 4px;">
+                        <h2 style="color:black">Study Materials</h2>
+
+                      </div>
 
                       <% materials.forEach(function(elem){%>
 
@@ -341,12 +340,12 @@
                             <div style="display:grid;grid-template-columns:20% 60% 20% ;gap:0px;padding-bottom: 20px;">
 
                               <div>
-                                <img class="border" style="width:50%;height:110px; margin:0px"
+                                <img class="border" style="width:100%;height:110px; margin:0px"
                                   src="https://images.unsplash.com/photo-1673877980197-c3ce24a8ab17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
                                   alt="">
                               </div>
                               <div style="width: auto;">
-                                <div class="card-body" style="width: 50%; margin-left: 100px;">
+                                <div class="card-body" style="width: 50%;">
                                   <h5 class="card-title">
                                     <%=elem.content %>
                                   </h5>
@@ -372,10 +371,11 @@
                     </div>
 
 
-                    <div class="bg-light m-4" style="height: auto;border-radius: 90px;">
+                    <div class="bg-light m-4" style="height: auto;border-radius: 90px;border:1px solid black;">
+                      <div style="width: 100%;background-color: rgb(131, 173, 205);padding-bottom: 4px;">
 
-                    <h2>Solved Papers</h2>
-
+                    <h2 style="color: black;">Solved Papers</h2>
+                      </div>
                     <% materials.forEach(function(elem){%>
 
                       <% if(elem.MaterialType=="SolvedPapers" ){ %>
@@ -386,12 +386,12 @@
                           <div style="display:grid;grid-template-columns:20% 60% 20% ;gap:0px;padding-bottom: 20px;">
 
                             <div>
-                              <img class="border" style="width:50%;height:110px; margin:0px"
+                              <img class="border" style="width:100%;height:110px; margin:0px"
                                 src="https://images.unsplash.com/photo-1673877980197-c3ce24a8ab17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
                                 alt="">
                             </div>
                             <div style="width: auto;">
-                              <div class="card-body" style="width: 50%;margin-left: 100px;">
+                              <div class="card-body" style="width: 50%;">
                                 <h5 class="card-title">
                                   <%=elem.content %>
                                 </h5>

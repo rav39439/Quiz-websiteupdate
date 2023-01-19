@@ -149,6 +149,9 @@ img{
       <!-- Left links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item " style="margin-left: 150px;">
+          <a class="nav-link" href="/Mysecrets"><button style="border:none;"onclick="change(event)">All Exams</button></a>
+        </li>
+        <li class="nav-item " style="margin-left: 150px;">
           <a class="nav-link" href="/filterexam?exam=Management Exams"><button style="border:none;"onclick="change(event)">Management Exams</button></a>
         </li>
         <li class="nav-item " style="margin-left: 150px;">
@@ -174,6 +177,154 @@ img{
   </div>
   <!-- Container wrapper -->
 </nav>
+
+<!----------------------------filter------------------------------------------->
+
+<% if(examname=="Government Exams" ) {%>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMark" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMark">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item " style="margin-left:20pxpx;">
+            <a class="nav-link" href="/ExamFilter1?exam=Government Exams&&test=SSC CGL"><button
+                style="border:none;">SSC CGL</button></a>
+          <li class="nav-item " style="margin-left: 150px;">
+            <a class="nav-link" href="/ExamFilter1?exam=Government Exams&&test=CET"><button
+                style="border:none;">CET</button></a>
+          </li>
+          <li class="nav-item " style="margin-left: 150px;">
+            <a class="nav-link" href="/ExamFilter1?exam=Government Exams&&test=Railways"><button
+                style="border:none;">Railways</button></a>
+          </li>
+          <li class="nav-item " style="margin-left: 150px;">
+            <a class="nav-link" href="/ExamFilter1?exam=Government Exams&&test=NNN"><button
+                style="border:none;">NNN</button></a>
+          </li>
+        </ul>
+      </div>
+     
+    </div>
+    </div>
+  </nav>
+
+  <% } %>
+    <% if(examname=="Management Exams" ) {%>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMar" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMar">
+           
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item " style="margin-left:20pxpx;">
+                <a class="nav-link" href="/ExamFilter1?exam=Management Exams&&test=GMAT"><button
+                    style="border:none;">GMAT</button></a>
+              <li class="nav-item " style="margin-left: 150px;">
+                <a class="nav-link" href="/ExamFilter1?exam=Management Exams&&test=CAT"><button
+                    style="border:none;">CAT</button></a>
+              </li>1
+              <li class="nav-item " style="margin-left: 150px;">
+                <a class="nav-link" href="/ExamFilter1?exam=Management Exams&&test=SNAP"><button
+                    style="border:none;">SNAP</button></a>
+              </li>
+              <li class="nav-item " style="margin-left: 150px;">
+                <a class="nav-link" href="/ExamFilter1?exam=Management Exams&&test=XAT"><button
+                    style="border:none;">XAT</button></a>
+              </li>
+
+
+
+            </ul>
+          </div>
+        
+
+        </div>
+        </div>
+      </nav>
+
+      <% } %>
+        <% if(examname=="Bank Exams" ) {%>
+
+          <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMa" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMa">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item " style="margin-left:20pxpx;">
+                    <a class="nav-link" href="/ExamFilter1?exam=Bank Exams&&test=IBPS"><button
+                        style="border:none;">IBPS</button></a>
+                  <li class="nav-item " style1="margin-left: 150px;">
+                    <a class="nav-link" href="/ExamFilter1?exam=Bank Exams&&test=CanaraBank"><button
+                        style="border:none;">CANARA BANK</button></a>
+                  </li>
+                  <li class="nav-item " style="margin-left: 150px;">
+                    <a class="nav-link" href="/ExamFilter1?exam=Bank Exams&&test=SBI-PO"><button
+                        style="border:none;">SBI-PO</button></a>
+                  </li>
+                  <li class="nav-item " style="margin-left: 150px;">
+                    <a class="nav-link" href="/ExamFilter1?exam=Bank Exams&&test=INDIAN BANK"><button
+                        style="border:none;">INDIAN BANK</button></a>
+                  </li>
+
+                </ul>
+              </div>
+
+            </div>
+            </div>
+          </nav>
+
+          <% } %>
+            <% if(examname=="Engineering Entrance Exams" ) {%>
+
+              <nav class="navbar navbar-expand-lg navbar-light bg-light mt-4">
+                <div class="container-fluid">
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltM" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNavAltM">
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item " style="margin-left:20pxpx;">
+                        <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams&&test=IIT"><button
+                            style="border:none;">IIT-JEE</button></a>
+                      <li class="nav-item " style="margin-left: 150px;">
+                        <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams&&test=NEE"><button
+                            style="border:none;">NEE</button></a>
+                      </li>
+                      <li class="nav-it1em " style="margin-left: 150px;">
+                        <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams&&test=KITJEE"><button
+                            style="border:none;">KITJEE</button></a>
+                      </li>
+                      <li class="nav-item " style="margin-left: 150px;">
+                        <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams&&test=NIT"><button
+                            style="border:none;">NIT</button></a>
+                      </li>
+
+
+
+                    </ul>
+                  </div>
+
+
+
+                </div>
+                </div>
+              </nav>
+
+<% } %> 
+<!---------------------------------------------------------------------------------->
+
+
+
 <h1 style="color:red">Free Quizzes</h1>
 
 <div class="showgrid mb-4"style="margin-bottom:70px">
