@@ -33,6 +33,11 @@
     </div>
 
     <div class="form-group">
+      <label >Enter preview image address</label><br>
+      <input type="text" id="previewimg"><br>
+      </div>
+
+    <div class="form-group">
       <label for="exampleFormControlSelect1"> select the topic of your content</label>
       <select class="form-control" id="content1" name="content" style="width:200px;">
         <option value="Government Exams">Government Exams</option>
@@ -104,6 +109,7 @@ $("#myform").on("submit",function(e){
      examname:$("#details3").val(),
      examtype:$("#content1").val(),
      status:$("#content2").val(),
+     previewimg:$("#previewimg").val(),
     MaterialType:$("#content3").val(),
      uploadPreview:imagePath1,
      myfile:imagePath,
@@ -117,7 +123,7 @@ $("#myform").on("submit",function(e){
             success:function(response){
             
                 alert(response.message)
-              
+              imagePath=""
              
              
             }

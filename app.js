@@ -706,6 +706,8 @@ app.get('/ExamFilter', (req, res) => {
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
         blog.collection("studymaterial").find({"type":req.query.exam}).sort({_id:1}).toArray(function(error,materials){
+
+
             res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
             
             ,examname:req.query.exam,test:"Government Exams"})
@@ -714,6 +716,7 @@ app.get('/ExamFilter', (req, res) => {
 }
 else{
 
+    let image=""
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
         blog.collection("studymaterial").find({
@@ -727,6 +730,7 @@ else{
           
             
             ).sort({_id:1}).toArray(function(error,materials){
+                
             res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
             
             ,examname:req.query.exam,test:req.query.test})
@@ -891,6 +895,7 @@ console.log(req.body)
                 "filedata":req.body.myfile,
                 "status":req.body.status,
                 "details":req.body.details,
+                "previewimg":req.body.previewimg,
                 "MaterialType":req.body.MaterialType
             },function(err,data){
                     res.json({
