@@ -149,6 +149,9 @@ app.get('/myhome', function (req, res) {
 })
 app.get('/', function (req, res) {
 
+    const value = date.format((new Date(Date.now())),
+  'DD/MM/YYYY');
+  console.log(value)
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
         blog.collection("studymaterial").find({type:"Government Exams"}).toArray(function(error,materials){
@@ -159,7 +162,6 @@ app.get('/', function (req, res) {
             let length5
 
 
-            console.log(materials)
    materials.forEach((elem)=>{
     if(elem.content=="govexams"){
         length1+=1
@@ -183,7 +185,7 @@ length4+=1
 
 
  res.render("index.ejs",{materials:materials,username:req.session.username,length1:length1,length2:length2,length3:length3
-,length4:length4,length5:length5,examname:"Government Exams"
+,length4:length4,length5:length5,examname:"Government Exams",test:"Government Exams"
 })         
         })
         })
@@ -645,7 +647,7 @@ app.get('/Mysecrets', (req, res) => {
 
         blog.collection("Quizzes").find().sort({_id:1}).toArray(function(error,quizzes){
            // console.log(quizzes)
-            res.render("listoftests.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes), username:req.session.username,data:req.session,examname:"Government Exams"})
+            res.render("listoftests.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes), username:req.session.username,data:req.session,examname:"Government Exams",test:"All Quizzes"})
 
 
 
@@ -681,7 +683,7 @@ app.get('/secrets', (req, res) => {
 
         blog.collection("Quizzes").find().sort({_id:1}).toArray(function(error,quizzes){
             console.log(quizzes)
-            res.render("tests.ejs",{quizdata:quizzes,username:req.session.username})
+            res.render("tests.ejs",{quizdata:quizzes,username:req.session.username,test:"All Quizzes"})
     })
     })
 })
@@ -694,7 +696,7 @@ app.get('/filterexam', (req, res) => {
 
 
         blog.collection("Quizzes").find({"examname":req.query.exam}).sort({_id:1}).toArray(function(error,quizzes){
-            res.render("listoftests.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes),username:req.session.username,data:req.session,examname:req.query.exam})
+            res.render("listoftests.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes),username:req.session.username,data:req.session,examname:req.query.exam,test:req.query.exam})
     })
     })
 })
@@ -710,7 +712,7 @@ app.get('/ExamFilter', (req, res) => {
 
             res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
             
-            ,examname:req.query.exam,test:"Government Exams"})
+            ,examname:req.query.exam,test:req.query.exam})
     })
     })
 }
@@ -748,7 +750,7 @@ app.get('/ExamFilter1', (req, res) => {
         var blog=client.db("blog")
         blog.collection("Quizzes").find({"examname":req.query.exam}).sort({_id:1}).toArray(function(error,quizzes){
             res.render("listoftests.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes), username:req.session.username,data:req.session
-            ,examname:req.query.exam})
+            ,examname:req.query.exam,test:req.query.exam})
     })
     })
 }
@@ -896,7 +898,9 @@ console.log(req.body)
                 "status":req.body.status,
                 "details":req.body.details,
                 "previewimg":req.body.previewimg,
-                "MaterialType":req.body.MaterialType
+                "MaterialType":req.body.MaterialType,
+                "currentDate":req.body.currentDate
+
             },function(err,data){
                     res.json({
                        "message":"success",

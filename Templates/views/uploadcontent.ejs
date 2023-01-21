@@ -38,6 +38,11 @@
       </div>
 
     <div class="form-group">
+      <label >Enter Date</label><br>
+      <input type="text" id="content4"><br>
+      </div>
+
+    <div class="form-group">
       <label for="exampleFormControlSelect1"> select the topic of your content</label>
       <select class="form-control" id="content1" name="content" style="width:200px;">
         <option value="Government Exams">Government Exams</option>
@@ -111,6 +116,7 @@ $("#myform").on("submit",function(e){
      status:$("#content2").val(),
      previewimg:$("#previewimg").val(),
     MaterialType:$("#content3").val(),
+    currentDate:$("#content4").val(),
      uploadPreview:imagePath1,
      myfile:imagePath,
     
