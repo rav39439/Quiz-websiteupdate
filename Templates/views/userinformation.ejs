@@ -101,6 +101,8 @@ margin-top: 90px;
 
 <div class="new2">
 <form action="/login" method="POST">
+
+  <% if(!data.username){ %> 
   <div class="form-group">
     <label for="exampleInputEmail1">Username</label>
     <input type="text" class="form-control" id="uniquecode" name="username" aria-describedby="emailHelp" placeholder="Enter your Username">
@@ -116,8 +118,10 @@ margin-top: 90px;
 </div>
 </div>
 
+<% } else {%> 
 
-
+<h1 style="color:red;font-style: italic;">You are logged in </h1>
+  <% } %> 
 <div class="quizenter">
 
 </div>

@@ -183,13 +183,24 @@ length4+=1
     }
    })
 
+   
+   //---------------------------quiz-----------------------------------------------------
 
- res.render("index.ejs",{materials:materials,username:req.session.username,length1:length1,length2:length2,length3:length3
-,length4:length4,length5:length5,examname:"Government Exams",test:"Government Exams"
-,data:req.session,quizdata:null
+   MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+    var blog=client.db("blog")
+    blog.collection("Quizzes").find({"examname":"Government Exams"}).sort({_id:1}).toArray(function(error,quizzes){
+        res.render("index.ejs",{materials:materials,quizdata:quizzes,stringdata:JSON.stringify(quizzes), username:req.session.username,data:req.session
+        ,examname:"Government Exams",test:"Government Exams"})
+})
+})
+
+
+
+   //--------------------------------------------------------------------------------------
+ 
 })         
         })
-        })
+        
 
 
 
@@ -265,7 +276,8 @@ blog.collection("users").findOne({
     ]
     
 },function(error,data){
-    if(data){
+    console.log(data)
+    if(data.Admin){
         // req.session.email=data.email;
         // req.session.username=data.username
         // req.session.isadmin=data.Admin
@@ -300,8 +312,15 @@ blog.collection("users").findOne({
       // res.redirect('/')
     }
     else{
+        req.session.username=data.username
+        req.session.email=data.email
+        req.session.isadmin=data.isadmin
+        res.redirect('/')
     }
     
+    if(error){
+        res.send("Wrong username or password")
+    }
 })
   
 })
@@ -338,7 +357,7 @@ app.get('/Explaination', (req, res) => {
 
 
 app.get('/login', (req, res) => {
-    res.render("userinformation.ejs")
+    res.render("userinformation.ejs",{data:req.session})
 })
 
 
@@ -455,7 +474,7 @@ var transporter=nodemailer.createTransport(sendgridtransport({
 
 app.get('/register', (req, res) => {
     // if(!req.session){
-        res.render("register.ejs",{username:req.session.username})
+        res.render("register.ejs",{username:req.session.username,data:req.session})
 
   //  }
     // else{
@@ -606,7 +625,6 @@ MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.m
 
 app.post("/newquiz4", (req, res) => {
 
-console.log(req.body.Mytable2)
     var MongoClient=require("mongodb").MongoClient;
 
 
@@ -616,7 +634,14 @@ console.log(req.body.Mytable2)
       blog.collection("Quizzes").findOne({"quizname":req.body.Mytable2}, function(error,quiz){
         console.log(quiz)
 
-        res.render("newquiz4.hbs",{userd:JSON.stringify(quiz.quizquestions),name2: req.body.Myname2, reg: req.body.registration, table2: req.body.Mytable2})
+        if(req.session.username){
+
+            res.render("newquiz4.hbs",{userd:JSON.stringify(quiz.quizquestions),name2: req.body.Myname2, reg: req.body.registration, table2: req.body.Mytable2})
+
+        }
+        else{
+            res.send(`<h1 style="color:red;font-style:italic">You are not Registered or logged in</h1>`)
+        }
             })
 
 })
@@ -2225,27 +2250,27 @@ return data.length
 }
 
 
-ssd().then((data)=>{
-    return data
-})
-console.log(ssd())
+// ssd().then((data)=>{
+//     return data
+// })
+// console.log(ssd())
 
-                //        blog.collection("users").insertOne({
+                       blog.collection("users").insertOne({
                     
-                //             "username":req.username,
-                //             "password":req.password,
-                //             "email":req.email,
-                //             "Admin":false,
-                //             "Joined":date.format((new Date(Date.now())),
-                //             'DD/MM/YYYY')
+                            "username":req.username,
+                            "password":req.password,
+                            "email":req.email,
+                            "Admin":false,
+                            "Joined":date.format((new Date(Date.now())),
+                            'DD/MM/YYYY')
                         
             
-                //         },function(err,data){
-                //                 res.json({
-                //                    "message":"successively registered",
+                        },function(err,data){
+                                res.json({
+                                   "message":"successively registered",
                                 
-                //                 })
-                //                 })
+                                })
+                                })
  
                  })
                 })
@@ -2396,8 +2421,6 @@ const PORT=process.env.PORT
     if(req.query.token){
         const decodedToken=jwt.verify(req.query.token,process.env.KEY_NEW)
     username=decodedToken.username
-       // uniquecode=decodedToken.uniquecode
-       //password=decodedToken.password
         email=decodedToken.email
     
         if(decodedToken.isadmin==true){

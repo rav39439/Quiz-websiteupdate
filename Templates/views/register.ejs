@@ -119,6 +119,8 @@ margin-top: 0px;
   <%- include('../partials/heading.hbs') %>
   <h1 id="mylogin">Register</h1>
 
+  <% if(!data.username){ %> 
+
 <div class="new1">
 <div class="new2">
  
@@ -157,6 +159,10 @@ margin-top: 0px;
 
 </div>
 </div>
+<% } else{ %> 
+
+  <h1 style="color:red;font-style:italic">You are registered</h1>
+  <% } %> 
 </body>
 
 
@@ -187,7 +193,6 @@ $("#myform").on("submit",function(e){
         
     
    };
-alert("send")
         $.ajax({
             url:"/register",
             method:"POST",
