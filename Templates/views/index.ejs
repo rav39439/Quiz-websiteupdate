@@ -398,54 +398,59 @@
                     <div class="bg-light m-4" style="height: auto;border:1px solid black;">
                       <div style="width: 100%;background-color: rgb(131, 173, 205);padding-bottom: 4px;">
 
-                        <h2 style="color: black;">Solved Papers</h2>
+                        <h2 style="color: black;">Free Quizzes</h2>
                       </div>
-                      <% materials.forEach(function(elem){%>
+                      <% if(!data?.isadmin) {%> 
 
-                        <% if(elem.MaterialType=="SolvedPapers" ){ %>
+                      <% quizdata?.forEach(function(elem ,index){%>
 
-
-                          <div class="card" style="width:100%;height:auto;">
-
-                            <div style="display:grid;grid-template-columns:20% 60% 20% ;gap:0px;padding-bottom: 20px;">
-
-                              <div>
-                                <% if(elem.previewimg){ %>
-
-                                  <img class="border" style="width:100%;height:110px; margin:0px"
-                                    src="<%=elem.previewimg%>" alt="">
-                                  <% } else{ %>
-                                    <img class="border" style="width:100%;height:110px; margin:0px"
-                                      src="https://images.unsplash.com/photo-1673877980197-c3ce24a8ab17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
-                                      alt="">
-
-                                      <% } %> 
-
-                            </div>
-                            <div style="width: auto;">
-                              <div class="card-body" style="width: 100%;">
-                                <h5 class="card-title">
-                                  <%=elem.content %>
-                                </h5>
-                                <p class="card-text">
-                                  <%=elem.details %>
-                                </p>
-                              </div>
-                            </div>
-                            <div class="" style="margin-top:47px">
-
-                              <a href="<%=elem.data%>" style="width:100%;">
-                                click here
-                              </a>
-                            </div>
-
+                        <% if(elem.status=='public'){ %> 
+                          <div class="card" style=" margin-top: 20px;">
+                            <form id="myform<%index%>" action="/enterquiz1" method="GET">
+                            <div class="card-body"style="position: relative;">
+                       <div style="display: grid; grid-template-columns:auto auto; gap:3px">
+                             <div>
+                               <h3 class="card-title">Practice Exam for <%=elem.quizname%> </h3>
+                             </div>     
+                       <div>
+                         <input readonly id="name"name="myquiz" type="hidden" value="<%=elem.quizname%>">
+                              <input readonly type="hidden" name="quiz"id="quiz" value="<%=elem.examname%>"> 
+                       <button type="submit" style="position:absolute;right: 20px;;" class="btn btn-primary" >start</button>        
+                       </div>
+                       </div>
+                       <p>Quizname: <%=elem.quizname %></p>
+                              <p class="card-text">  
+                               <div style="display: grid; grid-template-columns:auto auto auto auto; gap:3px">
+                                 <span><i class="fa fa-clock-o" aria-hidden="true">
+                                   <%=elem.time %></i> </span>
+                                 <span><i class="fa fa-book" aria-hidden="true">
+                                   <%=elem.quizname %></i> </span>
+                                 <span><i class="fa fa-question-circle-o" aria-hidden="true">
+                                   <%=elem.noofquestions %> questions</i>
+                                   </span>  
+                                 <span> <i class="fa fa-info" aria-hidden="true">
+                                   <%=elem?.marks %> marks</i>
+                                   </span>  
+                                     </div> 
+                                   </p>
+                       </div>
+                       </form>
                           </div>
+
+                      
                     </div>
 
                     <% }%>
                       <%}) %>
-
+<% } %> 
                         </div>
+
+                        <!------------------quizzes--------------------->
+
+
+
+
+                        <!----------------------------------------->
                         <!-------------------------------------------------------------------------------------------->
                         <!-----------------------------------------Management exams--------------------------------------->
 

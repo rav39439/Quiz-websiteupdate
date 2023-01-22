@@ -186,6 +186,7 @@ length4+=1
 
  res.render("index.ejs",{materials:materials,username:req.session.username,length1:length1,length2:length2,length3:length3
 ,length4:length4,length5:length5,examname:"Government Exams",test:"Government Exams"
+,data:req.session,quizdata:null
 })         
         })
         })
@@ -265,11 +266,38 @@ blog.collection("users").findOne({
     
 },function(error,data){
     if(data){
-        req.session.email=data.email;
-        req.session.username=data.username
-        req.session.isadmin=data.Admin
-        console.log(req.session)
-       res.redirect('/')
+        // req.session.email=data.email;
+        // req.session.username=data.username
+        // req.session.isadmin=data.Admin
+
+
+        payload={
+        email:data.email,
+            username:data.username,
+            isadmin:data.Admin
+                 }
+        const token=jwt.sign(payload,process.env.KEY_NEW,{expiresIn:'1hr'});
+                var mailOptions={
+                    from:"rav39439@gmail.com",
+                    to:data.email,
+                    subject:"signin successful",
+                    html:`<h2>${data.username}! Thanks for registering on our site</h2>
+                    <h4>Please verify your mail to continue</h4>
+                    <a href="http://localhost:8700/verify-email?token=${token}">verify your email</a>
+                    `
+                }
+                transporter.sendMail(mailOptions,function(error,info){
+                
+                    if(error){
+                       console.log(error)
+                    }else{
+                        res.render("verify-email.ejs",{token:token})
+                        console.log("verificartion email is sent")
+                    }
+            })
+       
+
+      // res.redirect('/')
     }
     else{
     }
@@ -426,7 +454,13 @@ var transporter=nodemailer.createTransport(sendgridtransport({
 
 
 app.get('/register', (req, res) => {
-    res.render("register.ejs",{username:req.session.username})
+    // if(!req.session){
+        res.render("register.ejs",{username:req.session.username})
+
+  //  }
+    // else{
+    //     res.send("You are already registered")
+    // }
 })
 
 
@@ -708,13 +742,31 @@ app.get('/ExamFilter', (req, res) => {
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
         blog.collection("studymaterial").find({"type":req.query.exam}).sort({_id:1}).toArray(function(error,materials){
+//-------------------quiz----------------------------------------------------
 
+blog.collection("Quizzes").find(
 
-            res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
+      
+        {'examname':req.query.exam},
+        
+    
+
+  
+    
+    ).sort({_id:1}).toArray(function(error,quizzes){
+
+        res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
             
-            ,examname:req.query.exam,test:req.query.exam})
+            ,examname:req.query.exam,test:req.query.exam,quizdata:quizzes,stringdata:JSON.stringify(quizzes)})
+
+
+    })
+//--------------------------------------------------------------------
+
     })
     })
+
+
 }
 else{
 
@@ -732,10 +784,31 @@ else{
           
             
             ).sort({_id:1}).toArray(function(error,materials){
-                
-            res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
+
+
+ //-------------------quiz----------------------------------------------------
+
+ blog.collection("Quizzes").find({
+
+      
+    $and: [
+        {'examname':req.query.exam},
+        {'exam':req.query.test}
+    ]
+}
+  
+    
+    ).sort({_id:1}).toArray(function(error,quizzes){
+
+
+        res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
             
-            ,examname:req.query.exam,test:req.query.test})
+            ,examname:req.query.exam,test:req.query.test,quizdata:quizzes,stringdata:JSON.stringify(quizzes)})
+    })
+//--------------------------------------------------------------------
+                
+          
+
     })
     }) 
 }
@@ -884,7 +957,6 @@ length4+=1
 app.post("/uploadcontent" ,function(req,res){  
 
     // if(req.body.status=="newpublic"){
-console.log(req.body)
         MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
             var blog=client.db("blog")
 
@@ -2052,25 +2124,6 @@ console.log("no file is emitted")
 
 
 
-   
-
-
-   
-    //socket.broadcast.to(roomId).emit('user-connected', id)
-
-   // socket.on('disconnect', () => {
-      //console.log("gggg")
-     // socket.broadcast.to(roomId).emit('user-disconnected', id)
-
-    
-
-
-        // socket.on('shar',function(){
-        //   console.log("this is the event")
-        //   io.emit("changesize")
-        // })
-      
-   
      
    
   })
@@ -2091,22 +2144,114 @@ console.log("no file is emitted")
                 res.render('chat.html',{user:req.body.username,room:req.body.room});
                 })
     
+ function middle(req,res,next){
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
 
 
+    blog.collection("users").findOne({
+    
+        $or: [
+    
+            {
+                "username":req.body.name,
+    
+            },
+            {
+                "email":req.body.email,
+    
+            }
+        ]
+        
+    },function(error,data){
+if(data){
+
+    res.send({
+              message:"Enter the unique username or password" 
+       })
+}
+
+else{
+    req.username=req.body.name
+    req.email=req.body.email
+    next()
+}
+    })
+    })
+
+
+}
+
+
+
+
+function middle1(req,res,next){
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+
+
+    blog.collection("users").findOne({
+             
+                "password":req.body.password,
+    
+    },function(error,data){
+if(data){
+    res.send({
+        message:"enter unique password"
+    })
+}
+else{
+    req.password=req.body.password
+    next()
+}
+    })
+    })
+
+}
+
+
+                app.post('/register',middle,middle1,async(req, res) => {
+
+                    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+                        var blog=client.db("blog")
+var ssd=()=>{
+    
+    
+    return  blog.collection("users").find().toArray().then((data)=>{
+return data.length
+})
+}
+
+
+ssd().then((data)=>{
+    return data
+})
+console.log(ssd())
+
+                //        blog.collection("users").insertOne({
+                    
+                //             "username":req.username,
+                //             "password":req.password,
+                //             "email":req.email,
+                //             "Admin":false,
+                //             "Joined":date.format((new Date(Date.now())),
+                //             'DD/MM/YYYY')
+                        
+            
+                //         },function(err,data){
+                //                 res.json({
+                //                    "message":"successively registered",
+                                
+                //                 })
+                //                 })
+ 
+                 })
+                })
 
 
 ///-----------------------------------------------video-----------------------------------------------
-
-
-
-
-
-
-  
-
-
-
-
 
   //---------------------------------------videoupload-------------------------------------------------
 const PORT=process.env.PORT
@@ -2247,14 +2392,26 @@ const PORT=process.env.PORT
 //     })
     
     
-    //app.get("/verify-email",function(req,res){
-    // if(req.query.token){
-    //     const decodedToken=jwt.verify(req.query.token,process.env.KEY_NEW)
-    // username=decodedToken.username
-    //     uniquecode=decodedToken.uniquecode
-    //    password=decodedToken.password
-    //     email=decodedToken.email
+    app.get("/verify-email",function(req,res){
+    if(req.query.token){
+        const decodedToken=jwt.verify(req.query.token,process.env.KEY_NEW)
+    username=decodedToken.username
+       // uniquecode=decodedToken.uniquecode
+       //password=decodedToken.password
+        email=decodedToken.email
     
+        if(decodedToken.isadmin==true){
+           
+            
+            req.session.username=decodedToken.username
+            req.session.email=decodedToken.email
+            req.session.isadmin=decodedToken.isadmin
+            res.redirect('/')
+        }
+        else{
+            req.session.destroy()
+            res.send("something wrong please contact")
+        }
     //     bcrypt.genSalt(10, function(err, salt) {
     //         bcrypt.hash(password, salt, function(err, hash) {
     //     var c = "INSERT INTO `users` ( `Name`,`email`,`password`,`uniquecode`,`admin`,`isverified`,`token`) VALUES ('" +username+ "','" +email+ "','" + hash + "','" +uniquecode + "','true','true','"+req.query.token+"')";
@@ -2269,13 +2426,13 @@ const PORT=process.env.PORT
     // })
     // })
     // })
-    // }
-    // else{
-    //     req.session.destroy()
-    //     res.send("something wrong please contact")
-    // }
+    }
+    else{
+        // req.session.destroy()
+        // res.send("something wrong please contact") 
+    }
     
-    //})
+    })
     
     // app.post("/hiddencontent",function(req,res){
 
