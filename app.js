@@ -632,11 +632,14 @@ app.post("/newquiz4", (req, res) => {
       var blog=client.db("blog")
 
       blog.collection("Quizzes").findOne({"quizname":req.body.Mytable2}, function(error,quiz){
-        console.log(quiz)
-
+let user=quiz.quizattempters.find(data=> data.name==req.body.Myname2)
         if(req.session.username){
+if(user){
+    res.send("You have already attempted this exam")
+} else{
+    res.render("newquiz4.hbs",{userd:JSON.stringify(quiz.quizquestions),name2: req.body.Myname2, reg: req.body.registration, table2: req.body.Mytable2})
 
-            res.render("newquiz4.hbs",{userd:JSON.stringify(quiz.quizquestions),name2: req.body.Myname2, reg: req.body.registration, table2: req.body.Mytable2})
+}
 
         }
         else{

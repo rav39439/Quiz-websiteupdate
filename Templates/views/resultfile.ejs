@@ -926,7 +926,6 @@
 
 
 
-        // let name="${req.body.name}"
 
 
         let option_tag = ``;
@@ -1028,13 +1027,19 @@ else{
                 if (Mydata[i].type == "integertype") {
 
                     que_tag = '<span class="ff">' + `<b>`+ Mydata[i].numb +`<b>`+ ". " + Mydata[i].question + '</span>' + '<br>'
-
+                        solution_tag = ` <p> Solution</p> <br>
+                    <textarea rows=20 class="qsol">
+                        ${Mydata[i].solutions}</textarea>`;
                     option_tag = `<div class="form-group">
     <label for="exampleInputEmail1">Enter the answer in integer</label><br>
-    <input type="number" class="form-control" style="margin-left:200px;width:200px"  aria-describedby="emailHelp" placeholder="Enter Answercode" value=${Mydata[i].integerans} >
+    <input type="number" class="form-control" style="margin-left:200px;width:200px"  aria-describedby="emailHelp" placeholder="Enter Answercode" value=${response.answers[i]} >
     <input type="number" class="newinteger" id="newinteger" style="margin-left:200px;width:200px"  aria-describedby="emailHelp" placeholder="Enter Answercode">
-  </div>`
-                    html += que_tag + `<br>` + option_tag + `<br>`+`<br>`+`<br>`;
+  </div><br>
+  <p>Your answer ${response.answers[i]}</p><br>
+  <p>Correct answer ${Mydata[i].integerans} </p>
+  
+  `
+                    html += que_tag + `<br>` + option_tag + `<br>`+solution_tag+`<br>`+`<br>`;
 
                 }
             }
