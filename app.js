@@ -276,13 +276,11 @@ blog.collection("users").findOne({
     ]
     
 },function(error,data){
-    console.log(data)
+  if(data){
+
+
     if(data.Admin){
-        // req.session.email=data.email;
-        // req.session.username=data.username
-        // req.session.isadmin=data.Admin
-
-
+      
         payload={
         email:data.email,
             username:data.username,
@@ -317,8 +315,8 @@ blog.collection("users").findOne({
         req.session.isadmin=data.isadmin
         res.redirect('/')
     }
-    
-    if(error){
+}
+    else{
         res.send("Wrong username or password")
     }
 })
