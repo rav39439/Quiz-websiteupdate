@@ -105,7 +105,9 @@ select{
         <label for="exampleInputPassword1" class="mt-4">Enter the quizname</label>
         <select class="form-select mt-4" aria-label="Default select example" name="quizname" id="quizname">
           <% quizdata.forEach(function(elem){%>
+            <% if(elem.resultstatus=='public'){ %> 
             <option value=<%=elem.quizname %> ><%=elem.quizname %>
+              <% } %> 
             </option>
 
             <% }) %>

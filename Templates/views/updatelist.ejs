@@ -121,7 +121,14 @@
 
          
             <input readonly id="myquiz"name="myquiz" type="hidden" value="<%=elem.quizname%>">
-<select name="status"class="form-select" aria-label="Default select example">
+            <label for="status">Quizstatus</label>
+<select name="status"class="form-select" aria-label="Select status">
+<option value="public">public</option>
+<option value="private">private</option>
+</select>
+
+<label for="resultstatus">Resultstatus</label>
+<select name="resultstatus"class="form-select" aria-label="Select resultstatus">
 <option value="public">public</option>
 <option value="private">private</option>
 </select>
@@ -153,16 +160,18 @@ else{
        var formData = {
      myquiz: form.myquiz.value,
     exam: form.quiz.value, 
-    status:form.status.value 
+    status:form.status.value,
+    resultstatus:form.resultstatus.value 
+
    };
-   
+   alert(JSON.stringify(formData))
+
        $.ajax({
            url:"/updatequiz",
            method:"POST",
            data:formData,
            success:function(response){
-          
-            alert("changed")
+          alert(response.message)
            }
        })
        return false;

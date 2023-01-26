@@ -1422,7 +1422,8 @@ blog.collection("Quizzes").insertOne
     "marks":req.body.marks,
     "quizinfo":req.body.quizinfo,
     "quizdesc":req.body.quizdesc,
-    "time":time
+    "time":time,
+    "resultstatus":req.body.resultstatus
 
 
 },
@@ -1664,7 +1665,9 @@ app.get("/updatequiz",function(req,res){
 })
 
     app.post("/updatequiz",function(req,res){
-console.log(req.body.status)
+console.log(req.body)
+console.log("resultstatus")
+
         MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
             var blog=client.db("blog")
     
@@ -1672,12 +1675,18 @@ console.log(req.body.status)
             "quizname":req.body.myquiz
         },{
             $set:{
-                "status":req.body.status
+                "status":req.body.status,
+                "resultstatus":req.body.resultstatus
+
             }
         },function(err,data){
             res.json({
                 "message":"quiz result is public"
             })
+        
+
+
+
         })
         })
 
