@@ -46,7 +46,12 @@
         <h1 class="card-title" style="color: blue;">Instructions</h1>
         <div style="text-align: left;">
           <p class="card-text">
-
+    <!------------------------------------Entered quiz description------------------------------------------------->
+<% if(quiz.quizdesc){ %> 
+<h4><%=quiz.quizdesc %> </h4>
+  <% } else {%>
+  
+  
           This quiz contains some questions and Each question will appear on screen one at a time. 
            Students attempting this quiz are provided with required amount of time to answer all the questions 
            in this quiz .The students attempting 
@@ -62,9 +67,10 @@
             next question  and 'submit' will save your responses and terminate the exam.After the time for 
             this quiz expires ,student would be directed to the screen where they can view their 
             score and see solutions after clicking on 'see solutions' button.  
-
-        </div>
+<% } %> 
         </p>
+
+        <!----------------------------------------------------------------------------->
       </div>
       <p style="font-weight:bold;"> Total no of quesitons in the quiz is <%=quiz.quizquestions.length %>
       </p>
@@ -79,8 +85,15 @@
 
       <div style="text-align: center;">
         <h1 style="color: blue;"> Sections in this Quiz</h1>
+
+
+    <!------------------------------------Entered quiz information------------------------------------------------->
+<% if(quiz.quizinfo){ %> 
+<h4><%=quiz.quizinfo %> </h4>
+  <% } else{ %> 
         <ul style="list-style-type: upper-roman;
         ">
+
             <% if(section1length!=0){ %>
 
           <li>
@@ -94,9 +107,9 @@
               </div>
               <p> There are <%=section1length%> questions in 1st section For each correct answer in this section you
                   will
-                  get <%=quiz.quizquestions[section1length]?.postivemarks %>
+                  get <%=quiz.quizquestions[0]?.postivemarks %>
                     and for incorrect answer
-                    <%=quiz.quizquestions[section1length]?.negativemarks %>will be deducted
+                    <%=quiz.quizquestions[0]?.negativemarks %>will be deducted
               </p>
           </div>
           </li>
@@ -115,8 +128,8 @@
               </div>
               <p> There are <%=section2length%> questions in 2nd section
                   For each correct answer in this section you will get
-                  <%=quiz.quizquestions[section1length]?.postivemarks %> for incorrect answer
-                    <%=quiz.quizquestions[section1length]?.negativemarks %> will be deducted
+                  <%=quiz.quizquestions[section2length]?.postivemarks %> for incorrect answer
+                    <%=quiz.quizquestions[section2length]?.negativemarks %> will be deducted
               </p>
           </div>
 
@@ -174,6 +187,8 @@
         <% } %>
 
           </ul>
+<% } %> 
+          <!--------------------------------------------------------------------------->
       </div>
       <hr>
 

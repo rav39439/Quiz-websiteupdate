@@ -1422,8 +1422,8 @@ blog.collection("Quizzes").insertOne
     "quizattempters":[],
     "nsection":req.body.nsection,
     "marks":req.body.marks,
-
-
+    "quizinfo":req.body.quizinfo,
+    "quizdesc":req.body.quizdesc,
     "time":time
 
 
@@ -1710,17 +1710,18 @@ app.get("/enterquiz4",function(req,res){
 app.get("/enterquiz1",function(req,res){
 
    // if(req.query.quiz=="Highlevelexam"){
-console.log(req.body.Mytable2)
+console.log(req.query.myquiz)
         MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
             var blog=client.db("blog")
       
             blog.collection("Quizzes").findOne({"quizname":req.query.myquiz}, function(error,quiz){
+                console.log(quiz)
               let data=quiz
               let section1length=0;
               let section2length=0;
             let  section3length=0
               let section4length=0
-let time=secondsToHms(data.time)
+let time=data.time
 let noofquizattemts=data.quizattempters.length
               if(parseInt(data.nsection)==4){
                  section1length=data.quizquestions[0]?.qsection
