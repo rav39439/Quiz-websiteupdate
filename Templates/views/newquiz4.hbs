@@ -511,15 +511,15 @@ background-color: red !important;
             </section>
             <!-- footer of Quiz Box -->
             <footer id="myfoot" style="margin-left:40px width:100%;">
-                <div class="total_que">
+                <div class="total_que" >
                     <!-- Here I've inserted Question Count Number from JavaScript -->
                 </div>
-                <div class="" style="margin-left: 25px;">
-                <button class="next_btn btn btn-primary">Next</button>
-                <button class="prev_btn btn btn-primary">prev</button>
-                <button style="display:none" class="integer_btn btn btn-primary">integer submit</button>
-                <button class="clearans_btn btn btn-primary">clear</button>
-                <button class="submit_btn btn btn-primary">submit</button>
+                <div class="" style="display: flex;flex-direction:row ;margin-left: 25px; ">
+                <button class="next_btn btn btn-primary ml-3">Next</button>
+                <button class="prev_btn btn btn-primary ml-3">prev</button>
+                <button style="display:none" class="integer_btn btn btn-primary ml-3">integer submit</button>
+                <button class="clearans_btn btn btn-primary ml-3">clear</button>
+                <button class="submit_btn btn btn-primary ml-3">submit</button>
                 </div>
             </footer>
         </div>
@@ -897,11 +897,15 @@ console.log(no1+no2+no3+no4)
                                         let message2=``
 
                     if(Mydata[que_count].type == "multi"){
+                          document.getElementById('passage').style.display="none"
+                         document.getElementById('passimg').style.display="none"
                         message1=`<p>Multiple option may be correct</p> <br>`
                         document.getElementById('messagetop').innerHTML=message1
 
                     } else{
                         message1=``
+                          document.getElementById('passage').style.display="none"
+                         document.getElementById('passimg').style.display="none"
                      document.getElementById('messagetop').innerHTML=message1
 
                     }
@@ -936,6 +940,8 @@ console.log(no1+no2+no3+no4)
                         style="width:100%;overflow-y:scroll;height:auto;margin:auto">
                         ${Mydata[que_count].passage}</textarea>`;
                          message=`<p>Read the passage and answer questions</p> <br>`
+                         document.getElementById('passage').style.display="block"
+
                      document.getElementById('passtop').innerHTML=message
                   document.getElementById('passage').innerHTML=pass_tag
                   console.log( document.getElementById('passage').innerHTML)
@@ -955,14 +961,14 @@ console.log(no1+no2+no3+no4)
                         myimgtag.setAttribute("src", img_tag)
                     }
                     else {
-                        message=`<p>Read the passage and answer questions</p> <br>`
+                       // message=`<p>Read the passage and answer questions</p> <br>`
 
                         myimgtag.setAttribute("src", img_tag)
                     }
                     if (pass_img.length != 0) {
-                        message2=`<p>Read the passage and answer questions</p> <br>`
+                        //message2=`<p>Read the passage and answer questions</p> <br>`
                     document.getElementById('passtop1').innerHTML=message2
-
+document.getElementById('passimg').style.display="block"
                         mypassimg.setAttribute("src", pass_img)
 
                     } else {
@@ -976,7 +982,7 @@ console.log(no1+no2+no3+no4)
                    
 //--------------------option images------------------------------------------------------------
 let option_tag=``
-if((typeof(Mydata[que_count].optionImg1)!='undefined')&& (Mydata[que_count].optionImg1!=""))
+if((typeof(Mydata[que_count].optionImg1)!='undefined')&& (Mydata[que_count].optionImg1!="")||(Mydata[que_count].optionImg2!=""))
 
 {
 
@@ -1069,7 +1075,17 @@ else{
                     option_list.style.display = "none"
                     integerquestion.style.display = 'block'
                     integerbtn.style.display = "block"
-                
+                                        // mypassimg.style.display="none"
+message=``
+message2=``
+                         document.getElementById('passage').style.display="none"
+                         document.getElementById('passimg').style.display="none"
+
+                    document.getElementById('passtop').innerHTML=message
+
+                    document.getElementById('passtop1').innerHTML=message2
+
+
                     que_tag = '<span class="ff">' + Mydata[que_count].numb + ". " + Mydata[que_count].question + '</span>' + '<br>'
                     que_text.innerHTML = que_tag
                     integerbtn.onclick = () => {
@@ -1148,8 +1164,7 @@ else{
 
                         if (l == b.length) {
                             if (Mydata[i].postivemarks != 'undefined') {
-                              console.log("they are qual")
-                              mymarks+=1
+                              mymarks=mymarks+parseInt(Mydata[i].postivemarks)
                                 nn = nn + parseInt(Mydata[i].postivemarks)
                             }
                             else {
@@ -1157,6 +1172,7 @@ else{
                         } else {
                             if (Mydata[i].negativemarks != 'undefined') {
                                 nn = nn - parseInt(Mydata[i].negativemarks)
+                             mymarks= mymarks-parseInt(Mydata[i].negativemarks)
                             }
                         }
                     }
@@ -1169,7 +1185,7 @@ else{
                         if (typeof (Mydata[i].postivemarks) != 'undefined') {
                             console.log("Integer evaluation is running")
                             pp = pp + parseInt(Mydata[i].positivemarks)
-                            mymarks+=1
+                            mymarks=mymarks+ parseInt(Mydata[i].positivemarks)
                             m = m + pp
                         }
                         else {
@@ -1178,6 +1194,8 @@ else{
                     } else {
                         if (typeof (Mydata[i].negativemarks) != 'undefined') {
                             m = m - parseInt(Mydata[i].negativemarks)
+                            mymarks=mymarks-  parseInt(Mydata[i].negativemarks)
+
                         }
                     }
                 }
@@ -1189,8 +1207,7 @@ else{
                         if (myquestions[i] == JSON.parse(Mydata[i].answercode)['answer1']) {
                             if (typeof (Mydata[i].postivemarks) != 'undefined') {
                                 m = m + parseInt(Mydata[i].postivemarks);
-                               mymarks+=1
-                                console.log("Marks is increased")
+                               mymarks=mymarks+parseInt(Mydata[i].postivemarks);
                             }
                             else {
                                 //
@@ -1198,12 +1215,12 @@ else{
                         } else {
                             if (typeof (Mydata[i].negativemarks) != 'undefined') {
                                 m = m - parseInt(Mydata[i].negativemarks)
-                                console.log("updated marks")
+                                mymarks=mymarks-parseInt(Mydata[i].negativemarks)
                             }
                         }
                     }
                     tm = m + nn + pp
-                    console.log(tm)
+                    console.log(mymarks)
                 }
 
                 //----------------------------------------------------------------------------
