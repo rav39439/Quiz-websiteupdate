@@ -712,6 +712,10 @@ console.log(no1+no2+no3+no4)
         const bottom_ques_counter = document.querySelector("footer .total_que");
         changed(0)
         function changed(kk) {
+                   // const option = option_list.children[0].querySelectorAll(".option");
+                 //   const ans=myquestions[kk]
+              //      option[ans].classList.add("green")
+//console.log("section switched")
 
             document.getElementById('myform').style.display = "none"
              let myanswers = JSON.parse(localStorage.getItem("myquestions"))
@@ -724,24 +728,24 @@ console.log(no1+no2+no3+no4)
             let html = ``;
             if (Mydata[0].section) {
                 html = ` <button id="button5"   name="button1"  style="height:30px;width:20%; color:white;
-                margin-left:12px;background-color:blue;border:none" onclick="changed(0)">${Mydata[0].section}</button>`
+                margin-left:12px;background-color:blue;border:none" onclick="changeoption(0)">${Mydata[0].section}</button>`
             }
 
             if (typeof (Mydata[no1]) != 'undefined') {
                 html += `<button id="button6"  name="button1" style="height:30px;width:20%; color:white;
-                 margin-left:12px;background-color:blue;border:none" onclick="changed(${no1 + 1})">${Mydata[no1].section}</button>`
+                 margin-left:12px;background-color:blue;border:none" onclick="changeoption(${no1 + 1})">${Mydata[no1].section}</button>`
             }
 
 
             if (typeof (Mydata[no2 + no1]) != 'undefined') {
                 html += `<button id="button7"  name="button2" style="height:30px;width:20%;
-                margin-left:12px; background-color:blue; color:white;border:none"onclick="changed(${no1 + no2 + 1})">${Mydata[no2 + no1].section}</button>`
+                margin-left:12px; background-color:blue; color:white;border:none"onclick="changeoption(${no1 + no2 + 1})">${Mydata[no2 + no1].section}</button>`
 
             }
 
             if (typeof (Mydata[no3 + no1 + no2]) != 'undefined') {
                 html += `<button id="button8"  name="button3" style="height:30px;width:20%;
-                margin-left:12px; background-color:blue; color:white;border:none"onclick="changed(${no1 + no2 + no3 + 1})">${Mydata[no3 + no1 + no2].section}</button>`
+                margin-left:12px; background-color:blue; color:white;border:none"onclick="changeoption(${no1 + no2 + no3 + 1})">${Mydata[no3 + no1 + no2].section}</button>`
             }
             const button5 = document.getElementById('button5')
             const button6 = document.getElementById('button6')
