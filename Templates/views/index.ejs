@@ -317,22 +317,28 @@
                               </div> -->
                               <li class="list-group-item" style="background-color: rgb(255, 255, 255);"><strong>
 
-                                  <div style="display: grid;grid-template-columns: 20% 60% 20%;gap:3px">
+                                  <div style="display: grid;grid-template-columns: 15% 60% 25%;gap:11px">
                                     <div style="display:flex;flex-direction:column">
-                                     <p><%=elem.content %></p>
-                                    
+
+                                      <div style="width: 100%;text-align:center;margin: auto;">
+                                     <p ><%=elem.content %></p>
                                     </div>
-                                    <p>
+                                    </div>
+
+                                    <div style="width: 100%;text-align:left
+                                    ;margin: auto;">
+
+                                    <p style="font-family: 'Courier New', Courier, monospace;font-style: italic;font-size:large;">
                                       <%=elem.details %>
                                     </p>
-                                    <div style="width:100%;margin-top: 0px;">
-                                      <a href="<%=elem.data%>">
-                                        View Details
-                                      </a>
+
                                     </div>
-                                    <p>
-                                      Date: <%=elem.currentDate %> 
-                                      </p>
+                                    <div style="width: 100%;text-align:center;margin: auto;">
+                                        <span>
+                                          Date: <%=elem.currentDate %> 
+                                        </span>
+                                    </div>
+                                    
                                   </div>
 
                               </li>
@@ -423,16 +429,29 @@
                        <p>Quizname: <%=elem.quizname %></p>
                               <p class="card-text">  
                                <div style="display: grid; grid-template-columns:auto auto auto auto; gap:3px">
-                                 <span><i class="fa fa-clock-o" aria-hidden="true">
-                                   <%=elem.time %></i> </span>
-                                 <span><i class="fa fa-book" aria-hidden="true">
-                                   <%=elem.quizname %></i> </span>
-                                 <span><i class="fa fa-question-circle-o" aria-hidden="true">
-                                   <%=elem.noofquestions %> questions</i>
-                                   </span>  
-                                 <span> <i class="fa fa-info" aria-hidden="true">
-                                   <%=elem?.marks %> marks</i>
-                                   </span>  
+                                <div style="background-color: rgb(166, 188, 209); width: fit-content;margin: 2px;">
+                                  <span><i class="fa fa-clock" aria-hidden="true">
+                                    <%=elem.time %></i> </span>
+                                </div>
+                                
+                                  <div style="background-color: rgb(166, 192, 216); width: fit-content;margin: 2px;">
+                                    <span style="word-wrap: break-word;"><i class="fa fa-book" aria-hidden="true">
+                                      <%=elem.quizname %></i> </span>
+                                  </div>
+                               
+                                   <div style="background-color: rgb(161, 188, 213); width: fit-content;margin: 2px;">
+                                    <span><i class="fa fa-question-circle" aria-hidden="true">
+                                      <%=elem.noofquestions %> questions</i>
+                                      </span>  
+                                   </div>
+                                
+
+                                   <div style="background-color: rgb(172, 191, 208); width: fit-content;margin: 2px;">
+                                    <span> <i class="fa fa-info" aria-hidden="true">
+                                      <%=elem?.marks %> marks</i>
+                                      </span>  
+                                   </div>
+                              
                                      </div> 
                                    </p>
                        </div>

@@ -18,6 +18,39 @@ const bcrypt = require('bcryptjs');
 var bodyParser=require("body-parser")
 app.use(bodyParser.urlencoded())
 
+// var rp=require('request-promise')
+// const cheerio=require('cheerio')
+// const puppeteer=require('puppeteer')
+
+// const options = {
+// 	url: `https://cisce.org/locate/result.php`,
+// 	json: true
+// }
+
+
+// async function startf(){
+// const browser=await puppeteer.launch()
+// const page=await browser.newPage()
+// await page.goto("https://learnwebcode.github.io/practice-requests/")
+// await page.screenshot({path:"newrav.png"})
+// }
+
+// startf()
+
+
+// rp(options)
+// 	.then((data) => {
+// 		let userData = [];
+//         console.log(data)
+		
+// 	})
+// 	.catch((err) => {
+// 		console.log(err);
+// 	});
+
+
+
+
 app.engine('html', require('ejs').renderFile);
 
 const {
@@ -78,7 +111,8 @@ var io=require("socket.io")(http, {
   })
 
 //---------------------------------------------------------------------------------------------
-var session=require("express-session")
+var session=require("express-session");
+const { start } = require('repl');
 
 // const MySQLStore = require('express-mysql-session')(session);
 // const options = {                 // setting connection options
