@@ -1110,11 +1110,15 @@ const findRanks = (arr = []) => {
    return result;
 };
 studentranks=findRanks(allmarks)
-console.log(findRanks(allmarks));
+let studentposition=quiz.quizattempters.findIndex(data=>data.marks==userresponses.marks)
+let remaining=quiz.quizattempters.length-studentranks[studentposition]+1
+let percentitle=(remaining/quiz.quizattempters.length) *100
+console.log(percentitle);
 
 
 if(userresponses){
-    res.render("resultfile.ejs",{usedata:JSON.stringify(quiz.quizquestions),name:req.body.name,mydata:quiz.quizattempters,responses:JSON.stringify(userresponses),quizname:req.body.myquiz,ranks:studentranks})
+    res.render("resultfile.ejs",{usedata:JSON.stringify(quiz.quizquestions),name:req.body.name,mydata:quiz.quizattempters,responses:JSON.stringify(userresponses),quizname:req.body.myquiz,ranks:studentranks,rank:studentranks[studentposition]
+    ,percentile:percentitle})
 
 }
 else{

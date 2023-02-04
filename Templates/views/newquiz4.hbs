@@ -1191,7 +1191,7 @@ message2=``
                         } else {
                             if (Mydata[i].negativemarks != 'undefined') {
                                 nn = nn - parseInt(Mydata[i].negativemarks)
-                             mymarks= mymarks-parseInt(Mydata[i].negativemarks)
+                             mymarks= mymarks-parseFloat(Mydata[i].negativemarks)
                             }
                         }
                     }
@@ -1213,7 +1213,7 @@ message2=``
                     } else {
                         if (typeof (Mydata[i].negativemarks) != 'undefined') {
                             m = m - parseInt(Mydata[i].negativemarks)
-                            mymarks=mymarks-  parseInt(Mydata[i].negativemarks)
+                            mymarks=mymarks-  parseFloat(Mydata[i].negativemarks)
 
                         }
                     }
@@ -1233,8 +1233,8 @@ message2=``
                             }
                         } else {
                             if (typeof (Mydata[i].negativemarks) != 'undefined') {
-                                m = m - parseInt(Mydata[i].negativemarks)
-                                mymarks=mymarks-parseInt(Mydata[i].negativemarks)
+                                m = m - parseFloat(Mydata[i].negativemarks)
+                                mymarks=mymarks-parseFloat(Mydata[i].negativemarks)
                             }
                         }
                     }
