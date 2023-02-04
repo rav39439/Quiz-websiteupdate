@@ -657,6 +657,7 @@ MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.m
 
 app.post("/newquiz4", (req, res) => {
 
+    console.log(req.body)
     var MongoClient=require("mongodb").MongoClient;
 
 
@@ -734,7 +735,6 @@ console.log(quiz?.quizquestions)
 
 
 app.get('/Mysecrets', (req, res) => {
-    console.log(req.session.isadmin)
 
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
@@ -1715,7 +1715,7 @@ console.log("resultstatus")
             }
         },function(err,data){
             res.json({
-                "message":"quiz result is public"
+                "message":"quiz status is updated"
             })
         
 
