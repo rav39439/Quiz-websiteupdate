@@ -135,7 +135,7 @@
         transition: all 0.3s ease;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: space-between
     }
 
     section .option_list .option:last-child {
@@ -993,33 +993,41 @@ document.getElementById('passimg').style.display="block"
                    
 //--------------------option images------------------------------------------------------------
 let option_tag=``
-if((typeof(Mydata[que_count].optionImg1)!='undefined')&& (Mydata[que_count].optionImg1!="")||(Mydata[que_count].optionImg2!=""))
+
+      option_tag += `<div class="optiongr"> `               
+if((typeof(Mydata[que_count].optionImg1)!='undefined')&& (Mydata[que_count].optionImg1!=""))
 
 {
-
- option_tag = `<div class="optiongr">               
-        <div class="option"id=0  style="width:100%;height:30%" ><img src="${Mydata[que_count].optionImg1}" alt="" style="" id=1> </div>
-    <div class="option"  id=1  style="width:100%;height:30%" ><img src="${Mydata[que_count].optionImg2}" alt="" style="" id=2> </div>
-    <div class="option"  id=2  style="width:100%;height:30%" ><img src="${Mydata[que_count].optionImg3}" alt="" style="" id=3> </div>
-    <div class="option"  id=3  style="width:100%;height:30%" > <img src="${Mydata[que_count].optionImg4}" alt="" style="" id=4> </div>
-    </div>`;
-
+      option_tag += `<div class="option"id=0  style="width:100%;height:30%" ><img src="${Mydata[que_count].optionImg1}" alt="" style="" id=1> </div>`
 }
-
 else{
-
-
- option_tag = `<div class="optiongr">               
-        <div class="option"  id=0>${Mydata[que_count].option1} </div>
-    <div class="option"  id=1>${Mydata[que_count].option2} </div>
-    <div class="option"  id=2>${Mydata[que_count].option3} </div>
-    <div class="option"  id=3> ${Mydata[que_count].option4} </div>
-   
-    </div>`;
-
+    option_tag +=` <div class="option"  style="width:100%;height:30%" id=0>${Mydata[que_count].option1} </div>`
 }
-                  
 
+if((typeof(Mydata[que_count].optionImg2)!='undefined')&& (Mydata[que_count].optionImg2!=""))
+{
+  option_tag +=`<div class="option"  id=1  style="width:100%;height:30%" ><img src="${Mydata[que_count].optionImg2}" alt="" style="" id=2> </div>`
+}
+else{
+     option_tag +=`  <div class="option"  style="width:100%;height:30%"  id=1>${Mydata[que_count].option2} </div>`
+}
+
+if((typeof(Mydata[que_count].optionImg3)!='undefined')&& (Mydata[que_count].optionImg3!=""))
+{
+  option_tag +=` <div class="option"  id=2  style="width:100%;height:30%" ><img src="${Mydata[que_count].optionImg3}" alt="" style="" id=3> </div>`
+}
+else{
+     option_tag +=`   <div class="option"  style="width:100%;height:30%" id=2>${Mydata[que_count].option3} </div>`
+}
+
+if((typeof(Mydata[que_count].optionImg4)!='undefined')&& (Mydata[que_count].optionImg4!=""))
+{
+  option_tag +=`  <div class="option"  id=3  style="width:100%;height:30%" > <img src="${Mydata[que_count].optionImg4}" alt="" style="" id=4> </div>`
+}
+else{
+     option_tag +=`   <div class="option"  style="width:100%;height:30%" id=3> ${Mydata[que_count].option4} </div>`
+}
+option_tag +=`</div>`
 
     //------------------------------------------------------------------------------
                     option_list.style.display = "block"
