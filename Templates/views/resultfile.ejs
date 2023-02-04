@@ -978,33 +978,47 @@
 
                     solution_tag = ` <p> Solution</p> <br>
                     <textarea rows=20 class="qsol">
-                        ${Mydata[i].solutions}</textarea>`;
+                        ${Mydata[i].solution}</textarea>`;
                 }
 
 ///---------------------Option img-----------------------------------------------------------
 let option_tag=``
+
+      option_tag += `<div class="optiongr"> `               
 if((typeof(Mydata[i].optionImg1)!='undefined')&& (Mydata[i].optionImg1!=""))
 
 {
-
- option_tag = `<div class="optiongr">               
-        <div class="option"id=0  style="width:100%;height:30%" ><img src="${Mydata[i].optionImg1}" alt="" style="" id=0> </div>
-    <div class="option"  id=1  style="width:100%;height:30%" ><img src="${Mydata[i].optionImg2}" alt="" style="" id=1> </div>
-    <div class="option"  id=2  style="width:100%;height:30%" ><img src="${Mydata[i].optionImg3}" alt="" style="" id=2> </div>
-    <div class="option"  id=3  style="width:100%;height:30%" > <img src="${Mydata[i].optionImg4}" alt="" style="" id=3> </div>
-    </div>`;
-
+      option_tag += `<div class="option"id=0  style="width:100%;height:30%" ><img src="${Mydata[i].optionImg1}" alt="" style="" id=1> </div>`
 }
-
 else{
- option_tag = `<div class="optiongr">               
-        <div class="option"  id=0>${Mydata[i].option1} </div>
-    <div class="option"  id=1>${Mydata[i].option2} </div>
-    <div class="option"  id=2>${Mydata[i].option3} </div>
-    <div class="option"  id=3> ${Mydata[i].option4} </div>  
-    </div>`;
-
+    option_tag +=` <div class="option"  style="width:100%;height:30%" id=0>${Mydata[i].option1} </div>`
 }
+
+if((typeof(Mydata[i].optionImg2)!='undefined')&& (Mydata[i].optionImg2!=""))
+{
+  option_tag +=`<div class="option"  id=1  style="width:100%;height:30%" ><img src="${Mydata[i].optionImg2}" alt="" style="" id=2> </div>`
+}
+else{
+     option_tag +=`  <div class="option"  style="width:100%;height:30%"  id=1>${Mydata[i].option2} </div>`
+}
+
+if((typeof(Mydata[i].optionImg3)!='undefined')&& (Mydata[i].optionImg3!=""))
+{
+  option_tag +=` <div class="option"  id=2  style="width:100%;height:30%" ><img src="${Mydata[i].optionImg3}" alt="" style="" id=3> </div>`
+}
+else{
+     option_tag +=`   <div class="option"  style="width:100%;height:30%" id=2>${Mydata[i].option3} </div>`
+}
+
+if((typeof(Mydata[i].optionImg4)!='undefined')&& (Mydata[i].optionImg4!=""))
+{
+  option_tag +=`  <div class="option"  id=3  style="width:100%;height:30%" > <img src="${Mydata[i].optionImg4}" alt="" style="" id=4> </div>`
+}
+else{
+     option_tag +=`   <div class="option"  style="width:100%;height:30%" id=3> ${Mydata[i].option4} </div>`
+}
+option_tag +=`</div>`
+              
 //-----------------------------------------------------------------------------------------
                 html += `<div style="border:1px solid black;border-radius:15px">`+que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`+`<br>`+`</div>`+`<br>`+`<br>`
 
