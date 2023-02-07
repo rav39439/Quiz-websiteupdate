@@ -101,6 +101,8 @@ button{
   let f = document.getElementById("name").innerText
   if (typeof (f) != 'undefined') {
     document.getElementById("myname").innerText = f
+    document.getElementById('login').style.display="none"
+  document.getElementById('register').style.display="none"
   }
   else {
     document.getElementById("myname").innerText = "Anonymous"

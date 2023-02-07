@@ -112,7 +112,7 @@ img{
 <% if(data.isadmin){ %> 
 <%- include('../partials/heading1.hbs') %>
 <% } else {%> 
-  <%- include('../partials/heading1.hbs') %>
+  <%- include('../partials/heading.hbs') %>
 
   <% } %> 
 <body>
@@ -418,21 +418,19 @@ console.log(f)
 if(typeof(f)!='undefined'){
   
    document.getElementById("myname").innerText=f
+   document.getElementById('login').style.display="none"
+  document.getElementById('register').style.display="none"
 }
 else{
   document.getElementById("myname").innerText="Anonymous"
+  
+
 
  }
 let gg=JSON.parse(document.getElementById('ss').innerText)
 
 
-
  function change(e){
-
-
-
-
-  
 
  }
         //const socket = io('http://localhost:8600')
