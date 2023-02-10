@@ -113,6 +113,7 @@ var io=require("socket.io")(http, {
 //---------------------------------------------------------------------------------------------
 var session=require("express-session");
 const { start } = require('repl');
+const { rawListeners } = require('process');
 
 // const MySQLStore = require('express-mysql-session')(session);
 // const options = {                 // setting connection options
@@ -433,11 +434,11 @@ app.post('/createtable',(req, res) => {
 })
 
 
-app.get('/editquestions', (req, res) => {
-    res.render("Editquestions.hbs")
+// app.get('/editquestions', (req, res) => {
+//     res.render("Editquestions.hbs")
 
-})
-app.post('/editquestions', (req, res) => {
+// })
+//app.post('/editquestions', (req, res) => {
 
     //-----------------------sql operation-----------------------------------------------
     // connection.query("select * from " + req.body.myno1 + " where numb>" + req.body.rangeno + "", function (err, data1, fields) {
@@ -447,7 +448,7 @@ app.post('/editquestions', (req, res) => {
        
     // })
 //----------------------------------------------------------------------------------------------
-})
+//})
 
 app.get("/viewquestions",function(req,res){
    
@@ -1830,11 +1831,44 @@ app.get("/getresult",function(req,res){
 
 })
 
+app.get("/Editquestions",function(req,res){
+
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+
+
+        blog.collection("Quizzes").find().sort({_id:1}).toArray(function(error,quizzes){
+           // console.log(quizzes)
+            res.render("Editquestions.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes), username:req.session.username,data:req.session})
+
+    })
+    })
+
+})
+
+app.post("/getquizquestions",function(req,res){
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+  
+        blog.collection("Quizzes").findOne({"quizname":req.body.quizname}, function(error,quiz){
+            
+            res.render("Editpage.ejs",{quiz:quiz})
+            
+})
+})
+})
+
+
+
+
 
 app.get("/uploadcontent",function(req,res){
 res.render("uploadcontent.ejs")
 
 })
+
+
 
 
 

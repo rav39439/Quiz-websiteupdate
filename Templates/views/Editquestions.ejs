@@ -29,29 +29,31 @@
 
     </style>
 </head>
-{{>heading5}}
-
-
-
-          <div class="bg-light mt-5" style="text-align:center">
 
 
 <body>
-    <h2>Edit your questions here</h2>
-    <form action="/editquestions" method="POST">
-   <div class="form-group">
-    <label for="exampleInputEmail1">Enter the question Number</label>
-    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter the question number"name="myno"style="width:auto;margin-left:400px">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Enter the Quizname</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="name" name="name"style="width:500px;margin-left:400px"name="myno1" style="width:auto;margin-left:400px">
-  </div>
-   
 
-    <button type="submit" class="btn btn-primary">submit</button>
-    </form>
 
+ <div class="new1">
+    <h3 id="" style="color: red;">Get the results of quiz here</h3>
+
+    <form action="/getquizquestions" method="POST">
+      <div class="" style="display: flex;flex-direction:column; align-items: center;justify-content:center;">
+
+        <label for="exampleInputPassword1" class="mt-4">Enter the quizname</label>
+        <select class="form-select mt-4" aria-label="Default select example" name="quizname" id="quizname">
+          <% quizdata.forEach(function(elem){%>
+            <option value=<%=elem.quizname %> ><%=elem.quizname %>
+            </option>
+
+            <% }) %>
+        </select>
+      <button type="submit" class="btn-btn primary mt-4">submit to see result</button>
     </div>
+
+    </form>
+  </div>
+
 </body>
+
 </html>
