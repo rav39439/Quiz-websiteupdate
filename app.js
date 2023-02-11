@@ -1254,14 +1254,13 @@ negativemarks:req.body.nm
 
 function GetallQuestions(req,res,next){
 
-    console.log(req.body.quizname)
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
         var blog=client.db("blog")
   
         blog.collection("Quizzes").findOne({"quizname":req.body.quizname}, function(error,quiz){
             if(quiz){
-                console.log(quiz)
                  req.quizquestions=quiz.quizquestions
+                 req.quizname=req.body.quizname
                 next()
             }
             else{
@@ -1271,14 +1270,34 @@ function GetallQuestions(req,res,next){
         })
 }
 
-app.post("/test",GetallQuestions,function(req,res){
+app.post("/testt",GetallQuestions,function(req,res){
 console.log("Helloddddddddddddddddddddddd")
-    console.log( req.quizquestions)
-    console.log(req.body.questions)
+    var key = "quizname";
+delete req.body[key];
+    //const newArray = array.map(({ bad, ...item }) => item);
+    let index=req.quizquestions.findIndex(elem=>elem.numb==req.body.numb)
+req.quizquestions[index]=req.body
+// console.log(req.quizname)
 
-    res.send({
-        message:"success"
+MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+    var blog=client.db("blog")
+
+
+
+blog.collection("Quizzes").updateOne({
+    "quizname":req.quizname
+},{
+    $set:{
+        "quizquestions":req.quizquestions
+    }
+},function(err,data){
+    res.json({
+        "message":"successfully updated"
     })
+
+})
+})
+   
 })
 
 app.post("/newquiz4result",function(req,res){

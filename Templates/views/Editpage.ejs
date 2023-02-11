@@ -167,7 +167,6 @@ var formData={
       passage: form.passage.value,
       solution: document.getElementById("Mysolutions").innerText,
    integerans: form.integerans.value,
-    
      answercode: form.answercode.value,
      option1: form.option1.value,
       option2: form.option2.value,
@@ -184,7 +183,7 @@ var formData={
       optionImg2: form.optionImg2.value,
       optionImg3: form.optionImg3.value,
       optionImg4:form.optionImg4.value,
-    // quizname:quizname
+    quizname:quizname
 }
 
 //quizname=""
@@ -224,20 +223,18 @@ var formData={
     console.log(formData)
      alert(formData)
     $.ajax({
-      url: "/test",
+      url: "/testt",
       method: "POST",
       data: formData,
       success: function (response) {
-alert(response)
+alert(response.message)
       
       }
     })
     return false;
-
   } 
 
 
-// /}
   //-----------------------------Using firebase to store images and questions----------------------///
 
 
@@ -295,12 +292,6 @@ if(img!==""){
   }
   function newcallback(url, data) {
     let newurl = url;
-
-    console.log(data.name)
-
-    console.log("link")
-    console.log(url)
-
     document.getElementById("myfile" + data.name).value = url
 
   }
