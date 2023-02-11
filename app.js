@@ -1252,6 +1252,34 @@ negativemarks:req.body.nm
 
 })
 
+function GetallQuestions(req,res,next){
+
+    console.log(req.body.quizname)
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+  
+        blog.collection("Quizzes").findOne({"quizname":req.body.quizname}, function(error,quiz){
+            if(quiz){
+                console.log(quiz)
+                 req.quizquestions=quiz.quizquestions
+                next()
+            }
+            else{
+                console.log(error)
+            }
+        })
+        })
+}
+
+app.post("/test",GetallQuestions,function(req,res){
+console.log("Helloddddddddddddddddddddddd")
+    console.log( req.quizquestions)
+    console.log(req.body.questions)
+
+    res.send({
+        message:"success"
+    })
+})
 
 app.post("/newquiz4result",function(req,res){
     
@@ -1852,8 +1880,8 @@ app.post("/getquizquestions",function(req,res){
         var blog=client.db("blog")
   
         blog.collection("Quizzes").findOne({"quizname":req.body.quizname}, function(error,quiz){
-            
-            res.render("Editpage.ejs",{quiz:quiz})
+            var questions=JSON.stringify(quiz?.quizquestions)
+            res.render("Editpage.ejs",{quiz:quiz,stringquestions:req.body.quizname})
             
 })
 })
