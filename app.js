@@ -1272,11 +1272,17 @@ function GetallQuestions(req,res,next){
 
 app.post("/testt",GetallQuestions,function(req,res){
 console.log("Helloddddddddddddddddddddddd")
-    var key = "quizname";
-delete req.body[key];
+let index=req.body.index
+
+    var key1 = "quizname";
+    var key2="index"
+    delete req.body[key1];
+    delete req.body[key2];
+console.log(index)
+    //let index=req.quizquestions.findIndex(elem=>elem.numb==req.body.numb)
+    req.quizquestions[parseInt(index)]=req.body
     //const newArray = array.map(({ bad, ...item }) => item);
-    let index=req.quizquestions.findIndex(elem=>elem.numb==req.body.numb)
-req.quizquestions[index]=req.body
+  
 // console.log(req.quizname)
 
 MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
@@ -1298,6 +1304,41 @@ blog.collection("Quizzes").updateOne({
 })
 })
    
+})
+
+app.post("/deletequestion",GetallQuestions,function(req,res){
+console.log("dssssssssssssssssssssssssssss")
+console.log(parseInt(req.body.index))
+console.log(req.quizquestions)
+// console.log(req.quizquestions)
+//let updatedquestions=req.quizquestions.splice(parseInt(req.body.index), 1); // 2nd parameter means remove one item only
+//delete req.quizquestions[parseInt(req.body.index)];
+let filtered=[]
+
+for(let i=0;i<req.quizquestions.length;i++){
+    if(i!=parseInt(req.body.index)){
+        filtered.push(req.quizquestions[i])
+    }
+}
+//let filtered=req.quizquestions.filter((data,index)=>index!=parseInt(req.body.index))
+console.log(filtered)
+MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+    var blog=client.db("blog")
+
+blog.collection("Quizzes").updateOne({
+    "quizname":req.quizname
+},{
+    $set:{
+        "quizquestions":filtered
+    }
+},function(err,data){
+    res.json({
+        "message":"successfully updated"
+    })
+
+})
+})
+
 })
 
 app.post("/newquiz4result",function(req,res){

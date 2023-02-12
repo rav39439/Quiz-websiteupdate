@@ -87,8 +87,10 @@ PositiveMarks : <input type="text" id="postivemarks" name="postivemarks" value=<
 
 NegativeMarks: <input type="text" id="negativemarks" name="negativemarks" value=<%=elem.negativemarks %>>
 
-
+index: <input type="number" id="index" readonly name="index" value="<%=index %>">
 <button type="submit" class="btn btn-primary">Update question</button>
+<button type="button" name="<%=index %>" class="btn btn-danger" onclick="Deletequestion(this)">Delete question</button>
+
 
 </form>
 <br>
@@ -183,45 +185,9 @@ var formData={
       optionImg2: form.optionImg2.value,
       optionImg3: form.optionImg3.value,
       optionImg4:form.optionImg4.value,
+      index:form.index.value,
     quizname:quizname
 }
-
-//quizname=""
-//var quizname= document.getElementById("stringquestions").innerText
-// var myquizquestions=JSON.parse(questions)
-
-//console.log(myquizquestions)
-    // var formData = {
-    //   no:form.numb.value,
-    //   section: form.section.value,
-    //   passage: form.passage.value,
-    //   qno: form.numb.value,
-    //   myquestion:form.question.value,
-    //   qsection: form.qsection.value,
-    //   Mysolutions: form.solution.value,
-    //   myinteger: form.integerans.value,
-    
-    //   answercode: form.answercode.value,
-    //   myquestion1: form.option1.value,
-    //   myquestion2: form.option2.value,
-    //   myquestion3: form.option3.value,
-    //   myquestion4: form.option4.value,
-    //   type: form.type.value,
-    //   time: form.time.value,
-    //   positivemarks:form.positivemarks.value,
-    //   negativemarks: form.negativemarks.value,
-    //   myquestionimg:form.queimg.value,
-    //   Mysolutionsimg:form.solutionsimg.value,
-    //   passageimg:form.passageimg.value,
-    //   myfiles: form.myfile.value,
-    //   optionImg1: form.optionImg1.value,
-    //   optionImg2: form.optionImg2.value,
-    //   optionImg3: form.optionImg3.value,
-    //   optionImg4:formm.optionImg4.value
-    // };
-
-    console.log(formData)
-     alert(formData)
     $.ajax({
       url: "/testt",
       method: "POST",
@@ -234,6 +200,11 @@ alert(response.message)
     return false;
   } 
 
+
+
+
+
+  //----------------------------------------------//
 
   //-----------------------------Using firebase to store images and questions----------------------///
 
@@ -621,6 +592,131 @@ if(img!==""){
 
   }
 
+
+
+    //------------delete question---------------//
+
+function Deletequestion(data){
+//--------------------deleting all materials in the firebase----------//
+//   let img= document.getElementById("myfile" + data.name).value
+// if(img!==""){
+//     let oldimg = document.getElementById("myfile" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+//     try {
+//       ref.child(oldimg).delete()
+//       console.log("file is deleted")
+//     }
+//     catch (err) {
+//       console.log(err)
+//     }
+//   }
+
+//   let img1= document.getElementById("solutionsimg" + data.name).value
+// if(img1!==""){
+//     let oldimg = document.getElementById("solutionsimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+//     try {
+//       ref.child(oldimg).delete()
+//       console.log("file is deleted")
+//     }
+//     catch (err) {
+//       console.log(err)
+//     }
+//   }
+//   else{
+//     console.log("no image")
+//   }
+
+//   let img2= document.getElementById("passageimg" + data.name).value
+// if(img2!==""){
+//     let oldimg = document.getElementById("passageimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+//     try {
+//       ref.child(oldimg).delete()
+//       console.log("file is deleted")
+//     }
+//     catch (err) {
+//       console.log(err)
+//     }
+//   }
+//   else{
+//     console.log("no image")
+//   }
+
+//   let img4= document.getElementById("option1" + data.name).value
+// if(img4!==""){
+//   let oldimg = document.getElementById("option1" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+//     console.log(oldimg)
+//     try {
+//       ref.child(oldimg).delete()
+//       console.log("file is deleted")
+//     }
+//     catch (err) {
+//       console.log(err)
+//     }
+// } else{
+//   console.log("No image")
+// }
+  
+// let img5= document.getElementById("option2" + data.name).value
+// if(img5!==""){
+//   let oldimg = document.getElementById("option2" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+//     console.log(oldimg)
+//     try {
+//       ref.child(oldimg).delete()
+//       console.log("file is deleted")
+//     }
+//     catch (err) {
+//       console.log(err)
+//     }
+// } else{
+//   console.log("No image")
+// }
+
+// let img6= document.getElementById("option3" + data.name).value
+// if(img6!==""){
+//   let oldimg = document.getElementById("option3" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+//     console.log(oldimg)
+//     try {
+//       ref.child(oldimg).delete()
+//       console.log("file is deleted")
+//     }
+//     catch (err) {
+//       console.log(err)
+//     }
+// } else{
+//   console.log("No image")
+// }
+
+// let img7= document.getElementById("option4" + data.name).value
+// if(img7!==""){
+//   let oldimg = document.getElementById("option4" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+//     console.log(oldimg)
+//     try {
+//       ref.child(oldimg).delete()
+//       console.log("file is deleted")
+//     }
+//     catch (err) {
+//       console.log(err)
+//     }
+// } else{
+//   console.log("No image")
+// }
+var quizname= document.getElementById("stringquestions").innerText
+
+var formData={
+  index:data.name,
+  quizname:quizname
+}
+$.ajax({
+      url: "/deletequestion",
+      method: "POST",
+      data: formData,
+      success: function (response) {
+alert(response.message)
+      
+      }
+    })
+//-------------------------------------------------------------//
+
+}
   //-------------------------------------------------------------------------------------------------
 
 
