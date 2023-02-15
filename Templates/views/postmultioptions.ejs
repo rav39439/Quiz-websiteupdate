@@ -54,187 +54,182 @@
 
   <body>
 
+    <div style="width: 800px; background-color: rgb(188, 188, 207);">
+      <h2>Enter Multisection quiz questions here</h2>
 
-    <h2>Enter Multisection quiz questions here</h2>
-
-    <div class="container">
-      <div class="row">
-
-
-
-
-        <div class="col-lg-6 offset-lg-3 bg-light mt-5" style="text-align:center">
+      <div
+        style="padding-inline: 70px;display: grid;grid-template-rows: auto;gap: 8px; text-align: center;">
+        <!-- <div class="row"> -->
 
 
 
-          <form id="myform" method="POST" enctype="multipart/form-data">
 
-            <div class="form-group">
-              <label for="exampleInputEmail1">Type Your Quiz name</label>
-              <% if(typeof(yourquiz)!='undefined' ){%>
+        <!-- <div class="col-lg-6 offset-lg-3 bg-light mt-5" style="text-align:center"> -->
+
+
+
+        <form id="myform" method="POST" enctype="multipart/form-data">
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Type Your Quiz name</label>
+            <% if(typeof(yourquiz)!='undefined' ){%>
+              <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Quiz name"
+                name="yourquiz" id="yourquiz" value=<%=yourquiz%>>
+              <%} else{%>
                 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Quiz name"
-                  name="yourquiz" id="yourquiz" value=<%=yourquiz%>>
-                <%} else{%>
-                  <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Quiz name"
-                    name="yourquiz" id="yourquiz">
-                  <%}%>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Enter section Number</label>
-              <input type="number" class="form-control" placeholder="Password" name="no" id="no">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter section name</label>
+                  name="yourquiz" id="yourquiz">
+                <%}%>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Enter section Number</label>
+            <input type="number" class="form-control" placeholder="Password" name="no" id="no">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter section name</label>
 
-              <% if(typeof(section)!='undefined' ){%>
+            <% if(typeof(section)!='undefined' ){%>
 
+              <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter section name"
+                name="section" id="section" value=<%=section%> >
+              <%} else{%>
                 <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter section name"
-                  name="section" id="section" value=<%=section%> >
-                <%} else{%>
-                  <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter section name"
-                    name="section" id="section">
-                  <%}%>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the number of questions in section</label>
-              <% if(typeof(queno)!='undefined' ){%>
+                  name="section" id="section">
+                <%}%>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the number of questions in section</label>
+            <% if(typeof(queno)!='undefined' ){%>
+              <input type="number" class="form-control" aria-describedby="emailHelp"
+                placeholder="Enter no of questions in the section " name="qsection" id="qsection" value=<%=queno%>>
+
+              <%} else{%>
+
                 <input type="number" class="form-control" aria-describedby="emailHelp"
-                  placeholder="Enter no of questions in the section " name="qsection" id="qsection" value=<%=queno%>>
+                  placeholder="Enter no of questions in the section " name="qsection" id="qsection">
+                <%}%>
 
-                <%} else{%>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the question number</label>
+            <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter Answercode"
+              name="qno" id="qno">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the question </label>
+            <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter the question"
+              name="myquestion" id="myquestion">
+          </div>
 
-                  <input type="number" class="form-control" aria-describedby="emailHelp"
-                    placeholder="Enter no of questions in the section " name="qsection" id="qsection">
-                  <%}%>
+          <div class="form-group" style="display:grid;grid-template-columns:50% 50%;" >
+           <span> Upload questions Image <input type="file" id="photo3" /></span>
+            <button type="button" onclick="uploadImage3()">Upload queimg image</button>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the integer answer 1 to 10 </label>
+            <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter the integer"
+              name="myinteger" id="myinteger">
+          </div>
 
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the question number</label>
-              <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter Answercode"
-                name="qno" id="qno">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the question </label>
-              <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter the question"
-                name="myquestion" id="myquestion">
-            </div>
-
-
-            <div class="form-group">
-              Upload questions Image <input type="file" id="photo3" />
-              <button type="button" onclick="uploadImage3()">Upload queimg image</button>
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the integer answer 1 to 10 </label>
-              <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter the integer"
-                name="myinteger" id="myinteger">
-            </div>
-
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the passage to be read </label>
-              <textarea class="form-control" name="passage" rows="5" name="passage" id="passage"></textarea>
-            </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the passage to be read </label>
+            <textarea class="form-control" name="passage" rows="5" name="passage" id="passage"></textarea>
+          </div>
 
 
-            <div class="form-group">
-              Upload passage Image <input type="file" id="photo2" />
-              <button type="button" onclick="uploadImage2()">Upload passage image</button>
-            </div>
+          <div class="form-group"style="display:grid;grid-template-columns:50% 50%;">
+           <span> Upload passage Image <input type="file" id="photo2" /></span>
+            <button type="button" onclick="uploadImage2()">Upload passage image</button>
+          </div>
 
 
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the answercode1</label>
-              <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter Answercode"
-                name="answercode1" id="answercode1">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the answercode2</label>
-              <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter Answercode"
-                name="answercode2" id="answercode2">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the answercode3</label>
-              <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter Answercode"
-                name="answercode3" id="answercode3">
-            </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the answercode1</label>
+            <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter Answercode"
+              name="answercode1" id="answercode1">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the answercode2</label>
+            <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter Answercode"
+              name="answercode2" id="answercode2">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the answercode3</label>
+            <input type="number" class="form-control" aria-describedby="emailHelp" placeholder="Enter Answercode"
+              name="answercode3" id="answercode3">
+          </div>
 
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the Option 1</label>
-              <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Option1"
-                name="myquestion1" id="myquestion1">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the Option 2</label>
-              <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Option2"
-                name="myquestion2" id="myquestion2">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the Option 3</label>
-              <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Option3"
-                name="myquestion3" id="myquestion3">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter the Option 4</label>
-              <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Option4"
-                name="myquestion4" id="myquestion4">
-            </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the Option 1</label>
+            <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Option1"
+              name="myquestion1" id="myquestion1">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the Option 2</label>
+            <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Option2"
+              name="myquestion2" id="myquestion2">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the Option 3</label>
+            <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Option3"
+              name="myquestion3" id="myquestion3">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Enter the Option 4</label>
+            <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter Option4"
+              name="myquestion4" id="myquestion4">
+          </div>
 
 
 
-            <div class="form-group">
-              <label for="exampleFormControlTextarea1">Enter the solution</label>
-              <textarea class="form-control" rows="5" name="Mysolutions" id="Mysolutions"></textarea>
-            </div>
-            <div class="form-group">
-              Upload solutions Image <input type="file" id="photo1" />
-              <button type="button" onclick="uploadImage1()">Upload Solution image</button>
+          <div class="form-group" >
+            <label for="exampleFormControlTextarea1">Enter the solution</label>
+            <textarea class="form-control" rows="5" name="Mysolutions" id="Mysolutions"></textarea>
+          </div>
 
-            </div>
+          <div class="form-group" style="display:grid;grid-template-columns:50% 50%;">
+           <span> Upload solutions Image <input type="file" id="photo1" /></span>
+            <button type="button" onclick="uploadImage1()">Upload Solution image</button>
 
-
-
-        </div>
-
-      </div>
+          </div>
 
 
 
-      <div class="form-group">
+          <!-- </div> -->
 
-      </div><br>
+          <!-- </div> -->
 
-      Upload Question accompanying image <input type="file" id="photo" />
-      <button type="button" onclick="uploadImage()">Upload Question accompanying image</button>
-    </div>
 
-    </div><br>
 
-    <div>
-      <div>
-        Upload Question option1 image <input type="file" id="photo5" />
+          <div class="form-group"style="display:grid;grid-template-columns:50% 50%;">
+
+
+          <span>Upload Question accompanying image <input type="file" id="photo" /></span>
+          <button type="button" onclick="uploadImage()">Upload Question image</button>
+
+           </div><br>
+
+      <div style="display:grid;grid-template-columns:50% 50%;">
+       <span> Upload Question option1 image <input type="file" id="photo5" /></span>
         <button type="button" onclick="uploadImage5()">Upload Question option1 image</button>
       </div>
-    <br>
-
-    <div>
-      Upload Question option2 image <input type="file" id="photo6" />
-      <button type="button" onclick="uploadImage6()">Upload Question option2 image</button>
-    </div>
       <br>
-      <div>
-        Upload Question option3 image <input type="file" id="photo7" />
+
+      <div style="display:grid;grid-template-columns:50% 50%;">
+       <span> Upload Question option2 image <input type="file" id="photo6" /></span>
+        <button type="button" onclick="uploadImage6()">Upload Question option2 image</button>
+      </div>
+      <br>
+      <div style="display:grid; grid-template-columns: 50% 50%; ">
+        <span> Upload Question option3 image <input type="file" id="photo7" /></span>
         <button type="button" onclick="uploadImage7()">Upload Question option3 image</button>
+      </div>
+      <br>
+      <div style="display:grid; grid-template-columns: 50% 50%; ">
+        <span>Upload Question option4 image <input type="file" id="photo8" /></span>
+        <button type="button" onclick="uploadImage8()">Upload Question option4 image</button>
 
       </div>
-    <br>
-    <div>
-      Upload Question option4 image <input type="file" id="photo8" />
-      <button type="button" onclick="uploadImage8()">Upload Question option4 image</button>
-
-    </div>
       <br>
-    </div>
-
 
     <div class="form-group">
       <label for="exampleFormControlSelect1">question type</label>
@@ -298,23 +293,11 @@
 
 
     </div>
-    </div>
+   
 
+  </body>
 
-    <script>
-    //function getdata(){
-    //let quizn=document.querySelector('.ty')
-    //let quizn1=document.querySelector('.yourquiz')
-    //quizn1.value=quizn.value
-   // console.log({{gh}})
-    //console.log(quizn1.value)
-   // }
-
-
-
-
-    </script>
-
+   
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -477,10 +460,10 @@
           Mysolutionsimg: imagePath1,
           passageimg: imagePath2,
           myfiles: imagePath3,
-optionImg1:imagePath5,
-optionImg2:imagePath6,
-optionImg3:imagePath7,
-optionImg4:imagePath8,
+          optionImg1: imagePath5,
+          optionImg2: imagePath6,
+          optionImg3: imagePath7,
+          optionImg4: imagePath8,
 
 
 
@@ -499,7 +482,7 @@ optionImg4:imagePath8,
             $("#photo").val('');
             imagePath = ""
             imagePath1 = ""
-           // imagePath2 = ""
+            // imagePath2 = ""
             imagePath3 = ""
             imagePath5 = ""
             imagePath6 = ""
@@ -798,7 +781,7 @@ optionImg4:imagePath8,
         })
       }
 
-//------------------------------options upload------------------------------------------------
+      //------------------------------options upload------------------------------------------------
       async function uploadImage5() {
         const ref = firebase.storage().ref();
         const file = document.querySelector("#photo5").files[0];
@@ -966,6 +949,5 @@ optionImg4:imagePath8,
 
 
     </script>
-  </body>
 
 </html>
