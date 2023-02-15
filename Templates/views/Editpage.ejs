@@ -8,199 +8,252 @@
   <title>Document</title>
   <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
-    integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-    crossorigin="anonymous"></script>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 
 <body>
-<div id="stringquestions"><%=stringquestions%></div>
-  <% quiz?.quizquestions.forEach(function(elem,index){ %>
-    <div class="bg-light" style="width:800px">
-
-  <form onsubmit="return updatequestion(this)" method="POST">
-
-Noofquestions: <input type="number"name="qsection" value="<%=elem.qsection %>" id="qsection">
-section: <input type="text" class="form-control" name="section" id="section" value="<%=elem.section %>">
-
-Q No: <input type="text"name="numb" value="<%=elem.numb %>" id="numb"><br>
-Question: <input type="text" name="question" value="<%=elem.question %>" id="question"><br>
-
-Queimg: <input type="text" name="queimg" id="queimg<%=index%>" value='<%=elem.queimg%>'>
-
-
-IntegerAns: <input type="number"name="integerans" id="integerans" value='<%=elem.integerans%>'>
-
-Passage : <textarea class="form-control" rows="5" name="passage" id="passage" value='<%=elem.passage %>'></textarea>
-
-PassageImg : <input type="text"name="passageimg" id="passageimg<%=index %>" value='<%=elem.passageimg%>'>
-
-
-Answercode : <input type="text"name="answercode" id="answercode" value="<%=elem.answercode %>">
-
-Option1 : <input type="text"name="option1" id="option1" value='<%=elem.option1%>'>
-
-Option2: <input type="text" name="option2" id="option2" value='<%=elem.option2%>'>
-
-Option 3: <input type="text"name="option3" id="option3" value='<%=elem.option3%>'>
-
-
-Option :4 <input type="text" name="option4" id="option4" value='<%=elem.option4%>'>
-
-Solution : <textarea class="form-control" rows="5" name="Mysolutions" id="Mysolutions"
-          >'<%elem.solution%>'</textarea>
-
-Solutionimg : <input type="text" name="solutionsimg" id="solutionsimg<%=index %>" value='<%=elem.solutionsimg%>'>
-
-QuestionAccImg: <input type="text" name="myfile" id="myfile<%=index %>" value='<%=elem.myfile%>'>
-
-OptionImg1 : <input type="text"name="optionImg1" id="option1<%=index %>" value='<%=elem.optionImg1%>'>
-
-OptionImg2 :<input type="text" name="optionImg2" id="option2<%=index %>" value='<%=elem.optionImg2%>'>
-
-OptionImg3 <input type="text" name="optionImg3" id="option3<%=index %>" value='<%=elem.optionImg3%>'>
-
-  OptionImg4: <input type="text" name="optionImg4" id="option4<%=index %>" value='<%=elem.optionImg4%>'>
-
-
-Type : <select  name="type" id="type" value='<%=elem.type%>'>
-                  <option value="multichoice">multichoice</option>
-                  <option value="integertype">integertype</option>
-                  <option value="passage">passage</option>
-                  <option value="multi">multipleoptions</option>
-                </select>
-
-
-          Time : <input type="number"id="time" name="time" value=<%=elem.time %>>
-
-
-PositiveMarks : <input type="text" id="postivemarks" name="postivemarks" value=<%=elem.postivemarks %>>
-
-
-NegativeMarks: <input type="text" id="negativemarks" name="negativemarks" value=<%=elem.negativemarks %>>
-
-index: <input type="number" id="index" readonly name="index" value="<%=index %>">
-<button type="submit" class="btn btn-primary">Update question</button>
-<button type="button" name="<%=index %>" class="btn btn-danger" onclick="Deletequestion(this)">Delete question</button>
-
-
-</form>
-<br>
-
-      <div>
-        Upload Question accompanying image <input type="file" id="photo<%=index %>" />
-        <button type="button" name="<%=index %>" onclick="uploadImage(this)">Upload Question accompanying
-          image</button>
-      </div>
-      <div class="form-group">
-        Upload solutions Image <input type="file" id="photo1<%=index %>" />
-        <button type="button" name="<%=index %>" onclick="uploadImage1(this)">Upload Solution image</button>
-      </div>
-
-      <div class="form-group">
-        Upload passage Image <input type="file" id="photo2<%=index %>" />
-        <button type="button" name="<%=index %>" onclick="uploadImage2(this)">Upload passage image</button>
-      </div>
-      <div>
-        Upload queimg Image <input type="file" id="photo3<%=index %>" />
-        <button type="button" name="<%=index %>" onclick="uploadImage3(this)">Upload queimg image</button>
-      </div>
-
-
-      <div>
-        Upload Question option1 image <input type="file" id="photo5<%=index %>" />
-        <button type="button" name="<%=index %>" onclick="uploadImage5(this)">Upload Question option1 image</button>
-      </div>
-      <br>
-
-      <div>
-        Upload Question option2 image <input type="file" id="photo6<%=index %>" />
-        <button type="button" name="<%=index %>" onclick="uploadImage6(this)">Upload Question option2 image</button>
-      </div>
-      <br>
-
-
-
-      <div>
-        Upload Question option3 image <input type="file" id="photo7<%=index %>" />
-        <button type="button" name="<%=index %>" onclick="uploadImage7(this)">Upload Question option3 image</button>
-      </div>
-      <br>
-
-      <div>
-        Upload Question option4 image <input type="file" id="photo8<%=index %>" />
-        <button type="button"  name="<%=index %>" onclick="uploadImage8(this)">Upload Question option4 image</button>
-      </div>
-      <br>
-    </div>
-
+  <div id="stringquestions">
+    <%=stringquestions%>
   </div>
+  <div style="width: 100%; ">
 
-    <br>
+    <% quiz?.quizquestions.forEach(function(elem,index){ %>
+      <div  style="width:800px;border: 2px solid black;padding-bottom: 15px; background-color: rgb(187, 187, 208); ">
 
-    <% }) %>
-   
+        <form onsubmit="return updatequestion(this)" method="POST">
+          <div class="" style="padding-inline: 70px;display: grid;grid-template-rows: auto;gap: 8px; text-align: center;">
+            Noofquestions: <input type="number" name="qsection" class="form-control" style="border-radius: 20px;height: 50px;" id="exampleInputEmail1"
+              value="<%=elem.qsection %>" id="qsection"><br>
+            section: <input type="text" class="form-control" name="section" id="section"style="border-radius: 20px;height: 50px;"  value="<%=elem.section %>"><br>
+
+            Q No: <input type="text" name="numb" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  value="<%=elem.numb %>"
+              id="numb"><br>
+            Question: <input type="text" name="question" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
+              value="<%=elem.question %>" id="question"><br>
+
+            Queimg: <input type="text" name="queimg" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  id="queimg<%=index%>"
+              value='<%=elem.queimg%>'><br>
+
+
+            IntegerAns: <input type="number" name="integerans" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
+              id="integerans" value='<%=elem.integerans%>'><br>
+
+            Passage : <textarea class="form-control" rows="5"style="border-radius: 20px;height: 50px;"  name="passage" id="passage"
+              value='<%=elem.passage %>'></textarea><br>
+
+            PassageImg : <input type="text" name="passageimg"style="border-radius: 20px;height: 50px;"  class="form-control" id="exampleInputEmail1"
+              id="passageimg<%=index %>" value='<%=elem.passageimg%>'><br>
+
+
+            Answercode : <input type="text" name="answercode" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
+              id="answercode" value="<%=elem.answercode %>"><br>
+
+            Option1 : <input type="text" name="option1" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1" id="option1"
+              value='<%=elem.option1%>'><br>
+
+            Option2: <input type="text" name="option2" class="form-control" style="border-radius: 20px;height: 50px;" id="exampleInputEmail1" id="option2"
+              value='<%=elem.option2%>'><br>
+
+            Option 3: <input type="text" name="option3" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1" id="option3"
+              value='<%=elem.option3%>'><br>
+
+
+            Option :4 <input type="text" name="option4" class="form-control" style="border-radius: 20px;height: 50px;" id="exampleInputEmail1" id="option4"
+              value='<%=elem.option4%>'><br>
+
+            Solution : <textarea class="form-control" rows="5"style="border-radius: 20px;height: 50px;"  name="Mysolutions"
+              id="Mysolutions">'<%elem.solution%>'</textarea><br>
+
+            Solutionimg : <input type="text" name="solutionsimg" style="border-radius: 20px;height: 50px;" class="form-control" id="exampleInputEmail1"
+              id="solutionsimg<%=index %>" value='<%=elem.solutionsimg%>'><br>
+
+            QuestionAccImg: <input type="text" name="myfile" style="border-radius: 20px;height: 50px;" class="form-control" id="exampleInputEmail1"
+              id="myfile<%=index %>" value='<%=elem.myfile%>'><br>
+
+            OptionImg1 : <input type="text" name="optionImg1" class="form-control" style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
+              id="option1<%=index %>" value='<%=elem.optionImg1%>'><br>
+
+            OptionImg2 :<input type="text" name="optionImg2" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
+              id="option2<%=index %>" value='<%=elem.optionImg2%>'><br>
+
+            OptionImg3 <input type="text" name="optionImg3" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
+              id="option3<%=index %>" value='<%=elem.optionImg3%>'><br>
+
+            OptionImg4: <input type="text" name="optionImg4" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
+              id="option4<%=index %>" value='<%=elem.optionImg4%>'><br>
+
+
+            Type : <select name="type" id="type" class="form-control" style="border-radius: 20px;height: 50px;" id="exampleFormControlSelect1"
+              value='<%=elem.type%>'>
+              <option value="multichoice">multichoice</option>
+              <option value="integertype">integertype</option>
+              <option value="passage">passage</option>
+              <option value="multi">multipleoptions</option>
+            </select><br>
+
+
+            Time : <input type="number" id="time" style="border-radius: 20px;height: 50px;" name="time" class="form-control" id="exampleInputEmail1"
+              value=<%=elem.time %>><br>
+
+
+            PositiveMarks : <input type="text"style="border-radius: 20px;height: 50px;" id="postivemarks" class="form-control" id="exampleInputEmail1"
+              name="postivemarks" value=<%=elem.postivemarks %>><br>
+
+
+            NegativeMarks: <input type="text"style="border-radius: 20px;height: 50px;" id="negativemarks" class="form-control" id="exampleInputEmail1"
+              name="negativemarks" value=<%=elem.negativemarks %>><br>
+
+            index: <input type="number"style="border-radius: 20px;height: 50px;" id="index" readonly name="index" class="form-control" id="exampleInputEmail1"
+              value="<%=index %>">
+            <button type="submit" class="btn btn-primary" style="margin-inline: 220px;border-radius: 20px;height: 50px;">Update question</button>
+            <button type="button" name="<%=index %>" class="btn btn-danger" style="margin-inline: 220px;border-radius: 20px;height: 50px;"
+              onclick="Deletequestion(this)">Delete
+              question</button>
+          </div>
+        </form>
+        <br>
+        <!-----------------------------File Upload---------------------------------------------------->
+        <div class="" style="display:grid;grid-template-rows: auto; padding-inline: 70px; gap: 8px;">
+          <div>
+            <div class="" style="display:grid; grid-template-columns: 50% 50%;">
+              <span>Upload Question containing image<input type="file" id="photo<%=index %>" /></span>
+              <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage(this)">Upload
+                Question accompanying
+                image</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="" style="display:grid; grid-template-columns: 50% 50%;">
+
+              <span> Upload solutions Image <input type="file" id="photo1<%=index %>" /></span>
+              <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage1(this)">Upload
+                Solution image</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="" style="display:grid; grid-template-columns: 50% 50%;">
+              <span>Upload passage Image <input type="file" id="photo2<%=index %>" /></span>
+              <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage2(this)">Upload
+                passage image</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="" style="display:grid; grid-template-columns: 50% 50%;">
+              <span> Upload queimg Image <input type="file" id="photo3<%=index %>" /></span>
+              <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage3(this)">Upload
+                queimg image</button>
+            </div>
+          </div>
+
+
+          <div>
+            <div class="" style="display:grid; grid-template-columns: 50% 50%;">
+
+              <span> Upload Question option1 image <input type="file" id="photo5<%=index %>" /></span>
+              <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage5(this)">Upload
+                Question option1 image</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="" class="btn btn-primary" style="display:grid; grid-template-columns: 50% 50%;">
+
+              <span> Upload Question option2 image <input type="file" id="photo6<%=index %>" /></span>
+              <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage6(this)">Upload
+                Question option2 image</button>
+            </div>
+          </div>
+
+
+
+          <div>
+            <div class="" style="display:grid; grid-template-columns: 50% 50%;">
+
+              <span>Upload Question option3 image <input type="file" id="photo7<%=index %>" /></span>
+              <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage7(this)">Upload
+                Question option3 image</button>
+            </div>
+          </div>
+
+          <div>
+            <div class="" style="display:grid; grid-template-columns: 50% 50%;">
+
+              <span> Upload Question option4 image <input type="file" id="photo8<%=index %>" /></span>
+              <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage8(this)">Upload
+                Question option4 image</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <br>
+
+      <% }) %>
+  </div>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+  integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js"
+  integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
 <script>
 
 
-function updatequestion(form){
-   console.log(form)
-   var quizname= document.getElementById("stringquestions").innerText
-  //  e.preventDefault()
-     alert(form)
-var formData={
-        qsection: form.qsection.value,
+  function updatequestion(form) {
+    console.log(form)
+    var quizname = document.getElementById("stringquestions").innerText
+    //  e.preventDefault()
+    alert(form)
+    var formData = {
+      qsection: form.qsection.value,
       section: form.section.value,
-  numb:form.numb.value,
-  question:form.question.value,
+      numb: form.numb.value,
+      question: form.question.value,
       passage: form.passage.value,
       solution: document.getElementById("Mysolutions").innerText,
-   integerans: form.integerans.value,
-     answercode: form.answercode.value,
-     option1: form.option1.value,
+      integerans: form.integerans.value,
+      answercode: form.answercode.value,
+      option1: form.option1.value,
       option2: form.option2.value,
       option3: form.option3.value,
       option4: form.option4.value,
       type: form.type.value,
       time: form.time.value,
-      postivemarks:form.postivemarks.value,
+      postivemarks: form.postivemarks.value,
       negativemarks: form.negativemarks.value,
-      queimg:form.queimg.value,
-      passageimg:form.passageimg.value,
+      queimg: form.queimg.value,
+      passageimg: form.passageimg.value,
       myfile: form.myfile.value,
       optionImg1: form.optionImg1.value,
       optionImg2: form.optionImg2.value,
       optionImg3: form.optionImg3.value,
-      optionImg4:form.optionImg4.value,
-      solutionsimg:form.solutionsimg.value,
+      optionImg4: form.optionImg4.value,
+      solutionsimg: form.solutionsimg.value,
 
-      index:form.index.value,
-    quizname:quizname
-}
+      index: form.index.value,
+      quizname: quizname
+    }
     $.ajax({
       url: "/testt",
       method: "POST",
       data: formData,
       success: function (response) {
-alert(response.message)
-      
+        alert(response.message)
+
       }
     })
     return false;
-  } 
+  }
 
 
 
@@ -226,33 +279,33 @@ alert(response.message)
 
   async function uploadImage(data) {
     const ref = firebase.storage().ref();
-    const file = document.querySelector("#photo"+data.name).files[0];
+    const file = document.querySelector("#photo" + data.name).files[0];
     const name = +new Date() + "-" + file.name;
     const metadata = {
       contentType: file.type
     };
 
-    let img= document.getElementById("myfile" + data.name).value
-if(img!==""){
-    let oldimg = document.getElementById("myfile" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img = document.getElementById("myfile" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("myfile" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
-    catch (err) {
-      console.log(err)
+    else {
+      console.log("no image")
     }
-  }
-  else{
-    console.log("no image")
-  }
 
 
     try {
       await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
           newurl = url
-         callback(url,data)
+          callback(url, data)
         })
     }
     catch (err) {
@@ -271,46 +324,46 @@ if(img!==""){
 
   async function uploadImage1(data) {
     const ref = firebase.storage().ref();
-    const file = document.querySelector("#photo1"+data.name).files[0];
+    const file = document.querySelector("#photo1" + data.name).files[0];
     const name = +new Date() + "-" + file.name;
     const metadata = {
       contentType: file.type
     };
-    
-    let img= document.getElementById("solutionsimg" + data.name).value
-if(img!==""){
-    let oldimg = document.getElementById("solutionsimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+
+    let img = document.getElementById("solutionsimg" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("solutionsimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
-    catch (err) {
-      console.log(err)
+    else {
+      console.log("no image")
     }
-  }
-  else{
-    console.log("no image")
-  }
 
 
     try {
       await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
           newurl = url
-          callback1(url,data)
+          callback1(url, data)
         })
     }
     catch (err) {
       console.log(err)
     }
 
-    function callback1(url,data) {
+    function callback1(url, data) {
       console.log(url)
-      newcallback1(url,data)
+      newcallback1(url, data)
     }
   }
   var imagePath1 = ""
-  function newcallback1(url,data) {
+  function newcallback1(url, data) {
     let newurl = url;
     document.getElementById("solutionsimg" + data.name).value = newurl
   }
@@ -318,86 +371,86 @@ if(img!==""){
 
   async function uploadImage2(data) {
     const ref = firebase.storage().ref();
-    const file = document.querySelector("#photo2"+data.name).files[0];
+    const file = document.querySelector("#photo2" + data.name).files[0];
     const name = +new Date() + "-" + file.name;
     const metadata = {
       contentType: file.type
     };
 
-    let img= document.getElementById("passageimg" + data.name).value
-if(img!==""){
-    let oldimg = document.getElementById("passageimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img = document.getElementById("passageimg" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("passageimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
-    catch (err) {
-      console.log(err)
+    else {
+      console.log("no image")
     }
-  }
-  else{
-    console.log("no image")
-  }
     try {
       await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
           newurl = url
-          callback2(url,data)
+          callback2(url, data)
         })
     }
     catch (err) {
       console.log(err)
     }
-    function callback2(url,data) {
+    function callback2(url, data) {
       console.log(url)
-      newcallback2(url,data)
+      newcallback2(url, data)
     }
   }
   var imagePath2 = ""
-  function newcallback2(url,data) {
+  function newcallback2(url, data) {
     let newurl = url;
-    document.getElementById("passageimg" + data.name).value= newurl
+    document.getElementById("passageimg" + data.name).value = newurl
 
   }
 
 
   async function uploadImage3(data) {
     const ref = firebase.storage().ref();
-    const file = document.querySelector("#photo3"+data.name).files[0];
+    const file = document.querySelector("#photo3" + data.name).files[0];
     const name = +new Date() + "-" + file.name;
     const metadata = {
       contentType: file.type
     };
-    let img= document.getElementById("queimg" + data.name).value
-if(img!==""){
-    let oldimg = document.getElementById("queimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
-    } catch (err) {
-      console.log(err)
+    let img = document.getElementById("queimg" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("queimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      } catch (err) {
+        console.log(err)
+      }
     }
-  }
-  else{
-    console.log("no image")
-  }
+    else {
+      console.log("no image")
+    }
     try {
       await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
           newurl = url
-          callback3(url,data)
+          callback3(url, data)
         })
     }
     catch (err) {
       console.log(err)
     }
-    function callback3(url,data) {
+    function callback3(url, data) {
       console.log(url)
-      newcallback3(url,data)
+      newcallback3(url, data)
     }
   }
   var imagePath = ""
-  function newcallback3(url,data) {
+  function newcallback3(url, data) {
     let newurl = url;
 
     document.getElementById("queimg" + data.name).value = newurl
@@ -407,27 +460,27 @@ if(img!==""){
   //------------------------------options upload------------------------------------------------
   async function uploadImage5(data) {
     const ref = firebase.storage().ref();
-    const file = document.getElementById("photo5"+data.name).files[0];
+    const file = document.getElementById("photo5" + data.name).files[0];
     console.log(file)
     const name = +new Date() + "-" + file.name;
     const metadata = {
       contentType: file.type
     };
-let img= document.getElementById("option1" + data.name).value
-if(img!==""){
-  let oldimg = document.getElementById("option1" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
-    console.log(oldimg)
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img = document.getElementById("option1" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("option1" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      console.log(oldimg)
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
+    } else {
+      console.log("No image")
     }
-    catch (err) {
-      console.log(err)
-    }
-} else{
-  console.log("No image")
-}
-   
+
 
 
 
@@ -435,20 +488,20 @@ if(img!==""){
       await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
           newurl = url
-          callback5(url,data)
+          callback5(url, data)
         })
     }
     catch (err) {
       console.log(err)
     }
 
-    function callback5(url,data) {
+    function callback5(url, data) {
       console.log(url)
-      newcallback5(url,data)
+      newcallback5(url, data)
     }
   }
   var imagePath5 = ""
-  function newcallback5(url,data) {
+  function newcallback5(url, data) {
     let newurl = url;
     document.getElementById("option1" + data.name).value = url
 
@@ -456,287 +509,287 @@ if(img!==""){
 
   async function uploadImage6(data) {
     const ref = firebase.storage().ref();
-    const file = document.querySelector("#photo6"+data.name).files[0];
+    const file = document.querySelector("#photo6" + data.name).files[0];
     const name = +new Date() + "-" + file.name;
     const metadata = {
       contentType: file.type
     };
 
 
-    let img= document.getElementById("option2" + data.name).value
-if(img!==""){
-    let oldimg = document.getElementById("option2" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
-    console.log(oldimg)
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img = document.getElementById("option2" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("option2" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      console.log(oldimg)
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
-    catch (err) {
-      console.log(err)
+    else {
+      console.log("no image")
     }
-  }
-  else{
-    console.log("no image")
-  }
 
 
     try {
       await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
           newurl = url
-          callback6(url,data)
+          callback6(url, data)
         })
     }
     catch (err) {
       console.log(err)
     }
-    function callback6(url,data) {
+    function callback6(url, data) {
       console.log(url)
-      newcallback6(url,data)
+      newcallback6(url, data)
     }
   }
   var imagePath6 = ""
-  function newcallback6(url,data) {
+  function newcallback6(url, data) {
     document.getElementById("option2" + data.name).value = url
 
   }
 
   async function uploadImage7(data) {
     const ref = firebase.storage().ref();
-    const file = document.querySelector("#photo7"+data.name).files[0];
+    const file = document.querySelector("#photo7" + data.name).files[0];
     const name = +new Date() + "-" + file.name;
     const metadata = {
       contentType: file.type
     };
-    let img= document.getElementById("option3" + data.name).value
-if(img!==""){
-    let oldimg = document.getElementById("option3" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
-    console.log(oldimg)
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img = document.getElementById("option3" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("option3" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      console.log(oldimg)
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
-    catch (err) {
-      console.log(err)
+    else {
+      console.log("no image")
     }
-  }
-  else{
-    console.log("no image")
-  }
 
     try {
       await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
           newurl = url
-          callback7(url,data)
+          callback7(url, data)
         })
     }
     catch (err) {
       console.log(err)
     }
 
-    function callback7(url,data) {
+    function callback7(url, data) {
       console.log(url)
-      newcallback7(url,data)
+      newcallback7(url, data)
     }
   }
   var imagePath7 = ""
-  function newcallback7(url,data) {
+  function newcallback7(url, data) {
     let newurl = url;
-    document.getElementById("option3" + data.name).value= newurl
+    document.getElementById("option3" + data.name).value = newurl
 
   }
 
   async function uploadImage8(data) {
     const ref = firebase.storage().ref();
-    const file = document.querySelector("#photo8"+data.name).files[0];
+    const file = document.querySelector("#photo8" + data.name).files[0];
     const name = +new Date() + "-" + file.name;
     const metadata = {
       contentType: file.type
     };
 
-    let img= document.getElementById("option4" + data.name).value
-if(img!==""){
-    let oldimg = document.getElementById("option4" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
-    console.log(oldimg)
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img = document.getElementById("option4" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("option4" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      console.log(oldimg)
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
-    catch (err) {
-      console.log(err)
+    else {
+      console.log("no image")
     }
-  }
-  else{
-    console.log("no image")
-  }
     try {
       await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
         .then(url => {
           newurl = url
-          callback8(url,data)
+          callback8(url, data)
         })
     }
     catch (err) {
       console.log(err)
     }
 
-    function callback8(url,data) {
+    function callback8(url, data) {
       console.log(url)
       newcallback8(url)
     }
   }
   var imagePath8 = ""
-  function newcallback8(url,data) {
+  function newcallback8(url, data) {
     let newurl = url;
-   
+
     document.getElementById("option4" + data.name).value = newurl
 
   }
 
 
 
-    //------------delete question---------------//
+  //------------delete question---------------//
 
-function Deletequestion(data){
+  function Deletequestion(data) {
 
-  const ref = firebase.storage().ref();
+    const ref = firebase.storage().ref();
 
-//--------------------deleting all materials in the firebase----------//
-  let img= document.getElementById("myfile" + data.name).value
-if(img!==""){
-    let oldimg = document.getElementById("myfile" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    //--------------------deleting all materials in the firebase----------//
+    let img = document.getElementById("myfile" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("myfile" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
-    catch (err) {
-      console.log(err)
-    }
-  }
 
-  let img8= document.getElementById("queimg" + data.name).value
-if(img8!==""){
-    let oldimg = document.getElementById("queimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
-    } catch (err) {
-      console.log(err)
+    let img8 = document.getElementById("queimg" + data.name).value
+    if (img8 !== "") {
+      let oldimg = document.getElementById("queimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      } catch (err) {
+        console.log(err)
+      }
     }
-  }
-  else{
-    console.log("no image")
-  }
+    else {
+      console.log("no image")
+    }
 
 
-  let img1= document.getElementById("solutionsimg" + data.name).value
-if(img1!==""){
-    let oldimg = document.getElementById("solutionsimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img1 = document.getElementById("solutionsimg" + data.name).value
+    if (img1 !== "") {
+      let oldimg = document.getElementById("solutionsimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
-    catch (err) {
-      console.log(err)
+    else {
+      console.log("no image")
     }
-  }
-  else{
-    console.log("no image")
-  }
 
-  let img2= document.getElementById("passageimg" + data.name).value
-if(img2!==""){
-    let oldimg = document.getElementById("passageimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img2 = document.getElementById("passageimg" + data.name).value
+    if (img2 !== "") {
+      let oldimg = document.getElementById("passageimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
-    catch (err) {
-      console.log(err)
+    else {
+      console.log("no image")
     }
-  }
-  else{
-    console.log("no image")
-  }
 
-  let img4= document.getElementById("option1" + data.name).value
-if(img4!==""){
-  let oldimg = document.getElementById("option1" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
-    console.log(oldimg)
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img4 = document.getElementById("option1" + data.name).value
+    if (img4 !== "") {
+      let oldimg = document.getElementById("option1" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      console.log(oldimg)
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
+    } else {
+      console.log("No image")
     }
-    catch (err) {
-      console.log(err)
-    }
-} else{
-  console.log("No image")
-}
-  
-let img5= document.getElementById("option2" + data.name).value
-if(img5!==""){
-  let oldimg = document.getElementById("option2" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
-    console.log(oldimg)
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
-    }
-    catch (err) {
-      console.log(err)
-    }
-} else{
-  console.log("No image")
-}
 
-let img6= document.getElementById("option3" + data.name).value
-if(img6!==""){
-  let oldimg = document.getElementById("option3" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
-    console.log(oldimg)
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img5 = document.getElementById("option2" + data.name).value
+    if (img5 !== "") {
+      let oldimg = document.getElementById("option2" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      console.log(oldimg)
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
+    } else {
+      console.log("No image")
     }
-    catch (err) {
-      console.log(err)
-    }
-} else{
-  console.log("No image")
-}
 
-let img7= document.getElementById("option4" + data.name).value
-if(img7!==""){
-  let oldimg = document.getElementById("option4" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
-    console.log(oldimg)
-    try {
-      ref.child(oldimg).delete()
-      console.log("file is deleted")
+    let img6 = document.getElementById("option3" + data.name).value
+    if (img6 !== "") {
+      let oldimg = document.getElementById("option3" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      console.log(oldimg)
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
+    } else {
+      console.log("No image")
     }
-    catch (err) {
-      console.log(err)
-    }
-} else{
-  console.log("No image")
-}
-var quizname= document.getElementById("stringquestions").innerText
 
-var formData={
-  index:data.name,
-  quizname:quizname
-}
-$.ajax({
+    let img7 = document.getElementById("option4" + data.name).value
+    if (img7 !== "") {
+      let oldimg = document.getElementById("option4" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      console.log(oldimg)
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
+    } else {
+      console.log("No image")
+    }
+    var quizname = document.getElementById("stringquestions").innerText
+
+    var formData = {
+      index: data.name,
+      quizname: quizname
+    }
+    $.ajax({
       url: "/deletequestion",
       method: "POST",
       data: formData,
       success: function (response) {
-alert(response.message)
-      
+        alert(response.message)
+
       }
     })
-//-------------------------------------------------------------//
+    //-------------------------------------------------------------//
 
-}
+  }
   //-------------------------------------------------------------------------------------------------
 
 
