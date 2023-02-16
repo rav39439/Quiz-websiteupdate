@@ -36,7 +36,6 @@
             Queimg: <input type="text" name="queimg" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  id="queimg<%=index%>"
               value='<%=elem.queimg%>'><br>
 
-
             IntegerAns: <input type="number" name="integerans" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
               id="integerans" value='<%=elem.integerans%>'><br>
 
@@ -45,7 +44,6 @@
 
             PassageImg : <input type="text" name="passageimg"style="border-radius: 20px;height: 50px;"  class="form-control" id="exampleInputEmail1"
               id="passageimg<%=index %>" value='<%=elem.passageimg%>'><br>
-
 
             Answercode : <input type="text" name="answercode" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
               id="answercode" value="<%=elem.answercode %>"><br>
@@ -59,12 +57,14 @@
             Option 3: <input type="text" name="option3" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1" id="option3"
               value='<%=elem.option3%>'><br>
 
-
             Option :4 <input type="text" name="option4" class="form-control" style="border-radius: 20px;height: 50px;" id="exampleInputEmail1" id="option4"
               value='<%=elem.option4%>'><br>
 
             Solution : <textarea class="form-control" rows="5"style="border-radius: 20px;height: 50px;"  name="Mysolutions"
-              id="Mysolutions">'<%elem.solution%>'</textarea><br>
+              id="Mysolutions"><%=elem.solution%></textarea><br>
+
+             
+               
 
             Solutionimg : <input type="text" name="solutionsimg" style="border-radius: 20px;height: 50px;" class="form-control" id="exampleInputEmail1"
               id="solutionsimg<%=index %>" value='<%=elem.solutionsimg%>'><br>
@@ -84,7 +84,6 @@
             OptionImg4: <input type="text" name="optionImg4" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
               id="option4<%=index %>" value='<%=elem.optionImg4%>'><br>
 
-
             Type : <select name="type" id="type" class="form-control" style="border-radius: 20px;height: 50px;" id="exampleFormControlSelect1"
               value='<%=elem.type%>'>
               <option value="multichoice">multichoice</option>
@@ -93,14 +92,11 @@
               <option value="multi">multipleoptions</option>
             </select><br>
 
-
             Time : <input type="number" id="time" style="border-radius: 20px;height: 50px;" name="time" class="form-control" id="exampleInputEmail1"
               value=<%=elem.time %>><br>
 
-
             PositiveMarks : <input type="text"style="border-radius: 20px;height: 50px;" id="postivemarks" class="form-control" id="exampleInputEmail1"
               name="postivemarks" value=<%=elem.postivemarks %>><br>
-
 
             NegativeMarks: <input type="text"style="border-radius: 20px;height: 50px;" id="negativemarks" class="form-control" id="exampleInputEmail1"
               name="negativemarks" value=<%=elem.negativemarks %>><br>
@@ -152,7 +148,6 @@
 
           <div>
             <div class="" style="display:grid; grid-template-columns: 50% 50%;">
-
               <span> Upload Question option1 image <input type="file" id="photo5<%=index %>" /></span>
               <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage5(this)">Upload
                 Question option1 image</button>
@@ -161,18 +156,14 @@
 
           <div>
             <div class="" class="btn btn-primary" style="display:grid; grid-template-columns: 50% 50%;">
-
               <span> Upload Question option2 image <input type="file" id="photo6<%=index %>" /></span>
               <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage6(this)">Upload
                 Question option2 image</button>
             </div>
           </div>
 
-
-
           <div>
             <div class="" style="display:grid; grid-template-columns: 50% 50%;">
-
               <span>Upload Question option3 image <input type="file" id="photo7<%=index %>" /></span>
               <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage7(this)">Upload
                 Question option3 image</button>
@@ -181,7 +172,6 @@
 
           <div>
             <div class="" style="display:grid; grid-template-columns: 50% 50%;">
-
               <span> Upload Question option4 image <input type="file" id="photo8<%=index %>" /></span>
               <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage8(this)">Upload
                 Question option4 image</button>
@@ -213,14 +203,14 @@
     console.log(form)
     var quizname = document.getElementById("stringquestions").innerText
     //  e.preventDefault()
-    alert(form)
+    alert(document.getElementById("Mysolutions").value)
     var formData = {
       qsection: form.qsection.value,
       section: form.section.value,
       numb: form.numb.value,
       question: form.question.value,
       passage: form.passage.value,
-      solution: document.getElementById("Mysolutions").innerText,
+      solution: document.getElementById("Mysolutions").value,
       integerans: form.integerans.value,
       answercode: form.answercode.value,
       option1: form.option1.value,
@@ -248,8 +238,7 @@
       method: "POST",
       data: formData,
       success: function (response) {
-        alert(response.message)
-
+     
       }
     })
     return false;
