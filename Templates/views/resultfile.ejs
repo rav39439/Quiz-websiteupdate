@@ -949,7 +949,9 @@
 
         let img_tag = '';
         let que_tag = '';
+let pass_tag=''
 
+let pass_img=''
 
         for (let i = 0; i < length; i++) {
 
@@ -977,14 +979,17 @@
                 }
 
                 if (Mydata[i].passage) {
-                    let pass_tag = `<textarea class="form-control" rows="5" style="width:300px;margin:auto">${Mydata[i].passage}</textarea>`;
+                     pass_tag = `<textarea class="form-control" rows="5" style="width:600px; height:400px">${Mydata[i].passage}</textarea>`;
                     // mypasstag.innerHTML=pass_tag
+                }else{
+                    pass_tag=``
                 }
                 if (Mydata[i].passageimg) {
-                    let pass_img = `<img src="${Mydata[i].passageimg}" alt="" id="ty" style="width:100;height:50;">`;
+                 pass_img = `<img src="${Mydata[i].passageimg}" alt="" id="ty" style="width:100;height:50;">`;
                     // mypassimg.innerHTML=pass_img
                 }
                 else {
+                    pass_img=``
                     //console.log("no passage")
                 }
                 if (Mydata[i].solutionsimg) {
@@ -1036,7 +1041,7 @@ else{
 option_tag +=`</div>`
               
 //-----------------------------------------------------------------------------------------
-                html += `<div style="border:1px solid black;border-radius:15px">`+que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`+`<br>`+`</div>`+`<br>`+`<br>`
+                html += `<div style="border:1px solid black;border-radius:15px">`+pass_tag+`<br>`+ pass_img+`<br>`+que_tag + `<br>` + img_tag + `<br>` + option_tag + `<br>` + solution_tag + `<br>`+`<br>`+`</div>`+`<br>`+`<br>`
 
                 //if((typeof(pass_img)!='undefined')&&((typeof(img_tag)!='undefined'))){
                 //  html +=pass_img+`<br>`+ que_tag + `<br>` + img_tag +`<br>` + option_tag+`<br>`
