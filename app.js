@@ -620,31 +620,6 @@ app.get("/logout",function(req,res){
 
 
 
-
-
-function getquizdata(req,res,next){
-//-------------------------------sql query------------------------------------------------
-    // connection.query("select * from myresult ORDER BY marks DESC",function(err,data){
-
-    //     if(err){
-
-    //     console.log(err)
-
-    //     }else{
-    //         req.quizdata=data
-    //         next()
-
-    //     }
-
-    // })
-
-    //-----------------------------------------------------------------------------------
-}
-
-
-
-
-
 //-------------------------------------xxxxxxxxxxxxx-------------------------------------------------------
 //----------------------------------------newquizactions--------------------------------------
 var MongoClient=require("mongodb").MongoClient;
@@ -658,20 +633,49 @@ MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.m
 
 app.post("/newquiz4", (req, res) => {
 
-    console.log(req.body)
-    var MongoClient=require("mongodb").MongoClient;
-
+   
+    
+   function findRanks(arr){
+        const { length } = arr;
+        let sortArray = arr.slice();
+        sortArray.sort((a,b) => b - a);
+        const result = [];
+        for(let i = 0; i < length; i++){
+           const j = sortArray.indexOf(arr[i])
+           result.push(j + 1);
+        }
+        return result;
+     
+    }
+    
 
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
       var blog=client.db("blog")
 
+      
       blog.collection("Quizzes").findOne({"quizname":req.body.Mytable2}, function(error,quiz){
 let user=quiz?.quizattempters.find(data=> data.name==req.body.Myname2)
         // if(req.session.username){
+            console.log(quiz?.quizattempters)
+            let allmarks=[]
+            let studentranks=[]
+            quiz.quizattempters.forEach((elem)=>{
+            allmarks.push(elem.marks)
+            })
+            studentranks=findRanks(allmarks)
+
+            let studentposition=quiz.quizattempters.findIndex(data=>data?.marks==user?.marks)
+            let remaining=quiz.quizattempters.length-studentranks[studentposition]+1
+let percentitle=(remaining/quiz.quizattempters.length) *100
+
+
 if(user){
-    res.send("You have already attempted this exam")
+    console.log("userrrrrrrrrrrrrrrrrrrrr")
+    console.log(user)
+    res.send(`<h1>You have already attempted this exam</h1><br> <h1>Your Score ${user.marks}</h1>
+    <br> <h1> <a href="/viewsolutions?name=${user.name}&quizname=${req.body.Mytable2}&rank=${studentranks[studentposition]}&percentile=${percentitle}&quiz=${quiz}&responses=${user.responses}">View Solutions</a></h1>
+    `)
 } else{
-console.log(quiz?.quizquestions)
     res.render("newquiz4.hbs",{userd:JSON.stringify(quiz?.quizquestions),name2: req.body.Myname2, reg: req.body.registration, table2: req.body.Mytable2})
 
 }
@@ -684,6 +688,27 @@ console.log(quiz?.quizquestions)
 
 })
 
+app.get("/viewsolutions",function(req,res){
+    let name=req.query.name
+let quizname=req.query.quizname
+let rank=req.query.rank
+let percentile=req.query.percentile
+
+// let quiz=JSON.stringify(req.query.quiz.quizquestions)
+MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+    var blog=client.db("blog")
+
+    blog.collection("Quizzes").findOne({"quizname":quizname}, function(error,quiz){
+
+        let user=quiz?.quizattempters.find(data=> data.name==name)
+
+        
+        res.render("resultfile.ejs",{name:name,rank:rank,percentile:percentile,usedata:JSON.stringify(quiz.quizquestions),responses:JSON.stringify(user),quizname:quizname})
+
+})
+})
+
+})
     //-----------------------------------sql operation---------------------------------
     // connection.query("select * from " + req.body.Mytable2 + "", function (err, userdata, fields) {
     //     if (err) {
@@ -1114,7 +1139,6 @@ studentranks=findRanks(allmarks)
 let studentposition=quiz.quizattempters.findIndex(data=>data.marks==userresponses.marks)
 let remaining=quiz.quizattempters.length-studentranks[studentposition]+1
 let percentitle=(remaining/quiz.quizattempters.length) *100
-console.log(percentitle);
 
 
 if(userresponses){
@@ -1774,6 +1798,21 @@ app.post("/getquizresult",function(req,res){
     })
     })
 
+// app.post("/getquizresult1",function(req,res){
+
+//     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+//         var blog=client.db("blog")
+  
+//         blog.collection("Quizzes").findOne({"quizname":req.body.quizname}, function(error,quiz){
+//             console.log(quiz)
+// res.json({
+//     status:"success",
+//     data:quiz
+// })
+//     })
+//     })
+//     })
+
 app.get("/updatequiz",function(req,res){
 
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
@@ -1844,12 +1883,10 @@ app.get("/enterquiz4",function(req,res){
 app.get("/enterquiz1",function(req,res){
 
    // if(req.query.quiz=="Highlevelexam"){
-console.log(req.query.myquiz)
         MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
             var blog=client.db("blog")
       
             blog.collection("Quizzes").findOne({"quizname":req.query.myquiz}, function(error,quiz){
-                console.log(quiz)
               let data=quiz
               let section1length=0;
               let section2length=0;

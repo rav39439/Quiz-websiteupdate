@@ -559,15 +559,15 @@ background-color: red !important;
     </div>
     <div class="solution"></div>
     <form action="/newquiz4result" method="POST" class="myform" id="myform" enctype="multipart/form-data">
-        <input type="hidden" name="na" value={{table2}} id="quizname">
+        <input type="hidden" name="na" value='{{table2}}' id="quizname">
         <input type="hidden" name="registation" value={{reg}} id="regno"><br>
         <span>Your Score is: </span><input type="text" readonly name="marks" id="marks"><br>
-        <input type="hidden" name="studentname" value={{name2}} id="studentname"><br>
+        <input type="hidden" name="studentname" value='{{name2}}' id="studentname"><br>
         <button type="submit" style="width:300px;height:40px" class="btn btn-primary">see solutions</button>
     </form>
     <form action="/newresultmulti" method="POST" class="myform1" id="myform1">
-        <input type="hidden" name="myquiz" value={{table2}} id="quizname">
-        <input type="hidden" name="name" value={{name2}} id="studentname"><br>
+        <input type="hidden" name="myquiz" value='{{table2}}' id="quizname">
+        <input type="hidden" name="name" value='{{name2}}'id="studentname"><br>
         <input type="hidden" name="examname" value="Highlevelexam"><br>
         <button type="submit" style="width:300px;height:40px;display:none" class="btn btn-primary">submit your
             responses</button>

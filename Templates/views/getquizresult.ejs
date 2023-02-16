@@ -118,6 +118,32 @@ select{
     </form>
   </div>
 
+  <% quizdata.forEach(function(elem,index){%>
+
+    <div style="width:600px;margin-top: 20px;border:1px solid black; border-radius: 30px;height: auto; margin-inline: auto;">
+<div style=" margin-left: 50px;">
+    <% if(elem.resultstatus=='public'){ %> 
+
+
+        <form action="/getquizresult" method="POST" id="myform<%=index %>">
+          <div class="" style="display: flex;flex-direction: row;">
+            <div style="">
+              <input type="hidden"name="quizname" value="<%=elem.quizname %>"><%=elem.quizname %> </input>
+            </div>
+          <% } %> 
+        <div>
+
+        </div>
+        <button type="button"class="btn btn-primary" name="<%=index %>" id="button<%=index %>" onclick="getquiz(this)">see result</button>
+        </div>
+      </form>
+    </div>
+      </div>
+    
+    <% }) %>
+
+
+
     <% if(typeof(username)!='undefined' ){%>
       <div id="name" style="display:none">
         <%=username%>
@@ -130,8 +156,46 @@ select{
 
 
   </body>
-
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
+
+function getquiz(data){
+  document.getElementById("myform"+data.name).submit();
+
+}
+// function getquizresult(data){
+// let html=``
+
+//   $.ajax({
+
+//     url:"/getquizresult1",
+//     method:"POST",
+//     data:{quizname:data.name},
+//     success:function(response){
+// alert(response.quiz)
+
+// let quiz=response.quiz
+//       html=`              
+      
+      
+      
+      
+      
+      
+      
+      
+      
+//       `
+      
+//     }
+    
+//   })
+//   return false
+// }
+
+
+
     let f = document.getElementById("name").innerText
     if (f) {
       document.getElementById("myname").innerText = f
