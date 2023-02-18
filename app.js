@@ -823,39 +823,38 @@ app.get('/filterexam', (req, res) => {
 })
 
 app.get('/ExamFilter', (req, res) => {
-    if(req.query.test==null &&req.query.exam!=null){
+
+    console.log("ddddddddddddddddddddssssssssss")
+    console.log(req.query.exam)
+    console.log(req.query.test)
+
+    // if(req.query.test==null &&req.query.exam!=null){
 
 
-    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
-        var blog=client.db("blog")
-        blog.collection("studymaterial").find({"type":req.query.exam}).sort({_id:1}).toArray(function(error,materials){
-//-------------------quiz----------------------------------------------------
+//     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+//         var blog=client.db("blog")
+//         blog.collection("studymaterial").find({"type":req.query.exam}).sort({_id:1}).toArray(function(error,materials){
+// //-------------------quiz----------------------------------------------------
 
-blog.collection("Quizzes").find(
+// blog.collection("Quizzes").find(
 
-      
-        {'examname':req.query.exam},
-        
+//         {'examname':req.query.exam},
     
+//     ).sort({_id:1}).toArray(function(error,quizzes){
 
-  
-    
-    ).sort({_id:1}).toArray(function(error,quizzes){
-
-        res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
+//         res.render("index.ejs",{materials:materials,username:req.session.username,data:req.session
             
-            ,examname:req.query.exam,test:req.query.exam,quizdata:quizzes,stringdata:JSON.stringify(quizzes)})
+//             ,examname:req.query.exam,test:req.query.exam,quizdata:quizzes,stringdata:JSON.stringify(quizzes)})
 
 
-    })
-//--------------------------------------------------------------------
+//     })
 
-    })
-    })
+//     })
+//     })
 
 
-}
-else{
+// }
+// else{
 
     let image=""
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
@@ -876,8 +875,6 @@ else{
  //-------------------quiz----------------------------------------------------
 
  blog.collection("Quizzes").find({
-
-      
     $and: [
         {'examname':req.query.exam},
         {'exam':req.query.test}
@@ -892,13 +889,9 @@ else{
             
             ,examname:req.query.exam,test:req.query.test,quizdata:quizzes,stringdata:JSON.stringify(quizzes)})
     })
-//--------------------------------------------------------------------
-                
-          
-
     })
     }) 
-}
+//}
 })
 
 
@@ -937,6 +930,46 @@ else{
 
 
 })
+
+app.get('/ExamFilter2', (req, res) => {
+    console.log(req.query.sub)
+    console.log(req.query.test)
+
+    if(req.query.sub==null &&req.query.test!=null){
+
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+        blog.collection("Quizzes").find({"examname":req.query.test}).sort({_id:1}).toArray(function(error,quizzes){
+            res.render("listoftests.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes), username:req.session.username,data:req.session
+            ,examname:req.query.exam,test:req.query.exam})
+    })
+    })
+}
+else{
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority",{useNewUrlParser:true},function(error,client){
+        var blog=client.db("blog")
+        blog.collection("Quizzes").find({
+            $and: [
+                {'subcategory':req.query.sub},
+                {'exam':req.query.test}
+            ]
+        }           
+            ).sort({_id:1}).toArray(function(error,quizzes){
+            res.render("listoftests.ejs",{quizdata:quizzes,stringdata:JSON.stringify(quizzes), username:req.session.username,data:req.session
+            ,examname:req.query.exam,test:req.query.test,sub:req.query.sub})
+    })
+    }) 
+}
+})
+
+
+
+
+
+
+
 
 
 app.post("/getallcontent",function(req,res){
@@ -1574,7 +1607,8 @@ blog.collection("Quizzes").insertOne
     "quizinfo":req.body.quizinfo,
     "quizdesc":req.body.quizdesc,
     "time":time,
-    "resultstatus":req.body.resultstatus
+    "resultstatus":req.body.resultstatus,
+    "subcategory":req.body.subcategory
 
 
 },

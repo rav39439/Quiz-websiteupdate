@@ -168,6 +168,12 @@ img{
                 ">Engineering Entrance Exams</a>
         </li>
 
+        <li class="nav-item " style="margin-left: 150px;">
+          <a class="nav-link" href="/ExamFilter1?exam=Research and Lectureship" style="color:black;  font-weight: bold;
+            ">Research & Lectureship</a>
+        </li>
+
+
         <!-- <li class="nav-item " style="margin-left: 150px;">
           <a class="nav-link" href="/ExamFilter?exam=Other Exams"><button style="border:none;">Other
               Exams</button></a>
@@ -306,15 +312,11 @@ img{
                 ">
                           GATE</a>
                       </li>
-                      <!-- <li class="nav-it1em " style="margin-left: 150px;">
-                        <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams&&test=COMEDK" style="color:black;  font-weight: bold;
-                ">
-                          COMEDK</a>
-                      </li> -->
-                      <li class="nav-item " style="margin-left: 150px;">
+                  
+                      <!-- <li class="nav-item " style="margin-left: 150px;">
                         <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams&&test=CSIR-NET" style="color:black;  font-weight: bold;
                 ">CSIR-NET</a>
-                      </li>
+                      </li> -->
                     </ul>
                   </div>
                 </div>
@@ -322,12 +324,128 @@ img{
               </nav>
 
 <% } %> 
+
+<% if(examname=="Research and Lectureship" ) {%>
+  <nav class="navbar navbar-expand-lg navbar-light mt-4"
+    style="background-color: rgb(133, 172, 205);">
+
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltM" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltM">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item " style="margin-left:0px;">
+            <a class="nav-link" href="/ExamFilter1?exam=Research and Lectureship&&test=CSIR-NET"
+              style="color:black;  font-weight: bold;
+                ">CSIR-NET</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <% } %>
+
+
+
+  <% if(test=="CSIR-NET" ) {%>
+    <nav class="navbar navbar-expand-lg navbar-light mt-4"
+      style="background-color: rgb(133, 172, 205);">
+  
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltM" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltM">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item " style="margin-left:0px;">
+              <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=Physics"
+                style="color:black;  font-weight: bold;
+                  ">PHYSCICS</a>
+            </li>
+            <li class="nav-item " style="margin-left:0px;">
+              <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=Chemsitry"
+                style="color:black; margin-left: 70px;  font-weight: bold;
+                  ">CHEMISTRY</a>
+            </li>
+            <li class="nav-item " style="margin-left:0px;">
+              <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=Maths"
+                style="color:black;  margin-left: 70px; font-weight: bold;
+                  ">MATHS</a>
+            </li>
+            <li class="nav-item " style="margin-left:0px;">
+              <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=English"
+                style="color:black; margin-left: 70px;  font-weight: bold;
+                  ">English</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <% } %>
+
+
+  <% if(test=="GATE" ) {%>
+    <nav class="navbar navbar-expand-lg navbar-light mt-4"
+      style="background-color: rgb(133, 172, 205);">
+  
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltM" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltM">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item " style="margin-left:0px;">
+              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=Physics"
+                style="color:black;  font-weight: bold;
+                  ">PHYSCICS</a>
+            </li>
+            <li class="nav-item " style="margin-left:0px;">
+              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=Chemsitry"
+                style="color:black; margin-left: 70px;  font-weight: bold;
+                  ">CHEMISTRY</a>
+            </li>
+            <li class="nav-item " style="margin-left:0px;">
+              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=Maths"
+                style="color:black;  margin-left: 70px; font-weight: bold;
+                  ">MATHS</a>
+            </li>
+            <li class="nav-item " style="margin-left:0px;">
+              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=ElectricalEngg"
+                style="color:black; margin-left: 70px;  font-weight: bold;
+                  ">Electrical Engineering</a>
+            </li>
+
+            <li class="nav-item " style="margin-left:0px;">
+              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=MechanicalEngg"
+                style="color:black; margin-left: 70px;  font-weight: bold;
+                  ">Mechanical Engineering</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  
+    <% } %>
+
+
+
 <!---------------------------------------------------------------------------------->
 
+<% if(typeof(sub)!='undefined'){ %>
+<h1 style="color:red"><%=sub %></h1>
+<% } else {%>
+  <h1 style="color:red"><%=test %></h1>
 
-
-<h1 style="color:red"><%=test %> </h1>
-
+<% } %>
 <div class="showgrid mb-4"style="margin-bottom:70px">
   <% if(data.isadmin) {%> 
 <% quizdata.forEach(function(elem,index){ %> 
@@ -337,7 +455,6 @@ img{
         <div class="card-body">
           <h3 class="card-title"><%=elem.quizname%> </h3>
           <h5 class="card-title">Based on <%=elem.exam%> </h5>
-
           <p class="card-text">   
             <div style="display: grid; grid-template-columns:auto auto auto auto; gap:3px">
               <span><i class="fa fa-clock-o" aria-hidden="true">
@@ -352,11 +469,9 @@ img{
                 </span>  
                   </div> 
                  </p>
-
             <input readonly id="name"name="myquiz" type="hidden" value="<%=elem.quizname%>">
           <input readonly type="hidden" name="quiz"id="quiz" value="<%=elem.examname%>"> 
  <button type="submit" style="margin-top:20px;margin-right:20px" class="btn btn-primary" >start</button>        
-
 </div>
 </form>
       </div>
