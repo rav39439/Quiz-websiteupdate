@@ -21,16 +21,103 @@
     <!-- <img src="" id="newimage" style="width:200px;height:200px;"><br>
     <input type="file" id="photo" /><br> -->
     <!-- <label ></label><br> -->
-
     <div class="form-group">
-      <label for="exampleFormControlTextarea1">Enter details about of exam</label>
-      <textarea class="form-control"rows="3" id="infodata"></textarea>
-    </div>
+      <label for="exampleFormControlSelect1"> select the topic of your content</label>
+      <select class="form-control" id="content1" onchange="change(event)" name="content" style="width:200px;">
+        <option value="Government Exams">Government Exams</option>
+        <option value="Bank Exams">Bank Exams</option>
+        <option value="Management Exams">Management Exams</option>
+        <option value="Engineering Entrance Exams">Engineering Entrance Exams</option>
+        <option value="Research and Lectureship">Research and Lectureship</option>      
+        <option value="Primary and Secondary Education">Primary and Secondary Education</option>      
+      </select>
+    </div>     
 
-    <div class="form-group">
+
+    <!-- <div class="form-group">
     <label >Enter details about exam</label><br>
     <input type="text" id="details3"><br>
+    </div> -->
+
+
+     <!------------------category of exam--------------------------->
+     <div class="form-group" id="exampleform1"style="display:none">
+      <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
+      <select class="form-control" onchange="change1(event)" id="exam5" name="exam" required>
+        <option value="SSC CGL">SSC CGL</option>
+        <option value="RRB">RRB</option>  
+        <option value="LIC">LIC</option>  
+      </select>
     </div>
+      <div class="form-group" id="exampleform2" style="display:none">
+      <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
+      <select class="form-control" onchange="change2(event)" id="exam4" name="exam" required>
+        <option value="GMAT">GMAT</option>
+        <option value="CAT">CAT</option>  
+        <option value="SNAP">SNAP</option>  
+      </select>
+    </div>
+      <div class="form-group" id="exampleform3" style="display:none">
+      <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
+      <select class="form-control"onchange="change3(event)" id="exam3" name="exam" required>
+        <option value="IBPS">IBPS</option>
+        <option value="SBI-PO">SBI-PO</option>  
+        <option value="RBI">RBI</option>  
+      </select>
+    </div>
+
+      <div class="form-group" id="exampleform5" style="display:none">
+      <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
+      <select class="form-control" id="exam2" onchange="nchange(event)"  name="exam" required>
+        <option value="CSIR-NET">CSIR-NET</option>
+       
+      </select>
+    </div>
+
+      <div class="form-group" id="exampleform4" style="display:none">
+      <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
+      <select class="form-control" id="exam1"onchange="nechange(event)"  name="exam" required>
+        <option value="GATE">GATE</option>
+        <option value="IIT-JEE">IIT-JEE</option>  
+      </select>
+    </div>
+
+
+
+    <!------------------------------------------------->
+
+  <!----------subcategory---->
+
+
+  <div class="form-group" id="exampleform51"  style="display:none">
+    <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
+    <select class="form-control" id="content9" onchange="change5(event)" name="subcategory" required>
+      <option value="Physics">Physics</option>
+      <option value="Chemistry">Chemsitry</option>  
+      <option value="Maths">Maths</option>  
+      <option value="English">English</option>  
+    </select>
+  </div>
+
+    <div class="form-group"id="exampleform41"  style="display:none">
+    <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
+    <select class="form-control" id="content8" onchange="change6(event)" name="subcategory" required>
+       <option value="Physics">Physics</option>
+      <option value="Chemistry">Chemsitry</option>  
+      <option value="Maths">Maths</option>  
+      <option value="ElectricalEngg">Electrical Engineering</option>  
+      <option value="MechanicalEngg">Mechanical Engineering</option>  
+    </select>
+  </div>
+
+  <!---------------------------->
+
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Enter details about of Material</label>
+    <textarea class="form-control"rows="3" id="infodata"></textarea>
+  </div>
+
 
     <div class="form-group">
       <label >Enter preview image address</label><br>
@@ -42,16 +129,14 @@
       <input type="text" id="content4"><br>
       </div>
 
-    <div class="form-group">
-      <label for="exampleFormControlSelect1"> select the topic of your content</label>
-      <select class="form-control" id="content1" name="content" style="width:200px;">
-        <option value="Government Exams">Government Exams</option>
-        <option value="Bank Exams">Bank Exams</option>
-        <option value="Management Exams">Management Exams</option>
-        <option value="Engineering Entrance Exams">Engineering Entrance Exams</option>
-        <option value="Other Exams">Other Exams</option>      
-      </select>
-    </div>     
+    <!-- <div class="form-group">
+      <label >Enter subcategory</label><br>
+      <input type="text" id="content8"><br>
+      </div> -->
+
+
+    
+   
 
     <div class="form-group">
       <label for="exampleFormControlSelect1"> select the status</label>
@@ -109,18 +194,22 @@ firebase.initializeApp(firebaseConfig);
 
 $("#myform").on("submit",function(e){  
   e.preventDefault()
+  console.log(document.querySelector(".details3"))
        var formData = {
       details:$("#infodata").val(),
-     examname:$("#details3").val(),
+     examname:details3,
      examtype:$("#content1").val(),
      status:$("#content2").val(),
      previewimg:$("#previewimg").val(),
     MaterialType:$("#content3").val(),
     currentDate:$("#content4").val(),
+    sub:subcategory,
      uploadPreview:imagePath1,
      myfile:imagePath,
     
    };
+
+   console.log(formData)
 
         $.ajax({
             url:"/uploadcontent",
@@ -280,9 +369,190 @@ console.log(imagePath)
 
 //--------------------------------------------------------------------------------------------
 
+//------------handling the change in exam-----------------------------//
+
+let details3=""
+let subcategory=""
+let examname=document.getElementById("content1").value
+runchange(examname)
+
+function change(e){
+  let examname=e.target.value
+if(examname=="Government Exams"){
+  subcategory=""
+
+details3=document.getElementById('exam5').value
+document.getElementById("exampleform1").style.display="block"
+document.getElementById("exampleform2").style.display="none"
+document.getElementById("exampleform3").style.display="none"
+document.getElementById("exampleform4").style.display="none"
+document.getElementById("exampleform5").style.display="none"
+document.getElementById("exampleform51").style.display="none"
+  document.getElementById("exampleform41").style.display="none"
+}
+if(examname=="Management Exams"){
+  subcategory=""
+
+  details3=document.getElementById('exam4').value
+
+document.getElementById("exampleform2").style.display="block"
+document.getElementById("exampleform5").style.display="none"
+document.getElementById("exampleform3").style.display="none"
+document.getElementById("exampleform4").style.display="none"
+document.getElementById("exampleform1").style.display="none"
+document.getElementById("exampleform51").style.display="none"
+  document.getElementById("exampleform41").style.display="none"
+}
+if(examname=="Engineering Entrance Exams"){
+  details3=document.getElementById('exam1').value
+  console.log(document.getElementById('exam1').value)
+  subcategory=document.getElementById('content8').value
+  console.log(details3)
+
+  document.getElementById("exampleform51").style.display="none"
+  document.getElementById("exampleform41").style.display="block"
+document.getElementById("exampleform4").style.display="block"
+document.getElementById("exampleform2").style.display="none"
+document.getElementById("exampleform3").style.display="none"
+document.getElementById("exampleform5").style.display="none"
+document.getElementById("exampleform1").style.display="none"
+
+}
 
 
+if(examname=="Bank Exams"){
+  details3=document.getElementById('exam3').value
+  subcategory=""
 
+document.getElementById("exampleform3").style.display="block"
+document.getElementById("exampleform2").style.display="none"
+document.getElementById("exampleform5").style.display="none"
+document.getElementById("exampleform4").style.display="none"
+document.getElementById("exampleform1").style.display="none"
+document.getElementById("exampleform51").style.display="none"
+  document.getElementById("exampleform41").style.display="none"
+}
+
+
+if(examname=="Research and Lectureship"){
+  details3=document.getElementById('exam2').value
+  subcategory=document.getElementById('content9').value
+  document.getElementById("exampleform51").style.display="block"
+  document.getElementById("exampleform41").style.display="none"
+document.getElementById("exampleform5").style.display="block"
+document.getElementById("exampleform2").style.display="none"
+document.getElementById("exampleform3").style.display="none"
+document.getElementById("exampleform4").style.display="none"
+document.getElementById("exampleform1").style.display="none"
+}
+}
+
+
+function runchange(examname){
+  if(examname=="Government Exams"){
+    details3=document.getElementById('exam5').value
+
+  console.log(document.getElementById("exampleform1"))
+  document.getElementById("exampleform1").style.display="block"
+  document.getElementById("exampleform2").style.display="none"
+  document.getElementById("exampleform3").style.display="none"
+  document.getElementById("exampleform4").style.display="none"
+  document.getElementById("exampleform5").style.display="none"
+}
+if(examname=="Management Exams"){
+  details3=document.getElementById('exam4').value
+
+  document.getElementById("exampleform2").style.display="block"
+  document.getElementById("exampleform5").style.display="none"
+  document.getElementById("exampleform3").style.display="none"
+  document.getElementById("exampleform4").style.display="none"
+  document.getElementById("exampleform1").style.display="none"
+}
+if(examname=="Engineering Entrance Exams"){
+  details3=document.getElementById('exam2').value
+
+  document.getElementById("exampleform4").style.display="block"
+  document.getElementById("exampleform2").style.display="none"
+  document.getElementById("exampleform3").style.display="none"
+  document.getElementById("exampleform5").style.display="none"
+  document.getElementById("exampleform1").style.display="none"
+}
+if(examname=="Bank Exams"){
+  details3=document.getElementById('exam3').value
+
+  document.getElementById("exampleform3").style.display="block"
+  document.getElementById("exampleform2").style.display="none"
+  document.getElementById("exampleform5").style.display="none"
+  document.getElementById("exampleform4").style.display="none"
+  document.getElementById("exampleform1").style.display="none"
+}
+if(examname=="Research and Lectureship"){
+  details3=document.getElementById('exam1').value
+
+  document.getElementById("exampleform5").style.display="block"
+  document.getElementById("exampleform2").style.display="none"
+  document.getElementById("exampleform3").style.display="none"
+  document.getElementById("exampleform4").style.display="none"
+  document.getElementById("exampleform1").style.display="none"
+}
+}
+
+
+function nchange(e){
+  details3=e.target.value
+  let examname=e.target.value
+subcategory=document.getElementById('content9').value
+
+  if(examname=="CSIR-NET"){
+
+    document.getElementById("exampleform51").style.display="block"
+    document.getElementById("exampleform41").style.display="none"
+}
+else{
+  subcategory=""
+
+   document.getElementById("exampleform51").style.display="none"
+    document.getElementById("exampleform41").style.display="none"
+}
+}
+
+function nechange(e){
+
+  details3=e.target.value
+  let examname=e.target.value
+  subcategory=document.getElementById('content8').value
+  if(examname=="GATE"){
+    document.getElementById("exampleform51").style.display="none"
+    document.getElementById("exampleform41").style.display="block"
+}
+else{
+  subcategory=""
+   document.getElementById("exampleform51").style.display="none"
+    document.getElementById("exampleform41").style.display="none"
+}
+}
+
+function change1(e){
+  details3=e.target.value
+
+}
+function change2(e){
+  details3=e.target.value
+
+}
+function change3(e){
+  details3=e.target.value
+
+}
+function change5(e){
+  subcategory=e.target.value
+
+}
+function change6(e){
+  subcategory=e.target.value
+
+}
+//----------------------------------------------------------//
 
 
 
