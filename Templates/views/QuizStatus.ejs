@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <% quizdata.forEach(function(elem,index){%>
+        <div  style="width:800px;border: 2px solid black;padding-bottom: 15px; background-color: rgb(187, 187, 208); margin-top: 20px;">
+
+            <form onsubmit="return updatequiz(this)" method="POST">
+              <div class="" style="padding-inline: 70px;display: grid;grid-template-rows: auto;gap: 8px; text-align: center;">
+                OldQuizname: <input type="hidden" name="oldquizname" class="form-control" style="border-radius: 20px;height: 50px;" id="exampleInputEmail1"
+                value="<%=elem.quizname %>" id="oldquizname"><br>
+                Quizname: <input type="text" name="quizname" class="form-control" style="border-radius: 20px;height: 50px;" id="exampleInputEmail1"
+                  value="<%=elem.quizname %>" id="quizname"><br>
+                  Exam: <input type="text" name="exam" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  value="<%=elem.exam %>"
+                  id="exam"><br>
+                Examname: <input type="text" name="examname" class="form-control"style="border-radius: 20px;height: 50px;"  id="exampleInputEmail1"
+                  value="<%=elem.examname %>" id="question"><br>
+                Noofquestions <input type="text" name="noofquestions" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  id="noofquestions<%=index%>"
+                  value='<%=elem.noofquestions%>'><br>
+                Description: <input type="text" name="desc" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  id="desc<%=index%>"
+                  value='<%=elem.desc%>'><br>
+               Nsection : <input type="text" name="nsection" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  id="nsection<%=index%>"
+                  value='<%=elem.nsection%>'><br>
+                Marks: <input type="number" name="marks" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  id="marks<%=index%>"
+                  value='<%=elem.marks%>'><br>
+                QuizInfo: <input type="text" name="quizinfo" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  id="quizinfo<%=index%>"
+                  value='<%=elem.quizinfo%>'><br>
+                Quizdescription: <input type="text" name="quizdesc" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  id="quizdesc<%=index%>"
+                  value='<%=elem.quizdesc%>'><br>
+                Time: <input type="text" name="time" class="form-control" id="exampleInputEmail1"style="border-radius: 20px;height: 50px;"  id="time<%=index%>"
+                  value='<%=elem.time%>'><br>
+                index: <input type="number"style="border-radius: 20px;height: 50px;" id="index" readonly name="index" class="form-control" id="exampleInputEmail1"
+                  value="<%=index %>">
+                <button type="submit" class="btn btn-primary" style="margin-inline: 220px;border-radius: 20px;height: 50px;">Update quiz</button>
+                <button type="button" name="<%=elem.quizname %>" class="btn btn-danger" style="margin-inline: 220px;border-radius: 20px;height: 50px;"
+                  onclick="Deletequiz(this)">Delete
+                  quiz</button>
+              </div>
+            </form>
+            <br>
+
+        <% }) %>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+
+function updatequiz(form) {
+    console.log(form)
+
+    var formData = {
+    quizname:form.quizname.value,
+    Oldquizname:form.oldquizname.value,
+    exam:form.exam.value,
+    examname:form.examname.value,
+    noofquestions:form.noofquestions.value,
+    desc:form.desc.value,
+    nsection:form.nsection.value,
+    marks:form.marks.value,
+    quizinfo:form.quizinfo.value,
+    quizdesc:form.quizdesc.value,
+    quizdesc:form.quizdesc.value,
+    time:form.time.value,
+      index: form.index.value,
+    }
+    $.ajax({
+      url: "/Editquiz",
+      method: "POST",
+      data: formData,
+      success: function (response) {
+     alert(response.message)
+      }
+    })
+    return false;
+  }
+
+  function Deletequiz(form) {
+    var formData = {
+      quizname: form.name,
+    }
+    alert(form.name)
+    $.ajax({
+      url: "/deletequiz",
+      method: "POST",
+      data: formData,
+      success: function (response) {
+        alert(response.message)
+
+      }
+    })
+
+  }
+
+</script>
+
+
+
+</html>

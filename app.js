@@ -1772,17 +1772,16 @@ function deletemid(req, res, next) {
 }
 
 app.post("/deletequiz", function (req, res) {
+    console.log("delete starting")
 
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
-
-
-
+        console.log("deleted")
         blog.collection("Quizzes").deleteOne(
-
-
             { quizname: req.body.quizname }, function (error, data) {
-                res.send("Data deleted")
+                res.json({
+                    message:"quiz deleted"
+                })
             })
     })
 
@@ -1907,9 +1906,6 @@ app.get("/updatequiz", function (req, res) {
 
         })
     })
-
-
-
 })
 
 app.post("/updatequiz", function (req, res) {
@@ -2068,8 +2064,52 @@ app.post("/getquizquestions", function (req, res) {
 })
 
 
+app.get("/Editquiz",function(req,res){
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true }, function (error, client) {
+        var blog = client.db("blog")
 
 
+        blog.collection("Quizzes").find().sort({ _id: 1 }).toArray(function (error, quizzes) {
+            // console.log(quizzes)
+            res.render("QuizStatus.ejs", { quizdata: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session })
+
+        })
+    })
+})
+
+
+app.post("/Editquiz",function(req,res){
+
+    console.log(req.body)
+
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true }, function (error, client) {
+        var blog = client.db("blog")
+
+        blog.collection("Quizzes").updateOne({
+            "quizname": req.body.oldquizname
+        }, {
+            $set: {
+                "quizname": req.body.quizname,
+                "exam":req.body.exam,
+    "examname":req.body.examname,
+    "noofquestions":req.body.noofquestions,
+    "desc":req.body.desc,
+    "nsection":req.body.nsection,
+    "marks":req.body.marks,
+    "quizinfo":req.body.quizinfo,
+    "quizdesc":req.body.quizdesc,
+   "quizdesc":req.body.quizdesc,
+   "time":req.body.time,
+
+            }
+        }, function (err, data) {
+            res.json({
+                "message": "quiz is successfully updated"
+            })
+        })
+    })
+
+})
 
 app.get("/uploadcontent", function (req, res) {
     res.render("uploadcontent.ejs")
