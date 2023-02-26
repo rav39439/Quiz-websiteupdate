@@ -1827,6 +1827,59 @@ app.post("/deletequiz", function (req, res) {
 
 })
 
+app.get("/EditstudyMaterial",function(req,res){
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true }, function (error, client) {
+        var blog = client.db("blog")
+        blog.collection("studymaterial").find().sort({ _id: 1 }).toArray(function (error, materials) {
+        res.render("editstudymaterial.ejs", {
+            materials: materials, username: req.session.username, data: req.session
+    
+            , examname: req.query.exam, test: req.query.exam
+        })
+    })
+    })
+    })
+
+    app.post("/EditstudyMaterial",function(req,res){
+console.log("nksdiksfdgff")
+console.log(req.body)
+        MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true }, function (error, client) {
+            var blog = client.db("blog")
+    
+            blog.collection("studymaterial").updateOne({
+                "topic": req.body.oldtopic
+            }, {
+                $set: {
+                    "filedata":req.body.filedata,
+                }
+            }, function (err, data) {
+                res.json({
+                    "message": "Material is successfully updated"
+                })
+            })
+        })
+
+    })
+
+
+app.post("/deleteMaterial",function(req,res){
+    MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true }, function (error, client) {
+        var blog = client.db("blog")
+
+        blog.collection("studymaterial").deleteOne({
+            "topic": req.body.topic
+    
+        }, function (err, data) {
+            res.json({
+                "message": "Material is successfully deleted"
+            })
+        })
+    })
+
+})
+
+
+
 
 app.get("/getquizresult", function (req, res) {
 

@@ -83,6 +83,7 @@ select{
               <input type="hidden"name="quizname" value="<%=elem.quizname %>"/>
           <% } %> 
         <button type="button"class="btn btn-primary" name="<%=index %>" id="button<%=index %>" onclick="getquiz(this)">See Solutions</button>
+       
         </div>
       </form>
     </div>
@@ -117,7 +118,7 @@ function getquiz(data){
       document.getElementById("myname").innerText = "Anonymous"
 
     }
-
+   
   </script>
 
 </html>

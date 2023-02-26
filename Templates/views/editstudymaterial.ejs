@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="bg-light mt-4 " style="height: auto; border:1px solid black;">
+        <div style="width: 100%;background-color: rgb(131, 173, 205);padding-bottom: 4px;">
+          <h2 style="color:black">Study Materials</h2>
+
+        </div>
+
+        <% materials.forEach(function(elem,index){%>
+
+          <% if(elem.MaterialType=="StudyMaterial" ){ %>
+            <div class="card" style="width:100%;height:auto;">
+
+              <div
+                style="display:grid;grid-template-columns:20% 60% 20% ;gap:0px;padding-bottom: 20px;border: 2px solid black;">
+                <div>
+                  <% if(elem.previewimg){%>
+                    <img class="border" style="width:100%;height:110px; margin:0px"
+                      src="<%=elem.previewimg%>" alt="">
+                    <% } else{ %>
+                      <img class="border" style="width:100%;height:110px; margin:0px"
+                        src="https://images.unsplash.com/photo-1673877980197-c3ce24a8ab17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
+                        alt="">
+                      <% } %>
+
+                </div>
+                <div style="width: auto;height: auto;">
+                  <div class="card-body" style="width: 100%; ">
+                    <h5 class="card-title">
+                      <%=elem.content %>
+                    </h5>
+                    <div class="card-text" style="height:auto;">
+                      <%=elem.details %>
+                    </div>
+                  </div>
+                </div>
+
+                <form action="/EditstudyMaterial" method="POST" id="myform<%=index %>">
+
+                    <input type="text" id="filedata<%=index%>" name="filedata" value="<%=elem.filedata%>">
+                    <input type="text" id="oldtopic<%=index%>" name="oldtopic" value="<%=elem.topic%>">
+                <div class="" style="margin-top:47px">
+                  <a href="<%=elem.filedata%>" style="width:100%;">
+                    click here
+                  </a>
+                </div>
+                <button type="button"class="btn btn-primary" name="<%=index %>" id="button<%=index %>" onclick="getMaterial(this)">See Solutions</button>
+                <button type="button" name="<%=elem.topic%>" class="btn btn-danger" style="margin-inline: 220px;border-radius: 20px;height: 50px;"
+                  onclick="DeleteMaterial(this)">Delete
+                  Material</button>
+                 </form>
+
+                 <!-----------upload file---------->
+                 <div class="form-group">
+                    <div class="" style="display:grid; grid-template-columns: 50% 50%;">
+        
+                      <span> Upload Material<input type="file" id="photo1<%=index %>" /></span>
+                      <button type="button" class="btn btn-primary" style="border-radius: 20px;height: 50px;" name="<%=index %>" onclick="uploadImage1(this)">Upload
+                        Material</button>
+                    </div>
+                  </div>
+
+                  <!------------------------------------>
+              </div>
+            </div>
+
+            <% }%>
+              <%}) %>
+      </div>
+
+      <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-storage.js"></script>
+      <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyAZ9x_QbhCfY9aEsqxEiYhWtfIRNGl_qeo",
+    authDomain: "mynewproject-ae49a.firebaseapp.com",
+    projectId: "mynewproject-ae49a",
+    storageBucket: "mynewproject-ae49a.appspot.com",
+    messagingSenderId: "939005557600",
+    appId: "1:939005557600:web:ee766070db4bd2dadfbc05",
+    measurementId: "G-YFKTT151SN"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+
+
+
+
+function getMaterial(data) {
+
+    document.getElementById("myform"+data.name).submit();
+  }
+
+
+
+
+
+
+
+async function uploadImage1(data) {
+    const ref = firebase.storage().ref();
+    const file = document.querySelector("#photo1" + data.name).files[0];
+    const name = +new Date() + "-" + file.name;
+    const metadata = {
+      contentType: file.type
+    };
+
+    let img = document.getElementById("filedata" + data.name).value
+    if (img !== "") {
+      let oldimg = document.getElementById("filedata" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      try {
+        ref.child(oldimg).delete()
+        console.log("file is deleted")
+      }
+      catch (err) {
+        console.log(err)
+      }
+    }
+    else {
+      console.log("no image")
+    }
+
+
+    try {
+      await ref.child(name).put(file, metadata).then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+          newurl = url
+          callback1(url, data)
+        })
+    }
+    catch (err) {
+      console.log(err)
+    }
+
+    function callback1(url, data) {
+      console.log(url)
+      newcallback1(url, data)
+    }
+  }
+  var imagePath1 = ""
+  function newcallback1(url, data) {
+    let newurl = url;
+    document.getElementById("filedata" + data.name).value = newurl
+  }
+
+
+  function DeleteMaterial(data){
+var formData={
+  topic:data.name
+}
+
+    $.ajax({
+      url: "/deleteMaterial",
+      method: "POST",
+      data: formData,
+      success: function (response) {
+        alert(response.message)
+
+      }
+    })
+    }
+</script>
+
+
+
+</body>
+</html>
