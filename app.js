@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const Qs = require('query-string');
 const app = express()
+var ObjectId=require("mongodb").ObjectId
+
 const { DATABASE } = process.env;
 const { PASSWORD } = process.env;
 const { KEYUSER } = process.env;
@@ -1847,10 +1849,12 @@ console.log(req.body)
             var blog = client.db("blog")
     
             blog.collection("studymaterial").updateOne({
-                "topic": req.body.oldtopic
+                "_id":ObjectId(req.body.id)
             }, {
                 $set: {
                     "filedata":req.body.filedata,
+                    "topic":req.body.topic,
+                    "details":req.body.details
                 }
             }, function (err, data) {
                 res.json({
@@ -1863,11 +1867,12 @@ console.log(req.body)
 
 
 app.post("/deleteMaterial",function(req,res){
+    console.log(req.body.id)
     MongoClient.connect("mongodb+srv://Ravkkrrttyy:xDKSBRRDI8nkn13w@cluster1.2pfid.mongodb.net/blog?retryWrites=true&w=majority", { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
 
         blog.collection("studymaterial").deleteOne({
-            "topic": req.body.topic
+            "_id": ObjectId(req.body.id)
     
         }, function (err, data) {
             res.json({
