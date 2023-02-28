@@ -1,106 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 </head>
+
 <body>
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#" id="myname"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
+ 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light"style="width:100%;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"id="myname"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+              <a class="dropdown-item" href="/Mysecrets">Home</a>
 
-      <li>
-<img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50"alt="">
-
-      </li>
-
-
-      <li class="mr-4" >
-
-        <p class="mt-2 mr-3"id="myname"></p>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/Mysecrets">Home <span class="sr-only">(current)</span></a>
-      </li>
-     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-       Quiz Options
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/createtable">SimplQuiz</a>
-          <a class="dropdown-item" href="/postquestions">PostQuestions</a>
-          <a class="dropdown-item" href="/editquestions">Editquestions</a>
-          <a class="dropdown-item" href="/viewquestions">viewquestions</a>
-          <a class="dropdown-item" href="/takequiz">takequiz</a>
-          <a class="dropdown-item" href="/findresult">result</a>
-        </div>
-      </li>
-     <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Multiple Section quiz
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-                    <a class="dropdown-item" href="/multicreation">Create a multiple section quiz</a>
-
-          <a class="dropdown-item" href="/postmultiques">post a multiple section quiz</a>
-                    <a class="dropdown-item" href="/enterquiz4">Take a multisectionquiz</a>
-                    <a class="dropdown-item" href="/findyourquizres">find your quiz result</a>
-
-        </div>
-
-      </li>
-
- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          High level quiz
-        </a>
-<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-                    <a class="dropdown-item" href="/createnewtable">Create a high level quiz</a>
-
-        
-                    <a class="dropdown-item" href="/postmultioptions">post a high level quiz</a>
-                    <a class="dropdown-item" href="/enterquiz">write a high level quiz</a>
-                    <a class="dropdown-item" href="/resultmulti">find your multiquiz result</a>
-
-
-
-          <a class="dropdown-item" href="/performance">view the performance </a>
-                    
-        </div>
-
-
-        </li>
-
-
-
- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Other adjustments
-        </a>
-<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-
-
- <a class="mt-4" style="color:black" href="/Yourexam">Yourprotectedquizzes</a><br>
- <a class="mt-4" style="color:black" href="/getquestions">getquestions</a><br>
- <a class="mt-4" style="color:black" href="/uploadcontent">uploadcontent</a><br>
- <a class="mt-4" style="color:black" href="/deletequiz">Delete your quiz</a>
-
-</div>
-     </li>
-      
-    </ul>
+            <a class="dropdown-item"  href="/uploadcontent">uploadContent</a><br>
+            <a class="dropdown-item" href="/createnewtable">createQuiz</a>
+            <a class="dropdown-item" href="/postmultioptions">postQuestions</a>
+      </div>
+    </div>
   </div>
 </nav>
+
+
+
 </body>
+
 </html>

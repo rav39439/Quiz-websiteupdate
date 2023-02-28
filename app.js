@@ -764,6 +764,9 @@ app.post("/createnewtable", function (req, res) {
 })
 
 app.get("/postmultioptions", function (req, res) {
+
+console.log("yufhfjyhfjyfyjf")
+
     res.render("postmultioptions.ejs")
 })
 
@@ -1418,6 +1421,15 @@ app.get("/verify-email1", function (req, res) {
 
     }
 
+})
+
+app.get("/RegisteredUsers",function(req,res){
+    MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
+        var blog = client.db("blog")
+        blog.collection("users").find().toArray( function(error,users){
+            res.render('RegisteredUsers.ejs',{users:users})
+        })
+    })
 })
 
 const PORT = process.env.PORT

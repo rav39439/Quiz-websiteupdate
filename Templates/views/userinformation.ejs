@@ -100,12 +100,13 @@ margin-top: 90px;
 
 
 <div class="new2">
-<form action="/login" method="POST">
+<!-- <form action="/login" method="POST"> -->
+  <form  method="POST" id="myform">
 
   <% if(!data.username){ %> 
   <div class="form-group">
     <label for="exampleInputEmail1">Username</label>
-    <input type="text" class="form-control" id="uniquecode" name="username" aria-describedby="emailHelp" placeholder="Enter your Username">
+    <input type="text" class="form-control" id="email" name="username" aria-describedby="emailHelp" placeholder="Enter your Username">
   </div>
 
   <div class="form-group">
@@ -137,7 +138,75 @@ margin-top: 90px;
     <%}  %> 
 
 
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+<script src="https://cdn.firebase.com/libs/firebaseui/3.0.0/firebaseui.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+const firebaseConfig = {
+    apiKey: "AIzaSyAZ9x_QbhCfY9aEsqxEiYhWtfIRNGl_qeo",
+    authDomain: "mynewproject-ae49a.firebaseapp.com",
+    projectId: "mynewproject-ae49a",
+    storageBucket: "mynewproject-ae49a.appspot.com",
+    messagingSenderId: "939005557600",
+    appId: "1:939005557600:web:ee766070db4bd2dadfbc05",
+    measurementId: "G-YFKTT151SN"
+  };
+  firebase.initializeApp(firebaseConfig);
+
+
+
+  $("#myform").on("submit",function(e){  
+  e.preventDefault()
+       var formData = {
+     email:$("#email").val(),
+     password:$("#password").val(),
+   };
+
+   firebase.auth().signInWithEmailAndPassword(formData.email, formData.password)
+      .then(function(val) {
+
+        alert("user has logged in")
+        console.log(val)
+          loginUser(val,name)   
+        })
+      .catch(function(error) {
+        alert("ERROR");
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+      })
+
+
+     function loginUser(val,name){
+      var formData = {
+      name:name,
+     email:val.email,
+     password:$("#password").val(),
+   };
+     
+        $.ajax({
+            url:"/login",
+            method:"POST",
+            data:formData,
+            success:function(response){
+                alert(response.message)
+            }
+        })
+      }
+    })
+
+
+
+
+
 
 
 let f= document.getElementById("name").innerText
@@ -202,7 +271,7 @@ if(hj!=null){
   // });
   // });
   // });
-
+  
 </script>
     
 </body>
