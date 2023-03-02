@@ -88,11 +88,19 @@ select{
       </form>
     </div>
     <% }) %>
-    <% if(typeof(username)!='undefined' ){%>
-      <div id="name" style="display:none">
-        <%=username%>
-      </div>
-      <%}%>
+
+
+<% if(typeof(message)!='undefined'){ %> 
+<div id="message"style="display:none"><%=message%> </div>
+
+<% } %> 
+ <% if(typeof(content)!='undefined'){ %> 
+<div id="content"style="display:none"><%=content%> </div>
+<% } %> 
+
+
+
+<div id="name" style="display:none"><%=username%></div>
 
 
 
@@ -110,14 +118,40 @@ function getquiz(data){
              
       
   
-    let f = document.getElementById("name").innerText
-    if (f) {
-      document.getElementById("myname").innerText = f
-    }
-    else {
-      document.getElementById("myname").innerText = "Anonymous"
+    // let f = document.getElementById("name").innerText
+    // if (f) {
+    //   document.getElementById("myname").innerText = f
+    // }
+    // else {
+    //   document.getElementById("myname").innerText = "Anonymous"
 
-    }
+    // }
+
+    let h="";
+if(document.getElementById('message')){
+   h=document.getElementById('message')?.innerText
+}
+if(document.getElementById('content')){
+let content=document.getElementById('content').innerText
+}
+let myuniquecode=document.getElementById('myuniquecode')
+let myemail=document.getElementById('myemail')
+if(h){
+ if(content=="email"){
+myemail.innertext=h
+ }
+ else{
+   myuniquecode.innerText=h
+ }
+}
+let f= document.getElementById("name").innerText
+
+if(typeof(f)!='undefined'){
+   document.getElementById("myname").innerText=f
+}
+else{
+  document.getElementById("myname").innerText="Anonymous"
+ }
    
   </script>
 

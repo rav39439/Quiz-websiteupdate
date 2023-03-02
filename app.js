@@ -55,11 +55,6 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }))
 
-let a = []
-let data = {};
-let givenname;
-let givenage;
-console.log(setpath)
 app.set("view engine", "hbs")
 app.set("view engine", "ejs")
 app.set("views", setpath)
@@ -112,59 +107,73 @@ app.get('/', function (req, res) {
 })
 
 app.post('/login', (req, res) => {
-    MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
-        var blog = client.db("blog")
-        blog.collection("users").findOne({
-            $and: [
-                {
-                    "username": req.body.username,
+    console.log(req.body)
+    // MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
+    //     var blog = client.db("blog")
+    //     blog.collection("users").findOne({
+    //         $and: [
+    //             {
+    //                 "username": req.body.username,
 
-                },
-                {
-                    "password": req.body.password,
-                }
-            ]
-        }, function (error, data) {
-            if (data) {
-                if (data.Admin) {
-                    payload = {
-                        email: data.email,
-                        username: data.username,
-                        isadmin: data.Admin
-                    }
-                    const token = jwt.sign(payload, process.env.KEY_NEW, { expiresIn: '1hr' });
-                    var mailOptions = {
-                        from: "rav39439@gmail.com",
-                        to: data.email,
-                        subject: "signin successful",
-                        html: `<h2>${data.username}! Thanks for registering on our site</h2>
-                    <h4>Please verify your mail to continue</h4>
-                    <a href="http://localhost:8700/verify-email?token=${token}">verify your email</a>
-                    `
-                    }
-                    transporter.sendMail(mailOptions, function (error, info) {
+    //             },
+    //             {
+    //                 "password": req.body.password,
+    //             }
+    //         ]
+    //     }, function (error, data) {
+    //         if (data) {
+    //             if (data.Admin) {
+    //                 payload = {
+    //                     email: data.email,
+    //                     username: data.username,
+    //                     isadmin: data.Admin
+    //                 }
+    //                 const token = jwt.sign(payload, process.env.KEY_NEW, { expiresIn: '1hr' });
+    //                 var mailOptions = {
+    //                     from: "rav39439@gmail.com",
+    //                     to: data.email,
+    //                     subject: "signin successful",
+    //                     html: `<h2>${data.username}! Thanks for registering on our site</h2>
+    //                 <h4>Please verify your mail to continue</h4>
+    //                 <a href="http://localhost:8700/verify-email?token=${token}">verify your email</a>
+    //                 `
+    //                 }
+    //                 transporter.sendMail(mailOptions, function (error, info) {
 
-                        if (error) {
-                            console.log(error)
-                        } else {
-                            res.render("verify-email.ejs", { token: token })
-                            console.log("verificartion email is sent")
-                        }
+    //                     if (error) {
+    //                         console.log(error)
+    //                     } else {
+    //                         res.render("verify-email.ejs", { token: token })
+    //                         console.log("verificartion email is sent")
+    //                     }
+    //                 })
+    //             }
+    //             else {
+    //                 req.session.username = data.username
+    //                 req.session.email = data.email
+    //                 req.session.isadmin = data.isadmin
+    //                 res.redirect('/')
+    //             }
+    //         }
+    //         else {
+    //             res.send("Wrong username or password")
+    //         }
+    //     })
+
+    // })
+
+    req.session.username = req.body.email
+    req.session.emailVerfied=req.body.emailVerfied
+                    if(req.body.email=='rav39439@gmail.com'){
+                        req.session.isadmin = true
+
+                    }
+                    else{
+                        req.session.isadmin=false
+                    }
+                    res.json({
+                        message:"user has logged in"
                     })
-                }
-                else {
-                    req.session.username = data.username
-                    req.session.email = data.email
-                    req.session.isadmin = data.isadmin
-                    res.redirect('/')
-                }
-            }
-            else {
-                res.send("Wrong username or password")
-            }
-        })
-
-    })
 })
 
 app.get('/login', (req, res) => {
@@ -844,7 +853,7 @@ app.get("/getquizresult", function (req, res) {
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
         blog.collection("Quizzes").find().sort({ _id: 1 }).toArray(function (error, quizzes) {
-            res.render("getquizresult.ejs", { quizdata: quizzes })
+            res.render("getquizresult.ejs", { quizdata: quizzes ,username:req?.session?.username})
         })
     })
 })
@@ -855,7 +864,7 @@ app.post("/getquizresult", function (req, res) {
         var blog = client.db("blog")
         blog.collection("Quizzes").findOne({ "quizname": req.body.quizname }, function (error, quiz) {
             console.log(quiz)
-            res.render("newresultfile.ejs", { Mydata: JSON.stringify(quiz?.quizquestions), quizname: req.body.quizname })
+            res.render("newresultfile.ejs", { Mydata: JSON.stringify(quiz?.quizquestions), quizname: req.body.quizname,username:req?.session?.username })
 
         })
     })
@@ -893,7 +902,7 @@ app.post("/updatequiz", function (req, res) {
 
 
 app.get("/enterquiz", function (req, res) {
-    res.render("readinfo3.hbs", { Myname: req.session.username, Myreg: req.session.uniquecode })
+    res.render("readinfo3.hbs", { Myname: req.session.username, emailVerfied:req.session.emailVerfied})
 })
 
 app.get("/enterquiz4", function (req, res) {
@@ -1363,37 +1372,50 @@ function middle1(req, res, next) {
 
 
 app.post('/register', middle, middle1, async (req, res) => {
-    if (req.email) {
-        req.session.password = req.body.password
-        payload = {
-            username: req.body.name,
-            email: req.email,
-            Admin: false,
-            password: req.body.password
-        }
-        const token = jwt.sign(payload, process.env.KEY_NEW, { expiresIn: '1hr' });
-        var mailOptions = {
-            from: "rav39439@gmail.com",
-            to: req.body.email,
-            subject: "signup successful",
-            html: `<h2>${req.body.name}! Thanks for registering on our site</h2>
-            <h4>Please verify your mail to continue</h4>
-            <a href="http://localhost:8700/verify-email1?token=${token}">verify your email</a>
-            `
-        }
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error)
-            } else {
-                res.render("verify-email.ejs", { token: token })
-                console.log("verificartion email is sent")
-                console.log(req.email)
-            }
-        })
+    // if (req.email) {
+    //     req.session.password = req.body.password
+    //     payload = {
+    //         username: req.body.name,
+    //         email: req.email,
+    //         Admin: false,
+    //         password: req.body.password
+    //     }
+    //     const token = jwt.sign(payload, process.env.KEY_NEW, { expiresIn: '1hr' });
+    //     var mailOptions = {
+    //         from: "rav39439@gmail.com",
+    //         to: req.body.email,
+    //         subject: "signup successful",
+    //         html: `<h2>${req.body.name}! Thanks for registering on our site</h2>
+    //         <h4>Please verify your mail to continue</h4>
+    //         <a href="http://localhost:8700/verify-email1?token=${token}">verify your email</a>
+    //         `
+    //     }
+    //     transporter.sendMail(mailOptions, function (error, info) {
+    //         if (error) {
+    //             console.log(error)
+    //         } else {
+    //             res.render("verify-email.ejs", { token: token })
+    //             console.log("verificartion email is sent")
+    //             console.log(req.email)
+    //         }
+    //     })
+    // }
+    // else {
+    //     res.send("please logout to continue")
+    // }
+    req.session.username=req.body.email
+    req.session.emailVerfied=req.body.emailVerfied
+
+    if(req.body.email=='rav39439@gmail.com'){
+        req.session.isadmin = true
+
     }
-    else {
-        res.send("please logout to continue")
+    else{
+        req.session.isadmin=false
     }
+    res.json({
+        message:"successfully registered"
+    })
 })
 
 app.get("/verify-email1", function (req, res) {

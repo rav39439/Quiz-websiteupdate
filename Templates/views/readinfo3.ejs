@@ -194,23 +194,15 @@
 
 
       <% if(quizattempts<40){ %>
-
-        <% if(Myname){ %>
-
+        <% if(Myname!=null && emailVerified){ %>
         <div class="text-center">
-
           <h1 style="color: blue;">Your details</h1>
-
           <form action="/newquiz4" method="POST">
             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center">
               <label for="">Enter Your Name:</label>
               <span> </span> <input type="text" name="Myname2" class="Myname2 ml-3" readonly value='<%=Myname %>' ><br>
             </div>
-
-
-
             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center">
-
               <label for="">Name of the quiz:</label>
              <input  type ="text" name="Mytable2" readonly class="no-outline ml-3" value='<%=table2 %>' >
             </div>
@@ -218,14 +210,11 @@
           </form>
           <% } else{%>
             <h1 style="color:red;font-style: italic;">Login or Register to contiue to quiz </h1>
-            <% } %>
-
-            
+            <% } %>           
           <% } else{%>
             <h3 style="color: red;font-style: italic;">Quiz is Longer Active </h3>
             <% } %>
         </div>
-
     </div>
   </div>
 

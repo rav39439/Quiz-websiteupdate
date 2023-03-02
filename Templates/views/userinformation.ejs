@@ -167,10 +167,25 @@ const firebaseConfig = {
 
    firebase.auth().signInWithEmailAndPassword(formData.email, formData.password)
       .then(function(val) {
-
-        alert("user has logged in")
         console.log(val)
-          loginUser(val,name)   
+if(!val.user.emailVerified){
+  let text="Your email is not verified.Please verify your email to access content"
+  let result=confirm(text)
+  if(result==true){
+    val.user.sendEmailVerification().then(()=>{
+          alert("Click on the verification link sent to your email to complete the verification");
+
+        }) .catch(function(error) {
+         alert(error)
+        })
+  }
+  else{
+    console.log("Your email is not verified")
+     }
+      }
+
+      loginUser(val,name)
+
         })
       .catch(function(error) {
         alert("ERROR");
@@ -188,7 +203,8 @@ const firebaseConfig = {
      function loginUser(val,name){
       var formData = {
       name:name,
-     email:val.email,
+     email:val.user.email,
+     emailVerified:val.user.emailVerified,
      password:$("#password").val(),
    };
      
@@ -203,14 +219,7 @@ const firebaseConfig = {
       }
     })
 
-
-
-
-
-
-
 let f= document.getElementById("name").innerText
-
  if(typeof(f)!='undefined'){
    document.getElementById("myname").innerText=f
 }
