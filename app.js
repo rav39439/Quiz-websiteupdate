@@ -163,7 +163,7 @@ app.post('/login', (req, res) => {
     // })
 
     req.session.username = req.body.email
-    req.session.emailVerfied=req.body.emailVerfied
+    req.session.emailVerified=req.body.emailVerified
                     if(req.body.email=='rav39439@gmail.com'){
                         req.session.isadmin = true
 
@@ -943,8 +943,8 @@ app.get("/enterquiz1", function (req, res) {
             res.render("readinfo3.ejs", {
                 table2: req.query.myquiz, quiz: quiz,
                 Myname: req.session.username,
-                Myreg: req.session.uniquecode,
-                section1length: section1length,
+            emailVerified:req.session.emailVerified,              
+            section1length: section1length,
                 section2length: section2length
                 , section3length: section3length, section4length: section4length, time: time, quizattempts: noofquizattemts
             })
@@ -1404,7 +1404,7 @@ app.post('/register', middle, middle1, async (req, res) => {
     //     res.send("please logout to continue")
     // }
     req.session.username=req.body.email
-    req.session.emailVerfied=req.body.emailVerfied
+    req.session.emailVerified=req.body.emailVerified
 
     if(req.body.email=='rav39439@gmail.com'){
         req.session.isadmin = true

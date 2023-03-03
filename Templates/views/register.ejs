@@ -232,14 +232,11 @@ $("#myform").on("submit",function(e){
           alert(errorMessage);
         }
       })
-
-
      function saveData(val,name){
       var formData = {
       name:name,
      email:val.user.email,
      emailVerified:val.user.emailVerified,
-
      password:$("#password").val(),
    };
      
