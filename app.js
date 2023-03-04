@@ -533,10 +533,10 @@ app.post("/newresultmulti", (req, res) => {
         MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
             var blog = client.db("blog")
             blog.collection("Quizzes").findOne({ "quizname": req.body.myquiz }, function (error, quiz) {
-                let userresponses = quiz.quizattempters.find(elem => elem.name == req.body.name)
+                let userresponses = quiz.quizattempters.find(elem => elem?.name == req.body.name)
                 let allmarks = []
                 let studentranks = []
-                quiz.quizattempters.forEach((elem) => {
+                quiz?.quizattempters.forEach((elem) => {
                     allmarks.push(elem.marks)
                 })
                 const findRanks = (arr = []) => {
@@ -551,12 +551,12 @@ app.post("/newresultmulti", (req, res) => {
                     return result;
                 };
                 studentranks = findRanks(allmarks)
-                let studentposition = quiz.quizattempters.findIndex(data => data.marks == userresponses.marks)
-                let remaining = quiz.quizattempters.length - studentranks[studentposition] + 1
-                let percentitle = (remaining / quiz.quizattempters.length) * 100
+                let studentposition = quiz?.quizattempters?.findIndex(data => data?.marks == userresponses?.marks)
+                let remaining = quiz?.quizattempters?.length - studentranks[studentposition] + 1
+                let percentitle = (remaining / quiz?.quizattempters.length) * 100
                 if (userresponses) {
                     res.render("resultfile.ejs", {
-                        usedata: JSON.stringify(quiz.quizquestions), name: req.body.name, mydata: quiz.quizattempters, responses: JSON.stringify(userresponses), quizname: req.body.myquiz, ranks: studentranks, rank: studentranks[studentposition]
+                        usedata: JSON.stringify(quiz?.quizquestions), name: req.body.name, mydata: quiz?.quizattempters, responses: JSON.stringify(userresponses), quizname: req.body.myquiz, ranks: studentranks, rank: studentranks[studentposition]
                         , percentile: percentitle
                     })
                 }
