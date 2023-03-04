@@ -36,7 +36,7 @@ text-align: center;
 margin-top: 90px;
 
    }
-   #uniquecode{
+   #email{
  margin-left: 100px;
  width: 300px;
  margin-top: 20px;
@@ -68,7 +68,7 @@ margin-top: 90px;
    width: 230px;
    margin-left: 30px;
  }
- #uniquecode{
+ #email{
   width: 230px;
 
    margin-left: 30px;
@@ -101,11 +101,11 @@ margin-top: 90px;
 
 <div class="new2">
 <!-- <form action="/login" method="POST"> -->
-  <form  method="POST" id="myform">
+  <form action="/login" method="POST" id="myform">
 
   <% if(!data.username){ %> 
   <div class="form-group">
-    <label for="exampleInputEmail1">Username</label>
+    <label for="exampleInputEmail1">Email</label>
     <input type="text" class="form-control" id="email" name="username" aria-describedby="emailHelp" placeholder="Enter your Username">
   </div>
 
@@ -113,8 +113,12 @@ margin-top: 90px;
     <label for="exampleInputPassword1">Password</label>
     <input type="password" class="form-control" id="password" name="password"placeholder="Enter your Password">
   </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">EmailVerified</label>
+    <input type="hidden" class="form-control" id="emailVerified" name="emailVerified"placeholder="Enter your Password">
+  </div>
   
-  <button type="submit" class="btn btn-primary" id="info">Submit</button>
+  <button type="button" class="btn btn-primary" id="info"onclick="submitForm()">Submit</button>
 </form>
 </div>
 </div>
@@ -158,8 +162,9 @@ const firebaseConfig = {
 
 
 
-  $("#myform").on("submit",function(e){  
-  e.preventDefault()
+  ///$("#myform").on("submit",function(e){  
+
+    function submitForm(){
        var formData = {
      email:$("#email").val(),
      password:$("#password").val(),
@@ -167,14 +172,16 @@ const firebaseConfig = {
 
    firebase.auth().signInWithEmailAndPassword(formData.email, formData.password)
       .then(function(val) {
-        console.log(val)
+
+        document.getElementById('emailVerified').value=val.user.emailVerified
 if(!val.user.emailVerified){
   let text="Your email is not verified.Please verify your email to access content"
   let result=confirm(text)
   if(result==true){
     val.user.sendEmailVerification().then(()=>{
-          alert("Click on the verification link sent to your email to complete the verification");
-
+          alert("Click on the verification link sent to your email to complete the verification and login again");
+window.location.href="http://localhost:8700"
+return
         }) .catch(function(error) {
          alert(error)
         })
@@ -184,15 +191,18 @@ if(!val.user.emailVerified){
     return
      }
       }
+      else{
+        loginUser(val,name)
 
-      loginUser(val,name)
+      }
+
+     // 
 
         })
       .catch(function(error) {
         alert("ERROR");
         var errorCode = error.code;
         var errorMessage = error.message;
-        // [START_EXCLUDE]
         if (errorCode == 'auth/weak-password') {
           alert('The password is too weak.');
         } else {
@@ -202,23 +212,26 @@ if(!val.user.emailVerified){
 
 
      function loginUser(val,name){
-      var formData = {
-      name:name,
-     email:val.user.email,
-     emailVerified:val.user.emailVerified,
-     password:$("#password").val(),
-   };
+  //     var formData = {
+  //     name:name,
+  //    email:val.user.email,
+  //    emailVerified:val.user.emailVerified,
+  //    password:$("#password").val(),
+  //  };
      
-        $.ajax({
-            url:"/login",
-            method:"POST",
-            data:formData,
-            success:function(response){
-                alert(response.message)
-            }
-        })
-      }
-    })
+  //       $.ajax({
+  //           url:"/login",
+  //           method:"POST",
+  //           data:formData,
+  //           success:function(response){
+  //           }
+  //       })
+
+  document.getElementById('myform').submit()
+       }
+
+
+    }
 
 let f= document.getElementById("name").innerText
  if(typeof(f)!='undefined'){

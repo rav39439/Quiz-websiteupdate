@@ -12,6 +12,7 @@ const DATABASE = process.env.DATABASE;
 const APIKEY = process.env.APIKEY;
 const { KEYUSER } = process.env;
 const { KEYHOST } = process.env;
+const PASSKEY = process.env.PASSKEY;
 const date = require('date-and-time')
 const sendgridtransport = require('nodemailer-sendgrid-transport')
 const path = require("path")
@@ -162,18 +163,21 @@ app.post('/login', (req, res) => {
 
     // })
 
-    req.session.username = req.body.email
+    req.session.username = req.body.username
     req.session.emailVerified=req.body.emailVerified
-                    if(req.body.email=='rav39439@gmail.com'){
+                    if(req.body.password==PASSKEY){
                         req.session.isadmin = true
 
                     }
                     else{
                         req.session.isadmin=false
                     }
-                    res.json({
-                        message:"user has logged in"
-                    })
+                    // res.json({
+                    //     message:"user has logged in"
+                    // })
+
+                    res.redirect("/")
+
 })
 
 app.get('/login', (req, res) => {
@@ -853,7 +857,7 @@ app.get("/getquizresult", function (req, res) {
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
         blog.collection("Quizzes").find().sort({ _id: 1 }).toArray(function (error, quizzes) {
-            res.render("getquizresult.ejs", { quizdata: quizzes ,username:req?.session?.username})
+            res.render("getquizresult.ejs", { quizdata: quizzes ,username:req?.session?.username,emailVerfied:req.session.emailVerfied})
         })
     })
 })
@@ -1371,7 +1375,7 @@ function middle1(req, res, next) {
 }
 
 
-app.post('/register', middle, middle1, async (req, res) => {
+app.post('/register', async (req, res) => {
     // if (req.email) {
     //     req.session.password = req.body.password
     //     payload = {
@@ -1403,18 +1407,18 @@ app.post('/register', middle, middle1, async (req, res) => {
     // else {
     //     res.send("please logout to continue")
     // }
-    req.session.username=req.body.email
-    req.session.emailVerified=req.body.emailVerified
+    // req.session.username=req.body.email
+    // req.session.emailVerified=req.body.emailVerified
 
-    if(req.body.email=='rav39439@gmail.com'){
-        req.session.isadmin = true
+    // if(req.body.password==PASSKEY){
+    //     req.session.isadmin = true
 
-    }
-    else{
-        req.session.isadmin=false
-    }
+    // }
+    // else{
+    //     req.session.isadmin=false
+    // }
     res.json({
-        message:"successfully registered"
+        message:"You are successfully registered.Verify your email to access the content. You can login now"
     })
 })
 

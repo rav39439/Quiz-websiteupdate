@@ -59,6 +59,9 @@ select{
 <%- include('../partials/heading.hbs') %>
 
   <body>
+    <% if(typeof(emailVerified)!='undefined'){ %>
+    <p id="emailVerified"><%=emailVerified %></p>
+    <% } %>
   <h1>All Paper Solutions</h1>
   <% quizdata.forEach(function(elem,index){%>
     <% if(elem.resultstatus=='public'){ %> 
@@ -112,7 +115,14 @@ select{
   <script>
 
 function getquiz(data){
-  document.getElementById("myform"+data.name).submit();
+  //let emailVerified=document.getElementById('emailVerified')?.innerText;
+  //if((typeof(emailVerified)!='undefined') && emailVerified==true){
+    document.getElementById("myform"+data.name).submit();
+
+  //}
+  // else{
+  //   alert("login, register or Verify your email to see the content")
+  // }
 
 }
              
