@@ -87,11 +87,9 @@ margin-top: 90px;
 <body>
   <%- include('../partials/heading.hbs') %>
 
-  <% if(typeof(message)!='undefined'){ %> 
-    <div id="messagebody">
-      <div class="alert alert-primary" id="message" role="alert"><%=message%> </div>
+    <div id="messagebody" style="display:none">
+      <div class="alert alert-primary" id="message" role="alert"> </div>
       </div>
-    <% } %> 
  
   
     <div class="new1">
@@ -101,7 +99,7 @@ margin-top: 90px;
 
 <div class="new2">
 <!-- <form action="/login" method="POST"> -->
-  <form action="/login" method="POST" id="myform">
+  <form  method="POST" id="myform">
 
   <% if(!data.username){ %> 
   <div class="form-group">
@@ -118,7 +116,7 @@ margin-top: 90px;
     <input type="hidden" class="form-control" id="emailVerified" name="emailVerified"placeholder="Enter your Password">
   </div>
   
-  <button type="button" class="btn btn-primary" id="info"onclick="submitForm()">Submit</button>
+  <button type="submit" class="btn btn-primary" id="info">Submit</button>
 </form>
 </div>
 </div>
@@ -162,56 +160,19 @@ const firebaseConfig = {
 
 
 
-  ///$("#myform").on("submit",function(e){  
+$("#myform").on("submit",function(e){  
 
-    function submitForm(){
+  e.preventDefault()
        var formData = {
      email:$("#email").val(),
      password:$("#password").val(),
    };
 
-   firebase.auth().signInWithEmailAndPassword(formData.email, formData.password)
-      .then(function(val) {
-
-        document.getElementById('emailVerified').value=val.user.emailVerified
-if(!val.user.emailVerified){
-  let text="Your email is not verified.Please verify your email to access content"
-  let result=confirm(text)
-  if(result==true){
-    val.user.sendEmailVerification().then(()=>{
-          alert("Click on the verification link sent to your email to complete the verification and login again");
-window.location.href="http://localhost:8700"
-return
-        }) .catch(function(error) {
-         alert(error)
-        })
-  }
-  else{
-    console.log("Your email is not verified")
-    return
-     }
-      }
-      else{
-        loginUser(val,name)
-
-      }
-
-     // 
-
-        })
-      .catch(function(error) {
-        alert("ERROR");
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        if (errorCode == 'auth/weak-password') {
-          alert('The password is too weak.');
-        } else {
-          alert(errorMessage);
-        }
-      })
 
 
-     function loginUser(val,name){
+    // function loginUser(val,name){
+
+     // alert("kigg")
   //     var formData = {
   //     name:name,
   //    email:val.user.email,
@@ -219,19 +180,31 @@ return
   //    password:$("#password").val(),
   //  };
      
-  //       $.ajax({
-  //           url:"/login",
-  //           method:"POST",
-  //           data:formData,
-  //           success:function(response){
-  //           }
-  //       })
+        $.ajax({
+            url:"/login",
+            method:"POST",
+            data:formData,
+            success:function(response){
+alert(response.message)
+if(response.status=="success"){
+  document.getElementById("messagebody").style.display="block"
+  document.getElementById("message").setAttribute('role','success')
+              document.getElementById("message").innerText=response.message       
+}
+else{
+  document.getElementById("messagebody").style.display="block"
+              document.getElementById("message").innerText=response.message
+}
+             
 
-  document.getElementById('myform').submit()
-       }
+            }
+        })
+
+  //document.getElementById('myform').submit()
+     //  }
 
 
-    }
+    })
 
 let f= document.getElementById("name").innerText
  if(typeof(f)!='undefined'){

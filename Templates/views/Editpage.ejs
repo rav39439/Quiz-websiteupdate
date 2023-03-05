@@ -645,9 +645,9 @@
     const ref = firebase.storage().ref();
 
     //--------------------deleting all materials in the firebase----------//
-    let img = document.getElementById("myfile" + data.name).value
+    let img = document.getElementById("myfile" + data.name)?.value
     if (img !== "") {
-      let oldimg = document.getElementById("myfile" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      let oldimg = document.getElementById("myfile" + data.name)?.value?.split("/o")[1].split("?")[0].split("/")[1]
       try {
         ref.child(oldimg).delete()
         console.log("file is deleted")
@@ -657,9 +657,9 @@
       }
     }
 
-    let img8 = document.getElementById("queimg" + data.name).value
+    let img8 = document.getElementById("queimg" + data.name)?.value
     if (img8 !== "") {
-      let oldimg = document.getElementById("queimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      let oldimg = document.getElementById("queimg" + data.name)?.value?.split("/o")[1]?.split("?")[0]?.split("/")[1]
       try {
         ref.child(oldimg).delete()
         console.log("file is deleted")
@@ -672,9 +672,9 @@
     }
 
 
-    let img1 = document.getElementById("solutionsimg" + data.name).value
+    let img1 = document.getElementById("solutionsimg" + data.name)?.value
     if (img1 !== "") {
-      let oldimg = document.getElementById("solutionsimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      let oldimg = document.getElementById("solutionsimg" + data.name)?.value?.split("/o")[1].split("?")[0].split("/")[1]
       try {
         ref.child(oldimg).delete()
         console.log("file is deleted")
@@ -687,9 +687,9 @@
       console.log("no image")
     }
 
-    let img2 = document.getElementById("passageimg" + data.name).value
+    let img2 = document.getElementById("passageimg" + data.name)?.value
     if (img2 !== "") {
-      let oldimg = document.getElementById("passageimg" + data.name).value?.split("/o")[1].split("?")[0].split("/")[1]
+      let oldimg = document.getElementById("passageimg" + data.name)?.value?.split("/o")[1].split("?")[0].split("/")[1]
       try {
         ref.child(oldimg).delete()
         console.log("file is deleted")
@@ -702,9 +702,9 @@
       console.log("no image")
     }
 
-    let img4 = document.getElementById("option1" + data.name).value
+    let img4 = document.getElementById("option1" + data.name)?.value
     if (img4 !== "") {
-      let oldimg = document.getElementById("option1" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      let oldimg = document.getElementById("option1" + data.name)?.value.split("/o")[1].split("?")[0].split("/")[1]
       console.log(oldimg)
       try {
         ref.child(oldimg).delete()
@@ -717,9 +717,9 @@
       console.log("No image")
     }
 
-    let img5 = document.getElementById("option2" + data.name).value
+    let img5 = document.getElementById("option2" + data.name)?.value
     if (img5 !== "") {
-      let oldimg = document.getElementById("option2" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      let oldimg = document.getElementById("option2" + data.name)?.value.split("/o")[1].split("?")[0].split("/")[1]
       console.log(oldimg)
       try {
         ref.child(oldimg).delete()
@@ -732,9 +732,9 @@
       console.log("No image")
     }
 
-    let img6 = document.getElementById("option3" + data.name).value
+    let img6 = document.getElementById("option3" + data.name)?.value
     if (img6 !== "") {
-      let oldimg = document.getElementById("option3" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      let oldimg = document.getElementById("option3" + data.name)?.value.split("/o")[1].split("?")[0].split("/")[1]
       console.log(oldimg)
       try {
         ref.child(oldimg).delete()
@@ -747,9 +747,9 @@
       console.log("No image")
     }
 
-    let img7 = document.getElementById("option4" + data.name).value
+    let img7 = document.getElementById("option4" + data.name)?.value
     if (img7 !== "") {
-      let oldimg = document.getElementById("option4" + data.name).value.split("/o")[1].split("?")[0].split("/")[1]
+      let oldimg = document.getElementById("option4" + data.name)?.value.split("/o")[1].split("?")[0].split("/")[1]
       console.log(oldimg)
       try {
         ref.child(oldimg).delete()
@@ -761,7 +761,7 @@
     } else {
       console.log("No image")
     }
-    var quizname = document.getElementById("stringquestions").innerText
+    var quizname = document.getElementById("stringquestions")?.innerText
 
     var formData = {
       index: data.name,

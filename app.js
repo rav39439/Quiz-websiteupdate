@@ -5,6 +5,22 @@ const nodemailer = require('nodemailer')
 const Qs = require('query-string');
 const dotenv = require("dotenv");
 require('dotenv').config()
+var firebase = require('firebase')
+
+var firebaseConfig = {
+    apiKey: "AIzaSyAZ9x_QbhCfY9aEsqxEiYhWtfIRNGl_qeo",
+    authDomain: "mynewproject-ae49a.firebaseapp.com",
+    projectId: "mynewproject-ae49a",
+    storageBucket: "mynewproject-ae49a.appspot.com",
+    messagingSenderId: "939005557600",
+    appId: "1:939005557600:web:ee766070db4bd2dadfbc05",
+    measurementId: "G-YFKTT151SN"
+}
+
+firebase.initializeApp(firebaseConfig)
+
+let database = firebase.database()
+
 
 const app = express()
 var ObjectId = require("mongodb").ObjectId
@@ -67,7 +83,7 @@ app.get('/', function (req, res) {
     const value = date.format((new Date(Date.now())),
         'DD/MM/YYYY');
     console.log(value)
-    MongoClient.connect( DATABASE, { useNewUrlParser: true }, function (error, client) {
+    MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
         blog.collection("studymaterial").find({ type: "Government Exams" }).toArray(function (error, materials) {
             let length1
@@ -163,21 +179,47 @@ app.post('/login', (req, res) => {
 
     // })
 
-    req.session.username = req.body.username
-    req.session.emailVerified=req.body.emailVerified
-                    if(req.body.password==PASSKEY){
-                        req.session.isadmin = true
+    firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
+        .then(function (val) {
+            console.log(val)
+            req.session.emailVerified = val.user.emailVerified
 
-                    }
-                    else{
-                        req.session.isadmin=false
-                    }
-                    // res.json({
-                    //     message:"user has logged in"
-                    // })
+            if (!val.user.emailVerified) {
+                    val.user.sendEmailVerification().then(() => {
+                        res.json({
+                            message:"Click on the verification link sent to your email to complete the verification and login again"
+                        })
+                    }).catch(function (error) {
+                        res.json({
+                            status:"error",
+                            message:error
+                        })
+                    })
+               
+            }
+            else {
+                req.session.username = req.body.email
+                if (req.body.password == PASSKEY) {
+                    req.session.isadmin = true
+                }
+                else {
+                    req.session.isadmin = false
+                }
+                res.json({
+                    status:"success",
+                    message:"successfully logged in"
+                })
 
-                    res.redirect("/")
-
+            }
+        })
+        .catch(function (error) {
+            res.json({
+                status:"error",
+                message:error
+            })
+            
+          
+        })
 })
 
 app.get('/login', (req, res) => {
@@ -778,7 +820,7 @@ app.post("/createnewtable", function (req, res) {
 
 app.get("/postmultioptions", function (req, res) {
 
-console.log("yufhfjyhfjyfyjf")
+    console.log("yufhfjyhfjyfyjf")
 
     res.render("postmultioptions.ejs")
 })
@@ -857,7 +899,7 @@ app.get("/getquizresult", function (req, res) {
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
         blog.collection("Quizzes").find().sort({ _id: 1 }).toArray(function (error, quizzes) {
-            res.render("getquizresult.ejs", { quizdata: quizzes ,username:req?.session?.username,emailVerfied:req.session.emailVerfied})
+            res.render("getquizresult.ejs", { quizdata: quizzes, username: req?.session?.username, emailVerfied: req.session.emailVerfied })
         })
     })
 })
@@ -868,7 +910,7 @@ app.post("/getquizresult", function (req, res) {
         var blog = client.db("blog")
         blog.collection("Quizzes").findOne({ "quizname": req.body.quizname }, function (error, quiz) {
             console.log(quiz)
-            res.render("newresultfile.ejs", { Mydata: JSON.stringify(quiz?.quizquestions), quizname: req.body.quizname,username:req?.session?.username })
+            res.render("newresultfile.ejs", { Mydata: JSON.stringify(quiz?.quizquestions), quizname: req.body.quizname, username: req?.session?.username })
 
         })
     })
@@ -906,7 +948,7 @@ app.post("/updatequiz", function (req, res) {
 
 
 app.get("/enterquiz", function (req, res) {
-    res.render("readinfo3.hbs", { Myname: req.session.username, emailVerfied:req.session.emailVerfied})
+    res.render("readinfo3.hbs", { Myname: req.session.username, emailVerfied: req.session.emailVerfied })
 })
 
 app.get("/enterquiz4", function (req, res) {
@@ -947,8 +989,8 @@ app.get("/enterquiz1", function (req, res) {
             res.render("readinfo3.ejs", {
                 table2: req.query.myquiz, quiz: quiz,
                 Myname: req.session.username,
-            emailVerified:req.session.emailVerified,              
-            section1length: section1length,
+                emailVerified: req.session.emailVerified,
+                section1length: section1length,
                 section2length: section2length
                 , section3length: section3length, section4length: section4length, time: time, quizattempts: noofquizattemts
             })
@@ -1376,6 +1418,33 @@ function middle1(req, res, next) {
 
 
 app.post('/register', async (req, res) => {
+    console.log("dsssssssssss")
+    firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
+        .then(function (val) {
+            val.user.sendEmailVerification().then(() => {
+                console.log(val.user)
+            }).catch(function (error) {
+                val.user.delete().then(() => {
+                    res.json({
+                        message: error
+                    })
+                })
+            })
+            res.json({
+                message: "You credentails are successfully saved.click on the link sent to your email to Complete the registration"
+            })
+        })
+        .catch(function (error) {
+            alert("ERROR");
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // [START_EXCLUDE]
+            if (errorCode == 'auth/weak-password') {
+                alert('The password is too weak.');
+            } else {
+                alert(errorMessage);
+            }
+        })
     // if (req.email) {
     //     req.session.password = req.body.password
     //     payload = {
@@ -1417,9 +1486,7 @@ app.post('/register', async (req, res) => {
     // else{
     //     req.session.isadmin=false
     // }
-    res.json({
-        message:"You are successfully registered.Verify your email to access the content. You can login now"
-    })
+
 })
 
 app.get("/verify-email1", function (req, res) {
@@ -1449,11 +1516,11 @@ app.get("/verify-email1", function (req, res) {
 
 })
 
-app.get("/RegisteredUsers",function(req,res){
+app.get("/RegisteredUsers", function (req, res) {
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
-        blog.collection("users").find().toArray( function(error,users){
-            res.render('RegisteredUsers.ejs',{users:users})
+        blog.collection("users").find().toArray(function (error, users) {
+            res.render('RegisteredUsers.ejs', { users: users })
         })
     })
 })
