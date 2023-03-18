@@ -181,46 +181,70 @@ app.post('/login', (req, res) => {
 
     firebase.auth().signInWithEmailAndPassword(req.body.email, req.body.password)
         .then(function (val) {
-            console.log(val)
             req.session.emailVerified = val.user.emailVerified
-
             if (!val.user.emailVerified) {
-                    val.user.sendEmailVerification().then(() => {
-                        res.json({
-                            message:"Click on the verification link sent to your email to complete the verification and login again"
-                        })
-                    }).catch(function (error) {
-                        res.json({
-                            status:"error",
-                            message:error
-                        })
+                val.user.sendEmailVerification().then(() => {
+                    res.json({
+                        message: "Click on the verification link sent to your email to complete the verification and login again"
                     })
-               
+                }).catch(function (error) {
+                    res.json({
+                        status: "error",
+                        message: error
+                    })
+                })
             }
             else {
-                req.session.username = req.body.email
-                if (req.body.password == PASSKEY) {
-                    req.session.isadmin = true
-                }
-                else {
-                    req.session.isadmin = false
-                }
-                res.json({
-                    status:"success",
-                    message:"successfully logged in"
+
+                MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
+                    var blog = client.db("blog")
+                    blog.collection("users").updateOne({
+                        $and: [
+                            { 'password': req.body.password },
+                            { 'email': req.body.email }
+                        ]
+
+                    }, {
+                        $set: {
+                            "emailVerified": true
+                        }
+                    }, function (err, data) {
+                    })
+
+                    console.log("dddddddddddddddddddddddddddddddddddd")
+                    blog.collection("users").findOne({
+                        $and: [
+                            { 'password': req.body.password },
+                            { 'email': req.body.email },
+                        ]
+                    }, function (error, user) {
+                        req.session.email = user.email
+                        console.log("user is found")
+                     req.session.username=user.username
+                        if (req.body.password == PASSKEY) {
+                            req.session.isadmin = true
+                        }
+                        else {
+                            req.session.isadmin = false
+                        }
+                        res.json({
+                            status: "success",
+                            message: "successfully logged in"
+                        })
+                    })
                 })
 
+               
             }
         })
         .catch(function (error) {
             res.json({
-                status:"error",
-                message:error
+                status: "error",
+                message: "Error occured.Check your credentials"
             })
-            
-          
         })
 })
+
 
 app.get('/login', (req, res) => {
     res.render("userinformation.ejs", { data: req.session })
@@ -1418,11 +1442,23 @@ function middle1(req, res, next) {
 
 
 app.post('/register', async (req, res) => {
-    console.log("dsssssssssss")
+    console.log(req.body)
     firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
         .then(function (val) {
             val.user.sendEmailVerification().then(() => {
-                console.log(val.user)
+                MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
+                    var blog = client.db("blog")
+                    blog.collection("users").insertOne
+                        ({
+                            "username": req.body.username,
+                            "password": req.body.password,
+                            "email": req.body.email,
+                            "emailVerified": val.user.emailVerified
+                        },
+                            function (error, document) {
+                                console.log("saved")
+                            })
+                })
             }).catch(function (error) {
                 val.user.delete().then(() => {
                     res.json({
@@ -1435,14 +1471,20 @@ app.post('/register', async (req, res) => {
             })
         })
         .catch(function (error) {
-            alert("ERROR");
+            // alert("ERROR");
+            console.log(error)
             var errorCode = error.code;
             var errorMessage = error.message;
-            // [START_EXCLUDE]
             if (errorCode == 'auth/weak-password') {
-                alert('The password is too weak.');
+                res.json({
+                    message: "password is too weak"
+                })
             } else {
-                alert(errorMessage);
+
+                res.json({
+                    message: errorMessage
+                })
+
             }
         })
     // if (req.email) {

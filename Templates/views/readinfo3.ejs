@@ -194,9 +194,8 @@
 
 
       <% if(quizattempts<40){ %>
-        <p><%=Myname %>  <%=emailVerified %></p>
         <% if(Myname!=null ){ %>
-          <% if(emailVerified=='true'){ %>
+          <% if(emailVerified){ %>
         <div class="text-center">
           <h1 style="color: blue;">Your details</h1>
           <form action="/newquiz4" method="POST">
