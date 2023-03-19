@@ -204,6 +204,7 @@ app.post('/login', (req, res) => {
             if (!val.user.emailVerified) {
                 val.user.sendEmailVerification().then(() => {
                     res.json({
+                        status:"success",
                         message: "Click on the verification link sent to your email to complete the verification and login again"
                     })
                 }).catch(function (error) {
