@@ -28,6 +28,9 @@ const DATABASE = process.env.DATABASE;
 const APIKEY = process.env.APIKEY;
 const { KEYUSER } = process.env;
 const { KEYHOST } = process.env;
+
+  
+  // Now you can use Firebase services
 const PASSKEY = process.env.PASSKEY;
 const date = require('date-and-time')
 const sendgridtransport = require('nodemailer-sendgrid-transport')
@@ -71,7 +74,23 @@ app.use(session({
     saveUninitialized: true,
     cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }))
+const admin = require('firebase-admin');
 
+// let serviceAccount={
+//     "type": "service_account",
+//     "project_id": "mynewproject-ae49a",
+//     "private_key_id": "af3c9f249c893ea082335d51649c46d5676b9127",
+//     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCIXYMDNd9W5W95\nNV7Xx5EocQi5IzdlonL1E0pS+hkh9iPe3HsRdCy80FQL9howk58UnZdrkiCYrjP7\nXpKjNim2Ur9hT3zEpKZSNHNJWZTPMsS2qt8wF+2oiydwIk9HhPzDHk/+bJbE5He7\nNRc/hNytUUCh3xWk7DL7SZUuoqdnoZU9Xnqota/AHQ1Ned1s1+PS0JlN0a920d/q\n7MD1UCtw/xpRmgHFwLDwl+SVONjk9F0NpZ7+lzN7mTOzmpI7GZSWyUavMEzWDuFq\nrzYxXb8Yh8g4PCjxyoko+d1GTMwH2h2Xh/FjA7/Os/CFJ659P6XxGbZHlYNldMGB\nGRDw+zw7AgMBAAECggEAK64Md7xLaHnArconMaYmvJYMbcU2ivMwsIj3z0F2SHcg\nAVSNhUc5x1dR/Kzdsb6vf7qFFLtvfoiadQPTo70HOnQiAmkkNZbqAb30ScQMkxwX\nf82XBUA867Z7MQOEcovKLTPp+rzMxI/MPGaipkGIMGos8kzTkYrpP63Pv+rxBZP4\nUaUlXpNOSSFXIQQYCTFsz1TJO3nlici+3WMc0pmc/0lPPVg5t1rl52TxBn1Aut6z\nKmBuctd4OhZ+fztVdoJgqLJbZlLBETCyqUwYaOk6bMX5skHi9t1bWYxP9L+o7rwz\nssUGQ5dkGpLTfDJ6tfhWyYdpJUaq63w5plPxUoZZAQKBgQC+ozrxV51MefS5bLN7\n4Vb1+WjBpTE4mh1By7QqoEvpzVCBvJ3fRFzzn4lRedlTHrfrkIM/2fmJhP4g7KPt\nQCeth2fIpjuUFGEA0JEnDzikH4sNrJfXI5PaZtxTVv/w7mk6bgjQZ3TMnIlr4TAk\neC85UtZK6HFHcOz+g3qWjmztAQKBgQC3HqeFWDuzGinDc0ZaW9KDMjtLPoScc1OY\nAS95opOX4Fj5zaq6OfgcYkvUi5SanrOJoKaJB2kGKu/q+HO/tQcembyyQEUTJTQ/\ndzZyPZ5DVNV0osGUDpYRaNXFrS89Dj6VoLE3/J4RtsYGoYplglKgfASSO/rinr53\nTxXjVYedOwKBgQCB7giPUvKvm/NSqaaOyR+W2B0w1iD8/fTw0iCCaOw0dq3nLqG+\n+P4NQW+66zxWrXoXAFCkJTExLEZ0NDTpz677U21F0R6MJ3ORtZUotPQa0DDa6gY3\nKFVuJmsGFiaslCF+JF63g7uUdSAoObuxL4SoIjBRr6j9UxcDxKK5mGrfAQKBgGsz\n8ACZggG9PFvm/XXisaAK5TmMtRfeUD752rBL5DoSpiRAKkXxr/X1+czJlkraw+K7\ngSNRikOJGYGmyCSgNzXL7PMxuv6VVjwdb2t79U4XuQsaSVeDHom8pQGf/LqyvyLb\nu0Q6iNN3/ABfy+TXYcYANLDjmmHXa0vvqbG4HbeHAoGAd9XDLOwy5jx1gdlLsD3H\n70Jf3bGowpXCQTbAiIXQUbJLCfuqnH5tlIBpAxdgrrYmpTMKx5LOuWl9OMlhhB34\nLD5Ah3xOrlyygB47L7GV4yVFDOPE8i9994jmMlVJlEIjVxjygCSpRQ10iRl0vHUu\nMoM86q07aKD0om/z6r9fzFE=\n-----END PRIVATE KEY-----\n",
+//     "client_email": "rav67584935@mynewproject-ae49a.iam.gserviceaccount.com",
+//     "client_id": "118295374918634587385",
+//     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+//     "token_uri": "https://oauth2.googleapis.com/token",
+//     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+//     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rav67584935%40mynewproject-ae49a.iam.gserviceaccount.com"
+//   }
+//   admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount)
+//   });
 app.set("view engine", "hbs")
 app.set("view engine", "ejs")
 app.set("views", setpath)
@@ -199,10 +218,9 @@ app.post('/login', (req, res) => {
                 MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
                     var blog = client.db("blog")
                     blog.collection("users").updateOne({
-                        $and: [
-                            { 'password': req.body.password },
-                            { 'email': req.body.email }
-                        ]
+                        
+                        'email': req.body.email
+                    
 
                     }, {
                         $set: {
@@ -213,10 +231,9 @@ app.post('/login', (req, res) => {
 
                     console.log("dddddddddddddddddddddddddddddddddddd")
                     blog.collection("users").findOne({
-                        $and: [
-                            { 'password': req.body.password },
-                            { 'email': req.body.email },
-                        ]
+                
+                     'email': req.body.email 
+                    
                     }, function (error, user) {
                         req.session.email = user.email
                         console.log("user is found")
@@ -421,6 +438,36 @@ app.get('/ExamFilter', (req, res) => {
         })
     }
 })
+
+app.get("/forgot-password",function(req,res){
+    res.render("password-reset.ejs")
+})
+
+app.post("/forgot-password",function(req,res){
+    
+firebase.auth().sendPasswordResetEmail(req.body.email).then(()=>{
+        // const actionCodeSettings = {
+        //     // URL you want to redirect back to. The domain (www.example.com) for
+        //     // this URL must be whitelisted in the Firebase Console.
+        //     url: 'http://localhost:8700/password-changed',
+        //     // This must be true for email link sign-in.
+        //     handleCodeInApp: true,
+           
+       // };
+        ///admin.auth().generatePasswordResetLink(req.body.email, actionCodeSettings)
+    ///.then((link) => {
+        res.send("Password reset mail send to your provided email")
+   /// })
+    .catch((error) => {
+        console.log(error)
+    });
+})
+})
+
+app.get("/password-changed",function(req,res){
+    res.send("password changed")
+})
+
 
 
 app.get('/ExamFilter1', (req, res) => {

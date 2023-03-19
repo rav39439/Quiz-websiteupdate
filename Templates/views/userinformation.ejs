@@ -118,6 +118,7 @@ margin-top: 90px;
   
   <button type="submit" class="btn btn-primary" id="info">Submit</button>
 </form>
+<a href="/forgot-password">Forgot Password</a>
 </div>
 </div>
 
@@ -189,7 +190,12 @@ alert(response.message)
 if(response.status=="success"){
   document.getElementById("messagebody").style.display="block"
   document.getElementById("message").setAttribute('role','success')
-              document.getElementById("message").innerText=response.message       
+              document.getElementById("message").innerText=response.message 
+              setTimeout(() => {
+  location.href="http://localhost:8700/"
+}, "2000")  
+              
+
 }
 else{
   document.getElementById("messagebody").style.display="block"
