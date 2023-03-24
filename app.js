@@ -69,7 +69,7 @@ hbs.registerPartials(pathset)
 var http = require("http").createServer(app)
 var io = require("socket.io")(http, {
     cors: {
-        origin: "https://neweducationworld.herokuapp.com",
+        origin: "https://neweducationworld.onrender.com",
         //origin: "http://localhost:8700",
         credentials: true
     }
