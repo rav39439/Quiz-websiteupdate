@@ -6,15 +6,24 @@ const Qs = require('query-string');
 const dotenv = require("dotenv");
 require('dotenv').config()
 var firebase = require('firebase')
+const authdomain = process.env.authDomain;
+const projectId = process.env.projectId;
+const storageBucket = process.env.storageBucket;
+const messagingSenderId = process.env.messagingSenderId;
+const appId = process.env.appId;
+const measurmentId = process.env.measurmentId;
+const APIKEY = process.env.APIKEY;
 
+
+console.log(APIKEY, authdomain, projectId, storageBucket, messagingSenderId, appId, measurmentId)
 var firebaseConfig = {
-    apiKey: "AIzaSyAZ9x_QbhCfY9aEsqxEiYhWtfIRNGl_qeo",
-    authDomain: "mynewproject-ae49a.firebaseapp.com",
-    projectId: "mynewproject-ae49a",
-    storageBucket: "mynewproject-ae49a.appspot.com",
-    messagingSenderId: "939005557600",
-    appId: "1:939005557600:web:ee766070db4bd2dadfbc05",
-    measurementId: "G-YFKTT151SN"
+    apiKey: APIKEY,
+    authDomain: authdomain,
+    projectId: projectId,
+    storageBucket: storageBucket,
+    messagingSenderId: messagingSenderId,
+    appId: appId,
+    measurementId: measurmentId
 }
 
 firebase.initializeApp(firebaseConfig)
@@ -25,12 +34,13 @@ let database = firebase.database()
 const app = express()
 var ObjectId = require("mongodb").ObjectId
 const DATABASE = process.env.DATABASE;
-const APIKEY = process.env.APIKEY;
 const { KEYUSER } = process.env;
 const { KEYHOST } = process.env;
 
-  
-  // Now you can use Firebase services
+
+
+
+// Now you can use Firebase services
 const PASSKEY = process.env.PASSKEY;
 const date = require('date-and-time')
 const sendgridtransport = require('nodemailer-sendgrid-transport')
@@ -76,21 +86,7 @@ app.use(session({
 }))
 const admin = require('firebase-admin');
 
-// let serviceAccount={
-//     "type": "service_account",
-//     "project_id": "mynewproject-ae49a",
-//     "private_key_id": "af3c9f249c893ea082335d51649c46d5676b9127",
-//     "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCIXYMDNd9W5W95\nNV7Xx5EocQi5IzdlonL1E0pS+hkh9iPe3HsRdCy80FQL9howk58UnZdrkiCYrjP7\nXpKjNim2Ur9hT3zEpKZSNHNJWZTPMsS2qt8wF+2oiydwIk9HhPzDHk/+bJbE5He7\nNRc/hNytUUCh3xWk7DL7SZUuoqdnoZU9Xnqota/AHQ1Ned1s1+PS0JlN0a920d/q\n7MD1UCtw/xpRmgHFwLDwl+SVONjk9F0NpZ7+lzN7mTOzmpI7GZSWyUavMEzWDuFq\nrzYxXb8Yh8g4PCjxyoko+d1GTMwH2h2Xh/FjA7/Os/CFJ659P6XxGbZHlYNldMGB\nGRDw+zw7AgMBAAECggEAK64Md7xLaHnArconMaYmvJYMbcU2ivMwsIj3z0F2SHcg\nAVSNhUc5x1dR/Kzdsb6vf7qFFLtvfoiadQPTo70HOnQiAmkkNZbqAb30ScQMkxwX\nf82XBUA867Z7MQOEcovKLTPp+rzMxI/MPGaipkGIMGos8kzTkYrpP63Pv+rxBZP4\nUaUlXpNOSSFXIQQYCTFsz1TJO3nlici+3WMc0pmc/0lPPVg5t1rl52TxBn1Aut6z\nKmBuctd4OhZ+fztVdoJgqLJbZlLBETCyqUwYaOk6bMX5skHi9t1bWYxP9L+o7rwz\nssUGQ5dkGpLTfDJ6tfhWyYdpJUaq63w5plPxUoZZAQKBgQC+ozrxV51MefS5bLN7\n4Vb1+WjBpTE4mh1By7QqoEvpzVCBvJ3fRFzzn4lRedlTHrfrkIM/2fmJhP4g7KPt\nQCeth2fIpjuUFGEA0JEnDzikH4sNrJfXI5PaZtxTVv/w7mk6bgjQZ3TMnIlr4TAk\neC85UtZK6HFHcOz+g3qWjmztAQKBgQC3HqeFWDuzGinDc0ZaW9KDMjtLPoScc1OY\nAS95opOX4Fj5zaq6OfgcYkvUi5SanrOJoKaJB2kGKu/q+HO/tQcembyyQEUTJTQ/\ndzZyPZ5DVNV0osGUDpYRaNXFrS89Dj6VoLE3/J4RtsYGoYplglKgfASSO/rinr53\nTxXjVYedOwKBgQCB7giPUvKvm/NSqaaOyR+W2B0w1iD8/fTw0iCCaOw0dq3nLqG+\n+P4NQW+66zxWrXoXAFCkJTExLEZ0NDTpz677U21F0R6MJ3ORtZUotPQa0DDa6gY3\nKFVuJmsGFiaslCF+JF63g7uUdSAoObuxL4SoIjBRr6j9UxcDxKK5mGrfAQKBgGsz\n8ACZggG9PFvm/XXisaAK5TmMtRfeUD752rBL5DoSpiRAKkXxr/X1+czJlkraw+K7\ngSNRikOJGYGmyCSgNzXL7PMxuv6VVjwdb2t79U4XuQsaSVeDHom8pQGf/LqyvyLb\nu0Q6iNN3/ABfy+TXYcYANLDjmmHXa0vvqbG4HbeHAoGAd9XDLOwy5jx1gdlLsD3H\n70Jf3bGowpXCQTbAiIXQUbJLCfuqnH5tlIBpAxdgrrYmpTMKx5LOuWl9OMlhhB34\nLD5Ah3xOrlyygB47L7GV4yVFDOPE8i9994jmMlVJlEIjVxjygCSpRQ10iRl0vHUu\nMoM86q07aKD0om/z6r9fzFE=\n-----END PRIVATE KEY-----\n",
-//     "client_email": "rav67584935@mynewproject-ae49a.iam.gserviceaccount.com",
-//     "client_id": "118295374918634587385",
-//     "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-//     "token_uri": "https://oauth2.googleapis.com/token",
-//     "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-//     "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rav67584935%40mynewproject-ae49a.iam.gserviceaccount.com"
-//   }
-//   admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount)
-//   });
+
 app.set("view engine", "hbs")
 app.set("view engine", "ejs")
 app.set("views", setpath)
@@ -204,7 +200,7 @@ app.post('/login', (req, res) => {
             if (!val.user.emailVerified) {
                 val.user.sendEmailVerification().then(() => {
                     res.json({
-                        status:"success",
+                        status: "success",
                         message: "Click on the verification link sent to your email to complete the verification and login again"
                     })
                 }).catch(function (error) {
@@ -215,30 +211,22 @@ app.post('/login', (req, res) => {
                 })
             }
             else {
-
                 MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
                     var blog = client.db("blog")
                     blog.collection("users").updateOne({
-                        
                         'email': req.body.email
-                    
-
                     }, {
                         $set: {
                             "emailVerified": true
                         }
                     }, function (err, data) {
                     })
-
-                    console.log("dddddddddddddddddddddddddddddddddddd")
                     blog.collection("users").findOne({
-                
-                     'email': req.body.email 
-                    
+                        'email': req.body.email
                     }, function (error, user) {
                         req.session.email = user.email
                         console.log("user is found")
-                     req.session.username=user.username
+                        req.session.username = user.username
                         if (req.body.password == PASSKEY) {
                             req.session.isadmin = true
                         }
@@ -251,8 +239,6 @@ app.post('/login', (req, res) => {
                         })
                     })
                 })
-
-               
             }
         })
         .catch(function (error) {
@@ -273,7 +259,6 @@ app.get('/createtable', (req, res) => {
 })
 
 app.get("/viewquestions", function (req, res) {
-
     res.render("viewquestions.hbs")
 })
 
@@ -392,7 +377,6 @@ app.get('/secrets', (req, res) => {
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
         blog.collection("Quizzes").find().sort({ _id: 1 }).toArray(function (error, quizzes) {
-            console.log(quizzes)
             res.render("tests.ejs", { quizdata: quizzes, username: req.session.username, test: "All Quizzes" })
         })
     })
@@ -440,32 +424,32 @@ app.get('/ExamFilter', (req, res) => {
     }
 })
 
-app.get("/forgot-password",function(req,res){
+app.get("/forgot-password", function (req, res) {
     res.render("password-reset.ejs")
 })
 
-app.post("/forgot-password",function(req,res){
-    
-firebase.auth().sendPasswordResetEmail(req.body.email).then(()=>{
+app.post("/forgot-password", function (req, res) {
+
+    firebase.auth().sendPasswordResetEmail(req.body.email).then(() => {
         // const actionCodeSettings = {
         //     // URL you want to redirect back to. The domain (www.example.com) for
         //     // this URL must be whitelisted in the Firebase Console.
         //     url: 'http://localhost:8700/password-changed',
         //     // This must be true for email link sign-in.
         //     handleCodeInApp: true,
-           
-       // };
+
+        // };
         ///admin.auth().generatePasswordResetLink(req.body.email, actionCodeSettings)
-    ///.then((link) => {
+        ///.then((link) => {
         res.send("Password reset mail send to your provided email")
-   /// })
-    .catch((error) => {
-        console.log(error)
-    });
-})
+            /// })
+            .catch((error) => {
+                console.log(error)
+            });
+    })
 })
 
-app.get("/password-changed",function(req,res){
+app.get("/password-changed", function (req, res) {
     res.send("password changed")
 })
 
@@ -768,7 +752,6 @@ app.post("/testt", GetallQuestions, function (req, res) {
             res.json({
                 "message": "successfully updated"
             })
-
         })
     })
 })
@@ -948,7 +931,6 @@ app.post("/EditstudyMaterial", function (req, res) {
             })
         })
     })
-
 })
 
 
@@ -964,7 +946,6 @@ app.post("/deleteMaterial", function (req, res) {
             })
         })
     })
-
 })
 
 app.get("/getquizresult", function (req, res) {
@@ -983,7 +964,6 @@ app.post("/getquizresult", function (req, res) {
         blog.collection("Quizzes").findOne({ "quizname": req.body.quizname }, function (error, quiz) {
             console.log(quiz)
             res.render("newresultfile.ejs", { Mydata: JSON.stringify(quiz?.quizquestions), quizname: req.body.quizname, username: req?.session?.username })
-
         })
     })
 })
@@ -993,7 +973,6 @@ app.get("/updatequiz", function (req, res) {
         var blog = client.db("blog")
         blog.collection("Quizzes").find().sort().toArray(function (error, quizzes) {
             res.render("updatelist.ejs", { quizdata: quizzes, username: req.session.username, data: req.session })
-
         })
     })
 })
@@ -1014,10 +993,7 @@ app.post("/updatequiz", function (req, res) {
             })
         })
     })
-
 })
-
-
 
 app.get("/enterquiz", function (req, res) {
     res.render("readinfo3.hbs", { Myname: req.session.username, emailVerfied: req.session.emailVerfied })
@@ -1026,7 +1002,6 @@ app.get("/enterquiz", function (req, res) {
 app.get("/enterquiz4", function (req, res) {
     res.render("readinfo2.hbs", { Myname: req.session.username, Myreg: req.session.uniquecode })
 })
-
 
 app.get("/enterquiz1", function (req, res) {
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
@@ -1078,7 +1053,6 @@ app.get("/getresult", function (req, res) {
             res.render("getresult.ejs", { quizdata: quizzes, username: req.session.username })
         })
     })
-
 })
 
 app.get("/Editquestions", function (req, res) {
@@ -1114,10 +1088,11 @@ app.get("/Editquiz", function (req, res) {
 
 
 app.post("/Editquiz", function (req, res) {
+    console.log(req.body)
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
         blog.collection("Quizzes").updateOne({
-            "quizname": req.body.oldquizname
+            "quizname": req.body.Oldquizname
         }, {
             $set: {
                 "quizname": req.body.quizname,
@@ -1139,7 +1114,6 @@ app.post("/Editquiz", function (req, res) {
             })
         })
     })
-
 })
 
 app.get("/uploadcontent", function (req, res) {
@@ -1335,6 +1309,7 @@ app.post("/enterchat", function (req, res) {
 io.on("connection", function (socket) {
     console.log("user connected")
 })
+
 const rooms = {}
 const botName = 'ChatCord Bot';
 let room;
@@ -1403,7 +1378,6 @@ io.on("connection", function (socket) {
 
     socket.on("refresh", () => {
         console.log("fgzagf")
-
         io.emit("pagerefresh");
     })
 
