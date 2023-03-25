@@ -40,7 +40,9 @@
     }
 
 
-
+.palletes{
+    width: 50%;
+}
 
     .info_box {
         width: 540px;
@@ -91,7 +93,9 @@
         opacity: 1;
     }
 
-
+.mysect{
+    width: 100%;
+}
     .quiz_box header .timer {
         margin-left: 40px;
         color: #004085;
@@ -108,8 +112,9 @@
 
     section {
         display: inline-block;
-        padding: 25px 30px 20px 30px;
+        padding:5px;
         background: #fff;
+        width: 100% !important;
     }
 
     section .que_text {
@@ -255,6 +260,9 @@
 
     .fg {
         opacity: 0;
+    }
+    #mysect{
+        width: 100% !important;
     }
 
     .Myreg {
@@ -439,8 +447,18 @@
         .new1 {
             display: flex;
             flex-direction: column;
-            width: 90%
+            width: 100%
         }
+        
+.palletes{
+    width: 100%;
+}
+
+
+
+#mysect{
+    width: 170% !important;
+}
 
         #mysections{
             display: flex;
@@ -485,7 +503,7 @@ background-color: red !important;
     </div>
     <div class="namequiz">{{mdata}}</div>
     <div class="mycontainer new1">
-        <div class="quiz_box" id="myquiz" style=" width:100% ">
+        <div class="quiz_box" id="myquiz" style="width:100% ">
             <header>
                 <div class="timer" style="margin-top:40px;margin-bottom:20px">
                     <div class="time_left_txt">Time Left</div>
@@ -493,7 +511,7 @@ background-color: red !important;
                 </div>
                 {{!-- <div class="time_line"></div> --}}
             </header>
-            <section id="mysect" style="width: 100%;">
+            <section id="mysect">
                 <div id="passtop"></div>
                                 <div id="passtop1"></div>
 
@@ -519,7 +537,7 @@ background-color: red !important;
                 <div class="total_que" >
                     <!-- Here I've inserted Question Count Number from JavaScript -->
                 </div>
-                <div class="" style="display: flex;flex-direction:row ;margin-left: 25px; ">
+                <div class="" style="display: flex;flex-direction:row ;margin-left: 0px; ">
                 <button class="next_btn btn btn-primary ml-3">Next</button>
                 <button class="prev_btn btn btn-primary ml-3">prev</button>
                 <button style="display:none" class="integer_btn btn btn-primary ml-3">integer submit</button>
@@ -528,7 +546,7 @@ background-color: red !important;
                 </div>
             </footer>
         </div>
-        <div class="palletes" style="width:50%">
+        <div class="palletes" >
             <div class="pallette1">
             </div>
             <div class="pallette2">
