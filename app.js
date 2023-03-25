@@ -244,7 +244,7 @@ app.post('/login', (req, res) => {
         .catch(function (error) {
             res.json({
                 status: "error",
-                message: "Error occured.Check your credentials"
+                message: error.message
             })
         })
 })
