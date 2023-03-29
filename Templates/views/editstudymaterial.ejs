@@ -66,6 +66,9 @@
               <div class="formgroup">
                 <input type="text" class="form-control" id="details<%=index%>" name="details" value="<%=elem.details%>">
               </div>
+              <div class="formgroup">
+                <input type="text" class="form-control" id="previewim<%=index%>" name="previewimg" value="<%=elem.previewimg%>">
+              </div>
 
               <div class="" style="margin-top:10px">
                 <a href="<%=elem.filedata%>" style="width:100%;">
@@ -126,7 +129,7 @@
 
 
     function getMaterial(data) {
-
+alert(data)
       document.getElementById("myform" + data.name).submit();
     }
 

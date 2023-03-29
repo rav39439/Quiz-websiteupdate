@@ -411,12 +411,18 @@
                             <h2 style="color:black">Study Materials</h2>
 
                           </div>
-
+                          <% if(typeof(sub)!='undefined'){ %>
+                            <h1 style="color:red"><%=sub %></h1>
+                            <% } else {%>
+                              <h1 style="color:red"><%=test %></h1>
+                            
+                            <% } %>
                           <% materials.forEach(function(elem){%>
 
                             <% if(elem.MaterialType=="StudyMaterial" ){ %>
+                              <h1><%=elem.content%></h1>
                               <div class="card" style="width:100%;height:auto;">
-
+                                
                                 <div
                                   style="display:grid;grid-template-columns:20% 60% 20% ;gap:0px;padding-bottom: 20px;">
 
@@ -443,7 +449,7 @@
                                   </div>
                                   <div class="" style="margin-top:47px">
 
-                                    <a href="<%=elem.data%>" style="width:100%;">
+                                    <a href="<%=elem.filedata%>" style="width:100%;">
                                       click here
                                     </a>
                                   </div>

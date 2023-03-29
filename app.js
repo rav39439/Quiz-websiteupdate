@@ -915,6 +915,7 @@ app.get("/EditstudyMaterial", function (req, res) {
 })
 
 app.post("/EditstudyMaterial", function (req, res) {
+    console.log(req.body)
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
         blog.collection("studymaterial").updateOne({
@@ -923,7 +924,8 @@ app.post("/EditstudyMaterial", function (req, res) {
             $set: {
                 "filedata": req.body.filedata,
                 "topic": req.body.topic,
-                "details": req.body.details
+                "details": req.body.details,
+                "previewimg":req.body.previewimg
             }
         }, function (err, data) {
             res.json({
