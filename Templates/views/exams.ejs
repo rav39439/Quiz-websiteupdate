@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+    <%- include('../partials/heading.hbs') %>
+
+    <% if(examname=="Government Exams" ) {%>
+
+       
+              <!-- Navbar brand -->
+  
+              <!-- Left links -->
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <a class="nav-link" href="/ExamFilter?exam=Government Exams&&test=SSC CGL" style="color:black;  font-weight: bold;
+                  ">
+                                                        <div class="card" style="width: 18rem;">
+
+                  <div class="card-body">
+                    <h5 class="card-title"> SSC CGL</h5>
+                    </div>
+                  </div>
+                
+                </a>
+
+                  <a class="nav-link" href="/ExamFilter?exam=Government Exams&&test=RRB" style="color:black;  font-weight: bold;
+                  ">
+                                      <div class="card" style="width: 18rem;">
+
+                  <div class="card-body">
+                    <h5 class="card-title"> RRB</h5>
+                
+                    </div>
+                  </div></a>
+    
+                  <a class="nav-link" href="/ExamFilter?exam=Government Exams&&test=LIC" style="color:black;  font-weight: bold;
+                  ">  
+                    <div class="card" style="width: 18rem;">
+
+                   <div class="card-body">
+                    <h5 class="card-title"> LIC</h5>
+                
+                    </div>
+                </div>
+
+                </a>
+  
+  
+  
+              </ul>
+          
+  
+        <% } %>
+          <% if(examname=="Management Exams" ) {%>
+  
+            
+                  <!-- Navbar brand -->
+  
+                  <!-- Left links -->
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <a class="nav-link" href="/ExamFilter?exam=Management Exams&&test=GMAT" style="color:black;  font-weight: bold;
+                      ">
+                                                            <div class="card" style="width: 18rem;">
+
+                      <div class="card-body">
+                    <h5 class="card-title">GMAT</h5>
+                
+                    </div>
+                  </div></a>
+
+
+                      <a class="nav-link" href="/ExamFilter?exam=Management Exams&&test=CAT" style="color:black;  font-weight: bold;
+                      "><div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">CAT</h5>
+                
+                    </div>
+                  </div> </a>
+                    <li class="nav-item " >
+                      <a class="nav-link" href="/ExamFilter?exam=Management Exams&&test=SNAP" style="color:black;  font-weight: bold;
+                  ">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title"> SNAP</h5>
+                
+                    </div>
+                  </div> 
+                 </a>
+                  </ul>
+                  <!-- Left links -->
+             
+            <% } %>
+              <% if(examname=="Bank Exams" ) {%>
+  
+                      <!-- Navbar brand -->
+  
+                      <!-- Left links -->
+                      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <a class="nav-link" href="/ExamFilter?exam=Bank Exams&&test=IBPS" style="color:black;  font-weight: bold;
+                  "> <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">IBPS</h5>
+                
+                    </div>
+                  </div> </a>
+  
+                          <a class="nav-link" href="/ExamFilter?exam=Bank Exams&&test=SBI-PO" style="color:black;  font-weight: bold;
+                  ">
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">SBI-PO</h5>
+                
+                    </div>
+                  </div> 
+                  
+                  </a>
+
+                          <a class="nav-link" href="/ExamFilter?exam=Bank Exams&&test=RBI" style="color:black;  font-weight: bold;
+                  ">
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">RBI</h5>
+
+    </div>
+  </div> 
+                  
+                  </a>
+  
+  
+  
+                      </ul>
+                      <!-- Left links -->
+                    <!-- Collapsible wrapper -->
+  
+                    <!-- Right elements -->
+  
+                    <!-- Avatar -->
+  
+                 
+  
+                <% } %>
+                  <% if(examname=="Engineering Entrance Exams" ) {%>
+  
+                    
+  
+                          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                              <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=IIT-JEE" style="color:black;  font-weight: bold;
+                  ">
+                   <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">IIT-JEE</h5>
+                
+                    </div>
+                  </div> 
+                
+                </a>
+                              <a class="nav-link" href="/ExamFilter?exam=Engineering Entrance Exams&&test=GATE" style="color:black;  font-weight: bold;
+                  ">
+                   <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">GATE</h5>
+                
+                    </div>
+                  </div> 
+                
+                </a>
+                          </ul>
+                       
+  
+                    <% } %>
+  
+                      <% if(examname=="Research and Lectureship" ) {%>
+                       
+  
+                            
+                              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                  <a class="nav-link" href="/ExamFilter?exam=Research and Lectureship&&test=CSIR-NET"
+                                    style="color:black;  font-weight: bold;
+                                      ">
+                                      <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                        <h5 class="card-title">CSIR</h5>
+                                    
+                                        </div>
+                                      </div>  
+                                    
+                                    </a>
+                              </ul>
+                            
+  
+                        <% } %>
+  
+  
+                         
+  
+                            
+</body>
+</html>

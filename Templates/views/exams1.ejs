@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <%- include('../partials/heading.hbs') %>
+
+    <% if(test=="CSIR-NET" ) {%>
+                           
+                             
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <a class="nav-link"
+              href="/ExamFilter3?exam=Research and Lectureship&&test=CSIR-NET&&sub=Physics"
+              style="color:black;  font-weight: bold;
+              ">
+              <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                  <h5 class="card-title">Physics</h5>
+              
+                  </div>
+                </div> 
+          
+          </a>
+            <a class="nav-link"
+              href="/ExamFilter3?exam=Research and Lectureship&&test=CSIR-NET&&sub=Chemistry"
+              style="color:black;   font-weight: bold;
+              ">
+              <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                  <h5 class="card-title">Chemistry</h5>
+              
+                  </div>
+                </div> 
+          
+          
+          
+          </a>
+            <a class="nav-link"
+              href="/ExamFilter3?exam=Research and Lectureship&&test=CSIR-NET&&sub=Maths" style="color:black;   font-weight: bold;
+              ">
+              <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                  <h5 class="card-title">Maths</h5>
+              
+                  </div>
+                </div> 
+          
+          </a>
+            <a class="nav-link"
+              href="/ExamFilter3?exam=Research and Lectureship&&test=CSIR-NET&&sub=English"
+              style="color:black;   font-weight: bold;
+              ">
+              <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                  <h5 class="card-title">English</h5>
+              
+                  </div>
+                </div> 
+          
+          </a>
+        </ul>
+     
+
+
+  <% } %>
+
+
+  <% if(test=="GATE" ) {%>
+   
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <a class="nav-link"
+                href="/ExamFilter3?exam=Engineering Entrance Exams&&test=GATE&&sub=Physics"
+                style="color:black;  font-weight: bold;
+              ">
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">PHYSCICS</h5>
+                </div>
+              </div> 
+              </a>
+
+              <a class="nav-link"
+                href="/ExamFilter3?exam=Engineering Entrance Exams&&test=GATE&&sub=Chemistry"
+                style="color:black;   font-weight: bold;
+              ">
+               <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">CHEMISTRY</h5>
+                </div>
+              </div> 
+              </a>
+           
+              <a class="nav-link"
+                href="/ExamFilter3?exam=Engineering Entrance Exams&&test=GATE&&sub=Maths"
+                style="color:black;  font-weight: bold;
+              ">
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">MATHS</h5>
+                </div>
+              </div> 
+              </a>
+            
+              <a class="nav-link"
+                href="/ExamFilter3?exam=Engineering Entrance Exams&&test=GATE&&sub=ElectricalEngg"
+                style="color:black;   font-weight: bold;
+              ">
+               <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">Electrical Engineering</h5>
+                </div>
+              </div> 
+              
+              </a>
+
+              <a class="nav-link"
+                href="/ExamFilter3?exam=Engineering Entrance Exams&&test=GATE&&sub=MechanicalEngg"
+                style="color:black;   font-weight: bold;
+              ">
+              
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">Mechanical Engineering</h5>
+                </div>
+              </div> 
+              
+              </a>
+          </ul>
+       
+
+    <% } %>
+
+
+   
+      <% materials.forEach(function(elem){%>
+        <% if(elem.MaterialType=="StudyMaterial" ){ %>
+          <div class="card" style="width:100%;height:auto;">
+            
+            <div
+              style="display:grid;grid-template-columns:20% 60% 20% ;gap:0px;padding-bottom: 20px;">
+              <div>
+                <% if(elem.previewimg){%>
+                  <img class="border" style="width:100%;height:110px; margin:0px"
+                    src="<%=elem.previewimg%>" alt="">
+                  <% } else{ %>
+                    <img class="border" style="width:100%;height:110px; margin:0px"
+                      src="https://images.unsplash.com/photo-1673877980197-c3ce24a8ab17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
+                      alt="">
+                    <% } %>
+              </div>
+              <div style="width: auto;height: auto;">
+                <div class="card-body" style="width: 100%; ">
+                  <h5 class="card-title">
+                    <%=elem.content %>
+                  </h5>
+                  <div class="card-text" style="height:auto;">
+                    <%=elem.details %>
+                  </div>
+                </div>
+              </div>
+              <div class="" style="margin-top:47px">
+                <a href="<%=elem.filedata%>" style="width:100%;">
+                  click here
+                </a>
+              </div>
+            </div>
+          </div>
+          <% }%>
+            <%}) %>
+    </div>
+
+</body>
+</html>

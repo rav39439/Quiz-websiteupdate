@@ -397,7 +397,7 @@ app.get('/ExamFilter', (req, res) => {
         MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
             var blog = client.db("blog")
             blog.collection("studymaterial").find({ "type": req.query.exam }).sort({ _id: 1 }).toArray(function (error, materials) {
-                res.render("index.ejs", {
+                res.render("exams.ejs", {
                     materials: materials, username: req.session.username, data: req.session
                     , examname: req.query.exam, test: req.query.exam
                 })
@@ -415,7 +415,7 @@ app.get('/ExamFilter', (req, res) => {
                 ]
             }
             ).sort({ _id: 1 }).toArray(function (error, materials) {
-                res.render("index.ejs", {
+                res.render("exams1.ejs", {
                     materials: materials, username: req.session.username, data: req.session
                     , examname: req.query.exam, test: req.query.test
                 })
@@ -460,7 +460,7 @@ app.get('/ExamFilter1', (req, res) => {
         MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
             var blog = client.db("blog")
             blog.collection("Quizzes").find({ "examname": req.query.exam }).sort({ _id: 1 }).toArray(function (error, quizzes) {
-                res.render("listoftests.ejs", {
+                res.render("nexams.ejs", {
                     quizdata: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
                     , examname: req.query.exam, test: req.query.exam
                 })
@@ -477,7 +477,7 @@ app.get('/ExamFilter1', (req, res) => {
                 ]
             }
             ).sort({ _id: 1 }).toArray(function (error, quizzes) {
-                res.render("listoftests.ejs", {
+                res.render("nexams1.ejs", {
                     quizdata: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
                     , examname: req.query.exam, test: req.query.test
                 })
@@ -491,7 +491,7 @@ app.get('/ExamFilter2', (req, res) => {
         MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
             var blog = client.db("blog")
             blog.collection("Quizzes").find({ "examname": req.query.test }).sort({ _id: 1 }).toArray(function (error, quizzes) {
-                res.render("listoftests.ejs", {
+                res.render("nexams2.ejs", {
                     quizdata: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
                     , examname: req.query.exam, test: req.query.exam
                 })
@@ -508,7 +508,7 @@ app.get('/ExamFilter2', (req, res) => {
                 ]
             }
             ).sort({ _id: 1 }).toArray(function (error, quizzes) {
-                res.render("listoftests.ejs", {
+                res.render("nexams2.ejs", {
                     quizdata: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
                     , examname: req.query.exam, test: req.query.test, sub: req.query.sub
                 })
@@ -522,7 +522,7 @@ app.get('/ExamFilter3', (req, res) => {
         MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
             var blog = client.db("blog")
             blog.collection("studymaterial").find({ "examname": req.query.test }).sort({ _id: 1 }).toArray(function (error, quizzes) {
-                res.render("index.ejs", {
+                res.render("exams2.ejs", {
                     materials: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
                     , examname: req.query.exam, test: req.query.exam
                 })
@@ -539,7 +539,7 @@ app.get('/ExamFilter3', (req, res) => {
                 ]
             }
             ).sort({ _id: 1 }).toArray(function (error, quizzes) {
-                res.render("index.ejs", {
+                res.render("exams2.ejs", {
                     materials: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
                     , examname: req.query.exam, test: req.query.test, sub: req.query.sub
                 })

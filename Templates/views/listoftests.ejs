@@ -139,403 +139,101 @@ body{
 
 
 
-<nav class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(133, 172, 205);">
-  <!-- Container wrapper -->
-  <div class="container-fluid">
-    <!-- Toggle button -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarku"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarku">
-      <!-- Navbar brand -->
-
-      <!-- Left links -->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item " >
-          <a class="nav-link" href="/Mysecrets"style="color:black;  font-weight: bold;
-          ">All Exams</a>
-        </li>
-
-        <li class="nav-item " style="margin-left:60px;">
-          <a class="nav-link" href="/ExamFilter1?exam=Primary and Secondary Education"style="color:black;  font-weight: bold;
-            ">Primary and Secondary Education</a>
-            </li>
-
-        <li class="nav-item " style="margin-left:150px;">
-          <a class="nav-link" href="/ExamFilter1?exam=Government Exams" style="color:black;  font-weight: bold;
-                ">Government
-              Exams</a>
-        <li class="nav-item " style="margin-left: 150px;">
-          <a class="nav-link" href="/ExamFilter1?exam=Management Exams" style="color:black;  font-weight: bold;
-                ">Management
-              Exams</a>
-        </li>
-        <li class="nav-item " style="margin-left: 150px;">
-          <a class="nav-link" href="/ExamFilter1?exam=Bank Exams" style="color:black;  font-weight: bold;
-                ">Bank
-              Exams</a>
-        </li>
-        <li class="nav-item " style="margin-left: 150px;">
-          <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams" style="color:black;  font-weight: bold;
-                ">Engineering Entrance Exams</a>
-        </li>
-
-        <li class="nav-item " style="margin-left: 150px;">
-          <a class="nav-link" href="/ExamFilter1?exam=Research and Lectureship" style="color:black;  font-weight: bold;
-            ">Research & Lectureship</a>
-        </li>
-
-
-        <!-- <li class="nav-item " style="margin-left: 150px;">
-          <a class="nav-link" href="/ExamFilter?exam=Other Exams"><button style="border:none;">Other
-              Exams</button></a>
-        </li> -->
-
-      </ul>
-      <!-- Left links -->
-    </div>
-    <!-- Collapsible wrapper -->
-
-    <!-- Right elements -->
-
-    <!-- Avatar -->
-
-  </div>
-  <!-- Right elements -->
-  </div>
-  <!-- Container wrapper -->
-</nav>
-
-
-<!----------------------------filter------------------------------------------->
-
-<% if(examname=="Government Exams" ) {%>
-
-  <nav class="navbar navbar-expand-lg navbar-light mt-4" style="background-color: rgb(133, 172, 205);">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMark" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMark">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item " style="margin-left:20pxpx;">
-            <a class="nav-link" href="/ExamFilter1?exam=Government Exams&&test=SSC CGL" style="color:black;  font-weight: bold;
-                ">SSC CGL</a>
-          <li class="nav-item " style="margin-left: 150px;">
-            <a class="nav-link" href="/ExamFilter1?exam=Government Exams&&test=RRB" style="color:black;  font-weight: bold;
-                ">RRB</a>
-          </li>
-          <!-- <li class="nav-item " style="margin-left: 150px;">
-            <a class="nav-link" href="/ExamFilter1?exam=Government Exams&&test=UPSC" style="color:black;  font-weight: bold;
-                ">UPSC</a>
-          </li> -->
-          <li class="nav-item " style="margin-left: 150px;">
-            <a class="nav-link" href="/ExamFilter1?exam=Government Exams&&test=LIC" style="color:black;  font-weight: bold;
-                ">LIC</a>
-          </li>
-        </ul>
-      </div>
-     
-    </div>
-    </div>
-  </nav>
-
-  <% } %>
-    <% if(examname=="Management Exams" ) {%>
-
-      <nav class="navbar navbar-expand-lg navbar-light mt-4" style="background-color: rgb(133, 172, 205);">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMar" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMar">
-           
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item " style="margin-left:20pxpx;">
-                <a class="nav-link" href="/ExamFilter1?exam=Management Exams&&test=GMAT" style="color:black;  font-weight: bold;
-                ">GMAT</a>
-              <li class="nav-item " style="margin-left: 150px;">
-                <a class="nav-link" href="/ExamFilter1?exam=Management Exams&&test=CAT" style="color:black;  font-weight: bold;
-                ">CAT</a>
-              </li>1
-              <li class="nav-item " style="margin-left: 150px;">
-                <a class="nav-link" href="/ExamFilter1?exam=Management Exams&&test=SNAP" style="color:black;  font-weight: bold;
-                ">SNAP</a>
-              </li>
-              <!-- <li class="nav-item " style="margin-left: 150px;">
-                <a class="nav-link" href="/ExamFilter1?exam=Management Exams&&test=XAT" style="color:black;  font-weight: bold;
-                ">XAT</a>
-              </li> -->
-            </ul>
-          </div>
-        
-
-        </div>
-        </div>
-      </nav>
-
-      <% } %>
-        <% if(examname=="Bank Exams" ) {%>
-
-          <nav class="navbar navbar-expand-lg navbar-light mt-4" style="background-color: rgb(133, 172, 205);">
-            <div class="container-fluid">
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMa" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMa">
-
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item " style="margin-left:20px;">
-                    <a class="nav-link" href="/ExamFilter1?exam=Bank Exams&&test=IBPS" style="color:black;  font-weight: bold;
-                ">IBPS</a>
-                  <li class="nav-item " style="margin-left: 150px;">
-                    <a class="nav-link" href="/ExamFilter1?exam=Bank Exams&&test=RBI" style="color:black;  font-weight: bold;
-                ">RBI</a>
-                  </li>
-                  <li class="nav-item " style="margin-left: 150px;">
-                    <a class="nav-link" href="/ExamFilter1?exam=Bank Exams&&test=SBI-PO" style="color:black;  font-weight: bold;
-                ">SBI-PO</a>
-                  </li>
-                 
-                </ul>
-              </div>
-
-            </div>
-            </div>
-          </nav>
-
-          <% } %>
-            <% if(examname=="Engineering Entrance Exams" ) {%>
-
-              <nav class="navbar navbar-expand-lg navbar-light mt-4" style="background-color: rgb(133, 172, 205);">
-                <div class="container-fluid">
-                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltM" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarNavAltM">
-
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                      <li class="nav-item " style="margin-left:20pxpx;">
-                        <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams&&test=IIT-JEE" style="color:black;  font-weight: bold;
-                ">
-                          IIT-JEE</a>
-                      <li class="nav-item " style="margin-left: 150px;">
-                        <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams&&test=GATE" style="color:black;  font-weight: bold;
-                ">
-                          GATE</a>
-                      </li>
-                  
-                      <!-- <li class="nav-item " style="margin-left: 150px;">
-                        <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams&&test=CSIR-NET" style="color:black;  font-weight: bold;
-                ">CSIR-NET</a>
-                      </li> -->
-                    </ul>
-                  </div>
-                </div>
-                </div>
-              </nav>
-
-<% } %> 
-
-<% if(examname=="Research and Lectureship" ) {%>
-  <nav class="navbar navbar-expand-lg navbar-light mt-4"
-    style="background-color: rgb(133, 172, 205);">
-
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarNavAltM" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltM">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item " style="margin-left:0px;">
-            <a class="nav-link" href="/ExamFilter1?exam=Research and Lectureship&&test=CSIR-NET"
-              style="color:black;  font-weight: bold;
-                ">CSIR-NET</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <% } %>
-
-
-
-  <% if(test=="CSIR-NET" ) {%>
-    <nav class="navbar navbar-expand-lg navbar-light mt-4"
-      style="background-color: rgb(133, 172, 205);">
-  
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltM" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltM">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item " style="margin-left:0px;">
-              <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=Physics"
-                style="color:black;  font-weight: bold;
-                  ">PHYSCICS</a>
-            </li>
-            <li class="nav-item " style="margin-left:0px;">
-              <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=Chemistry"
-                style="color:black; margin-left: 70px;  font-weight: bold;
-                  ">CHEMISTRY</a>
-            </li>
-            <li class="nav-item " style="margin-left:0px;">
-              <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=Maths"
-                style="color:black;  margin-left: 70px; font-weight: bold;
-                  ">MATHS</a>
-            </li>
-            <li class="nav-item " style="margin-left:0px;">
-              <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=English"
-                style="color:black; margin-left: 70px;  font-weight: bold;
-                  ">English</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  
-    <% } %>
-
-
-  <% if(test=="GATE" ) {%>
-    <nav class="navbar navbar-expand-lg navbar-light mt-4"
-      style="background-color: rgb(133, 172, 205);">
-  
-      <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltM" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltM">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item " style="margin-left:0px;">
-              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=Physics"
-                style="color:black;  font-weight: bold;
-                  ">PHYSCICS</a>
-            </li>
-            <li class="nav-item " style="margin-left:0px;">
-              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=Chemistry"
-                style="color:black; margin-left: 70px;  font-weight: bold;
-                  ">CHEMISTRY</a>
-            </li>
-            <li class="nav-item " style="margin-left:0px;">
-              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=Maths"
-                style="color:black;  margin-left: 70px; font-weight: bold;
-                  ">MATHS</a>
-            </li>
-            <li class="nav-item " style="margin-left:0px;">
-              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=ElectricalEngg"
-                style="color:black; margin-left: 70px;  font-weight: bold;
-                  ">Electrical Engineering</a>
-            </li>
-
-            <li class="nav-item " style="margin-left:0px;">
-              <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=MechanicalEngg"
-                style="color:black; margin-left: 70px;  font-weight: bold;
-                  ">Mechanical Engineering</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  
-    <% } %>
-
 
 
 <!---------------------------------------------------------------------------------->
 
-<% if(typeof(sub)!='undefined'){ %>
-<h1 style="color:red"><%=sub %></h1>
-<% } else {%>
-  <h1 style="color:red"><%=test %></h1>
 
-<% } %>
-<div class="showgrid mb-4"style="margin-bottom:70px;width:100%">
-  <% if(data.isadmin) {%> 
-<% quizdata.forEach(function(elem,index){ %> 
-       <div class="card mt-4 bodywidth" >
-        <form id="myform<%index%>" action="/enterquiz1" method="GET">
-        <div class="card-body">
-          <h3 class="card-title title"><%=elem.quizname%> </h3>
-          <h5 class="card-title title">Based on <%=elem.exam%> </h5>
-          <p class="card-text">   
-            <div style="display: grid; grid-template-columns:auto auto auto auto; gap:3px">
-              <span><i class="fa fa-clock-o" aria-hidden="true">
-                <%=elem.time %></i> </span>
-              <span><i class="fa fa-book" aria-hidden="true">
-                <%=elem.exam %></i> </span>
-              <span><i class="fa fa-question-circle-o" aria-hidden="true">
-                <%=elem.noofquestions %> questions</i>
-                </span>  
-              <span> <i class="fa fa-info" aria-hidden="true">
-                <%=elem?.marks %> marks</i>
-                </span>  
-                  </div> 
-                 </p>
-            <input readonly id="name"name="myquiz" type="hidden" value="<%=elem.quizname%>">
-          <input readonly type="hidden" name="quiz"id="quiz" value="<%=elem.examname%>"> 
- <button type="submit" style="margin-top:20px;margin-right:20px" class="btn btn-primary" >start</button>        
-</div>
-</form>
-      </div>
-<%  }) %> 
+<!--------------------------------->
 
-<% } %> 
-</div > 
+    <!-- Navbar brand -->
+
+    <!-- Left links -->
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- <a class="nav-link" href="/Mysecrets"style="color:black;  font-weight: bold;
+        ">
+        
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+          <h5 class="card-title">All Exams</h5>
+      
+          </div>
+        </div> </a> -->
+
+        <a class="nav-link" href="/ExamFilter1?exam=Primary and Secondary Education"style="color:black;  font-weight: bold;
+          "><div class="card" style="width: 18rem;">
+          <div class="card-body">
+          <h5 class="card-title">Primary and Secondary Education</h5>
+      
+          </div>
+        </div></a>
+
+        <a class="nav-link" href="/ExamFilter1?exam=Government Exams" style="color:black;  font-weight: bold;
+              ">
+              <div class="card" style="width: 18rem;">
+          <div class="card-body">
+          <h5 class="card-title">Government
+            Exams</h5>
+          </div>
+        </div>
+          </a>
 
 
 
-<div id="ss" style="display: none;"><%=stringdata %></div>
-<div class="mb-4 bodywidth">
-<% if(!data.isadmin) {%> 
-  <% quizdata.forEach(function(elem,index){ %> 
-<% if(elem.status=='public'){ %> 
-    <div class="card" style=" margin-top: 20px;">
-     <form id="myform<%index%>" action="/enterquiz1" method="GET">
-     <div class="card-body"style="position: relative;">
-<div style="display: grid; grid-template-columns:auto auto; gap:3px">
-      <div>
-        <h3 class="card-title title" ><%=elem.quizname%> </h3>
-      </div>     
-<div>
-  <input readonly id="name"name="myquiz" type="hidden" value="<%=elem.quizname%>">
-       <input readonly type="hidden" name="quiz"id="quiz" value="<%=elem.examname%>"> 
-<button type="submit" style="position:absolute;right: 20px;;" class="btn btn-primary" >start</button>        
-</div>
-</div>
-<p>Quizname: <%=elem.quizname %></p>
-       <p class="card-text">  
-        <div style="display: grid; grid-template-columns:auto auto auto auto; gap:3px">
-          <span><i class="fa fa-clock-o" aria-hidden="true">
-            <%=elem.time %></i> </span>
-          <span><i class="fa fa-book" aria-hidden="true">
-            <%=elem.exam %></i> </span>
-          <span><i class="fa fa-question-circle-o" aria-hidden="true">
-            <%=elem.noofquestions %> questions</i>
-            </span>  
-          <span> <i class="fa fa-info" aria-hidden="true">
-            <%=elem?.marks %> marks</i>
-            </span>  
-              </div> 
-            </p>
-</div>
-</form>
-   </div>
+        <a class="nav-link" href="/ExamFilter1?exam=Management Exams" style="color:black;  font-weight: bold;
+              ">
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title">Management
+                  Exams</h5>
+                </div>
+              </div>
+          </a>
 
-   <% } %> 
-<%  }) %> 
 
-  <% } %> 
-</div>
+        <a class="nav-link" href="/ExamFilter1?exam=Bank Exams" style="color:black;  font-weight: bold;
+              ">
+              <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title"> Bank
+                  Exams</h5>
+                </div>
+              </div>
+             </a>
+
+
+        <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams" style="color:black;  font-weight: bold;
+              "><div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title"> Engineering Entrance Exams</h5>
+                </div>
+              </div></a>
+
+        <a class="nav-link" href="/ExamFilter1?exam=Research and Lectureship" style="color:black;  font-weight: bold;
+          "><div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h5 class="card-title"> Research & Lectureship</h5>
+                </div>
+              </div></a>
+
+
+      <!-- <li class="nav-item " style="margin-left: 150px;">
+        <a class="nav-link" href="/ExamFilter?exam=Other Exams"><button style="border:none;">Other
+            Exams</button></a>
+      </li> -->
+
+    </ul>
+    <!-- Left links -->
+ 
+
+
+
+
+
+
+
+
+
 </body>
 
       <script>

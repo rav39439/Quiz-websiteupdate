@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+</head>
+<style>
+
+.my{
+  margin-left: 100px;
+  margin-top: 50px;
+  height: 500px;
+  display: inline-flex;
+  flex-direction: column;
+  width: 300px;
+    }
+  
+    input[type="text"]{
+  outline: none;
+}
+
+.new1{
+  width:750px;
+  height:150px;
+  border-radius: 8px;
+  display:inline-block
+}
+
+#quiz{
+   width: 230px;
+   margin-left: 20px;
+   margin-top: 10px;
+   outline: none;
+ }
+
+ #name{
+  width: 230px;
+  outline: none;
+   margin-left: 20px;
+   margin-top: 10px;
+ }
+
+
+
+
+.showgrid{
+  display: flex;
+  flex-direction: column;
+justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+
+}
+
+.bodywidth{
+  width: 70% !important;
+}
+ .title{
+  width: auto;
+ }
+
+ @media only screen and (max-width: 660px) {
+
+  .title{
+    width: 150px !important;;
+  }
+  .bodywidth{
+  width: 100% !important;
+}
+
+  .showgrid{
+    display: flex;
+  flex-direction: column;
+justify-content: center;
+  align-items: center;
+}
+ }
+
+img{
+
+  width: 0px;
+  height:0px;
+}
+
+
+body{
+  width: 100% !important;
+}
+</style>
+<body>
+    <% if(data.isadmin){ %> 
+        <%- include('../partials/heading1.hbs') %>
+        <% } else {%> 
+          <%- include('../partials/heading.hbs') %>
+        
+          <% } %> 
+
+
+
+
+
+<% if(typeof(sub)!='undefined'){ %>
+    <h1 style="color:red"><%=sub %></h1>
+    <% } else {%>
+      <h1 style="color:red"><%=test %></h1>
+    
+    <% } %>
+    <div class="showgrid mb-4"style="margin-bottom:70px;width:100%">
+      <% if(data.isadmin) {%> 
+    <% quizdata.forEach(function(elem,index){ %> 
+           <div class="card mt-4 bodywidth" >
+            <form id="myform<%index%>" action="/enterquiz1" method="GET">
+            <div class="card-body">
+              <h3 class="card-title title"><%=elem.quizname%> </h3>
+              <h5 class="card-title title">Based on <%=elem.exam%> </h5>
+              <p class="card-text">   
+                <div style="display: grid; grid-template-columns:auto auto auto auto; gap:3px">
+                  <span><i class="fa fa-clock-o" aria-hidden="true">
+                    <%=elem.time %></i> </span>
+                  <span><i class="fa fa-book" aria-hidden="true">
+                    <%=elem.exam %></i> </span>
+                  <span><i class="fa fa-question-circle-o" aria-hidden="true">
+                    <%=elem.noofquestions %> questions</i>
+                    </span>  
+                  <span> <i class="fa fa-info" aria-hidden="true">
+                    <%=elem?.marks %> marks</i>
+                    </span>  
+                      </div> 
+                     </p>
+                <input readonly id="name"name="myquiz" type="hidden" value="<%=elem.quizname%>">
+              <input readonly type="hidden" name="quiz"id="quiz" value="<%=elem.examname%>"> 
+     <button type="submit" style="margin-top:20px;margin-right:20px" class="btn btn-primary" >start</button>        
+    </div>
+    </form>
+          </div>
+    <%  }) %> 
+    
+    <% } %> 
+    </div > 
+    
+    
+    
+    <div id="ss" style="display: none;"><%=stringdata %></div>
+    <div class="mb-4 bodywidth">
+    <% if(!data.isadmin) {%> 
+      <% quizdata.forEach(function(elem,index){ %> 
+    <% if(elem.status=='public'){ %> 
+        <div class="card" style=" margin-top: 20px;">
+         <form id="myform<%index%>" action="/enterquiz1" method="GET">
+         <div class="card-body"style="position: relative;">
+    <div style="display: grid; grid-template-columns:auto auto; gap:3px">
+          <div>
+            <h3 class="card-title title" ><%=elem.quizname%> </h3>
+          </div>     
+    <div>
+      <input readonly id="name"name="myquiz" type="hidden" value="<%=elem.quizname%>">
+           <input readonly type="hidden" name="quiz"id="quiz" value="<%=elem.examname%>"> 
+    <button type="submit" style="position:absolute;right: 20px;;" class="btn btn-primary" >start</button>        
+    </div>
+    </div>
+    <p>Quizname: <%=elem.quizname %></p>
+           <p class="card-text">  
+            <div style="display: grid; grid-template-columns:auto auto auto auto; gap:3px">
+              <span><i class="fa fa-clock-o" aria-hidden="true">
+                <%=elem.time %></i> </span>
+              <span><i class="fa fa-book" aria-hidden="true">
+                <%=elem.exam %></i> </span>
+              <span><i class="fa fa-question-circle-o" aria-hidden="true">
+                <%=elem.noofquestions %> questions</i>
+                </span>  
+              <span> <i class="fa fa-info" aria-hidden="true">
+                <%=elem?.marks %> marks</i>
+                </span>  
+                  </div> 
+                </p>
+    </div>
+    </form>
+       </div>
+    
+       <% } %> 
+    <%  }) %> 
+    
+      <% } %> 
+    </div>
+</body>
+</html>
