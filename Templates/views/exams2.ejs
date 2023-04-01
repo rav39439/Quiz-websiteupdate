@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+  <%- include('../partials/heading.hbs') %>
+
     <% materials.forEach(function(elem){%>
         <% if(elem.MaterialType=="StudyMaterial" ){ %>
           <div class="card" style="width:100%;height:auto;">
