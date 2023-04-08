@@ -480,6 +480,7 @@
 </style>
 
 <body>
+
     <div style="margin-left:20px;">
         <div style="width: 50%;">
             <div class="quiz_box" style="top:10px;left:10px;">
@@ -487,6 +488,9 @@
 
                 </header>
                 <section>
+
+
+
                     <div id="name"style=" font: weight 300px;;font-size: 30px;">
                         <span style="display:flex ; flex-direction:column;">
                            
@@ -507,8 +511,7 @@
                     </div>
                     <div id="marks" style="font-weight: 300px;font-size: 30px;">
 
-
-
+                        <span><h2>Score: <%=attemmarks%> </h2></span>
                     </div>
                     
 
@@ -541,7 +544,7 @@
             <div id="rat" style="display:none">
                 <%=usedata%>
             </div>
-         
+
 
             <div id="rat1" style="display:none">
                 <%=responses%>
@@ -1223,11 +1226,9 @@ option_tag +=`</div>`
             //--------------------------------------------------------------------------
             let p = document.getElementById("name")
             p.innerText = name
-            let k = document.getElementById("marks")
-            k.innerHTML = `<span><h2>Score: ${m}<h2></span>`;
+           
 
         }
-
 
 
 

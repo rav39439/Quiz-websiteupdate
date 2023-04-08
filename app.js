@@ -34,8 +34,7 @@ let database = firebase.database()
 const app = express()
 var ObjectId = require("mongodb").ObjectId
 const DATABASE = process.env.DATABASE;
-const { KEYUSER } = process.env;
-const { KEYHOST } = process.env;
+
 
 
 
@@ -58,8 +57,6 @@ const {
 } = require('./utils/users');
 const formatMessage = require('./utils/messeges');
 const formidable = require('formidable')
-const { v4: uuidV4 } = require('uuid');
-const url = require('url');
 const fs = require('fs')
 const pathset = path.join(__dirname, "/Templates/partials")
 const setpath = path.join(__dirname, "/Templates/views")
@@ -75,8 +72,7 @@ var io = require("socket.io")(http, {
     }
 })
 var session = require("express-session");
-const { start } = require('repl');
-const { rawListeners } = require('process');
+
 app.use(session({
     key: "admin",
     secret: "any random string",
@@ -652,9 +648,11 @@ app.post("/newresultmulti", (req, res) => {
                 let studentposition = quiz?.quizattempters?.findIndex(data => data?.marks == userresponses?.marks)
                 let remaining = quiz?.quizattempters?.length - studentranks[studentposition] + 1
                 let percentitle = (remaining / quiz?.quizattempters.length) * 100
+               let attempter= quiz?.quizattempters.find(elem=>elem.name==req.body.name)
+               let attemptermarks=attempter?.marks
                 if (userresponses) {
                     res.render("resultfile.ejs", {
-                        usedata: JSON.stringify(quiz?.quizquestions), name: req.body.name, mydata: quiz?.quizattempters, responses: JSON.stringify(userresponses), quizname: req.body.myquiz, ranks: studentranks, rank: studentranks[studentposition]
+                        usedata: JSON.stringify(quiz?.quizquestions), name: req.body.name,attemmarks:attemptermarks, mydata: quiz?.quizattempters, responses: JSON.stringify(userresponses), quizname: req.body.myquiz, ranks: studentranks, rank: studentranks[studentposition]
                         , percentile: percentitle
                     })
                 }
