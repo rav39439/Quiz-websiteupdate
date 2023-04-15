@@ -176,7 +176,6 @@ $("#myform").on("submit",function(e){
             method:"POST",
             data:formData,
             success:function(response){
-alert(response.message)
 if(response.status=="success"){
   document.getElementById("messagebody").style.display="block"
   document.getElementById("message").setAttribute('role','success')
