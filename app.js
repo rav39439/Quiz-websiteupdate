@@ -336,8 +336,8 @@ app.post("/newquiz4", (req, res) => {
             let percentitle = (remaining / quiz.quizattempters.length) * 100
             if (user) {
                 res.send(`<h1>You have already attempted this exam</h1><br> <h1>Your Score ${user.marks}</h1>
-    <br> <h1> <a href="/viewsolutions?name=${user.name}&quizname=${req.body.Mytable2}&rank=${studentranks[studentposition]}&percentile=${percentitle}&quiz=${quiz}&responses=${user.responses}">View Solutions</a></h1>
-    `)
+    <br> <h1> <a href="/viewsolutions?name=${user.name}&quizname=${req.body.Mytable2}&rank=${studentranks[studentposition]}&percentile=${percentitle}&quiz=${quiz}&responses=${user.responses}&marks=${user.marks}">View Solutions</a></h1>
+`)
             } else {
                 res.render("newquiz4.hbs", { userd: JSON.stringify(quiz?.quizquestions), name2: req.body.Myname2, reg: req.body.registration, table2: req.body.Mytable2 })
             }
@@ -345,7 +345,11 @@ app.post("/newquiz4", (req, res) => {
     })
 
     app.get("/viewsolutions", function (req, res) {
+        console.log("percentile hhhhhhhhhhhhhhhh")
+
         let name = req.query.name
+        let marks = req.query.marks
+
         let quizname = req.query.quizname
         let rank = req.query.rank
         let percentile = req.query.percentile
@@ -353,7 +357,7 @@ app.post("/newquiz4", (req, res) => {
             var blog = client.db("blog")
             blog.collection("Quizzes").findOne({ "quizname": quizname }, function (error, quiz) {
                 let user = quiz?.quizattempters.find(data => data.name == name)
-                res.render("resultfile.ejs", { name: name, rank: rank, percentile: percentile, usedata: JSON.stringify(quiz.quizquestions), responses: JSON.stringify(user), quizname: quizname })
+                res.render("resultfile.ejs", { name: name, rank: rank, percentile: percentile, usedata: JSON.stringify(quiz.quizquestions), responses: JSON.stringify(user), quizname: quizname,attemmarks:marks })
             })
         })
     })
