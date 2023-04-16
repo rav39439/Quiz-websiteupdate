@@ -231,7 +231,7 @@ app.post('/login', (req, res) => {
                         }
                         res.json({
                             status: "success",
-                            message: "successfully logged in"
+                            message: "successfully logged in. wait...."
                         })
                     })
                 })

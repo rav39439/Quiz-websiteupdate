@@ -202,15 +202,14 @@
   function updatequestion(form) {
     console.log(form)
     var quizname = document.getElementById("stringquestions").innerText
-    //  e.preventDefault()
-    alert(document.getElementById("Mysolutions").value)
+    alert(form.Mysolutions.value)
     var formData = {
       qsection: form.qsection.value,
       section: form.section.value,
       numb: form.numb.value,
       question: form.question.value,
       passage: form.passage.value,
-      solution: document.getElementById("Mysolutions").value,
+      solution: form.Mysolutions.value,
       integerans: form.integerans.value,
       answercode: form.answercode.value,
       option1: form.option1.value,
