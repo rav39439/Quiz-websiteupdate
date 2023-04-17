@@ -479,7 +479,7 @@ app.get('/ExamFilter1', (req, res) => {
             ).sort({ _id: 1 }).toArray(function (error, quizzes) {
                 res.render("nexams1.ejs", {
                     quizdata: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
-                    , examname: req.query.exam, test: req.query.test
+                    , examname: req.query.exam, test: req.query.test,message:req.query.message
                 })
             })
         })
