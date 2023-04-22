@@ -1466,7 +1466,6 @@ function middle(req, res, next) {
             }
         })
     })
-
 }
 
 function middle1(req, res, next) {
@@ -1491,34 +1490,30 @@ function middle1(req, res, next) {
 
 app.get('/deleteAccount', async (req, res) => {
     console.log(req.session.uid)
-    // firebase.auth().deleteUser(req.session.uid,function(error,result){
-    //     res.json({
-    //         message:"Your account has been successfully deleted"
-    //     })
-    // })
     if(req.session.uid){
-        
     admin.auth().deleteUser(req.session.uid)
     .then(() => {
         console.log(`Successfully deleted user with UID: ${req.session.uid}`);
-
-     res.json({
-            message:"Your account has been successfully deleted"
+        MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
+            var blog = client.db("blog")
+        blog.collection("users").deleteOne({
+                    "email": req.session.email,
+        }, function (error, data) {
+            res.json({
+                message:"Your account has been successfully deleted"
+            })
         })
-
-
+        req.session.destroy()
       })
+    })
       .catch((error) => {
         console.error(`Error deleting user with UID: ${req.session.uid}`, error);
       });
-      
     }
     else{
         res.send("No user has logged in")
     }
 })
-
-
 
 app.post('/register',middle, async (req, res) => {
     console.log(req.body)
@@ -1550,7 +1545,6 @@ app.post('/register',middle, async (req, res) => {
             })
         })
         .catch(function (error) {
-            // alert("ERROR");
             console.log(error)
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -1563,7 +1557,6 @@ app.post('/register',middle, async (req, res) => {
                 res.json({
                     message: errorMessage
                 })
-
             }
         })
     // if (req.email) {
@@ -1634,7 +1627,6 @@ app.get("/verify-email1", function (req, res) {
     else {
 
     }
-
 })
 
 app.get("/RegisteredUsers", function (req, res) {
