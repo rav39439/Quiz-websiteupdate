@@ -81,7 +81,27 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }))
 const admin = require('firebase-admin');
+console.log(process.env.private_key)
+console.log(process.env.client_email)
+serviceAccount={
+    type:process.env.type,
+    project_id: process.env.project_id,
+    private_key_id: process.env.private_key_id,
+    private_key:"-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDXB28gjePCkYxz\nsJZjEptXobG601arolRsKJJ6bZUCF2ADs0Zaq+SylnnLfdaX7gUZ8lSrsk6ff3al\nt3yxSgnfI4T8UhRbW5hj5Ps4tlEqZcH0k2JYfwLGwzoV68XJqkmC8fob7F9784lL\n30wrwMdX+3etqsTuDSermybVDpSeHaeyFJ7Iy/ovuVQdPNckrtzXM2/8UBQM9pdL\neQc840GCznF1/NCR4T4UyKaZOc+DAdBX/6SfUB95wF8OBZ65DzTSakg6JeVlzaKo\n5AR240QEMaifW4En2yB7R5lJPgtEw7DsmpAx1h6CzMe1LDVKsHf4/jPKnjeAsd9w\nj9Zu88Y7AgMBAAECggEAZ2ld2kwiwwn4gBLm4FKsfqJ2tSC6R+TTsQh6GYLl7JGN\nTXpEVYrhe7m+bUzhjUOdFHNkoQYppa9JQj1SLHks8jFE3Ywj2iPcz/3pi8ayli9F\n7feLjn/Wt/xfzPcMsgXBQMZawF8XNKdU2jZTjZ8yv29iiRTdjJarA26kaEaQ1tEO\ndInD4q45exa+sLOSe2OaHTIBNb2VQEhMoCMEh1DcvOlQG95qvNQJYaa82+ppkhFE\nHQIfOiUyyekbuaGFybfpuo1FfIFvlhdgXUKe1WhccveAN9Yzq5SHS1O5B2dBG5+H\n1kVl4UhNB0FCWj29ZTg5Hg5HPYvEJVQQ/JfmtojXUQKBgQDx20Nsi3MNzVoTsC97\no7Gn3DolpQorlNHCjt9O7uomXWP0tQI1Y0Hp37AOmBG5xi5K+al2VTYV+y4E/HpZ\n/T1f2UGZAPWZmzN14FQcX8VF59Q90H/EqiTDzeyIe0oCn4YgJvGMOOr519ffTZPU\nYPqVlrXCcDQZiJkJZ17hnx27dQKBgQDjmowvdUsMkhCMRuQq5FdFgs+WRUilN6f3\ni6h7H9fWI/xr2YlgNCv5Ra5RH6ddvxPVC+SYl67QiBNevbHvgQQtvyhDBPRaOHUN\nWEVXvWNXpAZR4Lld1cXu/oWsLP+lAnrUH8q8/mhjIdlkfFKcT9wz6eouO0gSGgOi\nWy/sGeY07wKBgG1AAoDxrRM7A8mI+Kn9E68jyBBhMOrm2qnsJ+tb+OFDpndPnKPJ\nJmki5kBxaPBmGVs809PkQf5D7FHMSuiDgEnftcYLrOWqOeCxaM04ZcBiLHmPyWdp\nBBp+1q4AIzp0HP5BGTOiMmKRoa35OSHifM89uPUQAjjWf2rECxQX8DJRAoGBANMh\nuE0F51p/3G3kDSBktTg8AkkJeDwbBusxWFbu0Q9KTovVPgRKIUiZBP0n+d+Sstj8\nsU+D1ZyHvkAyg+8CpVeybazN2cYffSWl7p1Xh+HyvBIT/qA2/+eVn3Z6P6NYS4ye\n+TicX0UmTz1RvmhWBJT7tkqwn0h7bUecgzXnSI9tAoGAfjDVvuSPLhDgfMi0P9iM\nuFesBV2wyE0XfP4pn30C45hpRlSdLGBQiWSycTKjl9Lg3jz2CSGXbp/cT1QUDb+K\nreyiVevnS4G5kmVFa737mi0VRtaOqiCqITwjA+DJXncn5f8LBYEqQ09N3GWJ7gt9\nrS196gIcwy1yG1lWiXE5MRM=\n-----END PRIVATE KEY-----\n",
+    client_email: process.env.client_email,
+    client_id: process.env.client_id,
+     auth_uri: process.env.auth_uri,
+    token_uri: process.env.token_uri,
+     auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
+     client_x509_cert_url: process.env.client_x509_cert_url
+}
 
+
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://mynewproject.firebaseio.com'
+});
 
 app.set("view engine", "hbs")
 app.set("view engine", "ejs")
@@ -207,6 +227,8 @@ app.post('/login', (req, res) => {
                 })
             }
             else {
+                req.session.uid=val.user.uid
+          
                 MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
                     var blog = client.db("blog")
                     blog.collection("users").updateOne({
@@ -221,6 +243,7 @@ app.post('/login', (req, res) => {
                         'email': req.body.email
                     }, function (error, user) {
                         req.session.email = user.email
+                        req.session.uid=val.user.uid
                         console.log("user is found")
                         req.session.username = user.username
                         if (req.body.password == PASSKEY) {
@@ -1419,16 +1442,16 @@ function middle(req, res, next) {
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
         blog.collection("users").findOne({
-            $or: [
-                {
-                    "username": req.body.name,
+            // $or: [
+               // {
+                    "username": req.body.username,
 
-                },
-                {
-                    "email": req.body.email,
+              //  },
+                // {
+                //     "email": req.body.email,
 
-                }
-            ]
+                // }
+            //]
         }, function (error, data) {
             if (data) {
 
@@ -1437,7 +1460,7 @@ function middle(req, res, next) {
                 })
             }
             else {
-                req.username = req.body.name
+                req.username = req.body.username
                 req.email = req.body.email
                 next()
             }
@@ -1466,8 +1489,31 @@ function middle1(req, res, next) {
 
 }
 
+app.get('/deleteAccount', async (req, res) => {
+    console.log(req.session.uid)
+    // firebase.auth().deleteUser(req.session.uid,function(error,result){
+    //     res.json({
+    //         message:"Your account has been successfully deleted"
+    //     })
+    // })
+    admin.auth().deleteUser(req.session.uid)
+    .then(() => {
+        console.log(`Successfully deleted user with UID: ${req.session.uid}`);
 
-app.post('/register', async (req, res) => {
+     res.json({
+            message:"Your account has been successfully deleted"
+        })
+
+
+      })
+      .catch((error) => {
+        console.error(`Error deleting user with UID: ${req.session.uid}`, error);
+      });
+})
+
+
+
+app.post('/register',middle, async (req, res) => {
     console.log(req.body)
     firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
         .then(function (val) {
