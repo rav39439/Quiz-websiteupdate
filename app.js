@@ -1496,6 +1496,8 @@ app.get('/deleteAccount', async (req, res) => {
     //         message:"Your account has been successfully deleted"
     //     })
     // })
+    if(req.session.uid){
+        
     admin.auth().deleteUser(req.session.uid)
     .then(() => {
         console.log(`Successfully deleted user with UID: ${req.session.uid}`);
@@ -1509,6 +1511,11 @@ app.get('/deleteAccount', async (req, res) => {
       .catch((error) => {
         console.error(`Error deleting user with UID: ${req.session.uid}`, error);
       });
+      
+    }
+    else{
+        res.send("No user has logged in")
+    }
 })
 
 
