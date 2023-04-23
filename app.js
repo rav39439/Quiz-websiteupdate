@@ -655,6 +655,8 @@ app.post("/newresultmulti", (req, res) => {
             var blog = client.db("blog")
             blog.collection("Quizzes").findOne({ "quizname": req.body.myquiz }, function (error, quiz) {
                 let userresponses = quiz.quizattempters.find(elem => elem?.name == req.body.name)
+                let responseuser = quiz.quizattempters.find(elem => elem?.email == req.body.email)
+
                 let allmarks = []
                 let studentranks = []
                 quiz?.quizattempters.forEach((elem) => {
@@ -675,9 +677,9 @@ app.post("/newresultmulti", (req, res) => {
                 let studentposition = quiz?.quizattempters?.findIndex(data => data?.marks == userresponses?.marks)
                 let remaining = quiz?.quizattempters?.length - studentranks[studentposition] + 1
                 let percentitle = (remaining / quiz?.quizattempters.length) * 100
-               let attempter= quiz?.quizattempters.find(elem=>elem.name==req.body.name)
+               let attempter= quiz?.quizattempters.find(elem=>elem?.name==req.body.name)
                let attemptermarks=attempter?.marks
-                if (userresponses) {
+                if (responseuser) {
                     res.render("resultfile.ejs", {
                         usedata: JSON.stringify(quiz?.quizquestions), name: req.body.name,attemmarks:attemptermarks, mydata: quiz?.quizattempters, responses: JSON.stringify(userresponses), quizname: req.body.myquiz, ranks: studentranks, rank: studentranks[studentposition]
                         , percentile: percentitle
@@ -842,6 +844,7 @@ app.post("/newquiz4result", function (req, res) {
                     name: req.body.studentname,
                     answers: g,
                     marks: req.body.marks,
+                    email:req.session.email,
                     rank: ""
                 }
             }

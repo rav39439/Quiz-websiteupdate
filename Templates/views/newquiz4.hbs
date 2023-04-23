@@ -1282,7 +1282,6 @@ message2=``
                     url: '/newquiz4result',
                     data: { studentname: studentname, quizname: quizname, regno: regno, responses: JSON.stringify(myquestions), marks: marks },
                     success: function (response) {
-                        alert(response)
                         document.getElementById("myform1").submit()
                        // document.getElementById("myform").submit()
 

@@ -481,6 +481,9 @@
 
 <body>
 
+    <a href="/">
+        <h2>Go back</h2>
+    </a>
     <div style="margin-left:20px;">
         <div style="width: 50%;">
             <div class="quiz_box" style="top:10px;left:10px;">
@@ -516,7 +519,7 @@
                     
 
                     <br>
-                <h3>Answer marked by you is shown in red and the correct response is shown in green</h3>
+                <h3> NOTE : Answer marked by you is shown in red and the correct response is shown in green</h3>
                     <div id="passage"></div>
                     <div id="passimg"></div>
                     <div id="myqueimg"></div>
@@ -566,23 +569,24 @@
                     <tbody>
                         <%if(typeof(mydata)!='undefined'){ %>
                             <% mydata.forEach(function(elem,index){%>
-                                <tr>
+                                <%if (elem.name==name){%>
+                                <tr style="background-color: #a9b5c2;">
+                                    <%} else { %>
+                                        <tr>
+                                            <%}%>
                                     <th scope="row">
                                         <%=elem.name%>
                                     </th>
                                     <th scope="row">
                                         <%=ranks[index]%>
                                     </th>
-                                    <%if (elem.name==name){%>
-                                        <td style="background-color: #a9b5c2;">
-                                            <%=elem.name%>
-                                        </td>
-                                        <%} else { %>
+                                       
+                                      
                                             <td>
                                                 <%=elem.name%>
                                             </td>
 
-                                            <% } %>
+                                            
                                                 <td>
                                                     <%=elem.marks%>
                                                 </td>
@@ -594,9 +598,7 @@
 
                 </table>
 
-                <a href="/">
-                    <h1>Go back</h1>
-                </a>
+               
         </div>
     </div>
     <script>
