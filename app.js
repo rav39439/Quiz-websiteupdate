@@ -1487,7 +1487,10 @@ function middle1(req, res, next) {
     })
 
 }
+app.get('/deleteAcc', async (req, res) => {
+res.render('deleteacc.ejs')
 
+})
 app.get('/deleteAccount', async (req, res) => {
     console.log(req.session.uid)
     if(req.session.uid){
