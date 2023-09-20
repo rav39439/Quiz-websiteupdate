@@ -11,11 +11,31 @@ const projectId = process.env.projectId;
 const storageBucket = process.env.storageBucket;
 const messagingSenderId = process.env.messagingSenderId;
 const appId = process.env.appId;
+
+const serviceAct = {
+    "type": "service_account",
+    "project_id": "mynewproject-ae49a",
+    "private_key_id": "6b83b2488c6260290e1d2f59d6600321265eb2fc",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDkR48AC1bE5TVZ\n17k9zzhugOtjiYDYHzlmk/ndxMFOTHgYAG49ryH3AsBo7T8lcvnPR5mek+SxF7BJ\nwWg59UaPxFUQlxJ32cneGERgJjMR3b9zDEhdy+YGvSH1PODKx0yj2ysY/xQRRMRO\n+80HC/uGBJQueER8FdFonnOfVKtCEquvQwqTUf5+XOnJU+q8X7pzZluCQPf8QgUr\naIJcEy8r9fsxD+lBArDCA6gutiw1x4Ee/2FoRn8aXnJeWAOTNWBE56w/9KNNs/cJ\nkBfTNmNPuCZiTqhp8BUnWwAOzO5sBMNZvcGuya8Wdd1s1fMcrGlJwOeA4J3CBnQM\naL+BalGnAgMBAAECggEADeqm4ckkgwsOKOn+gFwlA+eWx2dXPtW4eXPFTysdixkd\nASmVjuvMVZ4J/jDodpn/Ig8quFYqd6QKupRbNvKoWJS5iDINjYJDd5IMfmgVw528\nfCu1hbJWgEwAyU3qzlyUDtvfpr3Lirn3KxwtWvlKCNjinRVL54dU+txzZAqUs4mz\ns06SkUVbQPd7b1QhMKcSwZImYqkcjCqlEqJ3qwhKK9b8fzUFKlH3YCdisKDIgBHs\n6WjiL6mOfnyZBUcv5F+y6b+so6ulMJs2LjIbN6PE5vllFl5fPWeNDmUZDBUgE9ug\nDjHiJ67FhzZUsl7vD9/BxertDMI3jD9JoZrugQSk4QKBgQD3im1Y4tHCWmPmJ/6K\nattza2VQRUKlBpiIKnjeJH5yLsuqVuM86uleNxGX/xaUOS7uag+9E2OS2y9kknE5\ntVVZrv1WvwH8XNBDK3rkyLELCF9BOUR4362k5yF7oZHmJh6QzOkwHUC3V2TKvHHx\n0V0sUtPG5J+VJ3lngHGq9ZmtmQKBgQDsFKCw40uz5ZooZl6yqx56rU010UB//IF4\nDU+FR5o22c6q1/EEX+TX5V7O3yL1x7p4Q+DuPScLrvIWF2k2ZQ5rN+bDf3ot3cT7\nU9V2FF4uii32DGliFohV+9NgCsIMhj/SfgL6otx8gqHCdxa5eotR9Y6pc5eZrpL+\nkF8hcyMBPwKBgD2vHf53TwPaWGiC8Nf3NsY1LeLpz2imEx5jTwk0GNpFNPU2f5uv\nggW7PUQeCbdX5Iz+mvtnuHlg6xdpspNJz4HwrCqQoGMNkcwbKp2WMR/pryrmpVxl\niLS978cKBPxP5W/5z+XwdC77tR8cBFzY6hngbetzDx0w3/zdsfWDDA+JAoGAU8RF\n+D3OYLi5aFhahZ7+I51WZiAneMJJ1iUy8CGl8Ix8LlaM6HZ2Jrz2VQULzJXf7kh3\niVEdh6G9uGT6KhjVcunU8c1LtvaXrG3ksg8sE+tnv4RL6EgCfC/soolurS79elzI\nBdK/1VYsu2myIIIA6UXuJuYjBp7Q/Y6Qkrfd1dUCgYEA7AoXm2wHaD3N5+L5tE0H\nxyVgdRAIXvYulAQOZhSG6uzon544+N/XbC0hUsbduoiW/yI35AIWMAIr3rcp8QV+\nWsDuVFxv6CXOqDIvL/QM97gWZp+IrFjurAunpkD4sqQO/a0TaZsTaM/Is0HwviqR\n1PbIo8oPch/oCdsGpGPsHQk=\n-----END PRIVATE KEY-----\n",
+    "client_email": "rav67584935@mynewproject-ae49a.iam.gserviceaccount.com",
+    "client_id": "118295374918634587385",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rav67584935%40mynewproject-ae49a.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+}
+// const admin1 = require('firebase-admin');
+// admin1.initializeApp({
+//     credential: admin1.credential.cert(serviceAct)
+//   });
+// console.log("this is firebase admmin")
+//   console.log(admin1)
 const measurmentId = process.env.measurmentId;
 const APIKEY = process.env.APIKEY;
 
 
-console.log(APIKEY, authdomain, projectId, storageBucket, messagingSenderId, appId, measurmentId)
+// console.log(APIKEY, authdomain, projectId, storageBucket, messagingSenderId, appId, measurmentId)
 var firebaseConfig = {
     apiKey: APIKEY,
     authDomain: authdomain,
@@ -28,17 +48,24 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-let database = firebase.database()
 
 
+
+
+//------------test-----------------------//
+const collectionName = 'articles';
+const documentId = 'Physics';
+
+// Get a reference to the document
+// const docRef = database.ref(`${collectionName}/${documentId}`);
+
+// Retrieve the document data
+
+
+//---------------------------------------//
 const app = express()
 var ObjectId = require("mongodb").ObjectId
 const DATABASE = process.env.DATABASE;
-
-
-
-
-
 // Now you can use Firebase services
 const PASSKEY = process.env.PASSKEY;
 const date = require('date-and-time')
@@ -81,19 +108,18 @@ app.use(session({
     cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }))
 const admin = require('firebase-admin');
-console.log(process.env.private_key)
-console.log(process.env.client_email)
-serviceAccount={
-    type:process.env.type,
+
+serviceAccount = {
+    type: process.env.type,
     project_id: process.env.project_id,
     private_key_id: process.env.private_key_id,
-    private_key:"-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDXB28gjePCkYxz\nsJZjEptXobG601arolRsKJJ6bZUCF2ADs0Zaq+SylnnLfdaX7gUZ8lSrsk6ff3al\nt3yxSgnfI4T8UhRbW5hj5Ps4tlEqZcH0k2JYfwLGwzoV68XJqkmC8fob7F9784lL\n30wrwMdX+3etqsTuDSermybVDpSeHaeyFJ7Iy/ovuVQdPNckrtzXM2/8UBQM9pdL\neQc840GCznF1/NCR4T4UyKaZOc+DAdBX/6SfUB95wF8OBZ65DzTSakg6JeVlzaKo\n5AR240QEMaifW4En2yB7R5lJPgtEw7DsmpAx1h6CzMe1LDVKsHf4/jPKnjeAsd9w\nj9Zu88Y7AgMBAAECggEAZ2ld2kwiwwn4gBLm4FKsfqJ2tSC6R+TTsQh6GYLl7JGN\nTXpEVYrhe7m+bUzhjUOdFHNkoQYppa9JQj1SLHks8jFE3Ywj2iPcz/3pi8ayli9F\n7feLjn/Wt/xfzPcMsgXBQMZawF8XNKdU2jZTjZ8yv29iiRTdjJarA26kaEaQ1tEO\ndInD4q45exa+sLOSe2OaHTIBNb2VQEhMoCMEh1DcvOlQG95qvNQJYaa82+ppkhFE\nHQIfOiUyyekbuaGFybfpuo1FfIFvlhdgXUKe1WhccveAN9Yzq5SHS1O5B2dBG5+H\n1kVl4UhNB0FCWj29ZTg5Hg5HPYvEJVQQ/JfmtojXUQKBgQDx20Nsi3MNzVoTsC97\no7Gn3DolpQorlNHCjt9O7uomXWP0tQI1Y0Hp37AOmBG5xi5K+al2VTYV+y4E/HpZ\n/T1f2UGZAPWZmzN14FQcX8VF59Q90H/EqiTDzeyIe0oCn4YgJvGMOOr519ffTZPU\nYPqVlrXCcDQZiJkJZ17hnx27dQKBgQDjmowvdUsMkhCMRuQq5FdFgs+WRUilN6f3\ni6h7H9fWI/xr2YlgNCv5Ra5RH6ddvxPVC+SYl67QiBNevbHvgQQtvyhDBPRaOHUN\nWEVXvWNXpAZR4Lld1cXu/oWsLP+lAnrUH8q8/mhjIdlkfFKcT9wz6eouO0gSGgOi\nWy/sGeY07wKBgG1AAoDxrRM7A8mI+Kn9E68jyBBhMOrm2qnsJ+tb+OFDpndPnKPJ\nJmki5kBxaPBmGVs809PkQf5D7FHMSuiDgEnftcYLrOWqOeCxaM04ZcBiLHmPyWdp\nBBp+1q4AIzp0HP5BGTOiMmKRoa35OSHifM89uPUQAjjWf2rECxQX8DJRAoGBANMh\nuE0F51p/3G3kDSBktTg8AkkJeDwbBusxWFbu0Q9KTovVPgRKIUiZBP0n+d+Sstj8\nsU+D1ZyHvkAyg+8CpVeybazN2cYffSWl7p1Xh+HyvBIT/qA2/+eVn3Z6P6NYS4ye\n+TicX0UmTz1RvmhWBJT7tkqwn0h7bUecgzXnSI9tAoGAfjDVvuSPLhDgfMi0P9iM\nuFesBV2wyE0XfP4pn30C45hpRlSdLGBQiWSycTKjl9Lg3jz2CSGXbp/cT1QUDb+K\nreyiVevnS4G5kmVFa737mi0VRtaOqiCqITwjA+DJXncn5f8LBYEqQ09N3GWJ7gt9\nrS196gIcwy1yG1lWiXE5MRM=\n-----END PRIVATE KEY-----\n",
+    private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDXB28gjePCkYxz\nsJZjEptXobG601arolRsKJJ6bZUCF2ADs0Zaq+SylnnLfdaX7gUZ8lSrsk6ff3al\nt3yxSgnfI4T8UhRbW5hj5Ps4tlEqZcH0k2JYfwLGwzoV68XJqkmC8fob7F9784lL\n30wrwMdX+3etqsTuDSermybVDpSeHaeyFJ7Iy/ovuVQdPNckrtzXM2/8UBQM9pdL\neQc840GCznF1/NCR4T4UyKaZOc+DAdBX/6SfUB95wF8OBZ65DzTSakg6JeVlzaKo\n5AR240QEMaifW4En2yB7R5lJPgtEw7DsmpAx1h6CzMe1LDVKsHf4/jPKnjeAsd9w\nj9Zu88Y7AgMBAAECggEAZ2ld2kwiwwn4gBLm4FKsfqJ2tSC6R+TTsQh6GYLl7JGN\nTXpEVYrhe7m+bUzhjUOdFHNkoQYppa9JQj1SLHks8jFE3Ywj2iPcz/3pi8ayli9F\n7feLjn/Wt/xfzPcMsgXBQMZawF8XNKdU2jZTjZ8yv29iiRTdjJarA26kaEaQ1tEO\ndInD4q45exa+sLOSe2OaHTIBNb2VQEhMoCMEh1DcvOlQG95qvNQJYaa82+ppkhFE\nHQIfOiUyyekbuaGFybfpuo1FfIFvlhdgXUKe1WhccveAN9Yzq5SHS1O5B2dBG5+H\n1kVl4UhNB0FCWj29ZTg5Hg5HPYvEJVQQ/JfmtojXUQKBgQDx20Nsi3MNzVoTsC97\no7Gn3DolpQorlNHCjt9O7uomXWP0tQI1Y0Hp37AOmBG5xi5K+al2VTYV+y4E/HpZ\n/T1f2UGZAPWZmzN14FQcX8VF59Q90H/EqiTDzeyIe0oCn4YgJvGMOOr519ffTZPU\nYPqVlrXCcDQZiJkJZ17hnx27dQKBgQDjmowvdUsMkhCMRuQq5FdFgs+WRUilN6f3\ni6h7H9fWI/xr2YlgNCv5Ra5RH6ddvxPVC+SYl67QiBNevbHvgQQtvyhDBPRaOHUN\nWEVXvWNXpAZR4Lld1cXu/oWsLP+lAnrUH8q8/mhjIdlkfFKcT9wz6eouO0gSGgOi\nWy/sGeY07wKBgG1AAoDxrRM7A8mI+Kn9E68jyBBhMOrm2qnsJ+tb+OFDpndPnKPJ\nJmki5kBxaPBmGVs809PkQf5D7FHMSuiDgEnftcYLrOWqOeCxaM04ZcBiLHmPyWdp\nBBp+1q4AIzp0HP5BGTOiMmKRoa35OSHifM89uPUQAjjWf2rECxQX8DJRAoGBANMh\nuE0F51p/3G3kDSBktTg8AkkJeDwbBusxWFbu0Q9KTovVPgRKIUiZBP0n+d+Sstj8\nsU+D1ZyHvkAyg+8CpVeybazN2cYffSWl7p1Xh+HyvBIT/qA2/+eVn3Z6P6NYS4ye\n+TicX0UmTz1RvmhWBJT7tkqwn0h7bUecgzXnSI9tAoGAfjDVvuSPLhDgfMi0P9iM\nuFesBV2wyE0XfP4pn30C45hpRlSdLGBQiWSycTKjl9Lg3jz2CSGXbp/cT1QUDb+K\nreyiVevnS4G5kmVFa737mi0VRtaOqiCqITwjA+DJXncn5f8LBYEqQ09N3GWJ7gt9\nrS196gIcwy1yG1lWiXE5MRM=\n-----END PRIVATE KEY-----\n",
     client_email: process.env.client_email,
     client_id: process.env.client_id,
-     auth_uri: process.env.auth_uri,
+    auth_uri: process.env.auth_uri,
     token_uri: process.env.token_uri,
-     auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
-     client_x509_cert_url: process.env.client_x509_cert_url
+    auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
+    client_x509_cert_url: process.env.client_x509_cert_url
 }
 
 
@@ -103,17 +129,340 @@ admin.initializeApp({
     databaseURL: 'https://mynewproject.firebaseio.com'
 });
 
+app.use(async (req, res, next) => {
+    try {
+        const collectionName = 'articles';
+        let db = firebase.firestore()
+        let topicnames = []
+        db.collection(collectionName)
+            .get()
+            .then((querySnapshot) => {
+                const articles = [];
+                querySnapshot.forEach((doc) => {
+                    articles.push(doc.data());
+                });
+
+                let refinedArticles = fetchdata(articles)
+                res.locals.articles = refinedArticles
+                topicnames = refinedArticles.map(d => ({ topic: d.topicName, subject: d.Subject, class: d.class }))
+                res.locals.subjects = topicnames;
+                if (req.body) {
+                    //     if(req.body.topic='default'){
+                    //         req.locals.topic=req.body.topic
+                    //        }
+                    //        else if(req.body.grade!='default'){
+                    //         req.locals.grade=req.body.grade
+                    //        }
+                    //        else if(req.body.grade!='default' && req.body.topic!='default'){
+                    //         req.locals.grade=req.body.grade
+                    //         req.locals.topic=req.body.topic
+
+                    //        }
+                    //        else{
+                    //         req.locals.grade=''
+                    //         req.locals.topic=''
+                    //        }
+                    //    }else{
+                    //     req.locals.grade=''
+                    //     req.locals.topic=''
+                }
+
+            })
+        // Attach data to res.locals to make it available in all routes
+        next();
+    } catch (err) {
+        console.error('Error fetching data from the database:', err);
+        next(err);
+    }
+});
+
+
+function removeDuplicates(arr) {
+    return arr.filter((value, index, self) => self.indexOf(value) === index);
+}
+
+
+app.get('/articles', function (req, res) {
+    const collectionName = 'articles';
+    let db = firebase.firestore()
+    db.collection(collectionName)
+        .get()
+        .then((querySnapshot) => {
+            const articles = [];
+            querySnapshot.forEach((doc) => {
+                articles.push(doc.data());
+            });
+            let updatedarticles = fetchdata(articles)
+            let k='default'
+            let m='default'
+
+            res.render('allArticles.ejs', { articles: JSON.stringify(updatedarticles), allarticles: articles, goback: "All", alltopics: filterDuplicates(res.locals.subjects), alltop: JSON.stringify(res.locals.subjects), grade:JSON.stringify(k), topic:JSON.stringify(m)});
+        })
+        .catch((error) => {
+            console.log('Error getting documents:', error);
+        });
+})
+
+function filterDuplicates(d) {
+    let b = []
+    let m = []
+    d.forEach(e => {
+        let j = m.find(p => p == e.class)
+        if (!j) {
+            b.push(e)
+            m.push(e.class)
+        }
+
+    })
+    return b
+}
+
+
+function fetchdata(data) {
+    let d = []
+    data.forEach((e) => {
+        if (Object.keys(e).length != 0) {
+            let keys = Object.keys(e)
+            keys.forEach((key) => {
+                d.push(e[key])
+            })
+        }
+    })
+    return d
+}
+
+
+
+app.post('/getAll', (req, res) => {
+    const collectionName = 'articles';
+    let db = firebase.firestore()
+    db.collection(collectionName)
+        .get()
+        .then((querySnapshot) => {
+            const articles = [];
+            querySnapshot.forEach((doc) => {
+                articles.push(doc.data());
+            });
+
+            let refinedArticles = fetchdata(articles)
+            let topicnames = refinedArticles.map(d => d.topicName)
+            res.json({ alltopicnames: topicnames });
+        })
+        .catch((error) => {
+            console.log('Error getting documents:', error);
+        });
+})
+
+
+app.get('/goBack', (req, res) => {
+    let a = []
+    filter2 = req.session.grade
+    filter1 = req.session.topic
+    const collectionName = 'articles';
+    const documentId = req.query.data.trim();
+    let db = firebase.firestore()
+    if (documentId != 'All' && documentId != 'default') {
+        console.log("ddddddddddddddddddddd")
+        console.log(documentId)
+        let updateddata
+        const docRef = db.collection(collectionName).doc(documentId);
+        docRef.get()
+            .then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    a.push(data)
+                    let arraydata = fetchdata1(data)
+                    console.log("arraydata")
+                    console.log(arraydata)
+                    let refinedA = fetchdata1(data)
+                    if (filter2 != 'default' && filter1 != 'default') {
+                        updateddata = refinedA.filter(e => e.class == filter2 && e.topicName == filter1)
+                    }
+                    else if (filter2 != 'default') {
+                        updateddata = refinedA.filter(e => e.class == filter2)
+                    }
+                    else if (filter1 != 'default') {
+                        updateddata = refinedA.filter(e => e.topicName == filter1)
+                    }
+                    else {
+                        updateddata = refinedA
+                    }
+                    console.log("updated1")
+                    console.log(updateddata)
+                    res.render('allArticles.ejs', {
+                        articles: JSON.stringify(updateddata), allarticles: updateddata, goback: documentId, alltopics: res.locals.subjects, alltop: JSON.stringify(res.locals.subjects)
+                        , grade: JSON.stringify(req.session.grade), topic: JSON.stringify(req.session.topic)
+                    })
+                } else {
+                    console.log('Document not found!');
+                }
+            })
+            .catch((error) => {
+                console.log('Error getting document:', error);
+            });
+    } else {
+        console.log("ssssssssssssssssssssssssssssss")
+        let updateddata
+        db.collection(collectionName)
+            .get()
+            .then((querySnapshot) => {
+                const articles = [];
+                querySnapshot.forEach((doc) => {
+                    articles.push(doc.data());
+                });
+
+                let refinedA = fetchdata(articles)
+                if (filter2 != 'default' && filter1 != 'default') {
+                    updateddata = refinedA.filter(e => e.class == filter2 && e.topicName == filter1)
+                }
+                else if (filter2 != 'default') {
+                    updateddata = refinedA.filter(e => e.class == filter2)
+
+                }
+                else if (filter1 != 'default') {
+                    updateddata = refinedA.filter(e => e.topicName == filter1)
+                }
+                else {
+                    updateddata = refinedA
+                }
+                console.log("updated")
+                console.log(updateddata)
+
+                res.render('allArticles.ejs', {
+                    articles: JSON.stringify(updateddata), allarticles: updateddata, goback: documentId, alltopics: res.locals.subjects, alltop: JSON.stringify(res.locals.subjects)
+                    , grade: JSON.stringify(req.session.grade), topic: JSON.stringify(req.session.topic)
+                })
+            })
+            .catch((error) => {
+                console.log('Error getting documents:', error);
+            });
+    }
+
+
+})
+
+
+
+function fetchdata1(data) {
+    let d = []
+    // data.forEach((e) => {
+    for (const e in data) {
+        // if (Object.keys(e).length != 0) {
+        //    let keys = Object.keys(e)
+        // console.log(e)
+        //   keys.forEach((key) => {
+        d.push(data[e])
+        //  })
+        //   }
+    }
+    return d
+}
+
+app.post('/docdata', function (req, res) {
+    const collectionName = 'articles';
+    const documentId = req.body.subject;
+    let filter1 = req.body.topic
+    let filter2 = req.body.grade
+    req.session.topic = filter1
+    req.session.grade = filter2
+    req.session.subject = documentId
+
+    let db = firebase.firestore()
+
+    if (documentId != "All" && documentId != 'default') {
+        console.log("not all")
+        let updateddata
+        const docRef = db.collection(collectionName).doc(documentId);
+        docRef.get()
+            .then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    let filterdupdate = fetchdata1(data)
+                    if (filter2 != 'default' && filter1 != 'default') {
+                        updateddata = filterdupdate.filter(e => e.class == filter2 && e.topicName == filter1)
+                    }
+                    else if (filter2 != 'default') {
+                        updateddata = filterdupdate.filter(e => e.class == filter2)
+
+                    }
+                    else if (filter1 != 'default') {
+                        updateddata = filterdupdate.filter(e => e.topicName == filter1)
+
+                    }
+                    else {
+                        updateddata = filterdupdate
+                    }
+
+                    res.json({
+                        articles: data,
+                        topics: res.locals.subjects,
+                        sendata: updateddata
+                    })
+                } else {
+                    console.log('Document not found!');
+                }
+            })
+            .catch((error) => {
+                console.log('Error getting document:', error);
+            });
+
+    } else if (documentId == "All" || documentId == 'default') {
+        db.collection(collectionName)
+            .get()
+            .then((querySnapshot) => {
+                const articles = [];
+                querySnapshot.forEach((doc) => {
+                    articles.push(doc.data());
+                });
+
+                let filterdupdate = fetchdata(articles)
+                if (filter2 != 'default' && filter1 != 'default') {
+                    updateddata = filterdupdate.filter(e => e.class == filter2 && e.topicName == filter1)
+                }
+                else if (filter2 != 'default') {
+                    updateddata = filterdupdate.filter(e => e.class == filter2)
+
+                }
+                else if (filter1 != 'default') {
+                    updateddata = filterdupdate.filter(e => e.topicName == filter1)
+
+                }
+                else {
+                    updateddata = filterdupdate
+                }
+                res.json({
+                    sendata: updateddata,
+                    topics: res.locals.subjects
+                })
+            })
+            .catch((error) => {
+                console.log('Error getting documents:', error);
+            });
+    }
+    else {
+        console.log("its a select")
+        console.log(documentId)
+    }
+})
+
+app.post('/fetchPage', function (req, res) {
+    // console.log("fetchinggggggg")
+    res.json({ articledata: req.body.articlevalue })
+})
+
+
 app.set("view engine", "hbs")
 app.set("view engine", "ejs")
+//app.get('public', express.static('public'));
+app.use(express.static('public'));
+
 app.set("views", setpath)
-app.get('/public', express.static('public'));
 app.get('/myhome', function (req, res) {
 })
 
 app.get('/', function (req, res) {
     const value = date.format((new Date(Date.now())),
         'DD/MM/YYYY');
-    console.log(value)
     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
         var blog = client.db("blog")
         blog.collection("studymaterial").find({ type: "Government Exams" }).toArray(function (error, materials) {
@@ -227,8 +576,8 @@ app.post('/login', (req, res) => {
                 })
             }
             else {
-                req.session.uid=val.user.uid
-          
+                req.session.uid = val.user.uid
+
                 MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
                     var blog = client.db("blog")
                     blog.collection("users").updateOne({
@@ -243,7 +592,7 @@ app.post('/login', (req, res) => {
                         'email': req.body.email
                     }, function (error, user) {
                         req.session.email = user.email
-                        req.session.uid=val.user.uid
+                        req.session.uid = val.user.uid
                         console.log("user is found")
                         req.session.username = user.username
                         if (req.body.password == PASSKEY) {
@@ -380,7 +729,7 @@ app.post("/newquiz4", (req, res) => {
             var blog = client.db("blog")
             blog.collection("Quizzes").findOne({ "quizname": quizname }, function (error, quiz) {
                 let user = quiz?.quizattempters.find(data => data.name == name)
-                res.render("resultfile.ejs", { name: name, rank: rank, percentile: percentile, usedata: JSON.stringify(quiz.quizquestions), responses: JSON.stringify(user), quizname: quizname,attemmarks:marks })
+                res.render("resultfile.ejs", { name: name, rank: rank, percentile: percentile, usedata: JSON.stringify(quiz.quizquestions), responses: JSON.stringify(user), quizname: quizname, attemmarks: marks })
             })
         })
     })
@@ -502,7 +851,7 @@ app.get('/ExamFilter1', (req, res) => {
             ).sort({ _id: 1 }).toArray(function (error, quizzes) {
                 res.render("nexams1.ejs", {
                     quizdata: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
-                    , examname: req.query.exam, test: req.query.test,message:req.query.message
+                    , examname: req.query.exam, test: req.query.test, message: req.query.message
                 })
             })
         })
@@ -677,11 +1026,11 @@ app.post("/newresultmulti", (req, res) => {
                 let studentposition = quiz?.quizattempters?.findIndex(data => data?.marks == userresponses?.marks)
                 let remaining = quiz?.quizattempters?.length - studentranks[studentposition] + 1
                 let percentitle = (remaining / quiz?.quizattempters.length) * 100
-               let attempter= quiz?.quizattempters.find(elem=>elem?.name==req.body.name)
-               let attemptermarks=attempter?.marks
+                let attempter = quiz?.quizattempters.find(elem => elem?.name == req.body.name)
+                let attemptermarks = attempter?.marks
                 if (responseuser) {
                     res.render("resultfile.ejs", {
-                        usedata: JSON.stringify(quiz?.quizquestions), name: req.body.name,attemmarks:attemptermarks, mydata: quiz?.quizattempters, responses: JSON.stringify(userresponses), quizname: req.body.myquiz, ranks: studentranks, rank: studentranks[studentposition]
+                        usedata: JSON.stringify(quiz?.quizquestions), name: req.body.name, attemmarks: attemptermarks, mydata: quiz?.quizattempters, responses: JSON.stringify(userresponses), quizname: req.body.myquiz, ranks: studentranks, rank: studentranks[studentposition]
                         , percentile: percentitle
                     })
                 }
@@ -844,7 +1193,7 @@ app.post("/newquiz4result", function (req, res) {
                     name: req.body.studentname,
                     answers: g,
                     marks: req.body.marks,
-                    email:req.session.email,
+                    email: req.session.email,
                     rank: ""
                 }
             }
@@ -953,7 +1302,7 @@ app.post("/EditstudyMaterial", function (req, res) {
                 "filedata": req.body.filedata,
                 "topic": req.body.topic,
                 "details": req.body.details,
-                "previewimg":req.body.previewimg
+                "previewimg": req.body.previewimg
             }
         }, function (err, data) {
             res.json({
@@ -1446,14 +1795,14 @@ function middle(req, res, next) {
         var blog = client.db("blog")
         blog.collection("users").findOne({
             // $or: [
-               // {
-                    "username": req.body.username,
+            // {
+            "username": req.body.username,
 
-              //  },
-                // {
-                //     "email": req.body.email,
+            //  },
+            // {
+            //     "email": req.body.email,
 
-                // }
+            // }
             //]
         }, function (error, data) {
             if (data) {
@@ -1491,37 +1840,37 @@ function middle1(req, res, next) {
 
 }
 app.get('/deleteAcc', async (req, res) => {
-res.render('deleteacc.ejs')
+    res.render('deleteacc.ejs')
 
 })
 app.get('/deleteAccount', async (req, res) => {
     console.log(req.session.uid)
-    if(req.session.uid){
-    admin.auth().deleteUser(req.session.uid)
-    .then(() => {
-        console.log(`Successfully deleted user with UID: ${req.session.uid}`);
-        MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
-            var blog = client.db("blog")
-        blog.collection("users").deleteOne({
-                    "email": req.session.email,
-        }, function (error, data) {
-            res.json({
-                message:"Your account has been successfully deleted"
+    if (req.session.uid) {
+        admin.auth().deleteUser(req.session.uid)
+            .then(() => {
+                console.log(`Successfully deleted user with UID: ${req.session.uid}`);
+                MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
+                    var blog = client.db("blog")
+                    blog.collection("users").deleteOne({
+                        "email": req.session.email,
+                    }, function (error, data) {
+                        res.json({
+                            message: "Your account has been successfully deleted"
+                        })
+                    })
+                    req.session.destroy()
+                })
             })
-        })
-        req.session.destroy()
-      })
-    })
-      .catch((error) => {
-        console.error(`Error deleting user with UID: ${req.session.uid}`, error);
-      });
+            .catch((error) => {
+                console.error(`Error deleting user with UID: ${req.session.uid}`, error);
+            });
     }
-    else{
+    else {
         res.send("No user has logged in")
     }
 })
 
-app.post('/register',middle, async (req, res) => {
+app.post('/register', middle, async (req, res) => {
     console.log(req.body)
     firebase.auth().createUserWithEmailAndPassword(req.body.email, req.body.password)
         .then(function (val) {
@@ -1642,6 +1991,10 @@ app.get("/RegisteredUsers", function (req, res) {
             res.render('RegisteredUsers.ejs', { users: users })
         })
     })
+})
+
+app.get("/textnotes", function (req, res) {
+    res.render("textnotes.ejs")
 })
 
 const PORT = process.env.PORT

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<style>
+    #text-written {
+        width: 20%;
+        border: 1px;
+        height: 100%;
+
+    }
+
+    #card11 {
+        height: 200px;
+        width: 300px;
+        border: 1 px solid;
+        border-radius: 12px;
+        background-color: rgb(226, 226, 241);
+    }
+
+    p {
+        margin-left: 12px;
+    }
+</style>
+
+<%- include('../partials/heading.hbs') %>
+
+    <body>
+     
+        <div id="majordata" style="width: 100%;">
+            <div id="ndata" style="display: none;">
+                <%=articles%>
+            </div>
+         
+            <div id="goBack" style="display: none;">
+                <%=goback%>
+            </div>
+            <div id="gr" style="display: none;">
+                <%=grade%>
+            </div>
+            <div id="tp" style="display: none;">
+                <%=topic%>
+            </div>
+            <div id="alltopics" style="display: none;">
+                <%=alltop%>
+            </div>
+            <div style="width: 100%; ">
+                <div class="container " style="width: 60%;  margin-bottom:40px; border-radius:12px;">
+                    <div style="display:grid; grid-template-columns: 60% 20% 20%; gap: 30px;">
+                    <select name="grade" style=" border-radius:10px;" id="grade" class="form-control"
+                    onchange="getTopic(event)">
+                    <option value="default" selected>---select your level----</option>
+                    <option value="8">class 8</option>
+                    <option value="5">class 5</option>
+                    <option value="9">class 9</option>
+                    <option value="10">class 10</option>
+                    <option value="11">class 11</option>
+                </select>
+
+                    <select name="Subjects" style=" border-radius:10px;" id="Subject" class="form-control"
+                        onchange="getTopic(event)">
+                        <option value="default" selected>---select a subject---</option>
+
+                        <option value="All">All</option>
+
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Technology">Technology</option>
+                    </select>
+
+                   
+                    <select name="topicnames" style=" border-radius:10px;" id="topicnames" class="form-control"
+                        onchange="getTopic(event)">
+                        <option value="default" selected>---select your topic ----</option>
+
+                        <% alltopics.forEach(function(elem,index){%>
+                            <option value="<%= elem.topic %>">
+                                <%= elem.topic %>
+                            </option>
+
+                            <%}) %>
+                    </select>
+                </div>
+
+                </div>
+                <div id="articles" class=""
+                    style="width: 100%; display: grid; grid-template-columns: 32% 32% 32%; gap: 15px; margin-left:20px ;">
+
+                </div>
+            </div>
+        </div>
+    </body>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        let globalLength
+        let updatedData
+        let keys
+        let goBackData
+        let updateOnRefresh
+        let allArticlesData
+        let lastSavedTopic
+        let lastSavedGrade
+        gi()
+
+        getAlldata()
+        function gi() {
+            let goback = document.getElementById('goBack').innerText
+            let timeago
+            let html = ``
+            let topicDetailsWords = ''
+            goBackData = goback
+            let updated = []
+
+if(document.getElementById('gr')!=null){
+    let gr=JSON.parse((document.getElementById('gr').innerText).trim())
+    console.log(gr)
+    document.getElementById('grade').value=gr
+
+}
+if(document.getElementById('tp')!=null){
+    let tp=JSON.parse((document.getElementById('tp').innerText).trim())
+    console.log(tp)
+
+    document.getElementById('topicnames').value=tp
+
+}
+            let updatedOptions = JSON.parse(document.getElementById('ndata').innerText)
+            if (goBackData.trim() != 'All') {
+              //  updated = updatedOptions.filter(e => e.subject == goBackData.trim())
+    
+                updateTopics(updatedOptions,document.getElementById('topicnames').value)
+            } else {
+                console.log('all')
+            }
+            let a = JSON.parse(document.getElementById('ndata').innerText)
+            //const data = fetchdata(a)
+            updatedData = a
+            let b = checkData(a)
+            if (b.length == 1) {
+                document.getElementById('Subject').value = b[0]
+            }
+            else {
+                //
+            }
+            console.log(a)
+
+            globalLength = a.length
+
+            a.forEach((article, index) => {
+                let rootdata = article
+                if (typeof (article.Topicdetails) != "undefined") {
+                    topicDetailsWords = article.Topicdetails.split(' ').slice(0, 20).join(' ');
+
+                }
+                else {
+                    topicDetailsWords = ''
+                }
+                if (article.time) {
+                    timeago = getTimeDifference(article.time)
+
+                }
+                else {
+                    timeago = ''
+                }
+
+                html += `
+
+    <a href="#" style="text-decoration:none;color:black" id=${index} >
+
+<div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative">
+      <div class="card-body" style="background-color: rgb(245, 245, 250); margin:20px;border-radius:15px">
+          <div style="display:flex;gap:0.75rem">
+      <div style="flex-shrink:0;width:50px;height:50px;border-radius:50%;overflow:hidden">
+          <img src="https://media.istockphoto.com/id/915681526/photo/bandra-worli-sea-link-mumbai.webp?b=1&s=612x612&w=0&k=20&c=rLQ4xR3AMjH-LhMuoT_DOCxiT9BlMoCmnZ4CCRAQByk=" alt="Your Image">
+          </div>
+  <div style="display:flex;flex-direction:column;margin-left:10px">
+      <p style="font-size:1rem;font-weight:500 ;margin-bottom:0px;padding-bottom:0px">Ravish Kumar</p>
+      <p style="font-size:0.875rem;color:#6b7280;text-align:left">${timeago}</p>
+      </div>
+      </div>
+      <div style="padding-top:5px">
+        <h5 class="card-title" style="text-align:left;margin-bottom:5px">${article.topicName}</h5>
+        <div class="card-text" style="text-align:left;margin-bottom:18px">${topicDetailsWords}</div>
+         <p style="text-align:left; font-size:12px;bottom:5; position:absolute">click to learn more</p>
+</div>
+      </div>
+    </div>
+  </a>
+    `
+            })
+            document.getElementById('articles').innerHTML = html
+            attachEventListeners()
+        }
+
+        function fetchdata(data) {
+            let d = []
+            data.forEach((e) => {
+                if (Object.keys(e).length != 0) {
+                    let keys = Object.keys(e)
+                    keys.forEach((key) => {
+                        d.push(e[key])
+                    })
+                }
+            })
+            return d
+        }
+
+        function fetchdata1(data) {
+            let d = []
+            // data.forEach((e) => {
+            for (const e in data) {
+                // if (Object.keys(e).length != 0) {
+                //    let keys = Object.keys(e)
+                // console.log(e)
+                //   keys.forEach((key) => {
+                d.push(data[e])
+                //  })
+                //   }
+            }
+            return d
+        }
+
+        function gettime(index, timedata) {
+            return (getTimeDifference(timedata))
+        }
+
+        function checkData(d) {
+            let mapped = d.map(e => e.Subject)
+            return removeDuplicates(mapped)
+        }
+
+        function getData(event) {
+            goBackData = event.target.value
+            console.log(event.target.value)
+            document.getElementById('articles').innerHTML = ``
+            $.ajax({
+                url: "/docdata",
+                method: "POST",
+                data: { subject: event.target.value },
+                success: function (response) {
+                    updatedData = response.articles
+                    if (typeof (response.articles.length) == 'undefined') {
+                        keys = Object.keys(response.articles)
+                        let allartilces = Object.keys(response.articles)
+                        let subject = event.target.value
+                        globalLength = allartilces.length
+
+                        let filterd = response.topics.filter(t => t.subject == event.target.value)
+                        updateTopics(filterd)
+                        allartilces.forEach((elem, index) => {
+                            let rootdata = response.articles[elem]
+                            let time = response.articles[elem]?.time
+                            let timeago = getTimeDifference(time)
+
+
+                            document.getElementById('articles').innerHTML +=
+                                `
+                            <a href="#" style="text-decoration:none;color:black" id=${index} >
+
+          <div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative">
+           
+                <div class="card-body" style="background-color: rgb(245, 245, 250); margin:20px;border-radius:15px">
+                    <div style="display:flex;gap:0.75rem">
+                <div style="flex-shrink:0;width:50px;height:50px;border-radius:50%;overflow:hidden">
+                    <img src="https://media.istockphoto.com/id/915681526/photo/bandra-worli-sea-link-mumbai.webp?b=1&s=612x612&w=0&k=20&c=rLQ4xR3AMjH-LhMuoT_DOCxiT9BlMoCmnZ4CCRAQByk=" alt="Your Image">
+                    </div>
+            <div style="display:flex;flex-direction:column;margin-left:10px">
+                <p style="font-size:1rem;font-weight:500 ;margin-bottom:0px;padding-bottom:0px">Ravish Kumar</p>
+                <p style="font-size:0.875rem;color:#6b7280;text-align:left">${timeago}</p>
+                </div>
+                </div>
+                <div style="padding-top:5px">
+                  <h5 class="card-title" style="text-align:left;margin-bottom:5px">${elem}</h5>
+                  <div class="card-text" style="text-align:left;margin-bottom:18px">${rootdata.Topicdetails}</div>
+                   <p style="text-align:left; font-size:12px;bottom:5; position:absolute">click to learn more</p>
+        </div>
+                </div>
+              </div>
+            </a>
+          `
+
+
+                        })
+                        attachEventListeners(); // Call the function to attach event listeners
+                    }
+                    else {
+                        let resdata=fetchdata(response.articles)
+                        updateTopics(resdata)
+                        useArr(response.articles)
+                    }
+                }
+            })
+
+        }
+
+        function updateTopics(alltopics,topic) {
+            // const selectElement = document.getElementById("grade");
+
+            // // Clear existing options
+            // selectElement.innerHTML = "";
+
+            // // Add new options based on the updated data
+            // const optiond = document.createElement("option");
+            // optiond.value = 'default'
+            // optiond.textContent = '-----select your level-----';
+            // //optiond.selected = true
+            // selectElement.appendChild(optiond);
+
+            // alltopics.forEach(function (elem, index) {
+            //     const option = document.createElement("option");
+            //     option.value = elem.class;
+            //     option.textContent = elem.class;
+            //     selectElement.appendChild(option);
+            // });
+            
+            const selectElement1 = document.getElementById("topicnames");
+
+            selectElement1.innerHTML = "";
+            const optiond1 = document.createElement("option");
+            optiond1.value = 'default'
+            optiond1.textContent = '-----select your topic-----';
+            // optiond1.selected = true
+            selectElement1.appendChild(optiond1);
+            if(alltopics.length>0){
+                alltopics.forEach(function (elem, index) {
+                const option1 = document.createElement("option");
+                option1.value = elem.topicName;
+                option1.textContent = elem.topicName;
+                selectElement1.appendChild(option1);
+            });
+            document.getElementById('topicnames').value=topic
+            }
+          
+
+        }
+
+        function attachEventListeners() {
+            let updata
+            for (let i = 0; i < globalLength; i++) {
+                document.getElementById(i).addEventListener('click', (event) => {
+                    if (typeof (updatedData.length) != 'undefined') {
+                        updata = updatedData[i]
+                    }
+                    else {
+                        updata = updatedData[i]
+
+                    }
+                    console.log(updata)
+                    $.ajax({
+                        url: "/fetchPage",
+                        method: "POST",
+                        data: { articlevalue: updata },
+                        success: function (response) {
+                            //goBackData = response.articledata.Subject
+
+                            //             document.getElementById('majordata').innerHTML =
+                            //                 `
+                            //     <div style="width:80%;text-align:center;margin-left:10px !important;margin-top:100px">
+
+                            //     ${response.articledata.Text}
+                            //     <button class="btn btn-primary" style=" border-radius:17px;">
+                            //     <a href="/goBack?data=${goBackData}" style="text-decoration:none;color:black" >Go Back</a></button>
+                            //  </div>
+                            //     `
+
+                            document.getElementById('majordata').innerHTML = `
+               
+                <div class="container  " style="width: 100%;  margin-bottom:40px;margin-top:20px">
+                    <button class="btn btn-primary" style=" border-radius:17px;">
+                     <a href="/goBack?data=${goBackData}" style="text-decoration:none;color:black" >
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+
+                        </a></button>
+            <div class="" style=" background-color: rgb(230, 230, 250);width: 100%;border-radius:16px" id="">
+                <h1> ${response.articledata.topicName}</h1>
+                <br>
+                     ${response.articledata.Text}
+                    
+            </div>
+        </div>              
+                `
+                        }
+                    })
+                });
+            }
+        }
+
+        function getTimeDifference(timestamp) {
+            const currentTime = Date.now();
+            const timeDifference = currentTime - timestamp;
+            // Convert milliseconds to seconds, minutes, hours, days, and years
+            const seconds = Math.floor(timeDifference / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            const years = Math.floor(days / 365);
+
+            if (years >= 1) {
+                return `${years} years ago`;
+            } else if (years === 1) {
+                return `1 year ago`;
+            } else if (days >= 1) {
+                return `${days} days ago`;
+            } else if (hours >= 1) {
+                return `${hours} hours ago`;
+            } else if (minutes >= 1) {
+                return `${minutes} mins ago`;
+            } else {
+                return `${seconds} seconds ago`;
+            }
+        }
+
+        function removeDuplicates(arr) {
+            return arr.filter((value, index, self) => self.indexOf(value) === index);
+        }
+
+        function useArr(d) {
+            let html = ``
+
+            const data = fetchdata(d)
+            updatedData = data
+            globalLength = data.length
+
+            data.forEach((article, index) => {
+                let rootdata = article
+                if (typeof (article.Topicdetails) != "undefined") {
+                    topicDetailsWords = article.Topicdetails.split(' ').slice(0, 20).join(' ');
+
+                }
+                else {
+                    topicDetailsWords = ''
+                }
+                if (article.time) {
+                    timeago = getTimeDifference(article.time)
+
+                }
+                else {
+                    timeago = ''
+                }
+
+                html += `
+
+    <a href="#" style="text-decoration:none;color:black" id=${index} >
+
+<div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative">
+ 
+      <div class="card-body" style="background-color: rgb(245, 245, 250); margin:20px;border-radius:15px">
+          <div style="display:flex;gap:0.75rem">
+      <div style="flex-shrink:0;width:50px;height:50px;border-radius:50%;overflow:hidden">
+          <img src="https://media.istockphoto.com/id/915681526/photo/bandra-worli-sea-link-mumbai.webp?b=1&s=612x612&w=0&k=20&c=rLQ4xR3AMjH-LhMuoT_DOCxiT9BlMoCmnZ4CCRAQByk=" alt="Your Image">
+          </div>
+  <div style="display:flex;flex-direction:column;margin-left:10px">
+      <p style="font-size:1rem;font-weight:500 ;margin-bottom:0px;padding-bottom:0px">Ravish Kumar</p>
+      <p style="font-size:0.875rem;color:#6b7280;text-align:left">${timeago}</p>
+      </div>
+      </div>
+      <div style="padding-top:5px">
+        <h5 class="card-title" style="text-align:left;margin-bottom:5px">${article.topicName}</h5>
+        <div class="card-text" style="text-align:left;margin-bottom:18px">${topicDetailsWords}</div>
+         <p style="text-align:left; font-size:12px;bottom:5; position:absolute">click to learn more</p>
+</div>
+      </div>
+    </div>
+  </a>
+    `            })
+            document.getElementById('articles').innerHTML = html
+            attachEventListeners()
+        }
+
+        function getAlldata() {
+            $.ajax({
+                url: "/getAll",
+                method: "POST",
+                // data: { subject: goBackData },
+                success: function (response) {
+                    // allArticlesData=fetchdata(response.allarticles)
+
+                    let d = ` <select name="Subjects" style=" border-radius:10px;" id="Subject" class="form-control"
+                        onchange="getData(event)">
+                        <option value="All">All</option>
+
+                        <option value="History">History</option>
+                        <option value="Geography">Geography</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Technology">Technology</option>
+                    </select>`
+
+                }
+            })
+        }
+
+        function getTopic(event) {
+          //  goBackData = event.target.value
+            lastSavedTopic=document.getElementById('topicnames').value
+            
+            lastSavedGrade=document.getElementById('grade').value
+            document.getElementById('articles').innerHTML = ``
+            $.ajax({
+                url: "/docdata",
+                method: "POST",
+                data: { grade: document.getElementById('grade').value, subject: document.getElementById('Subject').value,topic:document.getElementById('topicnames').value },
+                success: function (response) {
+                    updatedData = response.articles
+                    console.log(response.sendata)
+                    if (response.sendata.length>0) {
+                      //  keys = Object.keys(response.articles)
+                       // let allartilces = Object.keys(response.articles)
+                        let subject =document.getElementById('Subject').value
+                        goBackData = document.getElementById('Subject').value
+                        globalLength =  response.sendata.length
+                        let allarticlesmap = response.sendata
+                        updateTopics(allarticlesmap,document.getElementById('topicnames').value)
+                        updatedData=allarticlesmap
+
+                        //let filterallarticles = allarticlesmap.filter(t => t.class == event.target.value)
+                        allarticlesmap.forEach((article, index) => {
+                            
+                            if (typeof (article.Topicdetails) != "undefined") {
+                                topicDetailsWords = article.Topicdetails.split(' ').slice(0, 20).join(' ');
+                            }
+                            else {
+                                topicDetailsWords = ''
+                            }
+                            if (article.time) {
+                                timeago = getTimeDifference(article.time)
+
+                            }
+                            else {
+                                timeago = ''
+                            }
+
+                            document.getElementById('articles').innerHTML +=
+                                `
+                            <a href="#" style="text-decoration:none;color:black" id=${index} >
+
+          <div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative">
+           
+                <div class="card-body" style="background-color: rgb(245, 245, 250); margin:20px;border-radius:15px">
+                    <div style="display:flex;gap:0.75rem">
+                <div style="flex-shrink:0;width:50px;height:50px;border-radius:50%;overflow:hidden">
+                    <img src="https://media.istockphoto.com/id/915681526/photo/bandra-worli-sea-link-mumbai.webp?b=1&s=612x612&w=0&k=20&c=rLQ4xR3AMjH-LhMuoT_DOCxiT9BlMoCmnZ4CCRAQByk=" alt="Your Image">
+                    </div>
+            <div style="display:flex;flex-direction:column;margin-left:10px">
+                <p style="font-size:1rem;font-weight:500 ;margin-bottom:0px;padding-bottom:0px">Ravish Kumar</p>
+                <p style="font-size:0.875rem;color:#6b7280;text-align:left">${timeago}</p>
+                </div>
+                </div>
+                <div style="padding-top:5px">
+                  <h5 class="card-title" style="text-align:left;margin-bottom:5px">${article.topicName}</h5>
+                  <div class="card-text" style="text-align:left;margin-bottom:18px">${topicDetailsWords}</div>
+                   <p style="text-align:left; font-size:12px;bottom:5; position:absolute">click to learn more</p>
+        </div>
+                </div>
+              </div>
+            </a>
+          `
+                        })
+                       attachEventListeners(); // Call the function to attach event listeners
+                    }
+                    else {
+                        updateTopics(response.sendata,document.getElementById('topicnames').value)
+                        useArr(response.sendata)
+                    }
+                }
+            })
+        }
+
+
+        function filterDuplicates(d){
+    let b=[]
+    let m=[]
+    d.forEach(e=>{
+        let j=m.find(p=>p==e.class)
+        if(!j){
+            b.push(e)
+            m.push(e.class)
+        }
+
+    })
+    return b
+}
+
+
+
+// function getTopic1(event) {
+//             goBackData = event.target.value
+//             document.getElementById('articles').innerHTML = ``
+//             $.ajax({
+//                 url: "/docdata",
+//                 method: "POST",
+//                 data: { topic: event.target.value, subject: document.getElementById('Subject').value },
+//                 success: function (response) {
+//                     updatedData = response.articles
+//                     if (typeof (response.articles.length) == 'undefined') {
+//                         keys = Object.keys(response.articles)
+//                         let allartilces = Object.keys(response.articles)
+//                         let subject =document.getElementById('Subject').value
+//                         goBackData = document.getElementById('Subject').value
+//                         globalLength = allartilces.length
+//                         let allarticlesmap = fetchdata1(response.articles)
+//                         let filterallarticles = allarticlesmap.filter(t => t.topic == event.target.value)
+//                         filterallarticles.forEach((article, index) => {
+//                             if (typeof (article.Topicdetails) != "undefined") {
+//                                 topicDetailsWords = article.Topicdetails.split(' ').slice(0, 20).join(' ');
+
+//                             }
+//                             else {
+//                                 topicDetailsWords = ''
+//                             }
+//                             if (article.time) {
+//                                 timeago = getTimeDifference(article.time)
+
+//                             }
+//                             else {
+//                                 timeago = ''
+//                             }
+
+//                             document.getElementById('articles').innerHTML +=
+//                                 `
+//                             <a href="#" style="text-decoration:none;color:black" id=${index} >
+
+//           <div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative">
+           
+//                 <div class="card-body" style="background-color: rgb(245, 245, 250); margin:20px;border-radius:15px">
+//                     <div style="display:flex;gap:0.75rem">
+//                 <div style="flex-shrink:0;width:50px;height:50px;border-radius:50%;overflow:hidden">
+//                     <img src="https://media.istockphoto.com/id/915681526/photo/bandra-worli-sea-link-mumbai.webp?b=1&s=612x612&w=0&k=20&c=rLQ4xR3AMjH-LhMuoT_DOCxiT9BlMoCmnZ4CCRAQByk=" alt="Your Image">
+//                     </div>
+//             <div style="display:flex;flex-direction:column;margin-left:10px">
+//                 <p style="font-size:1rem;font-weight:500 ;margin-bottom:0px;padding-bottom:0px">Ravish Kumar</p>
+//                 <p style="font-size:0.875rem;color:#6b7280;text-align:left">${timeago}</p>
+//                 </div>
+//                 </div>
+//                 <div style="padding-top:5px">
+//                   <h5 class="card-title" style="text-align:left;margin-bottom:5px">${article.topicName}</h5>
+//                   <div class="card-text" style="text-align:left;margin-bottom:18px">${topicDetailsWords}</div>
+//                    <p style="text-align:left; font-size:12px;bottom:5; position:absolute">click to learn more</p>
+//         </div>
+//                 </div>
+//               </div>
+//             </a>
+//           `
+//                         })
+//                         attachEventListeners(); // Call the function to attach event listeners
+//                     }
+//                     else {
+//                         useArr(response.articles)
+//                     }
+//                 }
+//             })
+//         }
+  
+
+    </script>
+
+
+</html>
