@@ -262,7 +262,6 @@ app.get('/goBack', (req, res) => {
     const documentId = req.query.data.trim();
     let db = firebase.firestore()
     if (documentId != 'All' && documentId != 'default') {
-        console.log("ddddddddddddddddddddd")
         console.log(documentId)
         let updateddata
         const docRef = db.collection(collectionName).doc(documentId);
@@ -272,8 +271,7 @@ app.get('/goBack', (req, res) => {
                     const data = doc.data();
                     a.push(data)
                     let arraydata = fetchdata1(data)
-                    console.log("arraydata")
-                    console.log(arraydata)
+                   
                     let refinedA = fetchdata1(data)
                     if (filter2 != 'default' && filter1 != 'default') {
                         updateddata = refinedA.filter(e => e.class == filter2 && e.topicName == filter1)
@@ -287,8 +285,7 @@ app.get('/goBack', (req, res) => {
                     else {
                         updateddata = refinedA
                     }
-                    console.log("updated1")
-                    console.log(updateddata)
+                   
                     res.render('allArticles.ejs', {
                         articles: JSON.stringify(updateddata), allarticles: updateddata, goback: documentId, alltopics: res.locals.subjects, alltop: JSON.stringify(res.locals.subjects)
                         , grade: JSON.stringify(req.session.grade), topic: JSON.stringify(req.session.topic)
@@ -301,7 +298,12 @@ app.get('/goBack', (req, res) => {
                 console.log('Error getting document:', error);
             });
     } else {
-        console.log("ssssssssssssssssssssssssssssss")
+        if(!req.session.grade){
+            req.session.grade="default"
+        }
+        if(!req.session.topic){
+            req.session.topic="default"
+        }
         let updateddata
         db.collection(collectionName)
             .get()
@@ -325,8 +327,7 @@ app.get('/goBack', (req, res) => {
                 else {
                     updateddata = refinedA
                 }
-                console.log("updated")
-                console.log(updateddata)
+                
 
                 res.render('allArticles.ejs', {
                     articles: JSON.stringify(updateddata), allarticles: updateddata, goback: documentId, alltopics: res.locals.subjects, alltop: JSON.stringify(res.locals.subjects)

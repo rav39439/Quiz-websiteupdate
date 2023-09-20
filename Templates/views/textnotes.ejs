@@ -36,6 +36,20 @@
                         <option value="Technology">Technology</option>
                     </select>
                 </div> <br>
+                <div class="form-group">
+                    <label for="topic"
+                        style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Select
+                        a level</label>
+                <select name="grade" style=" border-radius:10px;" id="grade" class="form-control"
+               >
+                <option value="default" selected>---select your level----</option>
+                <option value="8">class 8</option>
+                <option value="5">class 5</option>
+                <option value="9">class 9</option>
+                <option value="10">class 10</option>
+                <option value="11">class 11</option>
+            </select>
+        </div> <br>
                 <div class="input-group-prepend">
                     <label for="topic"
                         style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
@@ -155,6 +169,8 @@
             let subject = document.getElementById('Subject').value
             let topic = document.getElementById('topic').value
             let topicdetails = document.getElementById('topicdetails').value
+            let grade1 = document.getElementById('grade').value
+
             const result = await InspectDocuments(subject)
             const db = firebase.firestore();
             const collectionRef = db.collection('articles').doc(subject);
@@ -165,7 +181,8 @@
                     Topicdetails: topicdetails,
                     Subject: subject,
                     time: currentTime,
-                    topicName: topic
+                    topicName: topic,
+                    class:grade1
                 }
 
             };
