@@ -136,7 +136,7 @@
             let timeago
             let html = ``
             let topicDetailsWords = ''
-            goBackData = goback
+            goBackData =JSON.parse((document.getElementById('goBack').innerText).trim())
             let updated = []
 
 if(document.getElementById('gr')!=null){
@@ -152,6 +152,14 @@ if(document.getElementById('tp')!=null){
     document.getElementById('topicnames').value=tp
 
 }
+
+if(document.getElementById('goBack')!=null){
+    let t=JSON.parse((document.getElementById('goBack').innerText).trim())
+    console.log(t)
+
+    document.getElementById('Subject').value=t
+
+}
             let updatedOptions = JSON.parse(document.getElementById('ndata').innerText)
             if (goBackData.trim() != 'All') {
               //  updated = updatedOptions.filter(e => e.subject == goBackData.trim())
@@ -164,13 +172,13 @@ if(document.getElementById('tp')!=null){
             //const data = fetchdata(a)
             updatedData = a
             let b = checkData(a)
-            if (b.length == 1) {
-                document.getElementById('Subject').value = b[0]
-            }
-            else {
-                //
-            }
-            console.log(a)
+            // if (b.length == 1) {
+            //     document.getElementById('Subject').value = b[0]
+            // }
+            // else {
+            //     //
+            // }
+            // console.log(a)
 
             globalLength = a.length
 

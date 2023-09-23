@@ -196,7 +196,9 @@ app.get('/articles', function (req, res) {
             let k='default'
             let m='default'
 
-            res.render('allArticles.ejs', { articles: JSON.stringify(updatedarticles), allarticles: articles, goback: "All", alltopics: filterDuplicates(res.locals.subjects), alltop: JSON.stringify(res.locals.subjects), grade:JSON.stringify(k), topic:JSON.stringify(m)});
+            let l='default'
+
+            res.render('allArticles.ejs', { articles: JSON.stringify(updatedarticles), allarticles: articles, goback: JSON.stringify(l), alltopics: filterDuplicates(res.locals.subjects), alltop: JSON.stringify(res.locals.subjects), grade:JSON.stringify(k), topic:JSON.stringify(m)});
         })
         .catch((error) => {
             console.log('Error getting documents:', error);
@@ -262,7 +264,6 @@ app.get('/goBack', (req, res) => {
     const documentId = req.query.data.trim();
     let db = firebase.firestore()
     if (documentId != 'All' && documentId != 'default') {
-        console.log(documentId)
         let updateddata
         const docRef = db.collection(collectionName).doc(documentId);
         docRef.get()
@@ -287,7 +288,7 @@ app.get('/goBack', (req, res) => {
                     }
                    
                     res.render('allArticles.ejs', {
-                        articles: JSON.stringify(updateddata), allarticles: updateddata, goback: documentId, alltopics: res.locals.subjects, alltop: JSON.stringify(res.locals.subjects)
+                        articles: JSON.stringify(updateddata), allarticles: updateddata, goback:JSON.stringify(documentId), alltopics: res.locals.subjects, alltop: JSON.stringify(res.locals.subjects)
                         , grade: JSON.stringify(req.session.grade), topic: JSON.stringify(req.session.topic)
                     })
                 } else {
@@ -298,6 +299,8 @@ app.get('/goBack', (req, res) => {
                 console.log('Error getting document:', error);
             });
     } else {
+        console.log("else part is running")
+        console.log(documentId)
         if(!req.session.grade){
             req.session.grade="default"
         }
@@ -327,10 +330,8 @@ app.get('/goBack', (req, res) => {
                 else {
                     updateddata = refinedA
                 }
-                
-
                 res.render('allArticles.ejs', {
-                    articles: JSON.stringify(updateddata), allarticles: updateddata, goback: documentId, alltopics: res.locals.subjects, alltop: JSON.stringify(res.locals.subjects)
+                    articles: JSON.stringify(updateddata), allarticles: updateddata, goback: JSON.stringify(documentId), alltopics: res.locals.subjects, alltop: JSON.stringify(res.locals.subjects)
                     , grade: JSON.stringify(req.session.grade), topic: JSON.stringify(req.session.topic)
                 })
             })
