@@ -18,17 +18,17 @@
 #mylogin{
   margin-left:200px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
   font-size:60px;
 }
     .new1{
+      font-family:Georgia, 'Times New Roman', Times, serif; background-color:rgb(201,216,244);
+      box-shadow: 0 1px #00000020, 0 1px 3px #0003; border-radius: 8px;
 text-align: center;
       border-radius:8px;
       width: 500px;
       height:auto;
-      margin-left:80px;
+      margin-left:20px;
       height:400px;
-      background-color:aliceblue;
       margin-top: 10px;
       border: solid;
     }
@@ -53,10 +53,16 @@ margin-top: 30px;
      margin-top: 20px;
    }
 
+   .sample {
+    display: flex;
+    justify-content: left; /* Horizontal centering */
+    height: 100%; /* This ensures full viewport height */
+  }
+
     @media only screen and (max-width: 500px) {
  
  .new1{
- 
+  font-family:Georgia, 'Times New Roman', Times, serif; background-color:rgb(201,216,244);box-shadow: 0 1px #00000020, 0 1px 3px #0003; border-radius: 8px;
      height: 400px;
     width:320px;
     margin-left:10px;
@@ -91,13 +97,15 @@ margin-top: 30px;
       <div class="alert alert-primary" id="message" role="alert"> </div>
       </div>
  
+      <div class="sample">
+
   
     <div class="new1">
 
-      <h1 style="color: red;">Login</h1>
+      <h1 style="padding:8px;  text-decoration:solid;">Login</h1>
 
 
-<div class="new2">
+<div class="new2" style="">
 <!-- <form action="/login" method="POST"> -->
   <form  method="POST" id="myform">
 
@@ -128,6 +136,7 @@ margin-top: 30px;
 <div class="quizenter">
 
 </div>
+      </div>
 
 <% if(typeof(username)!='undefined'){ %> 
   <div id="name"style="display:none"><%=username%> </div>

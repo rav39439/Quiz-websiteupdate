@@ -24,6 +24,14 @@
         background-color: rgb(226, 226, 241);
     }
 
+    .card:hover {
+
+        transform: scale(1.05); /* Increase the scale on hover */
+  transition: transform 0.2s ease; /* Add a smooth transition effect for scaling */
+  background-color: rgb(255, 255, 255); 
+ 
+}
+
     p {
         margin-left: 12px;
     }
@@ -50,7 +58,7 @@
             <div id="alltopics" style="display: none;">
                 <%=alltop%>
             </div>
-            <div style="width: 100%; ">
+            <div style="width: 100%; margin-top: 20px; ">
                 <div class="container " style="width: 60%;  margin-bottom:40px; border-radius:12px;">
                     <div style="display:grid; grid-template-columns: 60% 20% 20%; gap: 30px;">
                     <select name="grade" style=" border-radius:10px;" id="grade" class="form-control"
@@ -120,6 +128,10 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
+
+let currentPage = 0; // Keep track of the current page
+const pageSize = 10; // Define the number of HTML content items per page
+
         let globalLength
         let updatedData
         let keys
@@ -203,7 +215,7 @@ if(document.getElementById('goBack')!=null){
 
     <a href="#" style="text-decoration:none;color:black" id=${index} >
 
-<div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative">
+<div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative;height:300px">
       <div class="card-body" style="background-color: rgb(245, 245, 250); margin:20px;border-radius:15px">
           <div style="display:flex;gap:0.75rem">
       <div style="flex-shrink:0;width:50px;height:50px;border-radius:50%;overflow:hidden">
@@ -217,7 +229,6 @@ if(document.getElementById('goBack')!=null){
       <div style="padding-top:5px">
         <h5 class="card-title" style="text-align:left;margin-bottom:5px">${article.topicName}</h5>
         <div class="card-text" style="text-align:left;margin-bottom:18px">${topicDetailsWords}</div>
-         <p style="text-align:left; font-size:12px;bottom:5; position:absolute">click to learn more</p>
 </div>
       </div>
     </div>
@@ -293,7 +304,7 @@ if(document.getElementById('goBack')!=null){
                                 `
                             <a href="#" style="text-decoration:none;color:black" id=${index} >
 
-          <div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative">
+          <div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative;height:300px">
            
                 <div class="card-body" style="background-color: rgb(245, 245, 250); margin:20px;border-radius:15px">
                     <div style="display:flex;gap:0.75rem">
@@ -308,7 +319,6 @@ if(document.getElementById('goBack')!=null){
                 <div style="padding-top:5px">
                   <h5 class="card-title" style="text-align:left;margin-bottom:5px">${elem}</h5>
                   <div class="card-text" style="text-align:left;margin-bottom:18px">${rootdata.Topicdetails}</div>
-                   <p style="text-align:left; font-size:12px;bottom:5; position:absolute">click to learn more</p>
         </div>
                 </div>
               </div>
@@ -387,18 +397,7 @@ if(document.getElementById('goBack')!=null){
                         method: "POST",
                         data: { articlevalue: updata },
                         success: function (response) {
-                            //goBackData = response.articledata.Subject
-
-                            //             document.getElementById('majordata').innerHTML =
-                            //                 `
-                            //     <div style="width:80%;text-align:center;margin-left:10px !important;margin-top:100px">
-
-                            //     ${response.articledata.Text}
-                            //     <button class="btn btn-primary" style=" border-radius:17px;">
-                            //     <a href="/goBack?data=${goBackData}" style="text-decoration:none;color:black" >Go Back</a></button>
-                            //  </div>
-                            //     `
-
+                        
                             document.getElementById('majordata').innerHTML = `
                
                 <div class="container  " style="width: 100%;  margin-bottom:40px;margin-top:20px">
@@ -478,7 +477,7 @@ if(document.getElementById('goBack')!=null){
 
     <a href="#" style="text-decoration:none;color:black" id=${index} >
 
-<div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative">
+<div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative;height:300px">
  
       <div class="card-body" style="background-color: rgb(245, 245, 250); margin:20px;border-radius:15px">
           <div style="display:flex;gap:0.75rem">
@@ -493,7 +492,6 @@ if(document.getElementById('goBack')!=null){
       <div style="padding-top:5px">
         <h5 class="card-title" style="text-align:left;margin-bottom:5px">${article.topicName}</h5>
         <div class="card-text" style="text-align:left;margin-bottom:18px">${topicDetailsWords}</div>
-         <p style="text-align:left; font-size:12px;bottom:5; position:absolute">click to learn more</p>
 </div>
       </div>
     </div>
@@ -569,7 +567,7 @@ if(document.getElementById('goBack')!=null){
                                 `
                             <a href="#" style="text-decoration:none;color:black" id=${index} >
 
-          <div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative">
+          <div class="card" style="width:100% ; background-color:rgb(226, 226, 241);border-radius:12px;position:relative ; height:300px">
            
                 <div class="card-body" style="background-color: rgb(245, 245, 250); margin:20px;border-radius:15px">
                     <div style="display:flex;gap:0.75rem">
@@ -584,8 +582,8 @@ if(document.getElementById('goBack')!=null){
                 <div style="padding-top:5px">
                   <h5 class="card-title" style="text-align:left;margin-bottom:5px">${article.topicName}</h5>
                   <div class="card-text" style="text-align:left;margin-bottom:18px">${topicDetailsWords}</div>
-                   <p style="text-align:left; font-size:12px;bottom:5; position:absolute">click to learn more</p>
-        </div>
+
+                  </div>
                 </div>
               </div>
             </a>
@@ -686,7 +684,14 @@ if(document.getElementById('goBack')!=null){
 //             })
 //         }
   
+function displayPage(pageNumber, htmlContent) {
+    const startIndex = pageNumber * pageSize;
+    const endIndex = startIndex + pageSize;
+    const pageHtml = htmlContent.slice(startIndex, endIndex);
 
+    // Display the HTML content on the page
+    document.getElementById('articleContent').innerHTML = pageHtml;
+}
     </script>
 
 

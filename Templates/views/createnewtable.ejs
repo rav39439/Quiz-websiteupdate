@@ -64,11 +64,11 @@
 
       <div class="row">
 
-        <h2> Full quiz</h2>
 
 
-        <div class=" col-lg-6 offset-lg-3 bg-light mt-5" style="text-align:center">
+        <div class=" col-lg-6 offset-lg-3  mt-5" style="text-align:center ;font-family:Georgia, 'Times New Roman', Times, serif; background-color:rgb(201,216,244);box-shadow: 0 1px #00000020, 0 1px 3px #0003; border-radius: 8px;">
 
+          <h2 style="padding: 14px;  text-decoration: underline;"> Full quiz</h2>
 
 
 
@@ -77,21 +77,21 @@
           <form id="myform"method="POST">
 
             <label for="exampleFormControlSelect1">Select the type of exam</label>
-            <select class="form-control" id="examname" onchange="change(event)" name="examname" style="width:200px;">
+            <center><select class="form-control"  id="examname" onchange="change(event)" name="examname" style="width:100%; border-radius: 8px;">
               <option value="Government Exams">Government Exams</option>
               <option value="Bank Exams">Bank Exams</option>
               <option value="Management Exams">Management Exams</option>
               <option value="Engineering Entrance Exams">Engineering Entrance Exams</option>
               <option value="Research and Lectureship">Research and Lectureship</option>
               <option value="Primary and Secondary Education">Primary and Secondary Education</option>
-            </select>
+            </select></center>
         <!-- <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
           <input type="text" class="form-control" id="exampleInputPassword1"name="exam" placeholder="text" required> -->
 
         <!------------------category of exam--------------------------->
         <div class="form-group" id="exampleform1" style="display:none">
           <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
-          <select class="form-control" onchange="change1(event)" id="exam5" name="exam" required>
+          <select class="form-control" onchange="change1(event)" id="exam5" name="exam" required style="border-radius: 8px;">
             <option value="SSC CGL">SSC CGL</option>
             <option value="RRB">RRB</option>
             <option value="LIC">LIC</option>
@@ -99,7 +99,7 @@
         </div>
         <div class="form-group" id="exampleform2" style="display:none">
           <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
-          <select class="form-control" onchange="change2(event)" id="exam4" name="exam" required>
+          <select class="form-control" onchange="change2(event)" id="exam4" name="exam" required style="border-radius: 8px;">
             <option value="GMAT">GMAT</option>
             <option value="CAT">CAT</option>
             <option value="SNAP">SNAP</option>
@@ -107,7 +107,7 @@
         </div>
         <div class="form-group" id="exampleform3" style="display:none">
           <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
-          <select class="form-control" onchange="change3(event)" id="exam3" name="exam" required>
+          <select class="form-control" onchange="change3(event)" id="exam3" name="exam" required style="border-radius: 8px;">
             <option value="IBPS">IBPS</option>
             <option value="SBI-PO">SBI-PO</option>
             <option value="RBI">RBI</option>
@@ -116,7 +116,7 @@
 
         <div class="form-group" id="exampleform5" style="display:none">
           <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
-          <select class="form-control" id="exam2" onchange="nchange(event)" name="exam" required>
+          <select class="form-control" id="exam2" onchange="nchange(event)" name="exam" required style="border-radius: 8px;">
             <option value="CSIR-NET">CSIR-NET</option>
 
           </select>
@@ -124,7 +124,7 @@
 
         <div class="form-group" id="exampleform4" style="display:none">
           <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
-          <select class="form-control" id="exam1" onchange="nechange(event)" name="exam" required>
+          <select class="form-control" id="exam1" onchange="nechange(event)" name="exam" style="border-radius: 8px;" required>
             <option value="GATE">GATE</option>
             <option value="IIT-JEE">IIT-JEE</option>
           </select>
@@ -133,7 +133,7 @@
         <!---------------------------subcategory------------------------------------->
         <div class="form-group" id="exampleform51" style="display:none">
           <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
-          <select class="form-control" id="content9" onchange="change5(event)" name="subcategory" required>
+          <select class="form-control" id="content9" onchange="change5(event)" name="subcategory" style="border-radius: 8px;" required>
             <option value="Physics">Physics</option>
             <option value="Chemistry">Chemistry</option>
             <option value="Maths">Maths</option>
@@ -143,7 +143,7 @@
 
         <div class="form-group" id="exampleform41" style="display:none">
           <label for="exampleInputPassword1" style="margin-top:10px">Enter the type of exam</label>
-          <select class="form-control" id="content8" onchange="change6(event)" name="subcategory" required>
+          <select class="form-control" id="content8" onchange="change6(event)" name="subcategory" style="border-radius: 8px;" required>
             <option value="Physics">Physics</option>
             <option value="Chemistry">Chemistry</option>
             <option value="Maths">Maths</option>
@@ -155,7 +155,7 @@
 
         <div class="form-group">
           <label for="exampleInputPassword1" style="margin-top:10px">Enter the name of quiz</label>
-          <input type="text" class="form-control" id="quizname" name="quizname" placeholder="text" required>
+          <input type="text" class="form-control" id="quizname" name="quizname" placeholder="text" style="border-radius: 8px;" required>
         </div>
 
         <div class="form-group">
@@ -167,7 +167,7 @@
 
           <div class="form-group">
 
-            <label for="exampleInputPassword1" style="margin-top:10px">Enter the quiz status</label>
+            <label for="exampleInputPassword1" style="margin-top:10px; border-radius: 8px;">Enter the quiz status</label>
             <select class="form-control" id="status" name="status" required>
               <option value="public">public</option>
               <option value="private">private</option>
@@ -185,27 +185,27 @@
 
           <div class="form-group">
             <label for="exampleInputPassword1" style="margin-top:10px">Enter the no of questions</label>
-            <input type="number" class="form-control" id="noofquestions" name="noofquestions" placeholder="text">
+            <input type="number" class="form-control" id="noofquestions" style="border-radius: 8px;" name="noofquestions" placeholder="text">
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1" style="margin-top:10px">Enter the description of the quiz</label>
-            <input type="text" class="form-control" id="desc" name="desc" placeholder="text">
+            <input type="text" class="form-control" id="desc" name="desc" style="border-radius: 8px;" placeholder="text">
           </div>
 
           <div class="form-group">
             <label for="exampleInputPassword1" style="margin-top:10px">Enter the number of sections in the quiz</label>
-            <input type="text" class="form-control" id="nsection" name="nsection" placeholder="text">
+            <input type="text" class="form-control" id="nsection" style="border-radius: 8px;" name="nsection" placeholder="text">
           </div>
 
           <div class="form-group">
             <label for="exampleInputPassword1" style="margin-top:10px">Enter the time for this quiz</label>
-            <input type="text" class="form-control" id="time" name="time" placeholder="text">
+            <input type="text" class="form-control" id="time" name="time" style="border-radius: 8px;" placeholder="text">
           </div>
 
 
           <div class="form-group">
             <label for="exampleInputPassword1" style="margin-top:10px">Enter the marks in the quiz</label>
-            <input type="text" class="form-control" id="marks" name="marks" placeholder="text">
+            <input type="text" class="form-control" id="marks" name="marks" style="border-radius: 8px;" placeholder="text">
           </div>
 
 
@@ -213,23 +213,23 @@
 
           <div class="form-group">
             <label for="exampleInputPassword1" style="margin-top:10px">Enter section information</label>
-            <textarea class="form-control" rows="5" name="quizinfo" id="quizinfo"></textarea>
+            <textarea class="form-control" style="border-radius: 8px;" rows="5" name="quizinfo" id="quizinfo"></textarea>
 
           </div>
 
           <div class="form-group">
             <label for="exampleInputPassword1" style="margin-top:10px">Enter instructions</label>
-            <textarea class="form-control" rows="5" name="quizdesc" id="quizdesc"></textarea>
+            <textarea class="form-control"  style="border-radius: 8px;" rows="5" name="quizdesc" id="quizdesc"></textarea>
 
           </div>
 
-          <div class="form-group">
+            <div class="form-group">
             <label for="exampleInputPassword1" style="margin-top:10px">Enter result visibility</label>
-            <select class="form-control" id="resultstatus" name="resultstatus" style="width:200px;">
+            <center> <select class="form-control" style="border-radius: 8px;" id="resultstatus" name="resultstatus" style="width:100%;">
               <option value="private">private</option>
               <option value="public">public</option>
 
-            </select>
+            </select></center>
           </div>
 
 

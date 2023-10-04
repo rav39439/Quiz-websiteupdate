@@ -10,6 +10,17 @@
 </head>
 
 <style>
+  .jj{
+  font-family:Georgia, 'Times New Roman', Times, serif; 
+  background-color:rgb(201,216,244);
+  box-shadow: 0 1px #00000020, 0 1px 3px #0003; 
+  border-radius: 8px;
+  width:100%
+}
+
+button:hover{
+  background-color: rgb(117, 145, 197);;
+}
 
 .my{
   margin-left: 100px;
@@ -59,6 +70,10 @@ justify-content: center;
 
 .bodywidth{
   width: 70% !important;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+   background-color:rgb(201,216,244) !important;
+  box-shadow: 0 1px #00000020, 0 1px 3px #0003;
+   border-radius: 8px;
 }
  .title{
   width: auto;
@@ -71,6 +86,10 @@ justify-content: center;
   }
   .bodywidth{
   width: 100% !important;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+   background-color:rgb(201,216,244) !important;
+  box-shadow: 0 1px #00000020, 0 1px 3px #0003;
+   border-radius: 8px;
 }
 
   .showgrid{
@@ -109,28 +128,28 @@ body{
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=Physics"
               style="color:black;  font-weight: bold;
-                "><div class="card" style="width: 18rem;">
+                "><div class="jj" style="width: 18rem;">
                                     <div class="card-body">
                                     <h5 class="card-title">PHYSCICS</h5>
                                     </div>
                                   </div></a>
             <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=Chemistry"
               style="color:black;  font-weight: bold;
-                "><div class="card" style="width: 18rem;">
+                "><div class="jj" style="width: 18rem;">
                                     <div class="card-body">
                                     <h5 class="card-title">CHEMISTRY</h5>
                                     </div>
                                   </div></a>
             <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=Maths"
               style="color:black;   font-weight: bold;
-                "><div class="card" style="width: 18rem;">
+                "><div class="jj" style="width: 18rem;">
                                     <div class="card-body">
                                     <h5 class="card-title">MATHS</h5>
                                     </div>
                                   </div></a>
             <a class="nav-link" href="/ExamFilter2?exam=Research and Lectureship&&test=CSIR-NET&&sub=English"
               style="color:black;   font-weight: bold;
-                "><div class="card" style="width: 18rem;">
+                "><div class="jj" style="width: 18rem;">
                                     <div class="card-body">
                                     <h5 class="card-title">English</h5>
                                     </div>
@@ -146,28 +165,28 @@ body{
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=Physics"
               style="color:black;  font-weight: bold;
-                "><div class="card" style="width: 18rem;">
+                "><div class="jj" style="width: 18rem;">
                                     <div class="card-body">
-                                    <h5 class="card-title">PHYSCICS</h5>
+                                    <h5 class="card-title">PHYSICS</h5>
                                     </div>
                                   </div></a>
             <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=Chemistry"
               style="color:black;   font-weight: bold;
-                "><div class="card" style="width: 18rem;">
+                "><div class="jj" style="width: 18rem;">
                                     <div class="card-body">
                                     <h5 class="card-title">CHEMISTRY</h5>
                                     </div>
                                   </div></a>
             <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=Maths"
               style="color:black;   font-weight: bold;
-                "><div class="card" style="width: 18rem;">
+                "><div class="jj" style="width: 18rem;">
                                     <div class="card-body">
                                     <h5 class="card-title">MATHS</h5>
                                     </div>
                                   </div></a>
             <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=ElectricalEngg"
               style="color:black;   font-weight: bold;
-                "><div class="card" style="width: 18rem;">
+                "><div class="jj" style="width: 18rem;">
                                     <div class="card-body">
                                     <h5 class="card-title">Electrical Engineering</h5>
                                     </div>
@@ -175,7 +194,7 @@ body{
 
             <a class="nav-link" href="/ExamFilter2?exam=Engineering Entrance Exams&&test=GATE&&sub=MechanicalEngg"
               style="color:black;   font-weight: bold;
-                "><div class="card" style="width: 18rem;">
+                "><div class="jj" style="width: 18rem;">
                                     <div class="card-body">
                                     <h5 class="card-title">Mechanical Engineering</h5>
                                     </div>
@@ -189,7 +208,7 @@ body{
     <div class="showgrid mb-4"style="margin-bottom:70px;width:100%">
       <% if(data.isadmin) {%> 
     <% quizdata.forEach(function(elem,index){ %> 
-           <div class="card mt-4 bodywidth" >
+           <div class=" bodywidth" >
             <form id="myform<%index%>" action="/enterquiz1" method="GET">
             <div class="card-body">
               <h3 class="card-title title"><%=elem.quizname%> </h3>
@@ -222,11 +241,11 @@ body{
 
     
     <div id="ss" style="display: none;"><%=stringdata %></div>
-    <div class="mb-4 bodywidth">
+    <div class=" bodywidth">
     <% if(!data.isadmin) {%> 
       <% quizdata.forEach(function(elem,index){ %> 
     <% if(elem.status=='public'){ %> 
-        <div class="card" style=" margin-top: 20px;">
+        <div class="jj" >
          <form id="myform<%index%>" action="/enterquiz1" method="GET">
          <div class="card-body"style="position: relative;">
     <div style="display: grid; grid-template-columns:auto auto; gap:3px">

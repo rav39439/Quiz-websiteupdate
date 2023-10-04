@@ -182,7 +182,7 @@ function removeDuplicates(arr) {
 }
 
 
-app.get('/articles', function (req, res) {
+app.get('/', function (req, res) {
     const collectionName = 'articles';
     let db = firebase.firestore()
     db.collection(collectionName)
@@ -462,48 +462,48 @@ app.set("views", setpath)
 app.get('/myhome', function (req, res) {
 })
 
-app.get('/', function (req, res) {
-    const value = date.format((new Date(Date.now())),
-        'DD/MM/YYYY');
-    MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
-        var blog = client.db("blog")
-        blog.collection("studymaterial").find({ type: "Government Exams" }).toArray(function (error, materials) {
-            let length1
-            let length2
-            let length3
-            let length4
-            let length5
-            materials.forEach((elem) => {
-                if (elem.content == "govexams") {
-                    length1 += 1
-                }
-                else if (elem.content == "entranceexams") {
-                    length2 += 1
-                }
-                else if (elem.content == "bankexams") {
-                    length3 += 1
-                }
-                else if (elem.content == "managementexams") {
-                    length4 += 1
-                }
-                else {
-                    length5 += 1
+// app.get('/', function (req, res) {
+//     const value = date.format((new Date(Date.now())),
+//         'DD/MM/YYYY');
+//     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
+//         var blog = client.db("blog")
+//         blog.collection("studymaterial").find({ type: "Government Exams" }).toArray(function (error, materials) {
+//             let length1
+//             let length2
+//             let length3
+//             let length4
+//             let length5
+//             materials.forEach((elem) => {
+//                 if (elem.content == "govexams") {
+//                     length1 += 1
+//                 }
+//                 else if (elem.content == "entranceexams") {
+//                     length2 += 1
+//                 }
+//                 else if (elem.content == "bankexams") {
+//                     length3 += 1
+//                 }
+//                 else if (elem.content == "managementexams") {
+//                     length4 += 1
+//                 }
+//                 else {
+//                     length5 += 1
 
-                }
-            })
-            MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
-                var blog = client.db("blog")
-                blog.collection("Quizzes").find({ "examname": "Government Exams" }).sort({ _id: 1 }).toArray(function (error, quizzes) {
-                    res.render("index.ejs", {
-                        materials: materials, quizdata: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
-                        , examname: "Government Exams", test: "Government Exams"
-                    })
-                })
-            })
-        })
-    })
+//                 }
+//             })
+//             MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
+//                 var blog = client.db("blog")
+//                 blog.collection("Quizzes").find({ "examname": "Government Exams" }).sort({ _id: 1 }).toArray(function (error, quizzes) {
+//                     res.render("index.ejs", {
+//                         materials: materials, quizdata: quizzes, stringdata: JSON.stringify(quizzes), username: req.session.username, data: req.session
+//                         , examname: "Government Exams", test: "Government Exams"
+//                     })
+//                 })
+//             })
+//         })
+//     })
 
-})
+// })
 
 app.post('/login', (req, res) => {
     console.log(req.body)
@@ -628,9 +628,9 @@ app.get('/createtable', (req, res) => {
     res.render("createquiz.ejs")
 })
 
-app.get("/viewquestions", function (req, res) {
-    res.render("viewquestions.hbs")
-})
+// app.get("/viewquestions", function (req, res) {
+//     res.render("viewquestions.hbs")
+// })
 
 app.get('/postquestions', (req, res) => {
     res.render("postquestions.hbs")
@@ -650,9 +650,9 @@ app.get("/fileupload", (req, res) => {
     res.render("upload.hbs")
 })
 
-app.get("/multilevelquiz", (req, res) => {
-    res.render("multiplelevel.hbs")
-})
+// app.get("/multilevelquiz", (req, res) => {
+//     res.render("multiplelevel.hbs")
+// })
 app.get("/readinfo1", (req, res) => {
     res.render("readinfo1.hbs", { Myname: req.query.Myname1, Myreg: req.query.regno1, table2: req.query.Myquiz })
 })
@@ -971,28 +971,28 @@ app.get("/studyinfo", function (req, res) {
 
 })
 
-app.post("/uploadcontent", function (req, res) {
-    MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
-        var blog = client.db("blog")
-        blog.collection("studymaterial").insertOne({
-            "topic": req.body.details,
-            "content": req.body.examname,
-            "type": req.body.examtype,
-            "data": req.body.uploadPreview,
-            "filedata": req.body.myfile,
-            "status": req.body.status,
-            "details": req.body.details,
-            "previewimg": req.body.previewimg,
-            "MaterialType": req.body.MaterialType,
-            "currentDate": req.body.currentDate,
-            "subcategory": req.body.sub
-        }, function (err, data) {
-            res.json({
-                "message": "success",
-            })
-        })
-    })
-})
+// app.post("/uploadcontent", function (req, res) {
+//     MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
+//         var blog = client.db("blog")
+//         blog.collection("studymaterial").insertOne({
+//             "topic": req.body.details,
+//             "content": req.body.examname,
+//             "type": req.body.examtype,
+//             "data": req.body.uploadPreview,
+//             "filedata": req.body.myfile,
+//             "status": req.body.status,
+//             "details": req.body.details,
+//             "previewimg": req.body.previewimg,
+//             "MaterialType": req.body.MaterialType,
+//             "currentDate": req.body.currentDate,
+//             "subcategory": req.body.sub
+//         }, function (err, data) {
+//             res.json({
+//                 "message": "success",
+//             })
+//         })
+//     })
+// })
 
 
 var arrayRankTransform = arr => {
@@ -1005,6 +1005,7 @@ app.post("/newresultmulti", (req, res) => {
         MongoClient.connect(DATABASE, { useNewUrlParser: true }, function (error, client) {
             var blog = client.db("blog")
             blog.collection("Quizzes").findOne({ "quizname": req.body.myquiz }, function (error, quiz) {
+                if(quiz){
                 let userresponses = quiz.quizattempters.find(elem => elem?.name == req.body.name)
                 let responseuser = quiz.quizattempters.find(elem => elem?.email == req.body.email)
 
@@ -1039,6 +1040,11 @@ app.post("/newresultmulti", (req, res) => {
                 else {
                     res.send("No such user has attempted the Exam")
                 }
+            }
+            else{
+                res.send("No such user has attempted the Exam")
+
+            }
             })
         })
     }
@@ -1254,7 +1260,6 @@ app.post("/createnewtable", function (req, res) {
 
 app.get("/postmultioptions", function (req, res) {
 
-    console.log("yufhfjyhfjyfyjf")
 
     res.render("postmultioptions.ejs")
 })
@@ -1671,25 +1676,25 @@ app.get("/wholeimage2", function (req, res) {
     res.render("newimage.ejs", { myimage: req.query.image })
 })
 
-app.get("/contactme", function (req, res) {
-    res.render("contactme.ejs")
-})
+// app.get("/contactme", function (req, res) {
+//     res.render("contactme.ejs")
+// })
 
-app.get("/chat", function (req, res) {
-    res.render("room.ejs", { username: req.session.username })
-})
+// app.get("/chat", function (req, res) {
+//     res.render("room.ejs", { username: req.session.username })
+// })
 
-app.get("/gchat", function (req, res) {
-    res.render("room.ejs", { username: req.session.username })
-})
+// app.get("/gchat", function (req, res) {
+//     res.render("room.ejs", { username: req.session.username })
+// })
 
-app.post("/enterchat", function (req, res) {
-    res.render('startchat.ejs', { username: req.body.username, roomid: req.body.roomid })
-})
+// app.post("/enterchat", function (req, res) {
+//     res.render('startchat.ejs', { username: req.body.username, roomid: req.body.roomid })
+// })
 
-io.on("connection", function (socket) {
-    console.log("user connected")
-})
+// io.on("connection", function (socket) {
+//     console.log("user connected")
+// })
 
 const rooms = {}
 const botName = 'ChatCord Bot';

@@ -121,13 +121,24 @@ body{
   width: 100% !important;
 }
 
+.jj{
+  font-family:Georgia, 'Times New Roman', Times, serif; 
+  background-color:rgb(201,216,244);
+  box-shadow: 0 1px #00000020, 0 1px 3px #0003; 
+  border-radius: 8px;
+  width: 18rem
+}
+.jj:hover{
+  background-color: rgb(117, 145, 197);;
+}
+
     </style>
 </head>
 
 <% if(data.isadmin){ %> 
 <%- include('../partials/heading1.hbs') %>
 <% } else {%> 
-  <%- include('../partials/heading.hbs') %>
+  <%- include('../partials/heading1.hbs') %>
 
   <% } %> 
 <body >
@@ -161,8 +172,8 @@ body{
           </div>
         </div> </a> -->
 
-        <a class="nav-link" href="/ExamFilter1?exam=Primary and Secondary Education"style="color:black;  font-weight: bold;
-          "><div class="card" style="width: 18rem;">
+        <a class="nav-link" href="/ExamFilter1?exam=Primary and Secondary Education" style="color:black;  font-weight: bold; 
+          "><div class=" jj" >
           <div class="card-body">
           <h5 class="card-title">Primary and Secondary Education</h5>
       
@@ -171,7 +182,7 @@ body{
 
         <a class="nav-link" href="/ExamFilter1?exam=Government Exams" style="color:black;  font-weight: bold;
               ">
-              <div class="card" style="width: 18rem;">
+              <div class=" jj" >
           <div class="card-body">
           <h5 class="card-title">Government
             Exams</h5>
@@ -183,7 +194,7 @@ body{
 
         <a class="nav-link" href="/ExamFilter1?exam=Management Exams" style="color:black;  font-weight: bold;
               ">
-              <div class="card" style="width: 18rem;">
+              <div class=" jj" >
                 <div class="card-body">
                 <h5 class="card-title">Management
                   Exams</h5>
@@ -194,7 +205,7 @@ body{
 
         <a class="nav-link" href="/ExamFilter1?exam=Bank Exams" style="color:black;  font-weight: bold;
               ">
-              <div class="card" style="width: 18rem;">
+              <div class=" jj" >
                 <div class="card-body">
                 <h5 class="card-title"> Bank
                   Exams</h5>
@@ -204,14 +215,14 @@ body{
 
 
         <a class="nav-link" href="/ExamFilter1?exam=Engineering Entrance Exams" style="color:black;  font-weight: bold;
-              "><div class="card" style="width: 18rem;">
+              "><div class=" jj" >
                 <div class="card-body">
                 <h5 class="card-title"> Engineering Entrance Exams</h5>
                 </div>
               </div></a>
 
         <a class="nav-link" href="/ExamFilter1?exam=Research and Lectureship" style="color:black;  font-weight: bold;
-          "><div class="card" style="width: 18rem;">
+          "><div class=" jj" >
                 <div class="card-body">
                 <h5 class="card-title"> Research & Lectureship</h5>
                 </div>

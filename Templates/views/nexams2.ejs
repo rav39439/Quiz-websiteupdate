@@ -9,7 +9,19 @@
 
     
 </head>
+
+
 <style>
+  .jj{
+  font-family:Georgia, 'Times New Roman', Times, serif; 
+  background-color:rgb(201,216,244);
+  box-shadow: 0 1px #00000020, 0 1px 3px #0003; 
+  border-radius: 8px;
+  width:100%
+}
+/* .jj:hover{
+  background-color: rgb(117, 145, 197);;
+} */
 
 .my{
   margin-left: 100px;
@@ -150,7 +162,7 @@ body{
     <% if(!data.isadmin) {%> 
       <% quizdata.forEach(function(elem,index){ %> 
     <% if(elem.status=='public'){ %> 
-        <div class="card" style=" margin-top: 20px;">
+        <div class="jj" style=" margin-top: 20px;">
          <form id="myform<%index%>" action="/enterquiz1" method="GET">
          <div class="card-body"style="position: relative;">
     <div style="display: grid; grid-template-columns:auto auto; gap:3px">

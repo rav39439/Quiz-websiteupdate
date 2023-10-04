@@ -100,7 +100,7 @@
 <% if(data.isadmin){ %> 
 <%- include('../partials/heading1.hbs') %>
 <% } else {%> 
-  <%- include('../partials/heading.hbs') %>
+  <%- include('../partials/heading1.hbs') %>
 
   <% } %> 
 <body>
@@ -122,15 +122,15 @@
          
             <input readonly id="myquiz"name="myquiz" type="hidden" value="<%=elem.quizname%>">
             <label for="status">Quizstatus</label>
-<select name="status"class="form-select" aria-label="Select status">
-<option value="public">public</option>
-<option value="private">private</option>
+<select name="status"class="form-select" aria-label="Select status" >
+<option value="public" <%= elem.status !== 'public' ? 'selected' : '' %>>public</option>
+<option value="private" <%= elem.status !== 'public' ? 'selected' : '' %>>private</option>
 </select>
 
 <label for="resultstatus">Resultstatus</label>
 <select name="resultstatus"class="form-select" aria-label="Select resultstatus">
-<option value="public">public</option>
-<option value="private">private</option>
+<option value="public" <%= elem.resultstatus !== 'public' ? 'selected' : '' %>>public</option>
+<option value="private" <%= elem.resultstatus !== 'public' ? 'selected' : '' %>>private</option>
 </select>
           <input readonly type="hidden" name="quiz"id="quiz" value="<%=elem.examname%>"> 
  <button type="submit" style="margin-top:20px;margin-right:20px" class="btn btn-primary" >update status</button>        
@@ -166,7 +166,7 @@ else{
     resultstatus:form.resultstatus.value 
 
    };
-   alert(JSON.stringify(formData))
+  //  alert(JSON.stringify(formData))
 
        $.ajax({
            url:"/updatequiz",

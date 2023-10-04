@@ -1,114 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+    integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Document</title>
 </head>
 
 <style>
-#mylogin{
-  margin-left:200px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  #mylogin {
+    margin-left: 200px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
-  font-size:60px;
-}
-    .new1{
-text-align: center;
-      border-radius:8px;
-      width: 500px;
-      height:1200px;
-      margin-left:80px;
-      height:400px;
-      background-color:aliceblue;
-      border: solid;
+    font-size: 60px;
+  }
+
+  .new1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rgb(201, 216, 244);
+    box-shadow: 0 1px #00000020, 0 1px 3px #0003;
+    border-radius: 8px;
+    text-align: center;
+    border-radius: 8px;
+    width: 500px;
+    height: 1200px;
+    height: 400px;
+    margin-left:20px;
+
+    border: solid;
+  }
+
+  .new2 {
+    margin-top: 0px;
+
+  }
+
+  #uniquecode {
+    margin-left: 100px;
+    width: 300px;
+    margin-top: 2px;
+  }
+
+
+  #Name {
+    margin-left: 100px;
+    width: 300px;
+    margin-top: 2px;
+  }
+
+  #email {
+    margin-left: 100px;
+    width: 300px;
+    margin-top: 2px;
+  }
+
+
+  #password {
+    margin-left: 100px;
+    width: 300px;
+    margin-top: 2px;
+  }
+
+  #info {
+    margin-top: 2px;
+  }
+
+  @media only screen and (max-width: 500px) {
+
+    .new1 {
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      background-color: rgb(201, 216, 244);
+      box-shadow: 0 1px #00000020, 0 1px 3px #0003;
+      border-radius: 8px;
+      height: 400px;
+      width: 320px;
+      margin-left: 10px;
     }
-   .new2{
-margin-top: 0px;
 
-   }
-   #uniquecode{
- margin-left: 100px;
- width: 300px;
- margin-top: 2px;
-   }
+    .new2 {
+      margin-right: 40px;
+    }
 
+    #password {
+      width: 230px;
+      margin-left: 30px;
+    }
 
-   #Name{
- margin-left: 100px;
- width: 300px;
- margin-top: 2px;
-   }
+    #uniquecode {
+      width: 230px;
 
-   #email{
- margin-left: 100px;
- width: 300px;
- margin-top: 2px;
-   }
+      margin-left: 30px;
+    }
 
+    #Name {
+      width: 230px;
 
-   #password{
- margin-left: 100px;
- width: 300px;
- margin-top: 2px;
-   }
+      margin-left: 30px;
+    }
 
-   #info{
-     margin-top: 2px;
-   }
+    #email {
+      width: 230px;
 
-    @media only screen and (max-width: 500px) {
- 
- .new1{
- 
-     height: 400px;
-    width:320px;
-    margin-left:10px;
- }
- .new2{
-     margin-right: 40px;
- }
- #password{
-   width: 230px;
-   margin-left: 30px;
- }
- #uniquecode{
-  width: 230px;
+      margin-left: 30px;
+    }
 
-   margin-left: 30px;
- }
- #Name{
-  width: 230px;
+    #mylogin {
+      margin-left: 100px;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 
-   margin-left: 30px;
- }
- #email{
-  width: 230px;
+      font-size: 60px;
+    }
 
-   margin-left: 30px;
- }
- #mylogin{
-  margin-left:100px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
 
-  font-size:60px;
-}
-
- }
-
-
-
-
-
-
+  .sample {
+    display: flex;
+    justify-content: left; /* Horizontal centering */
+    height: 100%; /* This ensures full viewport height */
+  }
 </style>
 
 
@@ -117,67 +142,81 @@ margin-top: 0px;
 <body>
 
   <%- include('../partials/heading.hbs') %>
-  <h1 id="mylogin">Register</h1>
 
-  <% if(!data.username){ %> 
-    <div id="messagebody" style="display:none">
-      <div class="alert alert-primary" id="message" role="alert"> </div>
+    <% if(!data.username){ %>
+      <div id="messagebody" style="display:none">
+        <div class="alert alert-primary" id="message" role="alert"> </div>
       </div>
-<div class="new1">
-<div class="new2">
- 
- <form  method="POST" id="myform">
-   <div class="mb-3">
-  <label  class="form-label">Name</label>
-  <input type="name" class="form-control"  name="username" id="Name" placeholder="Enter your name" required>
-</div>
 
-<div class="mb-3">
-   <label  class="form-label">email</label>
-  <input type="email" class="form-control"  name="email"id="email" placeholder="enter your email" required>
-</div>
-<small id="myemail"></small>
+      <div class="sample">
 
-<div class="mb-3">
-   <label class="form-label">password</label>
-  <input type="password" class="form-control"  name="password"id="password" placeholder="enter your password" required>
-</div>
+        <div class="new1 ">
+          <h1 style="padding:8px;  text-decoration:solid;">Register</h1>
+
+          <div class="new2">
+
+            <form method="POST" id="myform">
+              <div class="mb-3" style="">
+                <label class="form-label">Name</label>
+                <input type="name" class="form-control" name="username" id="Name" placeholder="Enter your name"
+                  required>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">email</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="enter your email"
+                  required>
+              </div>
+              <small id="myemail"></small>
+
+              <div class="mb-3">
+                <label class="form-label">password</label>
+                <input type="password" class="form-control" name="password" id="password"
+                  placeholder="enter your password" required>
+              </div>
 
 
-<!-- <div class="form-check">
+              <!-- <div class="form-check">
   <input class="form-check-input" type="checkbox" value="teacher" id="defaultCheck1"name="status"id="status" style="margin-left: 150px;">
   <label class="form-check-label" for="defaultCheck1"style="margin-right:170px">
     teacher
 </div> -->
-<!-- <div class="form-check">
+              <!-- <div class="form-check">
   <input class="form-check-input" type="checkbox" value="student" id="defaultCheck2" name="status"id="status" style="margin-left: 150px;">
   <label class="form-check-label" for="defaultCheck2"style="margin-right:170px">
     student
   </label>
 </div> -->
- 
- <button type="submit" class="btn btn-primary">submit</button>
-</form>
-</div>
-</div>
-<% } else{ %> 
 
-  <h1 style="color:red;font-style:italic">You are registered</h1>
-  <% } %> 
+              <button type="submit" class="btn btn-primary">submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <% } else{ %>
+
+        <h1 style="color:red;font-style:italic">You are registered</h1>
+        <% } %>
 </body>
 
 
-<% if(typeof(message)!='undefined'){ %> 
-<div id="message"style="display:none"><%=message%> </div>
+<% if(typeof(message)!='undefined' ){ %>
+  <div id="message" style="display:none">
+    <%=message%>
+  </div>
 
-<% } %> 
- <% if(typeof(content)!='undefined'){ %> 
-<div id="content"style="display:none"><%=content%> </div>
-<% } %> 
+  <% } %>
+    <% if(typeof(content)!='undefined' ){ %>
+      <div id="content" style="display:none">
+        <%=content%>
+      </div>
+      <% } %>
 
 
 
-<div id="name" style="display:none"><%=username%></div>
+        <div id="name" style="display:none">
+          <%=username%>
+        </div>
 
 
 </html>
@@ -188,98 +227,88 @@ margin-top: 0px;
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 
-const firebaseConfig = {
-    apiKey: "AIzaSyAZ9x_QbhCfY9aEsqxEiYhWtfIRNGl_qeo",
-    authDomain: "mynewproject-ae49a.firebaseapp.com",
-    projectId: "mynewproject-ae49a",
-    storageBucket: "mynewproject-ae49a.appspot.com",
-    messagingSenderId: "939005557600",
-    appId: "1:939005557600:web:ee766070db4bd2dadfbc05",
-    measurementId: "G-YFKTT151SN"
-  };
-
-firebase.initializeApp(firebaseConfig);
+  // 
 
 
-$("#myform").on("submit",function(e){  
-  e.preventDefault()
-       var formData = {
-      username:$("#Name").val(),
-     email:$("#email").val(),
-     password:$("#password").val(),
-   };
+  $("#myform").on("submit", function (e) {
+    e.preventDefault()
+    var formData = {
+      username: $("#Name").val(),
+      email: $("#email").val(),
+      password: $("#password").val(),
+    };
 
-  //  firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password)
-  //     .then(function(val) {
+    //  firebase.auth().createUserWithEmailAndPassword(formData.email, formData.password)
+    //     .then(function(val) {
 
-  //       val.user.sendEmailVerification().then(()=>{
-  //         alert("Please verify your email by clicking on the link sent to your email to access content ");
-  //         saveData(val,name)
+    //       val.user.sendEmailVerification().then(()=>{
+    //         alert("Please verify your email by clicking on the link sent to your email to access content ");
+    //         saveData(val,name)
 
-  //       }) .catch(function(error) {
-  //         val.user.delete().then(()=>{
-  //           alert("user is deleted")
-  //         })
-  //       })
-           
-  //       })
-  //     .catch(function(error) {
-  //       alert("ERROR");
-  //       var errorCode = error.code;
-  //       var errorMessage = error.message;
-  //       // [START_EXCLUDE]
-  //       if (errorCode == 'auth/weak-password') {
-  //         alert('The password is too weak.');
-  //       } else {
-  //         alert(errorMessage);
-  //       }
-  //     })
+    //       }) .catch(function(error) {
+    //         val.user.delete().then(()=>{
+    //           alert("user is deleted")
+    //         })
+    //       })
+
+    //       })
+    //     .catch(function(error) {
+    //       alert("ERROR");
+    //       var errorCode = error.code;
+    //       var errorMessage = error.message;
+    //       // [START_EXCLUDE]
+    //       if (errorCode == 'auth/weak-password') {
+    //         alert('The password is too weak.');
+    //       } else {
+    //         alert(errorMessage);
+    //       }
+    //     })
     //  function saveData(val,name){
-  //     var formData = {
-  //     name:name,
-  //    email:val.user.email,
-  //    emailVerified:val.user.emailVerified,
-  //    password:$("#password").val(),
-  //  };
-     
-        $.ajax({
-            url:"/register",
-            method:"POST",
-            data:formData,
-            success:function(response){
-              document.getElementById("messagebody").style.display="block"
-              document.getElementById("message").innerText=response.message
-            }
-        })
-     // }
+    //     var formData = {
+    //     name:name,
+    //    email:val.user.email,
+    //    emailVerified:val.user.emailVerified,
+    //    password:$("#password").val(),
+    //  };
+
+    $.ajax({
+      url: "/register",
+      method: "POST",
+      data: formData,
+      success: function (response) {
+        document.getElementById("messagebody").style.display = "block"
+        document.getElementById("message").innerText = response.message
+      }
     })
+    // }
+  })
 
 
-    
-let h="";
-if(document.getElementById('message')){
-   h=document.getElementById('message').innerText
-}
-if(document.getElementById('content')){
-let content=document.getElementById('content').innerText
-}
-let myuniquecode=document.getElementById('myuniquecode')
-let myemail=document.getElementById('myemail')
-if(h){
- if(content=="email"){
-myemail.innertext=h
- }
- else{
-   myuniquecode.innerText=h
- }
-}
-let f= document.getElementById("name").innerText
 
-if(typeof(f)!='undefined'){
-   document.getElementById("myname").innerText=f
-}
-else{
-  document.getElementById("myname").innerText="Anonymous"
+  let h = "";
+  if (document.getElementById('message')) {
+    h = document.getElementById('message').innerText
+  }
+  if (document.getElementById('content')) {
+    let content = document.getElementById('content').innerText
+  }
+  let myuniquecode = document.getElementById('myuniquecode')
+  let myemail = document.getElementById('myemail')
+  if (h) {
+    if (content == "email") {
+      myemail.innertext = h
+    }
+    else {
+      myuniquecode.innerText = h
+    }
+  }
+  let f = document.getElementById("name").innerText
 
- }
+  if (typeof (f) != 'undefined') {
+    document.getElementById("myname").innerText = f
+  }
+  else {
+    document.getElementById("myname").innerText = "Anonymous"
+
+  }
 </script>

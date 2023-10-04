@@ -28,11 +28,13 @@
 
 
     .new1 {
+      font-family:Georgia, 'Times New Roman', Times, serif; background-color:rgb(201,216,244);
+      box-shadow: 0 1px #00000020, 0 1px 3px #0003; border-radius: 8px;
       text-align: center;
       border-radius: 8px;
       height: 350px;
-      background-color: aliceblue;
       margin-top: 40px;
+      margin-left: 20px;
       border: solid;
     }
 
@@ -40,29 +42,35 @@
       width: 100% !important;
     }
 button{
-  width: 100% !important;
 }
     select {
       width: 100% !important;
     }
+    .sample {
+    display: flex;
+    justify-content: left; /* Horizontal centering */
+    height: 100%; /* This ensures full viewport height */
+  }
 
   </style>
 </head>
 <%- include('../partials/heading.hbs') %>
 
 <body>
+
+  <div class="sample">
   <div id="name" style="display:none"><%=username %></div>
 
   <div class="new1" style="width: 80%;">
 
-    <div style="width: 100%; display: flex;flex-direction:column; justify-contents:center ;align-items:center">
-    <h3 style="color:red;">Search Your Result Here</h3>
+    <div style="width: 100%; display: flex;flex-direction:column;align-items:center">
+    <h1 style="padding:8px;  text-decoration:solid;">Search Your Result Here</h1>
     <form action="/newresultmulti" method="POST" style="text-align:center;width:70%">
-      <div class="" style="display: flex;flex-direction:column; justify-contents:center ">
+      <div class="" style="display: flex;flex-direction:column;  ">
 
         <div class="form-group">
           <label for="exampleInputEmail1">Enter the Quizname from the list of quizzes</label>
-         <select class="form-select mt-4" aria-label="Default select example" name="myquiz" id="myquiz">
+         <select class="form-select " style="border-radius: 8px" aria-label="Default select example" name="myquiz" id="myquiz">
           <% quizdata.forEach(function(elem){%>
               <option value=<%=elem.quizname %> ><%=elem.quizname %>
             </option>
@@ -75,24 +83,25 @@ button{
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Your name</label>
-          <input type="text" class="form-control mt-2" id="name"  name="name" required>
+          <input type="text" style="border-radius: 8px" class="form-control mt-2" id="name"  name="name" required>
         </div>
         <div class="form-group">
           <label>Enter the exam type</label>
-          <select class="form-control mt-2" id="examname" name="examname" required>
+          <select class="form-control mt-2" style="border-radius: 8px" id="examname" name="examname" required>
             <option value="Highlevelexam">High level exam</option>
           </select>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-2">Result</button>
       </div>
+              <button type="submit" class="btn btn-primary mt-2">Result</button>
+
     </form>
 </div>
 
 
   </div>
 
-
+</div>
 
 
 </body>
@@ -101,8 +110,8 @@ button{
   let f = document.getElementById("name").innerText
   if (typeof (f) != 'undefined') {
     document.getElementById("myname").innerText = f
-    document.getElementById('login').style.display="none"
-  document.getElementById('register').style.display="none"
+  //   document.getElementById('login').style.display="none"
+  // document.getElementById('register').style.display="none"
   }
   else {
     document.getElementById("myname").innerText = "Anonymous"
