@@ -128,10 +128,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
-
-let currentPage = 0; // Keep track of the current page
-const pageSize = 10; // Define the number of HTML content items per page
-
         let globalLength
         let updatedData
         let keys
@@ -139,6 +135,8 @@ const pageSize = 10; // Define the number of HTML content items per page
         let updateOnRefresh
         let allArticlesData
         let lastSavedTopic
+        let currentIndex=1
+
         let lastSavedGrade
         gi()
 
@@ -391,13 +389,31 @@ if(document.getElementById('goBack')!=null){
                         updata = updatedData[i]
 
                     }
-                    console.log(updata)
                     $.ajax({
                         url: "/fetchPage",
                         method: "POST",
                         data: { articlevalue: updata },
                         success: function (response) {
-                        
+
+                            let currentIndex=1
+
+                            //goBackData = response.articledata.Subject
+
+                            //             document.getElementById('majordata').innerHTML =
+                            //                 `
+                            //     <div style="width:80%;text-align:center;margin-left:10px !important;margin-top:100px">
+
+                            //     ${response.articledata.Text}
+                            //     <button class="btn btn-primary" style=" border-radius:17px;">
+                            //     <a href="/goBack?data=${goBackData}" style="text-decoration:none;color:black" >Go Back</a></button>
+                            //  </div>
+                            //     `
+                            let numberofbuttons=response.articledata.Text.length
+                            let buttons=``
+                            response.articledata.Text.forEach((buttonT,index)=>{
+
+                                buttons+=`<button class='btn btn-primary ml-4' style="margin-left:12px" id=button${index} value=${index}>${index+1}</button>`
+                            })
                             document.getElementById('majordata').innerHTML = `
                
                 <div class="container  " style="width: 100%;  margin-bottom:40px;margin-top:20px">
@@ -409,11 +425,71 @@ if(document.getElementById('goBack')!=null){
             <div class="" style=" background-color: rgb(230, 230, 250);width: 100%;border-radius:16px" id="">
                 <h1> ${response.articledata.topicName}</h1>
                 <br>
-                     ${response.articledata.Text}
-                    
+                <div id="textcontent">
+                    ${response.articledata.Text[0]}
+
+                    </div>
+
+                    <div style="display:flex;flex-direction:row;  justify-content:center;align-items:center">
+                    <button class='btn btn-primary' id=Previous style="background:none;color:black; margin-bottom:16px;border:none;cursor:pointer;width:max-content" >Previous</button>
+                    <p id='buttontext' style="padding:5px;margin-right:16px">${currentIndex}</p>
+
+                    <button class='btn btn-primary' id=Next style="background:none;color:black;margin-bottom:16px;border:none;cursor:pointer;width:max-content" >Next</button>
+                    </div>
             </div>
+           
+
         </div>              
                 `
+                // for(let i=0;i<numberofbuttons;i++){
+                //     document.getElementById('button'+i).addEventListener('click',(event)=>{
+                //         document.getElementById('textcontent').innerHTML=response.articledata.Text[i]
+                //         currentIndex=i
+                //         if(currentIndex+1>0 && currentIndex<numberofbuttons-1){
+                //             document.getElementById('Next').style.display='block'
+                //     }
+                //     else{
+                //         document.getElementById('Next').style.display='none'
+                //     }
+                    
+                // }) 
+
+                // }
+
+                document.getElementById('Next').addEventListener('click',(event)=>{
+                    console.log(currentIndex)
+
+                    if(currentIndex>=0 && currentIndex<numberofbuttons){
+                        currentIndex=currentIndex+1
+                        document.getElementById('buttontext').innerText=currentIndex
+                        document.getElementById('Previous').disabled = false;
+
+
+                    }
+                    else{
+                        //currentIndex=numberofbuttons
+                        document.getElementById('Next').disabled = true;
+                    }
+                    document.getElementById('textcontent').innerHTML=response.articledata.Text[currentIndex-1]
+
+                })
+
+                document.getElementById('Previous').addEventListener('click',(event)=>{
+                    console.log(currentIndex)
+
+                    if(currentIndex>1){
+                        currentIndex=currentIndex-1
+                        document.getElementById('buttontext').innerText=currentIndex
+                        document.getElementById('Next').disabled = false;
+
+                    }
+                    else{
+                        document.getElementById('Previous').disabled = true;
+                    }
+                    document.getElementById('textcontent').innerHTML=response.articledata.Text[currentIndex-1]
+
+                })
+            
                         }
                     })
                 });
@@ -429,7 +505,6 @@ if(document.getElementById('goBack')!=null){
             const hours = Math.floor(minutes / 60);
             const days = Math.floor(hours / 24);
             const years = Math.floor(days / 365);
-
             if (years >= 1) {
                 return `${years} years ago`;
             } else if (years === 1) {
@@ -451,16 +526,13 @@ if(document.getElementById('goBack')!=null){
 
         function useArr(d) {
             let html = ``
-
             const data = fetchdata(d)
             updatedData = data
             globalLength = data.length
-
             data.forEach((article, index) => {
                 let rootdata = article
                 if (typeof (article.Topicdetails) != "undefined") {
                     topicDetailsWords = article.Topicdetails.split(' ').slice(0, 20).join(' ');
-
                 }
                 else {
                     topicDetailsWords = ''
@@ -684,14 +756,7 @@ if(document.getElementById('goBack')!=null){
 //             })
 //         }
   
-function displayPage(pageNumber, htmlContent) {
-    const startIndex = pageNumber * pageSize;
-    const endIndex = startIndex + pageSize;
-    const pageHtml = htmlContent.slice(startIndex, endIndex);
 
-    // Display the HTML content on the page
-    document.getElementById('articleContent').innerHTML = pageHtml;
-}
     </script>
 
 

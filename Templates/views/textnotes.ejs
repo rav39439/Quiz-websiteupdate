@@ -40,16 +40,15 @@
                     <label for="topic"
                         style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Select
                         a level</label>
-                <select name="grade" style=" border-radius:10px;" id="grade" class="form-control"
-               >
-                <option value="default" selected>---select your level----</option>
-                <option value="8">class 8</option>
-                <option value="5">class 5</option>
-                <option value="9">class 9</option>
-                <option value="10">class 10</option>
-                <option value="11">class 11</option>
-            </select>
-        </div> <br>
+                    <select name="grade" style=" border-radius:10px;" id="grade" class="form-control">
+                        <option value="default" selected>---select your level----</option>
+                        <option value="8">class 8</option>
+                        <option value="5">class 5</option>
+                        <option value="9">class 9</option>
+                        <option value="10">class 10</option>
+                        <option value="11">class 11</option>
+                    </select>
+                </div> <br>
                 <div class="input-group-prepend">
                     <label for="topic"
                         style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
@@ -64,6 +63,14 @@
                         Topic Details</label>
                     <input type="text" style=" border-radius:10px;" id="topicdetails" class="form-control"
                         aria-describedby="basic-addon2">
+                </div>
+
+                <div class="input-group-prepend">
+                    <label for="Page"
+                        style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
+                        Page Number</label>
+                        <input type="number" style="border-radius: 10px;" id="Page" class="form-control" value="1" aria-describedby="basic-addon2" max="15" min="1">
+
                 </div>
 
                 <div class="form-group mt-1">
@@ -138,6 +145,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
+
+        let articletoBeModified
         const firebaseConfig = {
             apiKey: "AIzaSyAZ9x_QbhCfY9aEsqxEiYhWtfIRNGl_qeo",
             authDomain: "mynewproject-ae49a.firebaseapp.com",
@@ -166,33 +175,94 @@
         }
 
         async function savedata(data) {
+            let dataObject
             let subject = document.getElementById('Subject').value
             let topic = document.getElementById('topic').value
             let topicdetails = document.getElementById('topicdetails').value
             let grade1 = document.getElementById('grade').value
+            let Page = document.getElementById('Page').value
+
+
 
             const result = await InspectDocuments(subject)
             const db = firebase.firestore();
             const collectionRef = db.collection('articles').doc(subject);
             let text = data.replace(/\n \+/g, "<br>");
-            var dataObject = {
-                [topic]: {
-                    Text: text,
-                    Topicdetails: topicdetails,
-                    Subject: subject,
-                    time: currentTime,
-                    topicName: topic,
-                    class:grade1
-                }
+            if (articletoBeModified) {
+                articletoBeModified.Text[Page - 1] = text
+                let highestIndex = -1; // Initialize with a value that's less than any valid array index
+                let maxindex = []
+                articletoBeModified.Text.forEach((text, index) => {                    // if (typeof articletoBeModified[i] !== 'undefined' && i > highestIndex) {
+                    //     highestIndex = i;
+                    // }
+                    maxindex.push(index)
+                })
+                const max = Math.max(...maxindex);
+                console.log(max)
+                for (let i = 0; i < 9; i++) {
+                    if (typeof (articletoBeModified.Text[i]) == 'undefined') {
 
-            };
+                        articletoBeModified.Text[i] = ''
+                    }
+                }
+                // articletoBeModified.Text.forEach((text, index) => {
+                //     console.log("sssssssssssssssss")
+                // 
+                // })
+                dataObject = {
+                    [topic]: {
+                        Text: articletoBeModified.Text,
+                        Topicdetails: topicdetails,
+                        Subject: subject,
+                        time: currentTime,
+                        topicName: topic,
+                        class: grade1
+                    }
+
+                };
+            }
+            else {
+                let b = []
+                b.push(text)
+                dataObject = {
+                    [topic]: {
+                        Text: b,
+                        Topicdetails: topicdetails,
+                        Subject: subject,
+                        time: currentTime,
+                        topicName: topic,
+                        class: grade1
+                    }
+                };
+            }
+
 
             if (result) {
+                console.log(dataObject)
                 collectionRef.update(dataObject)
                     .then(docRef => {
                         console.log('Document updated with ID: ');
+                        if (articletoBeModified) {
+                            let Page = document.getElementById('Page').value
+
+                            dataObject.Text = articletoBeModified.Text[Page - 1]
+
+                        }
+                        else {
+                            dataObject.Text = []
+                        }
+
                     })
                     .catch(error => {
+                        // if (articletoBeModified) {
+                        //     let Page = document.getElementById('Page').value
+
+                        //     dataObject.Text=articletoBeModified.Text[Page-1]
+
+                        // }
+                        // else{
+                        //     dataObject.Text=[]
+                        // }
                         console.error('Error adding document: ', error);
                     });
             }
@@ -231,19 +301,20 @@
         }
 
         async function getText() {
-          let alldata=await getAllArticles()
-            let topic=document.getElementById('topic').value
-            let topicdetails=document.getElementById('topicdetails').value
-            let subject=document.getElementById('Subject').value
-           
-          alldata.forEach((e)=>{
-            if((e.Subject==subject)&&(e.topicName==topic)){
-                
-                document.getElementById('topicdetails').value=e.Topicdetails
-               // document.getElementById('mytextarea').value=e.Text
-               tinymce.get('mytextarea').setContent(e.Text);
-            }
-          })
+            let alldata = await getAllArticles()
+            let topic = document.getElementById('topic').value
+            let topicdetails = document.getElementById('topicdetails').value
+            let subject = document.getElementById('Subject').value
+            let Page = document.getElementById('Page').value
+
+            alldata.forEach((e) => {
+                if ((e.Subject == subject) && (e.topicName == topic)) {
+                    articletoBeModified = e
+                    document.getElementById('topicdetails').value = e.Topicdetails
+                    // document.getElementById('mytextarea').value=e.Text
+                    tinymce.get('mytextarea').setContent(e.Text[Page - 1]);
+                }
+            })
 
         }
 
@@ -324,22 +395,38 @@
 
         async function getAllArticles() {
             const db = firebase.firestore();
-            let result=[]
-            let promise=new Promise((resolve,reject)=>{
-            const collectionRef = db.collection('articles').get();
-            collectionRef.then(async (querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    let keys=Object.keys(doc.data())
-                    for(const el in doc.data()){
-                        result.push(doc.data()[el])
-                    }
+            let result = []
+            let promise = new Promise((resolve, reject) => {
+                const collectionRef = db.collection('articles').get();
+                collectionRef.then(async (querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        let keys = Object.keys(doc.data())
+                        for (const el in doc.data()) {
+                            result.push(doc.data()[el])
+                        }
+                    })
+                    resolve(result)
                 })
-                resolve(result)
             })
-        }) 
-        return promise
+            return promise
 
         }
+
+        const pageInput = document.getElementById('Page');
+
+  // Add an input event listener to perform validation
+  pageInput.addEventListener('input', function () {
+    const inputValue = parseInt(pageInput.value, 10); // Parse the input value as an integer
+
+    // Check if the input is greater than or equal to 1 and less than 15
+    if (inputValue >= 1 && inputValue < 15) {
+      // The input is valid, you can perform any desired action here
+      console.log('Input is valid:', inputValue);
+    } else {
+      // The input is invalid, you can display an error message or take other actions
+      console.log('Input is invalid');
+    }
+  });
     </script>
 
 
