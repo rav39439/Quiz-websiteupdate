@@ -126,6 +126,9 @@
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://cdn.rawgit.com/eligrey/FileSaver.js/1.3.8/FileSaver.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+
 
     <script>
         let globalLength
@@ -438,26 +441,45 @@ if(document.getElementById('goBack')!=null){
                     </div>
             </div>
            
-
+            <button class='btn btn-primary' id=download style="background:none;color:black;margin-bottom:16px;border:none;cursor:pointer;width:max-content" >download</button>
         </div>              
                 `
-                // for(let i=0;i<numberofbuttons;i++){
-                //     document.getElementById('button'+i).addEventListener('click',(event)=>{
-                //         document.getElementById('textcontent').innerHTML=response.articledata.Text[i]
-                //         currentIndex=i
-                //         if(currentIndex+1>0 && currentIndex<numberofbuttons-1){
-                //             document.getElementById('Next').style.display='block'
-                //     }
-                //     else{
-                //         document.getElementById('Next').style.display='none'
-                //     }
-                    
-                // }) 
+                for(let i=0;i<numberofbuttons;i++){
+                    let p=document.getElementById('download').addEventListener('click',(event)=>{
+                        
+                        html=response.articledata.Text[currentIndex-1]
+                        var htmlData = '<p>Your HTML content here</p>'; // Replace with your HTML data
 
-                // }
+    // Create a basic HTML document containing your HTML content
+    var htmlDocument = '<!DOCTYPE html>' +
+        '<html>' +
+        '<head>' +
+        '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">' +
+        '</head>' +
+        '<body>' +
+        html +
+        '</body>' +
+        '</html>';
+
+    // var blob = new Blob([htmlDocument], { type: "application/msword" });
+    // var url = URL.createObjectURL(blob);
+
+    // var a = document.createElement("a");
+    // a.href = url;
+    // a.download = "document.docx";
+    // document.body.appendChild(a);
+    // a.click();
+    // document.body.removeChild(a);
+    // URL.revokeObjectURL(url);
+
+//     var converted = htmlDocx.asBlob(html);
+// saveAs(converted, 'test.docx');
+                        Export2Doc(html,'new.docX')
+                }) 
+
+                }
 
                 document.getElementById('Next').addEventListener('click',(event)=>{
-                    console.log(currentIndex)
 
                     if(currentIndex>=0 && currentIndex<numberofbuttons){
                         currentIndex=currentIndex+1
@@ -756,7 +778,122 @@ if(document.getElementById('goBack')!=null){
 //             })
 //         }
   
+function Export2Doc(element, filename = '') {
+            //  _html_ will be replace with custom html
+            
+            //             var meta= "Mime-Version: 1.0\nContent-Base: " + location.href + "\nContent-Type: Multipart/related; boundary=\"NEXT.ITEM-BOUNDARY\";type=\"text/html\"\n\n--NEXT.ITEM-BOUNDARY\nContent-Type: text/html; charset=\"utf-8\"\nContent-Location: " + location.href + "\n\n<!DOCTYPE html>\n<html>\n_html_</html>";
+            //             //  _styles_ will be replaced with custome css
+            //             var head= "<head>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\n<style>\n_styles_\n</style>\n</head>\n";
+              
+            //             var html = element ;
+                        
+            //             var blob = new Blob(['\ufeff', html], {
+            //                 type: 'application/msword'
+            //             });
+                        
+            //             var  css = (
+            //                    '<style>' +
+            //                    'img {width:300px;}table {border-collapse: collapse; border-spacing: 0;}td{padding: 6px;}' +
+            //                    '</style>'
+            //                   );
+            // //  Image Area %%%%
+            //             var options = { maxWidth: 624};
+            //             var images = Array();
+            //             var img = $("#"+element).find("img");
+            //             for (var i = 0; i < img.length; i++) {
+            //                 // Calculate dimensions of output image
+            //                 var w = Math.min(img[i].width, options.maxWidth);
+            //                 var h = img[i].height * (w / img[i].width);
+            //                 // Create canvas for converting image to data URL
+            //                 var canvas = document.createElement("CANVAS");
+            //                 canvas.width = w;
+            //                 canvas.height = h;
+            //                 // Draw image to canvas
+            //                 var context = canvas.getContext('2d');
+            //                 context.drawImage(img[i], 0, 0, w, h);
+            //                 // Get data URL encoding of image
+            //                 var uri = canvas.toDataURL("image/png");
+            //                 $(img[i]).attr("src", img[i].src);
+            //                 img[i].width = w;
+            //                 img[i].height = h;
+            //                 // Save encoded image to array
+            //                 images[i] = {
+            //                     type: uri.substring(uri.indexOf(":") + 1, uri.indexOf(";")),
+            //                     encoding: uri.substring(uri.indexOf(";") + 1, uri.indexOf(",")),
+            //                     location: $(img[i]).attr("src"),
+            //                     data: uri.substring(uri.indexOf(",") + 1)
+            //                 };
+            //             }
+            
+            //             // Prepare bottom of mhtml file with image data
+            //             var imgMetaData = "\n";
+            //             for (var i = 0; i < images.length; i++) {
+            //                 imgMetaData += "--NEXT.ITEM-BOUNDARY\n";
+            //                 imgMetaData += "Content-Location: " + images[i].location + "\n";
+            //                 imgMetaData += "Content-Type: " + images[i].type + "\n";
+            //                 imgMetaData += "Content-Transfer-Encoding: " + images[i].encoding + "\n\n";
+            //                 imgMetaData += images[i].data + "\n\n";
+                            
+            //             }
+            //             imgMetaData += "--NEXT.ITEM-BOUNDARY--";
+            // // end Image Area %%
+            
+            //              var output = meta.replace("_html_", head.replace("_styles_", css) +  html) + imgMetaData;
+            
+            //             var url = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(output);
+            
+            
+            //             filename = filename ? filename + '.doc' : 'document.doc';
+            
+            
+            //             var downloadLink = document.createElement("a");
+            
+            //             document.body.appendChild(downloadLink);
+            
+            //             if (navigator.msSaveOrOpenBlob) {
+            //                 navigator.msSaveOrOpenBlob(blob, filename);
+            //             } else {
+            
+            //                 downloadLink.href = url;
+            //                 downloadLink.download = filename;
+            //                 downloadLink.click();
+            //             }
+            
+            //             document.body.removeChild(downloadLink);
 
+//-----------------------------
+var customCSS = `
+  <style>
+    div {
+      /* Add your CSS styles for div tags here */
+      font-size: 16px;
+      color: #333;
+      background-color: #eee;
+    }
+    p {
+      /* Add your CSS styles for p tags here */
+      font-size: 14px;
+      color: #444;
+    }
+    /* Add more CSS rules as needed */
+  </style>
+`;
+
+var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+            "xmlns:w='urn:schemas-microsoft-com:office:word' "+
+            "xmlns='http://www.w3.org/TR/REC-html40'>"+
+            "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title></head><body>";
+       var footer = "</body></html>";
+       var sourceHTML = header+element+footer;
+       
+       var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+       var fileDownload = document.createElement("a");
+       document.body.appendChild(fileDownload);
+       fileDownload.href = source;
+       fileDownload.download = 'document.doc';
+       fileDownload.click();
+       document.body.removeChild(fileDownload);
+        }
     </script>
 
 

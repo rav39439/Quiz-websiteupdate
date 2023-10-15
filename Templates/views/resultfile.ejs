@@ -41,8 +41,6 @@
     .new2 {
         text-align: center;
         margin-top: 90px;
-
-
         width: auto;
         height: auto;
         background-color: rgb(223, 228, 232);
@@ -53,12 +51,7 @@
     .newbutton {
         margin-left: 30px;
         margin-top: 10px;
-
     }
-
-
-
-
 
     #quizname {
         margin-left: 30px;
@@ -71,16 +64,13 @@
     }
 
     @media only screen and (max-width: 500px) {
-
         .new1 {
-
             height: 400px;
             width: 320px;
             margin-left: 10px;
         }
 
         .new2 {
-
             width: 300px;
             margin-left: 20px;
         }
@@ -99,20 +89,10 @@
         #mylogin {
             margin-left: 50px;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
             font-size: 30px;
         }
 
     }
-
-
-
-
-
-
-
-
-
 
     #rat {
         opacity: 0;
@@ -123,20 +103,14 @@
         font-weight: 500;
         color: #007bff;
         padding: 15px 30px;
-
         border-radius: 5px;
         background: #fff;
-
     }
-
-
-
 
     .info_box {
         width: 540px;
         background: #fff;
         border-radius: 5px;
-
         opacity: 0;
         pointer-events: none;
         transition: all 0.3s ease;
@@ -159,10 +133,7 @@
         width: 550px;
         background: #fff;
         border-radius: 5px;
-
         opacity: 1;
-
-
     }
 
     .activeQuiz {
@@ -239,8 +210,6 @@
         border: 1px solid #b8daff;
     }
 
-
-
     section .option_list .option.incorrect {
         color: #721c24;
         background: #f8d7da;
@@ -264,7 +233,6 @@
     }
 
     .green {
-
         background-color: red;
         font-family: 'Courier New', Courier, monospace;
     }
@@ -275,7 +243,6 @@
     }
 
     .option {
-
         border: 1px solid #84c5fe;
         border-radius: 5px;
         padding: 8px 15px;
@@ -283,14 +250,12 @@
         margin-bottom: 15px;
         cursor: pointer;
         transition: all 0.3s ease;
-
         align-items: center;
         justify-content: space-between;
 
     }
 
     .option2 {
-
         border: 1px solid #84c5fe;
         border-radius: 5px;
         padding: 8px 15px;
@@ -298,14 +263,11 @@
         margin-bottom: 15px;
         cursor: pointer;
         transition: all 0.3s ease;
-
         align-items: center;
         justify-content: space-between;
-
     }
 
     .option3 {
-
         border: 1px solid #84c5fe;
         border-radius: 5px;
         padding: 8px 15px;
@@ -313,14 +275,11 @@
         margin-bottom: 15px;
         cursor: pointer;
         transition: all 0.3s ease;
-
         align-items: center;
         justify-content: space-between;
-
     }
 
     .option4 {
-
         border: 1px solid #84c5fe;
         border-radius: 5px;
         padding: 8px 15px;
@@ -328,7 +287,6 @@
         margin-bottom: 15px;
         cursor: pointer;
         transition: all 0.3s ease;
-
         align-items: center;
         justify-content: space-between;
 
@@ -484,6 +442,7 @@
     <a href="/">
         <h2>Go back</h2>
     </a>
+    <div class="" id="resultdata">
     <div style="margin-left:20px;">
         <div style="width: 50%;">
             <div class="quiz_box" style="top:10px;left:10px;">
@@ -601,6 +560,8 @@
                
         </div>
     </div>
+    <button class='btn btn-primary ml-4' style="margin-left:12px" onclick="downloadData()">download</button>
+</div>
     <script>
 
 
@@ -1232,7 +1193,454 @@ option_tag +=`</div>`
 
         }
 
+        function downloadData(){
 
+            var customCSS = `
+  <style>
+    input[type="text"]::placeholder {
+
+/* Firefox, Chrome, Opera */
+text-align: center;
+}
+
+
+#mylogin {
+margin-left: 370px;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-size: 60px
+}
+
+.new1 {
+text-align: center;
+border-radius: 8px;
+width: 400px;
+height: 350px;
+background-color: aliceblue;
+margin-top: 40px;
+border: solid;
+margin-left: 300px
+}
+
+.new2 {
+text-align: center;
+margin-top: 90px;
+width: auto;
+height: auto;
+background-color: rgb(223, 228, 232);
+margin-top: 40px;
+margin-left: 300px
+}
+
+.newbutton {
+margin-left: 30px;
+margin-top: 10px;
+}
+
+#quizname {
+margin-left: 30px;
+width: 300px;
+margin-top: 20px;
+}
+
+#info {
+margin-top: 20px;
+}
+
+@media only screen and (max-width: 500px) {
+.new1 {
+    height: 400px;
+    width: 320px;
+    margin-left: 10px;
+}
+
+.new2 {
+    width: 300px;
+    margin-left: 20px;
+}
+
+#quizname {
+    width: 200px;
+
+    margin-left: 60px;
+}
+
+.newbutton {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+#mylogin {
+    margin-left: 50px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+}
+
+}
+
+#rat {
+opacity: 0;
+}
+
+.start_btn button {
+font-size: 25px;
+font-weight: 500;
+color: #007bff;
+padding: 15px 30px;
+border-radius: 5px;
+background: #fff;
+}
+
+.info_box {
+width: 540px;
+background: #fff;
+border-radius: 5px;
+opacity: 0;
+pointer-events: none;
+transition: all 0.3s ease;
+}
+
+.activeInf {
+opacity: 1;
+pointer-events: fill;
+}
+
+.btnstartdeactivate {
+opacity: 0
+}
+
+.btnstartactivate {
+opacity: 1;
+}
+
+.quiz_box {
+width: 550px;
+background: #fff;
+border-radius: 5px;
+opacity: 1;
+}
+
+.activeQuiz {
+opacity: 1;
+}
+
+
+.result_box {
+opacity: 0;
+
+}
+
+.showresultbox {
+opacity: 1;
+}
+
+
+.activeResult {
+margin-top: 0px;
+margin-left: 0px;
+opacity: 1;
+}
+
+
+.quiz_box header .timer {
+color: #004085;
+background: #cce5ff;
+border: 1px solid #b8daff;
+height: 45px;
+padding: 0 8px;
+border-radius: 5px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+width: 145px;
+}
+
+section {
+padding: 25px 30px 20px 30px;
+background: #fff;
+}
+
+section .que_text {
+font-size: 25px;
+font-weight: 600;
+}
+
+section .option_list {
+padding: 20px 0px;
+display: block;
+}
+
+section .option_list .option {
+background: aliceblue;
+border: 1px solid #84c5fe;
+border-radius: 5px;
+padding: 8px 15px;
+font-size: 17px;
+margin-bottom: 15px;
+cursor: pointer;
+transition: all 0.3s ease;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+
+section .option_list .option:last-child {
+margin-bottom: 0px;
+}
+
+section .option_list .option:hover {
+color: #004085;
+background: #cce5ff;
+border: 1px solid #b8daff;
+}
+
+section .option_list .option.incorrect {
+color: #721c24;
+background: #f8d7da;
+border: 1px solid #f5c6cb;
+}
+
+section .option_list .option.disabled {
+pointer-events: none;
+}
+
+section .option_list .option .icon {
+height: 26px;
+width: 26px;
+border: 2px solid transparent;
+border-radius: 50%;
+text-align: center;
+font-size: 13px;
+pointer-events: none;
+transition: all 0.3s ease;
+line-height: 24px;
+}
+
+.green {
+background-color: red;
+font-family: 'Courier New', Courier, monospace;
+}
+
+.red {
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+background-color: rgb(49, 153, 63);
+}
+
+.option {
+border: 1px solid #84c5fe;
+border-radius: 5px;
+padding: 8px 15px;
+font-size: 17px;
+margin-bottom: 15px;
+cursor: pointer;
+transition: all 0.3s ease;
+align-items: center;
+justify-content: space-between;
+
+}
+
+.option2 {
+border: 1px solid #84c5fe;
+border-radius: 5px;
+padding: 8px 15px;
+font-size: 17px;
+margin-bottom: 15px;
+cursor: pointer;
+transition: all 0.3s ease;
+align-items: center;
+justify-content: space-between;
+}
+
+.option3 {
+border: 1px solid #84c5fe;
+border-radius: 5px;
+padding: 8px 15px;
+font-size: 17px;
+margin-bottom: 15px;
+cursor: pointer;
+transition: all 0.3s ease;
+align-items: center;
+justify-content: space-between;
+}
+
+.option4 {
+border: 1px solid #84c5fe;
+border-radius: 5px;
+padding: 8px 15px;
+font-size: 17px;
+margin-bottom: 15px;
+cursor: pointer;
+transition: all 0.3s ease;
+align-items: center;
+justify-content: space-between;
+
+}
+
+.solution {
+width: 700px;
+background: #fff;
+border-radius: 5px;
+opacity: 1;
+
+}
+
+.solution_btn {
+opacity: 0;
+}
+
+.ff {
+font-size: 25px;
+font-weight: 400;
+font-family: 'Courier New', Courier, monospace;
+}
+
+.showsolutionbtn {
+opacity: 1;
+}
+
+.cred {}
+
+.ll {
+opacity: 1,
+}
+
+.finishexam {
+opacity: 0;
+}
+
+.activatefinish {
+opacity: 1;
+}
+
+.button1 {
+opacity: 0;
+}
+
+.activatebutton1 {
+opacity: 1;
+}
+
+.fg {
+opacity: 0;
+}
+
+.Myreg {
+opacity: 0;
+
+}
+
+.Myage {
+opacity: 0;
+}
+
+.marks {
+opacity: 0;
+}
+
+.quiz {
+opacity: 0;
+}
+
+.activemarks {
+opacity: 1;
+
+}
+
+.activereg {
+opacity: 1;
+}
+
+.activequiz {
+opacity: 1;
+}
+
+.activeage {
+opacity: 1;
+}
+
+.button2 {
+opacity: 0;
+
+}
+
+.button3 {
+opacity: 0;
+
+}
+
+.activebutton2 {
+opacity: 1;
+}
+
+.activebutton3 {
+opacity: 1;
+}
+
+#ty {
+margin-top: 15px;
+margin-left: 40px;
+height: 150px;
+width: 300px;
+}
+
+#passimg {
+height: 100px;
+width: 460px;
+}
+
+.myimgtag {
+height: 280px;
+width: 300px;
+}
+
+#ty1 {
+height: 300px;
+width: 500px;
+}
+
+#ty2 {
+height: 240px;
+width: 540px;
+}
+
+#ty3 {
+height: 150px;
+width: 600px;
+}
+
+.qsol {
+height: 300px;
+width: 500px;
+}
+
+.usermarks {
+background-color: #007bff !important;
+}
+.option{
+width: 80%;
+}
+  </style>
+`;
+
+            let data=document.getElementById('resultdata').innerHTML
+
+            var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
+            "xmlns:w='urn:schemas-microsoft-com:office:word' "+
+            "xmlns='http://www.w3.org/TR/REC-html40'>"+
+            "<head><meta charset='utf-8'><title>Export HTML to Word Document with JavaScript</title>" +
+  customCSS + // Include your custom CSS here
+  "</head><body>";
+       var footer = "</body></html>";
+       var sourceHTML = header+data+footer;
+       
+       var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+       var fileDownload = document.createElement("a");
+       document.body.appendChild(fileDownload);
+       fileDownload.href = source;
+       fileDownload.download = 'document.doc';
+       fileDownload.click();
+       document.body.removeChild(fileDownload);
+
+        }
 
 
 

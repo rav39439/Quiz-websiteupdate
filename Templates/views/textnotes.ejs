@@ -181,9 +181,6 @@
             let topicdetails = document.getElementById('topicdetails').value
             let grade1 = document.getElementById('grade').value
             let Page = document.getElementById('Page').value
-
-
-
             const result = await InspectDocuments(subject)
             const db = firebase.firestore();
             const collectionRef = db.collection('articles').doc(subject);
@@ -205,10 +202,7 @@
                         articletoBeModified.Text[i] = ''
                     }
                 }
-                // articletoBeModified.Text.forEach((text, index) => {
-                //     console.log("sssssssssssssssss")
-                // 
-                // })
+            
                 dataObject = {
                     [topic]: {
                         Text: articletoBeModified.Text,
