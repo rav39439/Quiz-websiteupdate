@@ -35,6 +35,57 @@
     p {
         margin-left: 12px;
     }
+
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+}
+
+#news-ticker {
+      width: 100%;
+      height: 50px;
+      overflow: hidden;
+      white-space: nowrap;
+      background-color: #333;
+      color: #fff;
+      padding: 10px 0;
+    }
+    .ticker-item {
+      font-size: 20px;
+      padding: 50px; /* Add spacing between news items */
+      display: inline-block;
+    }
+    #ticker-content {
+        /* animation-iteration-count: infinite;
+animation-timing-function: linear;
+      animation: ticker 30s linear infinite;  */
+    }
+
+    .ticker-transition {
+        width: 270%; 
+display: inline-block;
+white-space: nowrap;
+animation-iteration-count: infinite;
+animation-timing-function: linear;
+animation-name: ticker;
+animation-duration: 40s;
+}
+    @keyframes ticker {
+      0% {
+        transform: translateX(100%);
+      }
+      50% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+    .ticker-separator{
+        margin-left: 150px;
+    }
 </style>
 
 <%- include('../partials/heading.hbs') %>
@@ -58,6 +109,52 @@
             <div id="alltopics" style="display: none;">
                 <%=alltop%>
             </div>
+
+
+            <!-- <div class="ticker-container">
+                <div class="ticker-wrapper">
+                <div class="ticker-transition">
+                <div class="ticker-item">Item 1.</div>
+                <div class="ticker-item">Item 2.</div>
+                <div class="ticker-item">Item 3.</div>
+                <div class="ticker-item">Item 4.</div>
+                </div>
+                </div>
+                </div> -->
+
+
+            <div id="news-ticker">
+                <div id="ticker-content">
+                    <div class="ticker-transition">
+
+                  Breaking News: Scientists Discover New Species of Giant Squid Off the Coast
+                  <span class="ticker-separator"> </span>
+                  World Economy: Stock Markets Surge as Investors Respond to Positive Earnings Reports
+                  <span class="ticker-separator"> </span>
+                  Health Update: New Vaccine Shows Promise in Combating Rare Virus
+                  <span class="ticker-separator"> </span>
+                  Technology News: Apple Unveils Latest iPhone with Advanced Features
+                  <span class="ticker-separator"> </span>
+                  Climate Report: Record Temperatures Predicted for Upcoming Summer
+                  <span class="ticker-separator"> </span>
+                  Sports Update: Local Team Advances to Championship Finals
+                  <span class="ticker-separator"> </span>
+                  <!-- Entertainment Buzz: Oscar Nominations Announced for 2023
+                  <span class="ticker-separator"> </span>
+                  Travel Alert: New COVID-19 Travel Restrictions Implemented
+                  <span class="ticker-separator"> </span> -->
+                </div>
+              </div>
+            </div>
+
+            
+              <script>
+                // JavaScript can be added here for dynamic content or interactions.
+              </script>
+            </body>
+            </html>
+          
+            
             <div style="width: 100%; margin-top: 20px; ">
                 <div class="container " style="width: 60%;  margin-bottom:40px; border-radius:12px;">
                     <div style="display:grid; grid-template-columns: 60% 20% 20%; gap: 30px;">
@@ -131,6 +228,14 @@
 
 
     <script>
+
+const newsData = [
+    "Breaking news: Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    "New study shows that cats rule and dogs drool!",
+    "Tech giant XYZ announces record-breaking profits.",
+    "Local sports team wins the championship.",
+    "Weather forecast: Sunny skies with a chance of rain later.",
+];
         let globalLength
         let updatedData
         let keys
@@ -407,8 +512,7 @@ if(document.getElementById('goBack')!=null){
                             //     <div style="width:80%;text-align:center;margin-left:10px !important;margin-top:100px">
 
                             //     ${response.articledata.Text}
-                            //     <button class="btn btn-primary" style=" border-radius:17px;">
-                            //     <a href="/goBack?data=${goBackData}" style="text-decoration:none;color:black" >Go Back</a></button>
+                            //   
                             //  </div>
                             //     `
                             let numberofbuttons=response.articledata.Text.length
@@ -894,6 +998,29 @@ var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' "+
        fileDownload.click();
        document.body.removeChild(fileDownload);
         }
+
+
+//         function displayNews() {
+//     const newsContent = document.getElementById("news-content");
+
+//     newsData.forEach((headline, index) => {
+//         const newsItem = document.createElement("div");
+//         newsItem.textContent = headline;
+//         newsContent.appendChild(newsItem);
+
+//         // Add a separator (pipe character) between headlines, except for the last one
+//         if (index < newsData.length - 1) {
+//             const separator = document.createElement("span");
+//             separator.textContent = " | ";
+//             newsContent.appendChild(separator);
+//         }
+//     });
+// }
+
+// // Start the ticker
+// displayNews();
+       
+
     </script>
 
 

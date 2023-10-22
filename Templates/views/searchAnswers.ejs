@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+      p {
+        margin-left: 12px;
+    }
+</style>
+<body>
+    <%- include('../partials/heading.hbs') %>
+
+    <div id="tags" style="display: none;">
+        <%=articles%>
+    </div>
+    <div id="documents" style="display: none;">
+        <%=documents%>
+    </div>
+    <div class="input-group-prepend">
+        <label for="topic"
+            style="font-size: 20px; margin-bottom: 5px;font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Enter
+            Queries</label>
+        <input type="text" style=" border-radius:10px; width: 70%; height: 40px; margin-top:20px" id="queries" class="form-control"
+            aria-describedby="basic-addon2">
+
+            <button class="btn btn-primary mt-4" style=" border-radius:17px;" onclick="search()">
+    search</button>
+    </div>
+
+
+    <div id="Ans" class=""
+    style="width: 100%; ">
+
+</div>
+
+</body>
+</html>
+
+<script>
+    let alltags
+    let Tags
+let Documents
+getAllTags()
+getAlldocuments()
+
+
+function getAllTags(){
+    let tags=JSON.parse(document.getElementById('tags').innerText)
+    console.log(tags)
+    Tags=tags.Tags
+
+}
+
+function getAlldocuments(){
+let documents=JSON.parse(document.getElementById('documents').innerText)
+Documents=documents['Articledata']
+}
+
+function search(){
+   let query=document.getElementById('queries').value 
+let arrayquery=query.split(' ')
+getTagsfromquery(arrayquery)
+}
+
+function getTagsfromquery(queryarr){
+    let tagsTosearch=Tags.filter(t=>queryarr.includes(t.tag))
+    let docArr=tagsTosearch.map(document=>document.doc)
+    let resultantDoc=findMostRepeatedElement(docArr)
+    showthisDoc(resultantDoc)
+}
+
+function showthisDoc(resultdoc){
+    let doc=Documents.find(e=>e.topicName==resultdoc)
+    console.log(doc)
+    document.getElementById('Ans').innerHTML=
+    `
+    <div class="" style=" background-color: rgb(230, 230, 250);width: 100%;border-radius:16px;margin-top:40px;margin-left:5px" id="">
+    ${doc.Text}
+</div>
+    `
+
+}
+
+
+function findMostRepeatedElement(arr) {
+  // Create an object to store the frequency of each element
+  const frequencyMap = {};
+
+  // Initialize variables to keep track of the most repeated element and its frequency
+  let mostRepeatedElement;
+  let maxFrequency = 0;
+
+  // Iterate through the array and update the frequency map
+  for (const element of arr) {
+    if (frequencyMap[element]) {
+      frequencyMap[element]++;
+    } else {
+      frequencyMap[element] = 1;
+    }
+
+    // Check if the current element has a higher frequency than the previous most repeated element
+    if (frequencyMap[element] > maxFrequency) {
+      mostRepeatedElement = element;
+      maxFrequency = frequencyMap[element];
+    }
+  }
+
+  return mostRepeatedElement;
+}
+
+
+</script>

@@ -195,9 +195,7 @@ app.get('/', function (req, res) {
             let updatedarticles = fetchdata(articles)
             let k='default'
             let m='default'
-
             let l='default'
-
             res.render('allArticles.ejs', { articles: JSON.stringify(updatedarticles), allarticles: articles, goback: JSON.stringify(l), alltopics: filterDuplicates(res.locals.subjects), alltop: JSON.stringify(res.locals.subjects), grade:JSON.stringify(k), topic:JSON.stringify(m)});
         })
         .catch((error) => {
@@ -233,7 +231,24 @@ function fetchdata(data) {
     return d
 }
 
-
+app.get('/searchAns', (req, res) => {
+    let db = firebase.firestore()
+    db.collection('articles')
+        .get()
+        .then((querySnapshot) => {
+            const articles = [];
+            querySnapshot.forEach((doc) => {
+                articles.push(doc.data());
+            });
+            let updatedarticles = fetchdata(articles)
+            console.log(articles[5])
+           
+            res.render('searchAnswers.ejs', { articles:JSON.stringify(articles[5]),documents:JSON.stringify(articles[0]) });
+        })
+        .catch((error) => {
+            console.log('Error getting documents:', error);
+        });
+})
 
 app.post('/getAll', (req, res) => {
     const collectionName = 'articles';
