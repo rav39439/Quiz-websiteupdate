@@ -56,26 +56,25 @@
 
     function getAllTags() {
         let tags = JSON.parse(document.getElementById('tags').innerText)
-        console.log(tags)
         Tags = tags.Tags
 
-       let html=`<p>Two triangles are&nbsp;<a href="https://www.mathsisfun.com/geometry/similar.html">Similar</a>&nbsp;if the only difference is size (and possibly the need to turn or flip one around).</p><p class="center">These triangles are all similar:</p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-similar1.svg" alt="triangles similar different sizes and rotations" width="388" height="168"></p><p class="center">(Equal angles have been marked with the same number of arcs)</p><p>Notice that, as well as different sizes, some of them are turned or flipped.</p><p>&nbsp;</p><p>For similar triangles:</p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-corresponding-angles.svg" alt="corresponding angles on two triangles" width="272" height="126"><br>All corresponding angles are equal</p><p class="center"><em>and</em></p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-corresponding-sides.svg" alt="corresponding sides on two triangles" width="277" height="152"><br>All corresponding sides have the same&nbsp;<a href="https://www.mathsisfun.com/numbers/ratio.html">ratio</a></p><p>Also notice that the&nbsp;<span class="center">corresponding sides</span>&nbsp;face the corresponding angles. For example the sides that face the angles with two arcs&nbsp;are corresponding.</p><h2>Corresponding Sides</h2><p>In similar triangles,&nbsp;<span class="center">corresponding</span>&nbsp;sides are always in the same ratio.</p><p>For example:</p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-similar2.svg" alt="triangles similar R: (6,7,8) and S: (b,a,6.4)" width="360" height="133"></p><p>Triangles&nbsp;<strong>R</strong>&nbsp;and&nbsp;<strong>S</strong>&nbsp;are similar. The equal angles are marked with the same numbers of arcs.</p><p>What are the corresponding lengths?</p><ul><li>The lengths&nbsp;<strong>7</strong>&nbsp;and&nbsp;<strong>a</strong>&nbsp;are corresponding (they face the angle marked with one arc)</li><li>The lengths&nbsp;<strong>8</strong>&nbsp;and&nbsp;<strong>6.4</strong>&nbsp;are corresponding (they face the angle marked with two arcs)</li><li>The lengths&nbsp;<strong>6</strong>&nbsp;and&nbsp;<strong>b</strong>&nbsp;are corresponding (they face the angle marked with three arcs)</li></ul><h2>Calculating the Lengths of Corresponding Sides</h2><p>We can sometimes calculate lengths we don't know yet.</p><ul><li>Step 1: Find&nbsp;<strong>the ratio</strong>&nbsp;of corresponding sides</li><li>Step 2: Use that ratio to find the unknown lengths</li></ul><div class="example"><h3>Example: Find lengths a and b of Triangle S</h3><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-similar2.svg" alt="triangles similar R: (6,7,8) and S: (b,a,6.4)" width="360" height="133"></p><h3>Step 1: Find the ratio</h3><p class="indent50px">We know all the sides in Triangle<strong>&nbsp;R</strong>, and<br>We know the side&nbsp;<strong>6.4</strong>&nbsp;in Triangle<strong>&nbsp;S</strong></p><p class="indent50px">The 6.4 faces the angle marked with two arcs as does the side of length 8 in triangle&nbsp;<strong>R</strong>.</p><p class="indent50px">So we can match&nbsp;<strong>6.4 with 8</strong>, and so the&nbsp;<a href="https://www.mathsisfun.com/numbers/ratio.html">ratio</a>&nbsp;of sides in triangle<strong>&nbsp;S</strong>&nbsp;to triangle&nbsp;<strong>R</strong>&nbsp;is:</p><p class="indent50px" align="center">6.4 to 8</p><p class="indent50px">Now we know that the lengths of sides in triangle<strong>&nbsp;S</strong>&nbsp;are all&nbsp;<strong>6.4/8 times</strong>&nbsp;the lengths of sides in triangle&nbsp;<strong>R</strong>.</p><h3>Step 2: Use the ratio</h3><div class="indent50px"><p><strong>a</strong>&nbsp;faces the angle with one arc as does the side of length 7 in triangle&nbsp;<strong>R</strong>.</p><div class="so"><strong>a</strong>&nbsp;= (6.4/8) &times; 7 = 5.6</div><p>&nbsp;</p><p><strong>b</strong>&nbsp;faces the angle with three arcs as does the side of length 6 in triangle&nbsp;<strong>R</strong>.</p><div class="so"><strong>b</strong>&nbsp;= (6.4/8) &times; 6 = 4.8</div><p>&nbsp;</p><p>Done!</p></div></div><div class="fun"><p><img src="https://www.mathsisfun.com/measure/images/thumb-distance-far.svg" alt="thumb distance far" width="" height=""></p><p>Did You Know? Similar triangles can help you&nbsp;<a href="https://www.mathsisfun.com/measure/estimate-distance.html">estimate distances</a>.</p></div>`
-       document.getElementById('dd').innerHTML=html
-       if (html.length > 0) {
-        const htmlCollection = document.getElementsByTagName('p');
-        console.log(htmlCollection) // Replace 'p' with the tag name you want to select
+        let html = `<p>Two triangles are&nbsp;<a href="https://www.mathsisfun.com/geometry/similar.html">Similar</a>&nbsp;if the only difference is size (and possibly the need to turn or flip one around).</p><p class="center">These triangles are all similar:</p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-similar1.svg" alt="triangles similar different sizes and rotations" width="388" height="168"></p><p class="center">(Equal angles have been marked with the same number of arcs)</p><p>Notice that, as well as different sizes, some of them are turned or flipped.</p><p>&nbsp;</p><p>For similar triangles:</p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-corresponding-angles.svg" alt="corresponding angles on two triangles" width="272" height="126"><br>All corresponding angles are equal</p><p class="center"><em>and</em></p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-corresponding-sides.svg" alt="corresponding sides on two triangles" width="277" height="152"><br>All corresponding sides have the same&nbsp;<a href="https://www.mathsisfun.com/numbers/ratio.html">ratio</a></p><p>Also notice that the&nbsp;<span class="center">corresponding sides</span>&nbsp;face the corresponding angles. For example the sides that face the angles with two arcs&nbsp;are corresponding.</p><h2>Corresponding Sides</h2><p>In similar triangles,&nbsp;<span class="center">corresponding</span>&nbsp;sides are always in the same ratio.</p><p>For example:</p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-similar2.svg" alt="triangles similar R: (6,7,8) and S: (b,a,6.4)" width="360" height="133"></p><p>Triangles&nbsp;<strong>R</strong>&nbsp;and&nbsp;<strong>S</strong>&nbsp;are similar. The equal angles are marked with the same numbers of arcs.</p><p>What are the corresponding lengths?</p><ul><li>The lengths&nbsp;<strong>7</strong>&nbsp;and&nbsp;<strong>a</strong>&nbsp;are corresponding (they face the angle marked with one arc)</li><li>The lengths&nbsp;<strong>8</strong>&nbsp;and&nbsp;<strong>6.4</strong>&nbsp;are corresponding (they face the angle marked with two arcs)</li><li>The lengths&nbsp;<strong>6</strong>&nbsp;and&nbsp;<strong>b</strong>&nbsp;are corresponding (they face the angle marked with three arcs)</li></ul><h2>Calculating the Lengths of Corresponding Sides</h2><p>We can sometimes calculate lengths we don't know yet.</p><ul><li>Step 1: Find&nbsp;<strong>the ratio</strong>&nbsp;of corresponding sides</li><li>Step 2: Use that ratio to find the unknown lengths</li></ul><div class="example"><h3>Example: Find lengths a and b of Triangle S</h3><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-similar2.svg" alt="triangles similar R: (6,7,8) and S: (b,a,6.4)" width="360" height="133"></p><h3>Step 1: Find the ratio</h3><p class="indent50px">We know all the sides in Triangle<strong>&nbsp;R</strong>, and<br>We know the side&nbsp;<strong>6.4</strong>&nbsp;in Triangle<strong>&nbsp;S</strong></p><p class="indent50px">The 6.4 faces the angle marked with two arcs as does the side of length 8 in triangle&nbsp;<strong>R</strong>.</p><p class="indent50px">So we can match&nbsp;<strong>6.4 with 8</strong>, and so the&nbsp;<a href="https://www.mathsisfun.com/numbers/ratio.html">ratio</a>&nbsp;of sides in triangle<strong>&nbsp;S</strong>&nbsp;to triangle&nbsp;<strong>R</strong>&nbsp;is:</p><p class="indent50px" align="center">6.4 to 8</p><p class="indent50px">Now we know that the lengths of sides in triangle<strong>&nbsp;S</strong>&nbsp;are all&nbsp;<strong>6.4/8 times</strong>&nbsp;the lengths of sides in triangle&nbsp;<strong>R</strong>.</p><h3>Step 2: Use the ratio</h3><div class="indent50px"><p><strong>a</strong>&nbsp;faces the angle with one arc as does the side of length 7 in triangle&nbsp;<strong>R</strong>.</p><div class="so"><strong>a</strong>&nbsp;= (6.4/8) &times; 7 = 5.6</div><p>&nbsp;</p><p><strong>b</strong>&nbsp;faces the angle with three arcs as does the side of length 6 in triangle&nbsp;<strong>R</strong>.</p><div class="so"><strong>b</strong>&nbsp;= (6.4/8) &times; 6 = 4.8</div><p>&nbsp;</p><p>Done!</p></div></div><div class="fun"><p><img src="https://www.mathsisfun.com/measure/images/thumb-distance-far.svg" alt="thumb distance far" width="" height=""></p><p>Did You Know? Similar triangles can help you&nbsp;<a href="https://www.mathsisfun.com/measure/estimate-distance.html">estimate distances</a>.</p></div>`
+        document.getElementById('dd').innerHTML = html
+        if (html.length > 0) {
+            const htmlCollection = document.getElementsByTagName('p');
+            // console.log(htmlCollection) // Replace 'p' with the tag name you want to select
 
-    // Access the first element by index (index 0)
-    // const firstElement = html[0];
+            // Access the first element by index (index 0)
+            // const firstElement = html[0];
 
-    // Get the content of the first element
-    // const firstLineContent = firstElement.textContent;
+            // Get the content of the first element
+            // const firstLineContent = firstElement.textContent;
 
-    // // Log or work with the content of the first line
-    // console.log(firstelm);
-} else {
-    console.log('HTML collection is empty.');
-}
+            // // Log or work with the content of the first line
+            // console.log(firstelm);
+        } else {
+            console.log('HTML collection is empty.');
+        }
 
 
     }
@@ -95,20 +94,28 @@
         let tagsTosearch = Tags.filter(t => queryarr.includes(t.tag))
         let docArr = tagsTosearch.map(document => document.doc)
 
-        let resultantDoc =findMostRepeatedElement(docArr)
-        console.log(resultantDoc)
+        let result = hasDuplicates(docArr)
+        if (result) {
+            let resultantDoc = findMostRepeatedElement(docArr)
+
+        } else {
+            resultantDoc = null
+        }
 
         showthisDoc(resultantDoc, tagsTosearch)
 
     }
 
     function showthisDoc(resultdoc, tagsTosearch) {
-        let doc = Documents.find(e => e.topicName == resultdoc)
-        let html=getExactAnsFromtext(doc, tagsTosearch)
-        //let html = doc.Text
-        //const text = html.replace(/<[^>]*>/g, '');
-
-
+        let html=``
+        if(resultdoc!=null){
+            let doc = Documents.find(e => e.topicName == resultdoc)
+     html = getExactAnsFromtext(doc, tagsTosearch)
+        }
+        else{
+            html='`<h1> Not found </h1>`'
+        }
+     
         document.getElementById('Ans').innerHTML =
             `
     <div class="" style=" background-color: rgb(230, 230, 250);width: 100%;border-radius:16px;margin-top:40px;margin-left:5px" id="">
@@ -119,42 +126,59 @@
     }
 
     function getExactAnsFromtext(doc, tagsTosearch) {
-//
-       // let arrayofTexts = doc.Text.map(d => d.replace(/<[^>]*>/g, ''))
-       let arrayofTexts=[]
-       doc.Text.forEach((e)=>{
-        document.getElementById('dd').innerHTML=e
-        let text=document.getElementById('mmrg').innerText
-        arrayofTexts.push(text)
-       })
-        wordstosearch=tagsTosearch.map(e=>e.tag)
-        let html = ArrwithAllwords(arrayofTexts,wordstosearch,doc.Text)
-        console.log(arrayofTexts)
+        let docs = []
+        // let arrayofTexts = doc.Text.map(d => d.replace(/<[^>]*>/g, ''))
+        let newtags = []
+        let filteredquestions = []
+        //    console.log(doc)
+        doc.questions[0].split(',').forEach((e) => {
+            filteredquestions.push(e.trim())
+        })
+        //  tagsTosearch=tagsTosearch.filter(dc=>filteredquestions.includes(dc.tags))
+
+        tagsTosearch.forEach((dc) => {
+            if (filteredquestions.includes(dc.tag)) {
+                newtags.push(dc)
+            }
+        })
+        tagsTosearch = newtags
+        // console.log(filteredquestions)
+        // console.log(tagsTosearch)
+
+        //        console.log(doc.questions)
+        let arrayofTexts = []
+        doc.Text.forEach((e) => {
+            document.getElementById('dd').innerHTML = e
+            let text = document.getElementById('mmrg').innerText
+            arrayofTexts.push(text)
+            docs.push(document.getElementById('mmrg'))
+        })
+        wordstosearch = tagsTosearch.map(e => e.tag)
+        let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs)
         return html
     }
 
 
     function containsAllWords(wordString, wordsToSearch) {
-        
+
         const wordArray = wordString.split(' ');
         return wordsToSearch.every(word => wordArray.includes(word));
     }
 
     // Check each string of words
 
-    function ArrwithAllwords(arrayofTexts,wordsToSearch,htmlText) {
+    function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs) {
         let text
         for (let i = 0; i < arrayofTexts.length; i++) {
             if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
                 text = htmlText[i]
-                console.log("found")
-                console.log(text)
+                console.log('found')
 
                 break
             } else {
                 console.log("not found")
 
-                text = htmlText[0]
+                text = `Not Found`
                 continue
             }
 
@@ -190,5 +214,37 @@
         return mostRepeatedElement;
     }
 
+    function removeElement(doc, htmlCollection) {
 
+        const elementToRemove = doc
+        let resulthtml
+        // Check if the element exists in the collection
+        if (elementToRemove) {
+            // Remove the element from the collection
+            const index = Array.from(htmlCollection).indexOf(elementToRemove);
+            if (index !== -1) {
+                resulthtml = htmlCollection[index].remove();
+            } else {
+                resulthtml = htmlCollection
+                console.log('Element not found in the collection.');
+            }
+        } else {
+            console.log('Element with ID "dd" not found.');
+        }
+        return resulthtml
+    }
+
+
+    function hasDuplicates(array) {
+        const uniqueValues = new Set(); // Use a Set to store unique values
+
+        for (const item of array) {
+            if (uniqueValues.has(item)) {
+                return true; // Found a duplicate
+            }
+            uniqueValues.add(item);
+        }
+
+        return false; // No duplicates found
+    }
 </script>
