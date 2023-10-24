@@ -49,6 +49,7 @@
     let alltags
     let Tags
     let Documents
+    let alltopicdetails=[]
     getAllTags()
     getAlldocuments()
 
@@ -57,6 +58,7 @@
     function getAllTags() {
         let tags = JSON.parse(document.getElementById('tags').innerText)
         Tags = tags.Tags
+        console.log(Tags)
 
         let html = `<p>Two triangles are&nbsp;<a href="https://www.mathsisfun.com/geometry/similar.html">Similar</a>&nbsp;if the only difference is size (and possibly the need to turn or flip one around).</p><p class="center">These triangles are all similar:</p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-similar1.svg" alt="triangles similar different sizes and rotations" width="388" height="168"></p><p class="center">(Equal angles have been marked with the same number of arcs)</p><p>Notice that, as well as different sizes, some of them are turned or flipped.</p><p>&nbsp;</p><p>For similar triangles:</p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-corresponding-angles.svg" alt="corresponding angles on two triangles" width="272" height="126"><br>All corresponding angles are equal</p><p class="center"><em>and</em></p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-corresponding-sides.svg" alt="corresponding sides on two triangles" width="277" height="152"><br>All corresponding sides have the same&nbsp;<a href="https://www.mathsisfun.com/numbers/ratio.html">ratio</a></p><p>Also notice that the&nbsp;<span class="center">corresponding sides</span>&nbsp;face the corresponding angles. For example the sides that face the angles with two arcs&nbsp;are corresponding.</p><h2>Corresponding Sides</h2><p>In similar triangles,&nbsp;<span class="center">corresponding</span>&nbsp;sides are always in the same ratio.</p><p>For example:</p><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-similar2.svg" alt="triangles similar R: (6,7,8) and S: (b,a,6.4)" width="360" height="133"></p><p>Triangles&nbsp;<strong>R</strong>&nbsp;and&nbsp;<strong>S</strong>&nbsp;are similar. The equal angles are marked with the same numbers of arcs.</p><p>What are the corresponding lengths?</p><ul><li>The lengths&nbsp;<strong>7</strong>&nbsp;and&nbsp;<strong>a</strong>&nbsp;are corresponding (they face the angle marked with one arc)</li><li>The lengths&nbsp;<strong>8</strong>&nbsp;and&nbsp;<strong>6.4</strong>&nbsp;are corresponding (they face the angle marked with two arcs)</li><li>The lengths&nbsp;<strong>6</strong>&nbsp;and&nbsp;<strong>b</strong>&nbsp;are corresponding (they face the angle marked with three arcs)</li></ul><h2>Calculating the Lengths of Corresponding Sides</h2><p>We can sometimes calculate lengths we don't know yet.</p><ul><li>Step 1: Find&nbsp;<strong>the ratio</strong>&nbsp;of corresponding sides</li><li>Step 2: Use that ratio to find the unknown lengths</li></ul><div class="example"><h3>Example: Find lengths a and b of Triangle S</h3><p class="center"><img src="https://www.mathsisfun.com/geometry/images/tri-similar2.svg" alt="triangles similar R: (6,7,8) and S: (b,a,6.4)" width="360" height="133"></p><h3>Step 1: Find the ratio</h3><p class="indent50px">We know all the sides in Triangle<strong>&nbsp;R</strong>, and<br>We know the side&nbsp;<strong>6.4</strong>&nbsp;in Triangle<strong>&nbsp;S</strong></p><p class="indent50px">The 6.4 faces the angle marked with two arcs as does the side of length 8 in triangle&nbsp;<strong>R</strong>.</p><p class="indent50px">So we can match&nbsp;<strong>6.4 with 8</strong>, and so the&nbsp;<a href="https://www.mathsisfun.com/numbers/ratio.html">ratio</a>&nbsp;of sides in triangle<strong>&nbsp;S</strong>&nbsp;to triangle&nbsp;<strong>R</strong>&nbsp;is:</p><p class="indent50px" align="center">6.4 to 8</p><p class="indent50px">Now we know that the lengths of sides in triangle<strong>&nbsp;S</strong>&nbsp;are all&nbsp;<strong>6.4/8 times</strong>&nbsp;the lengths of sides in triangle&nbsp;<strong>R</strong>.</p><h3>Step 2: Use the ratio</h3><div class="indent50px"><p><strong>a</strong>&nbsp;faces the angle with one arc as does the side of length 7 in triangle&nbsp;<strong>R</strong>.</p><div class="so"><strong>a</strong>&nbsp;= (6.4/8) &times; 7 = 5.6</div><p>&nbsp;</p><p><strong>b</strong>&nbsp;faces the angle with three arcs as does the side of length 6 in triangle&nbsp;<strong>R</strong>.</p><div class="so"><strong>b</strong>&nbsp;= (6.4/8) &times; 6 = 4.8</div><p>&nbsp;</p><p>Done!</p></div></div><div class="fun"><p><img src="https://www.mathsisfun.com/measure/images/thumb-distance-far.svg" alt="thumb distance far" width="" height=""></p><p>Did You Know? Similar triangles can help you&nbsp;<a href="https://www.mathsisfun.com/measure/estimate-distance.html">estimate distances</a>.</p></div>`
         document.getElementById('dd').innerHTML = html
@@ -82,6 +84,16 @@
     function getAlldocuments() {
         let documents = JSON.parse(document.getElementById('documents').innerText)
         Documents = documents['Articledata']
+        console.log(Documents)
+        alltopicdetails=documents['Articledata'].map(e=>e.Topicdetails.split(' '))
+        // documents['Articledata'].forEach((e)=>{
+        //     let b=[]
+        //     e.Topicdetails.split(' ').forEach((d)=>{
+        //         b.push(d.trim())
+        //     })
+        //     alltopicdetails.push(b)
+        // })
+        console.log(alltopicdetails)
     }
 
     function search() {
@@ -91,16 +103,18 @@
     }
 
     function getTagsfromquery(queryarr) {
+        let resultantDoc 
         let tagsTosearch = Tags.filter(t => queryarr.includes(t.tag))
+        console.log(tagsTosearch)
         let docArr = tagsTosearch.map(document => document.doc)
 
-        let result = hasDuplicates(docArr)
-        if (result) {
-            let resultantDoc = findMostRepeatedElement(docArr)
+        // let result = hasDuplicates(docArr)
+        // if (result) {
+             resultantDoc = findMostRepeatedElement(docArr)
 
-        } else {
-            resultantDoc = null
-        }
+        // } else {
+        //     resultantDoc = null
+        // }
 
         showthisDoc(resultantDoc, tagsTosearch)
 
@@ -108,8 +122,35 @@
 
     function showthisDoc(resultdoc, tagsTosearch) {
         let html=``
-        if(resultdoc!=null){
-            let doc = Documents.find(e => e.topicName == resultdoc)
+
+        tagsinques=tagsTosearch.map(e=>e.tag)
+        // console.log(tagsTosearch)
+
+        // console.log(alltopicdetails)
+        let doci
+        for(let i=0;i<alltopicdetails.length;i++){
+            console.log(alltopicdetails[i])
+            console.log(tagsinques)
+            console.log(containsAllWordsdet(tagsinques,alltopicdetails[i]))
+            if(containsAllWordsdet(tagsinques,alltopicdetails[i])){
+
+                doci=Documents[i]
+                console.log("dddddddd")
+            }
+           
+        }
+        let doc
+        if(typeof(doci)!='undefined'){
+           doc=doci
+        }
+        else{
+         doc==null
+        }
+
+        console.log(doc)
+
+        if(doc!=null){
+        //  let doc = Documents.find(e => e.topicName == resultdoc)
      html = getExactAnsFromtext(doc, tagsTosearch)
         }
         else{
@@ -130,7 +171,6 @@
         // let arrayofTexts = doc.Text.map(d => d.replace(/<[^>]*>/g, ''))
         let newtags = []
         let filteredquestions = []
-        //    console.log(doc)
         doc.questions[0].split(',').forEach((e) => {
             filteredquestions.push(e.trim())
         })
@@ -247,4 +287,35 @@
 
         return false; // No duplicates found
     }
+
+    function containsAllWordsdet(userTags, documentTags) {
+        for (let i = 0; i < documentTags.length; i++) {
+    if (userTags.indexOf(documentTags[i]) === -1) {
+      return false;
+    }
+  }
+  return true;
+// return documentTags.every(word => userTags.includes(word));
+}
+
+function isSpecificSubset(subset, superset) {
+  for (let i = 0; i < subset.length; i++) {
+    if (superset.indexOf(subset[i]) === -1) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// const subset = ['triangles'];
+// const superset = ["similarity", "of", "triangles"];
+
+// if (isSpecificSubset(subset, superset)) {
+//   console.log("['triangles'] is a subset ");
+// } else {
+//   console.log("['triangles'] is not a subset ");
+// }
+
+
+
 </script>
