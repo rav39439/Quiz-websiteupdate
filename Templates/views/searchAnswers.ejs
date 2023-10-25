@@ -12,6 +12,8 @@
     }
 </style>
 
+
+
 <body>
     <%- include('../partials/heading.hbs') %>
 
@@ -153,15 +155,16 @@
         }
 
          document.getElementById('dd').innerHTML=html
+         let modifiedHTML=removeDivAndChildren(document.getElementById('dd').innerHTML)
 
-        console.log(document.getElementById('dd').children[0].innerHTML)
-    if(document.getElementById('dd').children[0].tagName=='DIV'){
-        document.getElementById('dd').innerHTML=document.getElementById('dd').children[0].innerHTML
-    }
+         console.log(modifiedHTML)
+
+    // if(document.getElementById('dd').children[0].tagName=='DIV'){
+    //     document.getElementById('dd').innerHTML=document.getElementById('dd').children[0].innerHTML
+    // }
         // getHTMLTags()
          let updatedHtml=getHTMLTags()
-       //  console.log(updatedHtml.split(' '))
-       console.log(updatedHtml)
+        console.log(updatedHtml)
 
          settext(updatedHtml)
      
@@ -357,9 +360,9 @@ function settext(wordArray) {
     html+=wordArray[i]
     setTimeout(() => {
         document.getElementById('Ans').innerHTML=document.getElementById('Ans').innerHTML+wordArray[i];
-        console.log(document.getElementById('Ans').innerHTML)
     },i*50); // Delay each word by i seconds
   }
+
 }
 
 // function settext(wordArray) {
@@ -466,11 +469,25 @@ if (divElement) {
                 })
         } 
         else if(tag.nodeName.toLowerCase() === 'h1' || tag.nodeName.toLowerCase() === 'h2' || tag.nodeName.toLowerCase() === 'h3'){
-            tag.textContent.split(' ').forEach((el)=>{
-                    let html=`<p>${el}</p>`
-                    pTagsArray.push(el + ' ');
-                })
+            // tag.textContent.split(' ').forEach((el)=>{
+                    let html=`<h2>${tag.textContent}</h2>`
+                    pTagsArray.push(html + ' ');
+              //  })
         }
+
+        else if(tag.nodeName.toLowerCase() === 'div'){
+            // tag.textContent.split(' ').forEach((el)=>{
+            //         let html=`<p>${el}</p>`
+            //         pTagsArray.push(el + ' ');
+            //     })
+        }
+
+        else if(tag.nodeName.toLowerCase() === 'li'){
+            // pTagsArray.push(tag.outerHTML);
+
+        }
+
+       
         
         else {
             // If it's not a <p> tag, add it to 'otherTagsArray'
@@ -483,9 +500,27 @@ if (divElement) {
 } else {
     console.log("Element with ID 'hjh' not found.");
 }
+console.log(pTagsArray)
 return pTagsArray
 }
 
+function removeDivAndChildren(collection) {
+  const resultCollection = document.createDocumentFragment(); // Create a new DocumentFragment to hold the modified elements
+let netel=[]
+  for (let i = 0; i < collection.length; i++) {
+    const element = collection[i];
+
+    // Check if the element is a <div>
+    if (element.tagName === "DIV") {
+      // If it's a <div>, skip this element and its descendants
+    }
+    else{
+        netel.push(element)
+    }
+  }
+
+  return netel; // Convert the DocumentFragment to an HTMLCollection
+}
 
 
 
