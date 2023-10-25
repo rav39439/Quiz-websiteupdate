@@ -153,10 +153,16 @@
         }
 
          document.getElementById('dd').innerHTML=html
-         getHTMLTags()
+
+        console.log(document.getElementById('dd').children[0].innerHTML)
+    if(document.getElementById('dd').children[0].tagName=='DIV'){
+        document.getElementById('dd').innerHTML=document.getElementById('dd').children[0].innerHTML
+    }
+        // getHTMLTags()
          let updatedHtml=getHTMLTags()
        //  console.log(updatedHtml.split(' '))
-       
+       console.log(updatedHtml)
+
          settext(updatedHtml)
      
 //         document.getElementById('Ans').innerHTML =
@@ -343,15 +349,36 @@ function isSpecificSubset(subset, superset) {
 //   }
 
 function settext(wordArray) {
-  for (let i = 0; i < wordArray.length; i++) {
     let html=``
+
+
+  for (let i = 0; i < wordArray.length; i++) {
 
     html+=wordArray[i]
     setTimeout(() => {
         document.getElementById('Ans').innerHTML=document.getElementById('Ans').innerHTML+wordArray[i];
+        console.log(document.getElementById('Ans').innerHTML)
     },i*50); // Delay each word by i seconds
   }
 }
+
+// function settext(wordArray) {
+//   let html = ``;
+//   let currentIndex = 0;
+
+//   function printNextElement() {
+//     if (currentIndex < wordArray.length) {
+//       const element = wordArray[currentIndex];
+//       html += element;
+//       document.getElementById('Ans').innerHTML = html;
+//       console.log(document.getElementById('Ans').innerHTML);
+//       currentIndex++;
+//       if (currentIndex < wordArray.length) {
+//         setTimeout(printNextElement, 50); // Delay by 50 seconds (50 * 1000 milliseconds)
+//       }
+//     }
+//   }
+// }
 
   
 //}
@@ -437,12 +464,19 @@ if (divElement) {
                     let html=`<p>${el}</p>`
                     pTagsArray.push(el + ' ');
                 })
-        } else {
+        } 
+        else if(tag.nodeName.toLowerCase() === 'h1' || tag.nodeName.toLowerCase() === 'h2' || tag.nodeName.toLowerCase() === 'h3'){
+            tag.textContent.split(' ').forEach((el)=>{
+                    let html=`<p>${el}</p>`
+                    pTagsArray.push(el + ' ');
+                })
+        }
+        
+        else {
             // If it's not a <p> tag, add it to 'otherTagsArray'
                 pTagsArray.push(tag.outerHTML);
         }
     }
-    console.log(pTagsArray)
     // console.log(otherTagsArray)
 
     // 'pTagsArray' now contains text content of <p> tags, and 'otherTagsArray' contains other tags within the div.
@@ -451,6 +485,8 @@ if (divElement) {
 }
 return pTagsArray
 }
+
+
 
 
 </script>
