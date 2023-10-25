@@ -153,8 +153,9 @@
         }
 
          document.getElementById('dd').innerHTML=html
-         let updatedHtml=extractTextFromHTML(html)
-         console.log(updatedHtml.split(' '))
+         getHTMLTags()
+         let updatedHtml=getHTMLTags()
+       //  console.log(updatedHtml.split(' '))
        
          settext(updatedHtml)
      
@@ -413,8 +414,42 @@ function extractTextFromHTML(htmlString) {
   }
   
   extractText(doc.body);
-  
   return textNodes.join(' ');
+}
+
+
+function getHTMLTags(){
+    // Get the <div> element by its ID
+const divElement = document.getElementById('dd');
+const pTagsArray = [];
+
+// Check if the divElement exists
+if (divElement) {
+    const allTags = divElement.getElementsByTagName('*'); // Get all tags within the div
+
+    // const otherTagsArray = [];
+
+    for (let i = 0; i < allTags.length; i++) {
+        const tag = allTags[i];
+        if (tag.nodeName.toLowerCase() === 'p') {
+            // If it's a <p> tag, add its text content to 'pTagsArray'
+                tag.textContent.split(' ').forEach((el)=>{
+                    let html=`<p>${el}</p>`
+                    pTagsArray.push(el + ' ');
+                })
+        } else {
+            // If it's not a <p> tag, add it to 'otherTagsArray'
+                pTagsArray.push(tag.outerHTML);
+        }
+    }
+    console.log(pTagsArray)
+    // console.log(otherTagsArray)
+
+    // 'pTagsArray' now contains text content of <p> tags, and 'otherTagsArray' contains other tags within the div.
+} else {
+    console.log("Element with ID 'hjh' not found.");
+}
+return pTagsArray
 }
 
 
