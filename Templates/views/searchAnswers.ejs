@@ -51,7 +51,7 @@
     let alltags
     let Tags
     let Documents
-    let alltopicdetails=[]
+    let alltopicdetails = []
     getAllTags()
     getAlldocuments()
 
@@ -87,7 +87,7 @@
         let documents = JSON.parse(document.getElementById('documents').innerText)
         Documents = documents['Articledata']
         console.log(Documents)
-        alltopicdetails=documents['Articledata'].map(e=>e.Topicdetails.split(' '))
+        alltopicdetails = documents['Articledata'].map(e => e.Topicdetails.split(' '))
         // documents['Articledata'].forEach((e)=>{
         //     let b=[]
         //     e.Topicdetails.split(' ').forEach((d)=>{
@@ -99,21 +99,21 @@
     }
 
     function search() {
-        document.getElementById('Ans').innerHTML=``
+        document.getElementById('Ans').innerHTML = ``
         let query = document.getElementById('queries').value
         let arrayquery = query.split(' ')
         getTagsfromquery(arrayquery)
     }
 
     function getTagsfromquery(queryarr) {
-        let resultantDoc 
+        let resultantDoc
         let tagsTosearch = Tags.filter(t => queryarr.includes(t.tag))
         console.log(tagsTosearch)
         let docArr = tagsTosearch.map(document => document.doc)
 
         // let result = hasDuplicates(docArr)
         // if (result) {
-             resultantDoc = findMostRepeatedElement(docArr)
+        resultantDoc = findMostRepeatedElement(docArr)
 
         // } else {
         //     resultantDoc = null
@@ -124,56 +124,56 @@
     }
 
     function showthisDoc(resultdoc, tagsTosearch) {
-        let html=``
+        let html = ``
 
-        tagsinques=tagsTosearch.map(e=>e.tag)
+        tagsinques = tagsTosearch.map(e => e.tag)
         // console.log(tagsTosearch)
 
         // console.log(alltopicdetails)
         let doci
-        for(let i=0;i<alltopicdetails.length;i++){
-            if(containsAllWordsdet(tagsinques,alltopicdetails[i])){
+        for (let i = 0; i < alltopicdetails.length; i++) {
+            if (containsAllWordsdet(tagsinques, alltopicdetails[i])) {
 
-                doci=Documents[i]
+                doci = Documents[i]
             }
-           
+
         }
         let doc
-        if(typeof(doci)!='undefined'){
-           doc=doci
+        if (typeof (doci) != 'undefined') {
+            doc = doci
         }
-        else{
-         doc==null
-        }
-
-        if(doc!=null){
-        //  let doc = Documents.find(e => e.topicName == resultdoc)
-     html = getExactAnsFromtext(doc, tagsTosearch)
-        }
-        else{
-            html='`<h1> Not found </h1>`'
+        else {
+            doc == null
         }
 
-         document.getElementById('dd').innerHTML=html
-         let modifiedHTML=removeDivAndChildren(document.getElementById('dd').innerHTML)
+        if (doc != null) {
+            //  let doc = Documents.find(e => e.topicName == resultdoc)
+            html = getExactAnsFromtext(doc, tagsTosearch)
+        }
+        else {
+            html = '`<h1> Not found </h1>`'
+        }
 
-         console.log(modifiedHTML)
+        document.getElementById('dd').innerHTML = html
+        let modifiedHTML = removeDivAndChildren(document.getElementById('dd').innerHTML)
 
-    // if(document.getElementById('dd').children[0].tagName=='DIV'){
-    //     document.getElementById('dd').innerHTML=document.getElementById('dd').children[0].innerHTML
-    // }
+        console.log(modifiedHTML)
+
+        // if(document.getElementById('dd').children[0].tagName=='DIV'){
+        //     document.getElementById('dd').innerHTML=document.getElementById('dd').children[0].innerHTML
+        // }
         // getHTMLTags()
-         let updatedHtml=getHTMLTags()
+        let updatedHtml = getHTMLTags()
         console.log(updatedHtml)
 
-         settext(updatedHtml)
-     
-//         document.getElementById('Ans').innerHTML =
-//             `
-//     <div class="" style=" background-color: rgb(230, 230, 250);width: 100%;border-radius:16px;margin-top:40px;margin-left:5px" id="">
-//     ${html}
-// </div>
-//     `
+        settext(updatedHtml)
+
+        //         document.getElementById('Ans').innerHTML =
+        //             `
+        //     <div class="" style=" background-color: rgb(230, 230, 250);width: 100%;border-radius:16px;margin-top:40px;margin-left:5px" id="">
+        //     ${html}
+        // </div>
+        //     `
 
     }
 
@@ -298,229 +298,247 @@
 
     function containsAllWordsdet(userTags, documentTags) {
         for (let i = 0; i < documentTags.length; i++) {
-    if (userTags.indexOf(documentTags[i]) === -1) {
-      return false;
+            if (userTags.indexOf(documentTags[i]) === -1) {
+                return false;
+            }
+        }
+        return true;
+        // return documentTags.every(word => userTags.includes(word));
     }
-  }
-  return true;
-// return documentTags.every(word => userTags.includes(word));
-}
 
-function isSpecificSubset(subset, superset) {
-  for (let i = 0; i < subset.length; i++) {
-    if (superset.indexOf(subset[i]) === -1) {
-      return false;
+    function isSpecificSubset(subset, superset) {
+        for (let i = 0; i < subset.length; i++) {
+            if (superset.indexOf(subset[i]) === -1) {
+                return false;
+            }
+        }
+        return true;
     }
-  }
-  return true;
-}
-// settext()
+    // settext()
 
-// function settext(htmlarr) {
-//   let b = htmlarr
-//   let html = '';
-//   let intervals = []; // Array to store interval IDs
+    // function settext(htmlarr) {
+    //   let b = htmlarr
+    //   let html = '';
+    //   let intervals = []; // Array to store interval IDs
 
-//   for (let i = 0; i < b.length; i++) {
-//     html += b[i] ;
+    //   for (let i = 0; i < b.length; i++) {
+    //     html += b[i] ;
 
-//      setTimeout(() => {
-      
-//     //   if (i === b.length - 1) {
-//     //     // Clear the interval when the loop is over
-//     //     intervals.forEach(clearInterval);
-//     //   }
-//      }, 1000);
-//      document.getElementById('Ans').innerHTML = html;
+    //      setTimeout(() => {
 
-//    // intervals.push(interval); // Store the interval ID in the array
-//   }
-// }
+    //     //   if (i === b.length - 1) {
+    //     //     // Clear the interval when the loop is over
+    //     //     intervals.forEach(clearInterval);
+    //     //   }
+    //      }, 1000);
+    //      document.getElementById('Ans').innerHTML = html;
 
-// function settext(wordArray) {
-  let index = 0;
+    //    // intervals.push(interval); // Store the interval ID in the array
+    //   }
+    // }
 
-//   function settext(wordArray) {
-//     if (index < wordArray.length) {
-//        console.log(wordArray[index]);
-//       index++;
-//       setTimeout(()=>{
-//         document.getElementById('Ans').innerHTML = wordArray[index];
+    // function settext(wordArray) {
+    let index = 0;
 
-//       },1000); // 1000 milliseconds = 1 second
-//     }
-//   }
+    //   function settext(wordArray) {
+    //     if (index < wordArray.length) {
+    //        console.log(wordArray[index]);
+    //       index++;
+    //       setTimeout(()=>{
+    //         document.getElementById('Ans').innerHTML = wordArray[index];
 
-function settext(wordArray) {
-    let html=``
+    //       },1000); // 1000 milliseconds = 1 second
+    //     }
+    //   }
+
+    function settext(wordArray) {
+        let html = ``
 
 
-  for (let i = 0; i < wordArray.length; i++) {
+        for (let i = 0; i < wordArray.length; i++) {
 
-    html+=wordArray[i]
-    setTimeout(() => {
-        document.getElementById('Ans').innerHTML=document.getElementById('Ans').innerHTML+wordArray[i];
-    },i*50); // Delay each word by i seconds
-  }
+            html += wordArray[i]
+            setTimeout(() => {
+                document.getElementById('Ans').innerHTML = document.getElementById('Ans').innerHTML + wordArray[i];
+            }, i * 50); // Delay each word by i seconds
+        }
 
-}
-
-// function settext(wordArray) {
-//   let html = ``;
-//   let currentIndex = 0;
-
-//   function printNextElement() {
-//     if (currentIndex < wordArray.length) {
-//       const element = wordArray[currentIndex];
-//       html += element;
-//       document.getElementById('Ans').innerHTML = html;
-//       console.log(document.getElementById('Ans').innerHTML);
-//       currentIndex++;
-//       if (currentIndex < wordArray.length) {
-//         setTimeout(printNextElement, 50); // Delay by 50 seconds (50 * 1000 milliseconds)
-//       }
-//     }
-//   }
-// }
-
-  
-//}
-
-
-
-// function htmlToArray(htmlString) {
-//   const tempDiv = document.createElement('div');
-//   tempDiv.innerHTML = htmlString;
-
-//   const childNodes = Array.from(tempDiv.childNodes);
-
-//   const resultArray = [];
-  
-//   childNodes.forEach(node => {
-//     if (node.nodeType === Node.ELEMENT_NODE) {
-//       // If it's an HTML element, add it to the resultArray
-//       resultArray.push(node);
-//     } else if (node.nodeType === Node.TEXT_NODE) {
-//       // If it's a text node, split it by words and add each word to the resultArray
-//       const words = node.textContent.trim().split(/\s+/);
-//       words.forEach(word => {
-//         resultArray.push(document.createTextNode(word));
-//       });
-//     }
-//   });
-
-//   return resultArray;
-// }
-
-// function updatedHtml(){
-//     let content = document.getElementById('dd');
-//     let paragraphs = content.getElementsByTagName('p');
-
-//     for (let i = 0; i < paragraphs.length; i++) {
-//         let paragraph = paragraphs[i];
-//         let text = paragraph.textContent;
-        
-//         let newText = document.createTextNode(text);
-        
-//         paragraph.parentNode.replaceChild(newText, paragraph);
-//     }
-// }
-
-function extractTextFromHTML(htmlString) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(htmlString, 'text/html');
-  
-  const textNodes = [];
-  
-  function extractText(node) {
-    if (node.nodeType === Node.TEXT_NODE) {
-      textNodes.push(node.textContent);
-    } else if (node.nodeType === Node.ELEMENT_NODE) {
-      const children = node.childNodes;
-      for (let i = 0; i < children.length; i++) {
-        extractText(children[i]);
-      }
     }
-  }
-  
-  extractText(doc.body);
-  return textNodes.join(' ');
-}
+
+    // function settext(wordArray) {
+    //   let html = ``;
+    //   let currentIndex = 0;
+
+    //   function printNextElement() {
+    //     if (currentIndex < wordArray.length) {
+    //       const element = wordArray[currentIndex];
+    //       html += element;
+    //       document.getElementById('Ans').innerHTML = html;
+    //       console.log(document.getElementById('Ans').innerHTML);
+    //       currentIndex++;
+    //       if (currentIndex < wordArray.length) {
+    //         setTimeout(printNextElement, 50); // Delay by 50 seconds (50 * 1000 milliseconds)
+    //       }
+    //     }
+    //   }
+    // }
 
 
-function getHTMLTags(){
-    // Get the <div> element by its ID
-const divElement = document.getElementById('dd');
-const pTagsArray = [];
+    //}
 
-// Check if the divElement exists
-if (divElement) {
-    const allTags = divElement.getElementsByTagName('*'); // Get all tags within the div
 
-    // const otherTagsArray = [];
 
-    for (let i = 0; i < allTags.length; i++) {
-        const tag = allTags[i];
-        if (tag.nodeName.toLowerCase() === 'p') {
-            // If it's a <p> tag, add its text content to 'pTagsArray'
-                tag.textContent.split(' ').forEach((el)=>{
-                    let html=`<p>${el}</p>`
-                    pTagsArray.push(el + ' ');
-                })
-        } 
-        else if(tag.nodeName.toLowerCase() === 'h1' || tag.nodeName.toLowerCase() === 'h2' || tag.nodeName.toLowerCase() === 'h3'){
-            // tag.textContent.split(' ').forEach((el)=>{
-                    let html=`<h2>${tag.textContent}</h2>`
+    // function htmlToArray(htmlString) {
+    //   const tempDiv = document.createElement('div');
+    //   tempDiv.innerHTML = htmlString;
+
+    //   const childNodes = Array.from(tempDiv.childNodes);
+
+    //   const resultArray = [];
+
+    //   childNodes.forEach(node => {
+    //     if (node.nodeType === Node.ELEMENT_NODE) {
+    //       // If it's an HTML element, add it to the resultArray
+    //       resultArray.push(node);
+    //     } else if (node.nodeType === Node.TEXT_NODE) {
+    //       // If it's a text node, split it by words and add each word to the resultArray
+    //       const words = node.textContent.trim().split(/\s+/);
+    //       words.forEach(word => {
+    //         resultArray.push(document.createTextNode(word));
+    //       });
+    //     }
+    //   });
+
+    //   return resultArray;
+    // }
+
+    // function updatedHtml(){
+    //     let content = document.getElementById('dd');
+    //     let paragraphs = content.getElementsByTagName('p');
+
+    //     for (let i = 0; i < paragraphs.length; i++) {
+    //         let paragraph = paragraphs[i];
+    //         let text = paragraph.textContent;
+
+    //         let newText = document.createTextNode(text);
+
+    //         paragraph.parentNode.replaceChild(newText, paragraph);
+    //     }
+    // }
+
+    function extractTextFromHTML(htmlString) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
+
+        const textNodes = [];
+
+        function extractText(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                textNodes.push(node.textContent);
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                const children = node.childNodes;
+                for (let i = 0; i < children.length; i++) {
+                    extractText(children[i]);
+                }
+            }
+        }
+
+        extractText(doc.body);
+        return textNodes.join(' ');
+    }
+
+
+    function getHTMLTags() {
+        // Get the <div> element by its ID
+        const divElement = document.getElementById('dd');
+        const pTagsArray = [];
+        const pElement = document.getElementById('mmrg');
+        if (pElement && pElement.parentNode === divElement) {
+            // Remove the p element from the div
+            divElement.removeChild(pElement);
+        }
+
+        // Check if the divElement exists
+        if (divElement) {
+            const allTags = divElement.getElementsByTagName('*'); // Get all tags within the div
+
+            // const otherTagsArray = [];
+
+            for (let i = 0; i < allTags.length; i++) {
+                const tag = allTags[i];
+                if (tag.nodeName.toLowerCase() === 'p') {
+                    // If it's a <p> tag, add its text content to 'pTagsArray'
+                    tag.textContent.split(' ').forEach((el) => {
+                        let html = `<p>${el}</p>`
+                        pTagsArray.push(el + ' ');
+                    })
+                }
+                else if (tag.nodeName.toLowerCase() === 'h1' || tag.nodeName.toLowerCase() === 'h2' || tag.nodeName.toLowerCase() === 'h3') {
+                    // tag.textContent.split(' ').forEach((el)=>{
+                    let html = `<h2>${tag.textContent}</h2>`
                     pTagsArray.push(html + ' ');
-              //  })
-        }
+                    //  })
+                }
 
-        else if(tag.nodeName.toLowerCase() === 'div'){
-            // tag.textContent.split(' ').forEach((el)=>{
-            //         let html=`<p>${el}</p>`
-            //         pTagsArray.push(el + ' ');
-            //     })
-        }
+                else if (tag.nodeName.toLowerCase() === 'div') {
+                    // tag.textContent.split(' ').forEach((el)=>{
+                    //         let html=`<p>${el}</p>`
+                    //         pTagsArray.push(el + ' ');
+                    //     })
+                    if (allTags[i].id === 'mmrg') {
+                        // Remove the p element from the div
+                        const targetDiv = allTags[i];
 
-        else if(tag.nodeName.toLowerCase() === 'li'){
-            // pTagsArray.push(tag.outerHTML);
+                        // Find and remove the p tag with id "mmrg" inside that div
+                        const pElement = targetDiv.getElementById('#mmrg');
+                        if (pElement) {
+                            targetDiv.removeChild(pElement);
+                        }
+                    }
+                }
 
-        }
+                else if (tag.nodeName.toLowerCase() === 'li') {
+                    // pTagsArray.push(tag.outerHTML);
 
-       
-        
-        else {
-            // If it's not a <p> tag, add it to 'otherTagsArray'
-                pTagsArray.push(tag.outerHTML);
+                }
+                //        else if (pElement && pElement.parentNode === divElement) {
+                //     // Remove the p element from the div
+                // }
+
+
+
+                else {
+                    // If it's not a <p> tag, add it to 'otherTagsArray'
+                    pTagsArray.push(tag.outerHTML);
+                }
+            }
+            // console.log(otherTagsArray)
+
+            // 'pTagsArray' now contains text content of <p> tags, and 'otherTagsArray' contains other tags within the div.
+        } else {
+            console.log("Element with ID 'hjh' not found.");
         }
+        console.log(pTagsArray)
+        return pTagsArray
     }
-    // console.log(otherTagsArray)
 
-    // 'pTagsArray' now contains text content of <p> tags, and 'otherTagsArray' contains other tags within the div.
-} else {
-    console.log("Element with ID 'hjh' not found.");
-}
-console.log(pTagsArray)
-return pTagsArray
-}
+    function removeDivAndChildren(collection) {
+        const resultCollection = document.createDocumentFragment(); // Create a new DocumentFragment to hold the modified elements
+        let netel = []
+        for (let i = 0; i < collection.length; i++) {
+            const element = collection[i];
 
-function removeDivAndChildren(collection) {
-  const resultCollection = document.createDocumentFragment(); // Create a new DocumentFragment to hold the modified elements
-let netel=[]
-  for (let i = 0; i < collection.length; i++) {
-    const element = collection[i];
+            // Check if the element is a <div>
+            if (element.tagName === "DIV") {
+                // If it's a <div>, skip this element and its descendants
+            }
+            else {
+                netel.push(element)
+            }
+        }
 
-    // Check if the element is a <div>
-    if (element.tagName === "DIV") {
-      // If it's a <div>, skip this element and its descendants
+        return netel; // Convert the DocumentFragment to an HTMLCollection
     }
-    else{
-        netel.push(element)
-    }
-  }
-
-  return netel; // Convert the DocumentFragment to an HTMLCollection
-}
 
 
 
