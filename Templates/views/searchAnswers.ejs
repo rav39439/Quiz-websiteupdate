@@ -212,7 +212,7 @@
         wordstosearch = tagsTosearch.map(e => e.tag)
        
 
-        let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs)
+        let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs,doc)
         return html
     }
 
@@ -232,7 +232,7 @@
 
     // Check each string of words
 
-    function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs) {
+    function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs,doc) {
         let text
         for (let i = 0; i < arrayofTexts.length; i++) {
             console.log(containsAlternativewords(arrayofTexts[i], wordsToSearch))
@@ -247,7 +247,8 @@
 
                 break
                 
-            } else if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
+            } 
+            else if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
                 text = htmlText[i]
                 console.log('found')
                 break
