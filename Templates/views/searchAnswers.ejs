@@ -131,13 +131,12 @@
         for (let i = 0; i < alltopicdetails.length; i++) {
     let result1=containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e=>!e.includes('|')))
           let result2=checkCommonelement(alltopicdetails[i].filter(e=>e.includes('|')),tagsinques)
-         
-          
-            
-          //  if (containsAllWordsdet(tagsinques, alltopicdetails[i])) {
-                if (result1&&result2) {
-
-
+        //  console.log(result1)
+        //  console.log(result2)
+        // if(!result2){
+          ///  console.log(result2,result1,alltopicdetails[i])
+       //  }
+        if (result1&&result2) {
                 doci = Documents[i]
             }
 
@@ -169,7 +168,7 @@
         // }
         // getHTMLTags()
         let updatedHtml = getHTMLTags()
-        console.log(updatedHtml)
+       // console.log(updatedHtml)
 
         settext(updatedHtml)
 
@@ -190,7 +189,6 @@
         doc.questions[0].split(',').forEach((e) => {
             filteredquestions.push(e.trim())
         })
-        console.log("filtered questions")
 
         //  tagsTosearch=tagsTosearch.filter(dc=>filteredquestions.includes(dc.tags))
 
@@ -212,9 +210,7 @@
             docs.push(document.getElementById('mmrg'))
         })
         wordstosearch = tagsTosearch.map(e => e.tag)
-        console.log(wordstosearch)
-        //let updatedarr=arr
-        console.log(arrayofTexts)
+       
 
         let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs)
         return html
@@ -222,7 +218,6 @@
 
 
     function containsAllWords(wordString, wordsToSearch) {
-       
         let wordArray = []
         if (wordString.includes(',')) {
             wordArray = wordString.split(',');
@@ -231,7 +226,6 @@
         else {
             wordArray = wordString.split(' ')
         }
-        console.log(wordArray)
 
         return wordsToSearch.every(word => wordArray.includes(word));
     }
@@ -241,12 +235,25 @@
     function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs) {
         let text
         for (let i = 0; i < arrayofTexts.length; i++) {
+            console.log(containsAlternativewords(arrayofTexts[i], wordsToSearch))
+            if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
+                // console.log('testing')
+                // console.log(arrayofTexts[i])
+                // console.log(wordsToSearch)
+            }
             if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
                 text = htmlText[i]
                 console.log('found')
 
                 break
-            } else {
+                
+            } else if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
+                text = htmlText[i]
+                console.log('found')
+                break
+            }
+            else {
+
                 console.log("not found")
                 text = `Not Found`
                 continue
@@ -317,18 +324,20 @@
     }
 
     function containsAllWordsdet(userTags, documentTags) {
-      
+        let contain1=true
+        // console.log("document tags")
+        // console.log(documentTags)
+      if(documentTags.length!=0){
         for (let i = 0; i < documentTags.length; i++) {
-            //if(!documentTags[i].includes('|')){
                 if (userTags.indexOf(documentTags[i]) === -1) {
                     contain1=false
-
-                    return false;
+                   // return false;
                 }
-          //  }
-                
         }
-    return true;
+      }else{
+        contain1=true
+      }
+    return contain1;
     }
 
     function isSpecificSubset(subset, superset) {
@@ -591,6 +600,19 @@ return result
         }
     }
     return false;
+}
+
+function containsAlternativewords(wordString, wordsToSearch){
+    let wordArray = []
+        if (wordString.includes(',')) {
+            wordArray = wordString.split(',');
+
+        }
+        else {
+            wordArray = wordString.split(' ')
+        }
+
+        return wordArray.every(word => wordsToSearch.includes(word));
 }
 
 </script>
