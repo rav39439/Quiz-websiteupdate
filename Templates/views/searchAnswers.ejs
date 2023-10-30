@@ -131,8 +131,10 @@
         for (let i = 0; i < alltopicdetails.length; i++) {
     let result1=containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e=>!e.includes('|')))
           let result2=checkCommonelement(alltopicdetails[i].filter(e=>e.includes('|')),tagsinques)
-        //  console.log(result1)
-        //  console.log(result2)
+         console.log(result1)
+         console.log(result2)
+         console.log(alltopicdetails[i])
+         console.log(tagsinques)
         // if(!result2){
           ///  console.log(result2,result1,alltopicdetails[i])
        //  }
@@ -158,9 +160,10 @@
         else {
             html = '`<h1> Not found </h1>`'
         }
+        console.log(doc)
 
-        document.getElementById('dd').innerHTML = html
-        let modifiedHTML = removeDivAndChildren(document.getElementById('dd').innerHTML)
+        // document.getElementById('dd').innerHTML = html
+        // let modifiedHTML = removeDivAndChildren(document.getElementById('dd').innerHTML)
 
 
         // if(document.getElementById('dd').children[0].tagName=='DIV'){
@@ -508,22 +511,12 @@
                 console.log(tag.textContent.split(';'))
                 tag.textContent.split(' ').forEach((el,index) => {
                         let html = `<p>${el}</p>`
-                        // if(index%9==0){
-                        //     pTagsArray.push(el + ' '+`<br>`);
-
-                        // }
-                        // else{
+                      
                             pTagsArray.push(el + ' ');
 
-                      //  }
                     })
             }
-                //        else if (pElement && pElement.parentNode === divElement) {
-                //     // Remove the p element from the div
-                // }
-
-
-
+            
                 else {
                     // If it's not a <p> tag, add it to 'otherTagsArray'
                     pTagsArray.push(tag.outerHTML);
