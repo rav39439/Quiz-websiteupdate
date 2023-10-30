@@ -235,12 +235,7 @@
     function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs,doc) {
         let text
         for (let i = 0; i < arrayofTexts.length; i++) {
-            console.log(containsAlternativewords(arrayofTexts[i], wordsToSearch))
-            if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
-                // console.log('testing')
-                // console.log(arrayofTexts[i])
-                // console.log(wordsToSearch)
-            }
+            
             if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
                 text = htmlText[i]
                 console.log('found')
@@ -349,43 +344,8 @@
         }
         return true;
     }
-    // settext()
-
-    // function settext(htmlarr) {
-    //   let b = htmlarr
-    //   let html = '';
-    //   let intervals = []; // Array to store interval IDs
-
-    //   for (let i = 0; i < b.length; i++) {
-    //     html += b[i] ;
-
-    //      setTimeout(() => {
-
-    //     //   if (i === b.length - 1) {
-    //     //     // Clear the interval when the loop is over
-    //     //     intervals.forEach(clearInterval);
-    //     //   }
-    //      }, 1000);
-    //      document.getElementById('Ans').innerHTML = html;
-
-    //    // intervals.push(interval); // Store the interval ID in the array
-    //   }
-    // }
-
-    // function settext(wordArray) {
+   
     let index = 0;
-
-    //   function settext(wordArray) {
-    //     if (index < wordArray.length) {
-    //        console.log(wordArray[index]);
-    //       index++;
-    //       setTimeout(()=>{
-    //         document.getElementById('Ans').innerHTML = wordArray[index];
-
-    //       },1000); // 1000 milliseconds = 1 second
-    //     }
-    //   }
-
     function settext(wordArray) {
         let html = ``
 
@@ -496,6 +456,7 @@
         // Check if the divElement exists
         if (divElement) {
             const allTags = divElement.getElementsByTagName('*'); // Get all tags within the div
+            console.log(allTags)
 
             // const otherTagsArray = [];
 
@@ -532,6 +493,31 @@
                     // pTagsArray.push(tag.outerHTML);
 
                 }
+
+                else if (tag.nodeName.toLowerCase() === 'span') {
+                console.log("Text span");
+               
+            }
+            else if (tag.nodeName.toLowerCase() === 'code') {
+                console.log("Text span");
+               
+            }
+
+            
+            else if (tag.nodeName.toLowerCase() === 'pre') {
+                console.log(tag.textContent.split(';'))
+                tag.textContent.split(' ').forEach((el,index) => {
+                        let html = `<p>${el}</p>`
+                        // if(index%9==0){
+                        //     pTagsArray.push(el + ' '+`<br>`);
+
+                        // }
+                        // else{
+                            pTagsArray.push(el + ' ');
+
+                      //  }
+                    })
+            }
                 //        else if (pElement && pElement.parentNode === divElement) {
                 //     // Remove the p element from the div
                 // }
