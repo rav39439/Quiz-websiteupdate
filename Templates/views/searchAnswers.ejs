@@ -122,6 +122,7 @@
 
     function showthisDoc(resultdoc, tagsTosearch) {
         let html = ``
+        let totaldocs=[]
 
         tagsinques = tagsTosearch.map(e => e.tag)
         // console.log(tagsTosearch)
@@ -130,39 +131,47 @@
         let doci
         for (let i = 0; i < alltopicdetails.length; i++) {
     let result1=containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e=>!e.includes('|')))
-          let result2=checkCommonelement(alltopicdetails[i].filter(e=>e.includes('|')),tagsinques)
-         console.log(result1)
-         console.log(result2)
-         console.log(alltopicdetails[i])
-         console.log(tagsinques)
+        let result2=checkCommonelement(alltopicdetails[i].filter(e=>e.includes('|')),tagsinques)
+        //  console.log(result1)
+        //  console.log(result2)
+        //  console.log(alltopicdetails[i])
+        //  console.log(tagsinques)
         // if(!result2){
           ///  console.log(result2,result1,alltopicdetails[i])
        //  }
         if (result1&&result2) {
+            totaldocs.push(Documents[i])
                 doci = Documents[i]
+            } else{
+                doci=null
             }
 
         }
-        let doc
-        if (typeof (doci) != 'undefined') {
-            doc = doci
-        }
-        else {
-            doc == null
-        }
-        // console.log("foundddddddddddddd not null")
-        //         console.log(doc)
-
+        console.log(totaldocs)
+        if(typeof(totaldocs)!='undefined' && totaldocs.length>0){
+        totaldocs.forEach((e)=>{
+            let doc=e
+        // if (typeof (doci) != 'undefined') {
+        //     doc = doci
+        // }
+        // else {
+        //     doc == null
+        // }
+     
         if (doc != null) {
-            //  let doc = Documents.find(e => e.topicName == resultdoc)
             html = getExactAnsFromtext(doc, tagsTosearch)
+            console.log(html)
         }
         else {
             html = '`<h1> Not found </h1>`'
         }
-        console.log(doc)
+        })
+        }
+      
+        // console.log("document")
+        // console.log(totaldocs)
 
-        // document.getElementById('dd').innerHTML = html
+        document.getElementById('dd').innerHTML = html
         // let modifiedHTML = removeDivAndChildren(document.getElementById('dd').innerHTML)
 
 
@@ -171,8 +180,6 @@
         // }
         // getHTMLTags()
         let updatedHtml = getHTMLTags()
-       // console.log(updatedHtml)
-
         settext(updatedHtml)
 
         //         document.getElementById('Ans').innerHTML =
@@ -189,22 +196,16 @@
         // let arrayofTexts = doc.Text.map(d => d.replace(/<[^>]*>/g, ''))
         let newtags = []
         let filteredquestions = []
-        doc.questions[0].split(',').forEach((e) => {
-            filteredquestions.push(e.trim())
-        })
+        // doc.questions[0].split(',').forEach((e) => {
+        //     filteredquestions.push(e.trim())
+        // })
 
-        //  tagsTosearch=tagsTosearch.filter(dc=>filteredquestions.includes(dc.tags))
-
-        tagsTosearch.forEach((dc) => {
-            if (filteredquestions.includes(dc.tag)) {
-                newtags.push(dc)
-            }
-        })
-        tagsTosearch = newtags
-        // console.log(filteredquestions)
-        // console.log(tagsTosearch)
-
-        //        console.log(doc.questions)
+        // tagsTosearch.forEach((dc) => {
+        //     if (filteredquestions.includes(dc.tag)) {
+        //         newtags.push(dc)
+        //     }
+        // })
+       // tagsTosearch = newtags
         let arrayofTexts = []
         doc.Text.forEach((e) => {
             document.getElementById('dd').innerHTML = e
@@ -212,9 +213,9 @@
             arrayofTexts.push(text)
             docs.push(document.getElementById('mmrg'))
         })
+       
         wordstosearch = tagsTosearch.map(e => e.tag)
        
-
         let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs,doc)
         return html
     }
@@ -229,6 +230,9 @@
         else {
             wordArray = wordString.split(' ')
         }
+        console.log(wordstosearch)
+
+console.log(wordArray)
 
         return wordsToSearch.every(word => wordArray.includes(word));
     }
@@ -246,16 +250,17 @@
                 break
                 
             } 
-            else if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
-                text = htmlText[i]
-                console.log('found')
-                break
-            }
+         
+            //  if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
+            //     text = htmlText[i]
+            //     console.log('found')
+                
+            // }
             else {
 
                 console.log("not found")
                 text = `Not Found`
-                continue
+                
             }
         }
         return text
@@ -351,10 +356,7 @@
     let index = 0;
     function settext(wordArray) {
         let html = ``
-
-
         for (let i = 0; i < wordArray.length; i++) {
-
             html += wordArray[i]
             setTimeout(() => {
                 document.getElementById('Ans').innerHTML = document.getElementById('Ans').innerHTML + wordArray[i];
@@ -469,7 +471,10 @@
                     // If it's a <p> tag, add its text content to 'pTagsArray'
                     tag.textContent.split(' ').forEach((el) => {
                         let html = `<p>${el}</p>`
-                        pTagsArray.push(el + ' ');
+                       // var newText = el.replace(/\u00A0/g, "<br>");
+                        var newText = el.replace("<br>",/\u00A0/g,);
+
+                        pTagsArray.push(newText+' ');
                     })
                 }
                 else if (tag.nodeName.toLowerCase() === 'h1' || tag.nodeName.toLowerCase() === 'h2' || tag.nodeName.toLowerCase() === 'h3') {
@@ -591,7 +596,7 @@ function containsAlternativewords(wordString, wordsToSearch){
         else {
             wordArray = wordString.split(' ')
         }
-
+       
         return wordArray.every(word => wordsToSearch.includes(word));
 }
 
