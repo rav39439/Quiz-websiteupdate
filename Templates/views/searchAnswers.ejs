@@ -105,7 +105,7 @@
     function getTagsfromquery(queryarr) {
         let resultantDoc
         let tagsTosearch = Tags.filter(t => queryarr.includes(t.tag))
-        console.log(tagsTosearch)
+        // console.log(tagsTosearch)
         let docArr = tagsTosearch.map(document => document.doc)
 
         // let result = hasDuplicates(docArr)
@@ -147,7 +147,6 @@
             }
 
         }
-        console.log(totaldocs)
         if(typeof(totaldocs)!='undefined' && totaldocs.length>0){
         totaldocs.forEach((e)=>{
             let doc=e
@@ -160,7 +159,6 @@
      
         if (doc != null) {
             html = getExactAnsFromtext(doc, tagsTosearch)
-            console.log(html)
         }
         else {
             html = '`<h1> Not found </h1>`'
@@ -168,10 +166,19 @@
         })
         }
       
-        // console.log("document")
-        // console.log(totaldocs)
+        console.log("document")
+        console.log(totaldocs)
+        console.log(html.length)
 
-        document.getElementById('dd').innerHTML = html
+        if(html.length!=0){
+            document.getElementById('dd').innerHTML = html
+
+        }
+
+         else{
+            document.getElementById('dd').innerHTML=`<h1>Nothing found related to this</h1>`
+        }
+
         // let modifiedHTML = removeDivAndChildren(document.getElementById('dd').innerHTML)
 
 
@@ -191,21 +198,27 @@
 
     }
 
+   function removeDuplicates(arr) {
+    return arr.filter((value, index, self) => self.indexOf(value) === index);
+  }
+
     function getExactAnsFromtext(doc, tagsTosearch) {
         let docs = []
         // let arrayofTexts = doc.Text.map(d => d.replace(/<[^>]*>/g, ''))
         let newtags = []
         let filteredquestions = []
-        // doc.questions[0].split(',').forEach((e) => {
-        //     filteredquestions.push(e.trim())
-        // })
+        doc.questions[0].split(',').forEach((e) => {
+            filteredquestions.push(e.trim())
+        })
 
-        // tagsTosearch.forEach((dc) => {
-        //     if (filteredquestions.includes(dc.tag)) {
-        //         newtags.push(dc)
-        //     }
-        // })
-       // tagsTosearch = newtags
+        tagsTosearch.forEach((dc) => {
+            if (filteredquestions.includes(dc.tag)) {
+                newtags.push(dc)
+            }
+        })
+       tagsTosearch = removeDuplicates(newtags)
+       console.log("new tags")
+       console.log(tagsTosearch)
         let arrayofTexts = []
         doc.Text.forEach((e) => {
             document.getElementById('dd').innerHTML = e
@@ -224,17 +237,22 @@
     function containsAllWords(wordString, wordsToSearch) {
         let wordArray = []
         if (wordString.includes(',')) {
-            wordArray = wordString.split(',');
+        wordString.split(',').forEach((e)=>{
+                wordArray.push(e.trim().toLowerCase())
+            });
 
         }
         else {
-            wordArray = wordString.split(' ')
+            wordString.split(' ').forEach((e)=>{
+                wordArray.push(e.trim().toLowerCase())
+            })
+
         }
         console.log(wordstosearch)
 
 console.log(wordArray)
 
-        return wordsToSearch.every(word => wordArray.includes(word));
+        return (wordsToSearch.every(word => wordArray.includes(word.toLowerCase())) );
     }
 
     // Check each string of words
@@ -257,9 +275,10 @@ console.log(wordArray)
                 
             // }
             else {
+                document.getElementById('dd').innerHTML=`<h1>Not Found</h1>`
 
                 console.log("not found")
-                text = `Not Found`
+                text = `<h1>Not Found</h1>`
                 
             }
         }
@@ -365,26 +384,8 @@ console.log(wordArray)
 
     }
 
-    // function settext(wordArray) {
-    //   let html = ``;
-    //   let currentIndex = 0;
+    
 
-    //   function printNextElement() {
-    //     if (currentIndex < wordArray.length) {
-    //       const element = wordArray[currentIndex];
-    //       html += element;
-    //       document.getElementById('Ans').innerHTML = html;
-    //       console.log(document.getElementById('Ans').innerHTML);
-    //       currentIndex++;
-    //       if (currentIndex < wordArray.length) {
-    //         setTimeout(printNextElement, 50); // Delay by 50 seconds (50 * 1000 milliseconds)
-    //       }
-    //     }
-    //   }
-    // }
-
-
-    //}
 
 
 
@@ -461,7 +462,6 @@ console.log(wordArray)
         // Check if the divElement exists
         if (divElement) {
             const allTags = divElement.getElementsByTagName('*'); // Get all tags within the div
-            console.log(allTags)
 
             // const otherTagsArray = [];
 
@@ -503,17 +503,14 @@ console.log(wordArray)
                 }
 
                 else if (tag.nodeName.toLowerCase() === 'span') {
-                console.log("Text span");
                
             }
             else if (tag.nodeName.toLowerCase() === 'code') {
-                console.log("Text span");
                
             }
 
             
             else if (tag.nodeName.toLowerCase() === 'pre') {
-                console.log(tag.textContent.split(';'))
                 tag.textContent.split(' ').forEach((el,index) => {
                         let html = `<p>${el}</p>`
                       
@@ -531,9 +528,9 @@ console.log(wordArray)
 
             // 'pTagsArray' now contains text content of <p> tags, and 'otherTagsArray' contains other tags within the div.
         } else {
-            console.log("Element with ID 'hjh' not found.");
+            // console.log("Element with ID 'hjh' not found.");
         }
-        console.log(pTagsArray)
+        // console.log(pTagsArray)
         return pTagsArray
     }
 
