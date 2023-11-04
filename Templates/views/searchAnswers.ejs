@@ -220,17 +220,19 @@
        console.log("new tags")
        console.log(tagsTosearch)
         let arrayofTexts = []
+        if(tagsTosearch.length>0){
         doc.Text.forEach((e) => {
             document.getElementById('dd').innerHTML = e
             let text = document.getElementById('mmrg').innerText
             arrayofTexts.push(text)
             docs.push(document.getElementById('mmrg'))
         })
-       
         wordstosearch = tagsTosearch.map(e => e.tag)
-       
         let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs,doc)
         return html
+    }else{
+        return `<h1>No result found</h1>`
+    }
     }
 
 
