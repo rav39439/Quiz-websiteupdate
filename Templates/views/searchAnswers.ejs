@@ -270,8 +270,8 @@
 
             if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
                 text = htmlText[i]
-                console.log('found')
-
+                console.log(htmlText[i])
+                break
 
             }
 
@@ -281,7 +281,7 @@
 
             // }
             else {
-                document.getElementById('dd').innerHTML = `<h1>Not Found</h1>`
+              //  document.getElementById('dd').innerHTML = `<h1>Not Found</h1>`
 
                 console.log("not found")
                 text = `<h1>Not Found</h1>`
