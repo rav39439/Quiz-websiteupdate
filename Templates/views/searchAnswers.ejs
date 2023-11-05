@@ -104,7 +104,8 @@
 
     function getTagsfromquery(queryarr) {
         let resultantDoc
-        let tagsTosearch = Tags.filter(t => queryarr.includes(t.tag))
+        let upatedquery=queryarr.map(e=>e.toLowerCase())
+        let tagsTosearch = Tags.filter(t => upatedquery.includes(t.tag.toLowerCase()))
         // console.log(tagsTosearch)
         let docArr = tagsTosearch.map(document => document.doc)
 
@@ -122,7 +123,7 @@
 
     function showthisDoc(resultdoc, tagsTosearch) {
         let html = ``
-        let totaldocs=[]
+        let totaldocs = []
 
         tagsinques = tagsTosearch.map(e => e.tag)
         // console.log(tagsTosearch)
@@ -130,53 +131,55 @@
         // console.log(tagsinques)
         let doci
         for (let i = 0; i < alltopicdetails.length; i++) {
-    let result1=containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e=>!e.includes('|')))
-        let result2=checkCommonelement(alltopicdetails[i].filter(e=>e.includes('|')),tagsinques)
-        //  console.log(result1)
-        //  console.log(result2)
-        //  console.log(alltopicdetails[i])
-        //  console.log(tagsinques)
-        // if(!result2){
-          ///  console.log(result2,result1,alltopicdetails[i])
-       //  }
-        if (result1&&result2) {
-            totaldocs.push(Documents[i])
+            let result1 = containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e => !e.includes('|')))
+            let result2 = checkCommonelement(alltopicdetails[i].filter(e => e.includes('|')), tagsinques)
+             console.log(result1)
+             console.log(result2)
+             console.log(alltopicdetails[i])
+             console.log(tagsinques)
+            // if(!result2){
+            ///  console.log(result2,result1,alltopicdetails[i])
+            //  }
+            if (result1 && result2) {
+                totaldocs.push(Documents[i])
                 doci = Documents[i]
-            } else{
-                doci=null
+            } else {
+                doci = null
             }
 
         }
-        if(typeof(totaldocs)!='undefined' && totaldocs.length>0){
-        totaldocs.forEach((e)=>{
-            let doc=e
-        // if (typeof (doci) != 'undefined') {
-        //     doc = doci
-        // }
-        // else {
-        //     doc == null
-        // }
-     
-        if (doc != null) {
-            html = getExactAnsFromtext(doc, tagsTosearch)
+        if (typeof (totaldocs) != 'undefined' && totaldocs.length > 0) {
+            totaldocs.forEach((e) => {
+                let doc = e
+                // if (typeof (doci) != 'undefined') {
+                //     doc = doci
+                // }
+                // else {
+                //     doc == null
+                // }
+
+                if (doc != null) {
+                    html = getExactAnsFromtext(doc, tagsTosearch)
+
+                }
+                else {
+                    html = '`<h1> Not found </h1>`'
+                }
+            })
         }
-        else {
-            html = '`<h1> Not found </h1>`'
-        }
-        })
-        }
-      
+        // console.log("dfoffffffffffffff")
+        // console.log(html)
         console.log("document")
         console.log(totaldocs)
         console.log(html.length)
 
-        if(html.length!=0){
+        if (html.length != 0) {
             document.getElementById('dd').innerHTML = html
 
         }
 
-         else{
-            document.getElementById('dd').innerHTML=`<h1>Nothing found related to this</h1>`
+        else {
+            document.getElementById('dd').innerHTML = `<h1>Nothing found related to this</h1>`
         }
 
         // let modifiedHTML = removeDivAndChildren(document.getElementById('dd').innerHTML)
@@ -198,9 +201,9 @@
 
     }
 
-   function removeDuplicates(arr) {
-    return arr.filter((value, index, self) => self.indexOf(value) === index);
-  }
+    function removeDuplicates(arr) {
+        return arr.filter((value, index, self) => self.indexOf(value) === index);
+    }
 
     function getExactAnsFromtext(doc, tagsTosearch) {
         let docs = []
@@ -216,72 +219,73 @@
                 newtags.push(dc)
             }
         })
-       tagsTosearch = removeDuplicates(newtags)
-       console.log("new tags")
-       console.log(tagsTosearch)
+        tagsTosearch = removeDuplicates(newtags)
+        //    console.log("new tags")
+        //    console.log(tagsTosearch)
         let arrayofTexts = []
-        if(tagsTosearch.length>0){
-        doc.Text.forEach((e) => {
-            document.getElementById('dd').innerHTML = e
-            let text = document.getElementById('mmrg').innerText
-            arrayofTexts.push(text)
-            docs.push(document.getElementById('mmrg'))
-        })
-        wordstosearch = tagsTosearch.map(e => e.tag)
-        let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs,doc)
-        return html
-    }else{
-        return `<h1>No result found</h1>`
-    }
+        if (tagsTosearch.length > 0) {
+            doc.Text.forEach((e) => {
+                document.getElementById('dd').innerHTML = e
+                let text = document.getElementById('mmrg').innerText
+                arrayofTexts.push(text)
+                docs.push(document.getElementById('mmrg'))
+            })
+            wordstosearch = tagsTosearch.map(e => e.tag)
+            let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
+            console.log("founddddddddddddddddddd")
+            console.log(html)
+            return html
+        } else {
+            return `<h1>No result found</h1>`
+        }
     }
 
 
     function containsAllWords(wordString, wordsToSearch) {
         let wordArray = []
         if (wordString.includes(',')) {
-        wordString.split(',').forEach((e)=>{
+            wordString.split(',').forEach((e) => {
                 wordArray.push(e.trim().toLowerCase())
             });
 
         }
         else {
-            wordString.split(' ').forEach((e)=>{
+            wordString.split(' ').forEach((e) => {
                 wordArray.push(e.trim().toLowerCase())
             })
 
         }
         console.log(wordstosearch)
 
-console.log(wordArray)
+        console.log(wordArray)
 
-        return (wordsToSearch.every(word => wordArray.includes(word.toLowerCase())) );
+        return (wordsToSearch.every(word => wordArray.includes(word.toLowerCase())));
     }
 
     // Check each string of words
 
-    function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs,doc) {
+    function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs, doc) {
         let text
         for (let i = 0; i < arrayofTexts.length; i++) {
-            
+
             if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
                 text = htmlText[i]
                 console.log('found')
 
-                break
-                
-            } 
-         
+
+            }
+
             //  if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
             //     text = htmlText[i]
             //     console.log('found')
-                
+
             // }
             else {
-                document.getElementById('dd').innerHTML=`<h1>Not Found</h1>`
+                document.getElementById('dd').innerHTML = `<h1>Not Found</h1>`
 
                 console.log("not found")
                 text = `<h1>Not Found</h1>`
-                
+
             }
         }
         return text
@@ -349,20 +353,21 @@ console.log(wordArray)
     }
 
     function containsAllWordsdet(userTags, documentTags) {
-        let contain1=true
+        let contain1 = true
         // console.log("document tags")
         // console.log(documentTags)
-      if(documentTags.length!=0){
-        for (let i = 0; i < documentTags.length; i++) {
-                if (userTags.indexOf(documentTags[i]) === -1) {
-                    contain1=false
-                   // return false;
+        updatedUsertags=userTags.map(e=>e.toLowerCase())
+        if (documentTags.length != 0) {
+            for (let i = 0; i < documentTags.length; i++) {
+                if (updatedUsertags.indexOf(documentTags[i].toLowerCase()) === -1) {
+                    contain1 = false
+                    // return false;
                 }
+            }
+        } else {
+            contain1 = true
         }
-      }else{
-        contain1=true
-      }
-    return contain1;
+        return contain1;
     }
 
     function isSpecificSubset(subset, superset) {
@@ -373,7 +378,7 @@ console.log(wordArray)
         }
         return true;
     }
-   
+
     let index = 0;
     function settext(wordArray) {
         let html = ``
@@ -386,7 +391,7 @@ console.log(wordArray)
 
     }
 
-    
+
 
 
 
@@ -470,20 +475,21 @@ console.log(wordArray)
             for (let i = 0; i < allTags.length; i++) {
                 const tag = allTags[i];
                 if (tag.nodeName.toLowerCase() === 'p') {
+
                     // If it's a <p> tag, add its text content to 'pTagsArray'
                     tag.textContent.split(' ').forEach((el) => {
                         let html = `<p>${el}</p>`
-                       // var newText = el.replace(/\u00A0/g, "<br>");
-                        var newText = el.replace("<br>",/\u00A0/g,);
+                        // var newText = el.replace(/\u00A0/g, "<br>");
+                        var newText = el.replace("<br>", /\u00A0/g,);
 
-                        pTagsArray.push(newText+' ');
+                        pTagsArray.push(newText + ' ');
                     })
                 }
                 else if (tag.nodeName.toLowerCase() === 'h1' || tag.nodeName.toLowerCase() === 'h2' || tag.nodeName.toLowerCase() === 'h3') {
-                    // tag.textContent.split(' ').forEach((el)=>{
+                    console.log("running1111111")
                     let html = `<h2>${tag.textContent}</h2>`
                     pTagsArray.push(html + ' ');
-                    //  })
+
                 }
 
                 else if (tag.nodeName.toLowerCase() === 'div') {
@@ -500,32 +506,37 @@ console.log(wordArray)
                 }
 
                 else if (tag.nodeName.toLowerCase() === 'li') {
+
                     // pTagsArray.push(tag.outerHTML);
 
                 }
 
                 else if (tag.nodeName.toLowerCase() === 'span') {
-               
-            }
-            else if (tag.nodeName.toLowerCase() === 'code') {
-               
-            }
-            else if (tag.nodeName.toLowerCase() === 'section') {
-               
-            }
 
-            
-            else if (tag.nodeName.toLowerCase() === 'pre') {
-                tag.textContent.split(' ').forEach((el,index) => {
+
+                }
+                else if (tag.nodeName.toLowerCase() === 'code') {
+
+
+                }
+                else if (tag.nodeName.toLowerCase() === 'section') {
+
+
+                }
+
+
+                else if (tag.nodeName.toLowerCase() === 'pre') {
+                    tag.textContent.split(' ').forEach((el, index) => {
                         let html = `<p>${el}</p>`
-                      
-                            pTagsArray.push(el + ' ');
+
+                        pTagsArray.push(el + ' ');
 
                     })
-            }
-            
+                }
+
                 else {
                     // If it's not a <p> tag, add it to 'otherTagsArray'
+
                     pTagsArray.push(tag.outerHTML);
                 }
             }
@@ -558,39 +569,42 @@ console.log(wordArray)
     }
 
 
-function checkCommonelement(arr,arr1){
-    let result=false
-    if(arr.length!=0){
+    function checkCommonelement(arr, arr1) {
+        let result = false
+        if (arr.length != 0) {
 
-  
-arr.forEach((elem)=>{
-    //if(elem.includes('|')){
-        let checArr=elem.split('|')
-        if(hasCommonElement(checArr,arr1)){
-            // console.log("result")
-            // console.log(checArr)
-            // console.log(arr1)
-        result=true
+
+            arr.forEach((elem) => {
+                //if(elem.includes('|')){
+                let checArr = elem.split('|')
+                // console.log(arr1)
+                // console.log(checArr)
+                if (hasCommonElement(checArr, arr1)) {
+                    // console.log("result")
+                    // console.log(checArr)
+                    // console.log(arr1)
+                    result = true
+                }
+                // }
+            })
+        } else {
+            result = true
         }
-   // }
-})
-}else{
-    result=true
-}
-return result
-}
+        return result
+    }
 
     function hasCommonElement(arr1, arr2) {
-    for (let element of arr1) {
-        if (arr2.includes(element)) {
-            return true;
+        let updatedarr2=arr2.map(e=>e.toLowerCase())
+        for (let element of arr1) {
+            if (updatedarr2.includes(element.toLowerCase())) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
 
-function containsAlternativewords(wordString, wordsToSearch){
-    let wordArray = []
+    function containsAlternativewords(wordString, wordsToSearch) {
+        let wordArray = []
         if (wordString.includes(',')) {
             wordArray = wordString.split(',');
 
@@ -598,8 +612,8 @@ function containsAlternativewords(wordString, wordsToSearch){
         else {
             wordArray = wordString.split(' ')
         }
-       
+
         return wordArray.every(word => wordsToSearch.includes(word));
-}
+    }
 
 </script>
