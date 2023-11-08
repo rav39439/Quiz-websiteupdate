@@ -493,11 +493,11 @@
 
                         // Using a regular expression to replace only the first occurrence of '&nbsp;'
                         //var newText = el.replace(firstSpace, brTag);
-                        //var newText = el.replace(/\u00A0/g, "<br>");
+                        var newText = el.replace(/\u00A0/g, "");
                         //  var newText = el.replace("<br>", /\u00A0/g,);
                         // var newText = el.replace("<br>", /\u00A0/g,);
 
-                         pTagsArray.push(el + ' ');
+                         pTagsArray.push(newText + ' ');
 
                         
 
