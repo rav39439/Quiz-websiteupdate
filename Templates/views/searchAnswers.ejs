@@ -104,7 +104,7 @@
 
     function getTagsfromquery(queryarr) {
         let resultantDoc
-        let upatedquery=queryarr.map(e=>e.toLowerCase())
+        let upatedquery = queryarr.map(e => e.toLowerCase())
         let tagsTosearch = Tags.filter(t => upatedquery.includes(t.tag.toLowerCase()))
         // console.log(tagsTosearch)
         let docArr = tagsTosearch.map(document => document.doc)
@@ -133,10 +133,10 @@
         for (let i = 0; i < alltopicdetails.length; i++) {
             let result1 = containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e => !e.includes('|')))
             let result2 = checkCommonelement(alltopicdetails[i].filter(e => e.includes('|')), tagsinques)
-             console.log(result1)
-             console.log(result2)
-             console.log(alltopicdetails[i])
-             console.log(tagsinques)
+            console.log(result1)
+            console.log(result2)
+            console.log(alltopicdetails[i])
+            console.log(tagsinques)
             // if(!result2){
             ///  console.log(result2,result1,alltopicdetails[i])
             //  }
@@ -281,7 +281,7 @@
 
             // }
             else {
-              //  document.getElementById('dd').innerHTML = `<h1>Not Found</h1>`
+                //  document.getElementById('dd').innerHTML = `<h1>Not Found</h1>`
 
                 console.log("not found")
                 text = `<h1>Not Found</h1>`
@@ -356,7 +356,7 @@
         let contain1 = true
         // console.log("document tags")
         // console.log(documentTags)
-        updatedUsertags=userTags.map(e=>e.toLowerCase())
+        updatedUsertags = userTags.map(e => e.toLowerCase())
         if (documentTags.length != 0) {
             for (let i = 0; i < documentTags.length; i++) {
                 if (updatedUsertags.indexOf(documentTags[i].toLowerCase()) === -1) {
@@ -474,16 +474,36 @@
 
             for (let i = 0; i < allTags.length; i++) {
                 const tag = allTags[i];
+                console.log(tag)
+                const nonBreakingSpace ='&nbsp'; // Non-breaking space
+
+// Finding the index of the first occurrence of &nbsp;
+                    let pt=``
                 if (tag.nodeName.toLowerCase() === 'p') {
+                    let lineBreak = document.createElement('br');
 
+// Insert <br> before </p>
+                         tag.appendChild(lineBreak);
+                    
+
+                   
                     // If it's a <p> tag, add its text content to 'pTagsArray'
-                    tag.textContent.split(' ').forEach((el) => {
+                        tag.textContent.split(' ').forEach((el) => {
                         let html = `<p>${el}</p>`
-                        // var newText = el.replace(/\u00A0/g, "<br>");
-                        var newText = el.replace("<br>", /\u00A0/g,);
 
-                        pTagsArray.push(newText + ' ');
+                        // Using a regular expression to replace only the first occurrence of '&nbsp;'
+                        //var newText = el.replace(firstSpace, brTag);
+                        //var newText = el.replace(/\u00A0/g, "<br>");
+                        //  var newText = el.replace("<br>", /\u00A0/g,);
+                        // var newText = el.replace("<br>", /\u00A0/g,);
+
+                         pTagsArray.push(el + ' ');
+
+                        
+
                     })
+
+                    
                 }
                 else if (tag.nodeName.toLowerCase() === 'h1' || tag.nodeName.toLowerCase() === 'h2' || tag.nodeName.toLowerCase() === 'h3') {
                     console.log("running1111111")
@@ -594,7 +614,7 @@
     }
 
     function hasCommonElement(arr1, arr2) {
-        let updatedarr2=arr2.map(e=>e.toLowerCase())
+        let updatedarr2 = arr2.map(e => e.toLowerCase())
         for (let element of arr1) {
             if (updatedarr2.includes(element.toLowerCase())) {
                 return true;
