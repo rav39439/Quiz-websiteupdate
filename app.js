@@ -11,31 +11,8 @@ const projectId = process.env.projectId;
 const storageBucket = process.env.storageBucket;
 const messagingSenderId = process.env.messagingSenderId;
 const appId = process.env.appId;
-
-const serviceAct = {
-    "type": "service_account",
-    "project_id": "mynewproject-ae49a",
-    "private_key_id": "6b83b2488c6260290e1d2f59d6600321265eb2fc",
-    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDkR48AC1bE5TVZ\n17k9zzhugOtjiYDYHzlmk/ndxMFOTHgYAG49ryH3AsBo7T8lcvnPR5mek+SxF7BJ\nwWg59UaPxFUQlxJ32cneGERgJjMR3b9zDEhdy+YGvSH1PODKx0yj2ysY/xQRRMRO\n+80HC/uGBJQueER8FdFonnOfVKtCEquvQwqTUf5+XOnJU+q8X7pzZluCQPf8QgUr\naIJcEy8r9fsxD+lBArDCA6gutiw1x4Ee/2FoRn8aXnJeWAOTNWBE56w/9KNNs/cJ\nkBfTNmNPuCZiTqhp8BUnWwAOzO5sBMNZvcGuya8Wdd1s1fMcrGlJwOeA4J3CBnQM\naL+BalGnAgMBAAECggEADeqm4ckkgwsOKOn+gFwlA+eWx2dXPtW4eXPFTysdixkd\nASmVjuvMVZ4J/jDodpn/Ig8quFYqd6QKupRbNvKoWJS5iDINjYJDd5IMfmgVw528\nfCu1hbJWgEwAyU3qzlyUDtvfpr3Lirn3KxwtWvlKCNjinRVL54dU+txzZAqUs4mz\ns06SkUVbQPd7b1QhMKcSwZImYqkcjCqlEqJ3qwhKK9b8fzUFKlH3YCdisKDIgBHs\n6WjiL6mOfnyZBUcv5F+y6b+so6ulMJs2LjIbN6PE5vllFl5fPWeNDmUZDBUgE9ug\nDjHiJ67FhzZUsl7vD9/BxertDMI3jD9JoZrugQSk4QKBgQD3im1Y4tHCWmPmJ/6K\nattza2VQRUKlBpiIKnjeJH5yLsuqVuM86uleNxGX/xaUOS7uag+9E2OS2y9kknE5\ntVVZrv1WvwH8XNBDK3rkyLELCF9BOUR4362k5yF7oZHmJh6QzOkwHUC3V2TKvHHx\n0V0sUtPG5J+VJ3lngHGq9ZmtmQKBgQDsFKCw40uz5ZooZl6yqx56rU010UB//IF4\nDU+FR5o22c6q1/EEX+TX5V7O3yL1x7p4Q+DuPScLrvIWF2k2ZQ5rN+bDf3ot3cT7\nU9V2FF4uii32DGliFohV+9NgCsIMhj/SfgL6otx8gqHCdxa5eotR9Y6pc5eZrpL+\nkF8hcyMBPwKBgD2vHf53TwPaWGiC8Nf3NsY1LeLpz2imEx5jTwk0GNpFNPU2f5uv\nggW7PUQeCbdX5Iz+mvtnuHlg6xdpspNJz4HwrCqQoGMNkcwbKp2WMR/pryrmpVxl\niLS978cKBPxP5W/5z+XwdC77tR8cBFzY6hngbetzDx0w3/zdsfWDDA+JAoGAU8RF\n+D3OYLi5aFhahZ7+I51WZiAneMJJ1iUy8CGl8Ix8LlaM6HZ2Jrz2VQULzJXf7kh3\niVEdh6G9uGT6KhjVcunU8c1LtvaXrG3ksg8sE+tnv4RL6EgCfC/soolurS79elzI\nBdK/1VYsu2myIIIA6UXuJuYjBp7Q/Y6Qkrfd1dUCgYEA7AoXm2wHaD3N5+L5tE0H\nxyVgdRAIXvYulAQOZhSG6uzon544+N/XbC0hUsbduoiW/yI35AIWMAIr3rcp8QV+\nWsDuVFxv6CXOqDIvL/QM97gWZp+IrFjurAunpkD4sqQO/a0TaZsTaM/Is0HwviqR\n1PbIo8oPch/oCdsGpGPsHQk=\n-----END PRIVATE KEY-----\n",
-    "client_email": "rav67584935@mynewproject-ae49a.iam.gserviceaccount.com",
-    "client_id": "118295374918634587385",
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/rav67584935%40mynewproject-ae49a.iam.gserviceaccount.com",
-    "universe_domain": "googleapis.com"
-}
-// const admin1 = require('firebase-admin');
-// admin1.initializeApp({
-//     credential: admin1.credential.cert(serviceAct)
-//   });
-// console.log("this is firebase admmin")
-//   console.log(admin1)
 const measurmentId = process.env.measurmentId;
 const APIKEY = process.env.APIKEY;
-
-
-// console.log(APIKEY, authdomain, projectId, storageBucket, messagingSenderId, appId, measurmentId)
 var firebaseConfig = {
     apiKey: APIKEY,
     authDomain: authdomain,
@@ -55,13 +32,6 @@ firebase.initializeApp(firebaseConfig)
 //------------test-----------------------//
 const collectionName = 'articles';
 const documentId = 'Physics';
-
-// Get a reference to the document
-// const docRef = database.ref(`${collectionName}/${documentId}`);
-
-// Retrieve the document data
-
-
 //---------------------------------------//
 const app = express()
 var ObjectId = require("mongodb").ObjectId

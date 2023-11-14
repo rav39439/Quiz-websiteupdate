@@ -214,9 +214,7 @@
       <hr>
 
 
-      <% if(quizattempts<40){ %>
-        <% if(Myname!=null ){ %>
-          <% if(emailVerified){ %>
+     
         <div class="text-center">
           <h1 style="color: blue;">Your details</h1>
           <form action="/newquiz4" method="POST">
@@ -230,16 +228,7 @@
             </div>
             <button class="mt-3 btn btn-primary" type="submit">start</button>
           </form>
-          <% }else{ %>
-            <h1 style="color:red;font-style: italic;">Verify your email to contiue to quiz </h1>
-
-            <% } %>
-          <% } else{%>
-            <h1 style="color:red;font-style: italic;">Login or Register to contiue to quiz </h1>
-            <% } %>           
-          <% } else{%>
-            <h3 style="color: red;font-style: italic;">Quiz is Longer Active </h3>
-            <% } %>
+        
         </div>
     </div>
   </div>
