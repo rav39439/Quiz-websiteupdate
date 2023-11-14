@@ -161,11 +161,11 @@
 
                 if (doc != null) {
                     console.log(getExactAnsFromtext(doc, tagsTosearch))
-                   
-                    if(typeof(getExactAnsFromtext(doc, tagsTosearch))!='undefined'){
+
+                    if (typeof (getExactAnsFromtext(doc, tagsTosearch)) != 'undefined') {
                         html = getExactAnsFromtext(doc, tagsTosearch)
                     }
-                    else{
+                    else {
                         html = '`<h1> Not found </h1>`'
 
                     }
@@ -176,7 +176,7 @@
                 }
             })
         }
-     
+
         // console.log("document")
         // console.log(totaldocs)
         // console.log(html.length)
@@ -215,6 +215,8 @@
 
     function getExactAnsFromtext(doc, tagsTosearch) {
         let docs = []
+
+        let html
         // let arrayofTexts = doc.Text.map(d => d.replace(/<[^>]*>/g, ''))
         let newtags = []
         let filteredquestions = []
@@ -227,7 +229,7 @@
                 newtags.push(dc)
             }
         })
-      //  tagsTosearch = removeDuplicates(newtags)
+        //  tagsTosearch = removeDuplicates(newtags)
         //    console.log("new tags")
         //    console.log(tagsTosearch)
         let arrayofTexts = []
@@ -241,8 +243,22 @@
             // console.log("this is wordsto seach")
             // console.log(tagsTosearch)
             wordstosearch = tagsTosearch.map(e => e.tag)
-            let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
+            // console.log(arrayofTexts)
            
+            // console.log(wordstosearch)
+
+            if( ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)){
+                html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
+            //     console.log("resulttant html")
+            // console.log(html)
+            }
+            else {
+                html = ArrywithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)
+                // console.log("defiened inside")
+                // console.log(html)
+
+            }
+
             return html
         } else {
             return `<h1>No result found</h1>`
@@ -276,25 +292,41 @@
     function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs, doc) {
         for (let i = 0; i < arrayofTexts.length; i++) {
 
-            if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
+            if (containsAlternativewords(arrayofTexts[i], wordsToSearch)) {
                 text = htmlText[i]
                 // console.log(htmlText[i])
                 break
 
             }
 
-            //  if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
+            // else if(containsAlternativewords(arrayofTexts[i], wordsToSearch)){
             //     text = htmlText[i]
-            //     console.log('found')
+            //     //console.log('found')
 
             // }
             // else {
             //     //  document.getElementById('dd').innerHTML = `<h1>Not Found</h1>`
 
-            //     console.log("not found")
+            //     // console.log("not found")
             //     text = `<h1>Not Found</h1>`
 
             // }
+        }
+        return text
+    }
+
+    function ArrywithAllwordsAlt(arrayofTexts, wordsToSearch, htmlText, docs, doc) {
+        for (let i = 0; i < arrayofTexts.length; i++) {
+
+            if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
+                // console.log("matched")
+                text = htmlText[i]
+                // console.log(htmlText[i])
+                break
+
+            }
+
+
         }
         return text
     }
@@ -483,20 +515,20 @@
             for (let i = 0; i < allTags.length; i++) {
                 const tag = allTags[i];
                 // console.log(tag)
-                const nonBreakingSpace ='&nbsp'; // Non-breaking space
+                const nonBreakingSpace = '&nbsp'; // Non-breaking space
 
-// Finding the index of the first occurrence of &nbsp;
-                    let pt=``
+                // Finding the index of the first occurrence of &nbsp;
+                let pt = ``
                 if (tag.nodeName.toLowerCase() === 'p') {
                     let lineBreak = document.createElement('br');
 
-// Insert <br> before </p>
-                         tag.appendChild(lineBreak);
-                    
+                    // Insert <br> before </p>
+                    tag.appendChild(lineBreak);
 
-                   
+
+
                     // If it's a <p> tag, add its text content to 'pTagsArray'
-                        tag.textContent.split(' ').forEach((el) => {
+                    tag.textContent.split(' ').forEach((el) => {
                         let html = `<p>${el}</p>`
 
                         // Using a regular expression to replace only the first occurrence of '&nbsp;'
@@ -505,16 +537,16 @@
                         //  var newText = el.replace("<br>", /\u00A0/g,);
                         // var newText = el.replace("<br>", /\u00A0/g,);
 
-                         pTagsArray.push(newText + ' ');
+                        pTagsArray.push(newText + ' ');
 
-                        
+
 
                     })
 
-                    
+
                 }
                 else if (tag.nodeName.toLowerCase() === 'h1' || tag.nodeName.toLowerCase() === 'h2' || tag.nodeName.toLowerCase() === 'h3') {
-                    console.log("running1111111")
+                    // console.log("running1111111")
                     let html = `<h2>${tag.textContent}</h2>`
                     pTagsArray.push(html + ' ');
 
