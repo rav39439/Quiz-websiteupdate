@@ -160,8 +160,15 @@
                 // }
 
                 if (doc != null) {
-                    // console.log(tagsTosearch)
-                    html = getExactAnsFromtext(doc, tagsTosearch)
+                    console.log(getExactAnsFromtext(doc, tagsTosearch))
+                   
+                    if(typeof(getExactAnsFromtext(doc, tagsTosearch))!='undefined'){
+                        html = getExactAnsFromtext(doc, tagsTosearch)
+                    }
+                    else{
+                        html = '`<h1> Not found </h1>`'
+
+                    }
 
                 }
                 else {
