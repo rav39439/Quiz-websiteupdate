@@ -54,6 +54,7 @@
     let alltopicdetails = []
     getAllTags()
     getAlldocuments()
+    let text
 
 
 
@@ -133,10 +134,10 @@
         for (let i = 0; i < alltopicdetails.length; i++) {
             let result1 = containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e => !e.includes('|')))
             let result2 = checkCommonelement(alltopicdetails[i].filter(e => e.includes('|')), tagsinques)
-            console.log(result1)
-            console.log(result2)
-            console.log(alltopicdetails[i])
-            console.log(tagsinques)
+            // console.log(result1)
+            // console.log(result2)
+            // console.log(alltopicdetails[i])
+            // console.log(tagsinques)
             // if(!result2){
             ///  console.log(result2,result1,alltopicdetails[i])
             //  }
@@ -159,6 +160,7 @@
                 // }
 
                 if (doc != null) {
+                    // console.log(tagsTosearch)
                     html = getExactAnsFromtext(doc, tagsTosearch)
 
                 }
@@ -167,11 +169,10 @@
                 }
             })
         }
-        // console.log("dfoffffffffffffff")
-        // console.log(html)
-        console.log("document")
-        console.log(totaldocs)
-        console.log(html.length)
+     
+        // console.log("document")
+        // console.log(totaldocs)
+        // console.log(html.length)
 
         if (html.length != 0) {
             document.getElementById('dd').innerHTML = html
@@ -219,7 +220,7 @@
                 newtags.push(dc)
             }
         })
-        tagsTosearch = removeDuplicates(newtags)
+      //  tagsTosearch = removeDuplicates(newtags)
         //    console.log("new tags")
         //    console.log(tagsTosearch)
         let arrayofTexts = []
@@ -230,10 +231,11 @@
                 arrayofTexts.push(text)
                 docs.push(document.getElementById('mmrg'))
             })
+            // console.log("this is wordsto seach")
+            // console.log(tagsTosearch)
             wordstosearch = tagsTosearch.map(e => e.tag)
             let html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
-            console.log("founddddddddddddddddddd")
-            console.log(html)
+           
             return html
         } else {
             return `<h1>No result found</h1>`
@@ -255,9 +257,9 @@
             })
 
         }
-        console.log(wordstosearch)
+        // console.log(wordstosearch)
 
-        console.log(wordArray)
+        // console.log(wordArray)
 
         return (wordsToSearch.every(word => wordArray.includes(word.toLowerCase())));
     }
@@ -265,12 +267,11 @@
     // Check each string of words
 
     function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs, doc) {
-        let text
         for (let i = 0; i < arrayofTexts.length; i++) {
 
             if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
                 text = htmlText[i]
-                console.log(htmlText[i])
+                // console.log(htmlText[i])
                 break
 
             }
@@ -280,13 +281,13 @@
             //     console.log('found')
 
             // }
-            else {
-                //  document.getElementById('dd').innerHTML = `<h1>Not Found</h1>`
+            // else {
+            //     //  document.getElementById('dd').innerHTML = `<h1>Not Found</h1>`
 
-                console.log("not found")
-                text = `<h1>Not Found</h1>`
+            //     console.log("not found")
+            //     text = `<h1>Not Found</h1>`
 
-            }
+            // }
         }
         return text
     }
@@ -474,7 +475,7 @@
 
             for (let i = 0; i < allTags.length; i++) {
                 const tag = allTags[i];
-                console.log(tag)
+                // console.log(tag)
                 const nonBreakingSpace ='&nbsp'; // Non-breaking space
 
 // Finding the index of the first occurrence of &nbsp;
