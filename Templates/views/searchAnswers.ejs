@@ -257,13 +257,14 @@
                         let result2 = tags2.every(word => wordstosearch.includes(word));
                          console.log(tags1)
                                                console.log(tags2)
-                                                console.log(wordstosearch)
+                                                console.log(removeDuplicates(wordstosearch))
+                                                let modData=removeDuplicates(wordstosearch)
 
                      console.log(value1)
                         //   
                         let c1=0
                         let c2=0                    
-                        wordstosearch.forEach((word)=>{
+                        modData.forEach((word)=>{
                             if(tags1.includes(word)){
                             c2++
                             }
