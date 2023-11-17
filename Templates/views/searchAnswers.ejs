@@ -53,7 +53,6 @@
     let alltags
     let Tags
     let Documents
-    let html
     let alltopicdetails = []
     getAllTags()
     getAlldocuments()
@@ -100,6 +99,7 @@
     }
 
     function search() {
+
         document.getElementById('Ans').innerHTML = ``
         let query = document.getElementById('queries').value
         let arrayquery = query.split(' ')
@@ -110,17 +110,8 @@
         let resultantDoc
         let upatedquery = queryarr.map(e => e.toLowerCase())
         let tagsTosearch = Tags.filter(t => upatedquery.includes(t.tag.toLowerCase()))
-        // console.log(tagsTosearch)
         let docArr = tagsTosearch.map(document => document.doc)
-
-        // let result = hasDuplicates(docArr)
-        // if (result) {
         resultantDoc = findMostRepeatedElement(docArr)
-
-        // } else {
-        //     resultantDoc = null
-        // }
-
         showthisDoc(resultantDoc, tagsTosearch)
 
     }
@@ -134,7 +125,7 @@
         tagsinques = tagsTosearch.map(e => e.tag)
         // console.log(tagsTosearch)
 
-        // console.log(tagsinques)
+        console.log(tagsinques)
         let doci
         for (let i = 0; i < alltopicdetails.length; i++) {
             let result1 = containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e => !e.includes('|')))
@@ -154,22 +145,17 @@
             }
 
         }
-        let html1=``
+        let html1 = []
 
         // console.log("document")
         // console.log(totaldocs)
         if (typeof (totaldocs) != 'undefined' && totaldocs.length > 0) {
             totaldocs.forEach((e) => {
                 let doc = e
-                // if (typeof (doci) != 'undefined') {
-                //     doc = doci
-                // }
-                // else {
-                //     doc == null
-                // }
+
 
                 if (doc != null) {
-                    console.log(getExactAnsFromtext(doc, tagsTosearch,html1))
+                    let value = getExactAnsFromtext(doc, tagsTosearch, html1)[0]
 
                     if (typeof (value) != 'undefined') {
                         // console.log("11111111")
@@ -189,9 +175,7 @@
             })
         }
 
-        // console.log("document")
-        // console.log(totaldocs)
-        // console.log(html.length)
+
 
         if (html.length != 0) {
             document.getElementById('dd').innerHTML = html
@@ -202,13 +186,6 @@
             document.getElementById('dd').innerHTML = `<h1>Nothing found related to this</h1>`
         }
 
-        // let modifiedHTML = removeDivAndChildren(document.getElementById('dd').innerHTML)
-
-
-        // if(document.getElementById('dd').children[0].tagName=='DIV'){
-        //     document.getElementById('dd').innerHTML=document.getElementById('dd').children[0].innerHTML
-        // }
-        // getHTMLTags()
         let updatedHtml = getHTMLTags()
         settext(updatedHtml)
      text =undefined
@@ -220,7 +197,7 @@
         return arr.filter((value, index, self) => self.indexOf(value) === index);
     }
 
-    function getExactAnsFromtext(doc, tagsTosearch,html1) {
+    function getExactAnsFromtext(doc, tagsTosearch, html1) {
         let docs = []
 
         // let arrayofTexts = doc.Text.map(d => d.replace(/<[^>]*>/g, ''))
@@ -235,6 +212,7 @@
                 newtags.push(dc)
             }
         })
+
         //  tagsTosearch = removeDuplicates(newtags)
         //    console.log("new tags")
         //    console.log(tagsTosearch)
@@ -314,7 +292,7 @@
                 && (typeof (value2) == 'undefined')) {
                 // console.log("first are defined")
 
-                html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
+                html1.push(value1)
                 //     console.log("resulttant html")
                 // console.log(html)
             }
@@ -322,22 +300,27 @@
                 // console.log("fffffff inside")
 
                 //  html=`<h1>Not found</h1>`
-                html = ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)
-                // console.log("defiened inside")
+                html1.push(value2)
+                // 
                 // console.log(html)
 
             }
             else {
                 // console.log("not in arary")
 
-                html= `<h2>Not found</h2>`
+                // html1.push(`<h2>Not found</h2>`)
             }
             // console.log("htmlkkkkkkkk")
             // console.log(html1)
            //return html1
         } else {
-            return `<h1>No result found</h1>`
+            console.log("not in arary")
+
+            // return `<h1>No result found</h1>`
         }
+        return html1
+
+
     }
 
 
