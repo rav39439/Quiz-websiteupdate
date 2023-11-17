@@ -126,6 +126,8 @@
     }
 
     function showthisDoc(resultdoc, tagsTosearch) {
+        // console.log("this is search")
+        // console.log(tagsTosearch)
         let html = ``
         let totaldocs = []
 
@@ -154,6 +156,8 @@
         }
         let html1=``
 
+        // console.log("document")
+        // console.log(totaldocs)
         if (typeof (totaldocs) != 'undefined' && totaldocs.length > 0) {
             totaldocs.forEach((e) => {
                 let doc = e
@@ -167,10 +171,13 @@
                 if (doc != null) {
                     console.log(getExactAnsFromtext(doc, tagsTosearch,html1))
 
-                    if (typeof (getExactAnsFromtext(doc, tagsTosearch)) != 'undefined') {
-                        html = getExactAnsFromtext(doc, tagsTosearch)
+                    if (typeof (value) != 'undefined') {
+                        // console.log("11111111")
+                        html = value
                     }
                     else {
+                        // console.log("222222222222")
+
                         html = '`<h1> Not found </h1>`'
 
                     }
@@ -204,15 +211,8 @@
         // getHTMLTags()
         let updatedHtml = getHTMLTags()
         settext(updatedHtml)
-
-        //         document.getElementById('Ans').innerHTML =
-        //             `
-        //     <div class="" style=" background-color: rgb(230, 230, 250);width: 100%;border-radius:16px;margin-top:40px;margin-left:5px" id="">
-        //     ${html}
-        // </div>
-        //     `
-        text = ``
-        html=``
+     text =undefined
+        // html = ``
 
     }
 
@@ -252,41 +252,74 @@
             // console.log(arrayofTexts)
 
             // console.log(wordstosearch)
-            // console.log(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-            // console.log(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-            if (typeof (ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)) != 'undefined' &&
-                typeof (ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)) != 'undefined') {
-                document.getElementById('sample').innerHTML = ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)
-                document.getElementById('sample1').innerHTML = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
-                let d1 = document.getElementById('sample')
-                let d2 = document.getElementById('sample1')
-                let tags1 = d1.querySelector('p#mmrg').innerText.split(',')
-                let tags2 = d2.querySelector('p#mmrg').innerText.split(',')
-                let result1=tags1.every(word => wordstosearch.includes(word));
-                let result2=tags2.every(word => wordstosearch.includes(word));
+            let value1 = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
+            let value2 = ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)
+            // console.log(value1.length==0)
+            // console.log(value2.length==0)
+            // console.log(value1)
+            // console.log(value2)
 
-            if(result1){
-                html=ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)
-            }
-            else if(result2){
-                html=ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
-            }
-            // else{
-            //     html='<h1>NOt found</h1>'
-            // }
+            // console.log(typeof(value2)=='string')
+            // console.log(typeof(value1)=='undefined')
+            // console.log(typeof(value2)=='string' && typeof(value1)=='undefined')
+
+            if (typeof (value2) != 'undefined' && value1 !== null && value2 !== null &&
+                typeof (value1) != 'undefined') {
+                    // alert("sdd")
+                if (value1 != value2) {
+                    document.getElementById('sample').innerHTML = value2
+                    document.getElementById('sample1').innerHTML = value1
+
+                    let d1 = document.getElementById('sample')
+                    let d2 = document.getElementById('sample1')
+                    if (d1.querySelector('p#mmrg') != null && d2.querySelector('p#mmrg') != null) {
+                        let tags1 = d1.querySelector('p#mmrg').innerText.split(',')
+                        let tags2 = d2.querySelector('p#mmrg').innerText.split(',')
+                        let result1 = tags1.every(word => wordstosearch.includes(word));
+                        let result2 = tags2.every(word => wordstosearch.includes(word));
+
+                        if (result1 && result2) {
+                            html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+
+                            // console.log("not nullllllllll11")
+
+                        }
+
+                        else if (result1) {
+                            html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+                            // console.log("not nullllllllll22")
+
+                        }
+                        else if (result2) {
+                            html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+                            // console.log("not nullllllllll33")
+
+                        }
+                        else {
+                            // console.log("not nullllllllll44")
+
+                        }
+                    }
+                    else {
+                    }
+                }
+                else {
+                    // console.log("values are equal")
+                    html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+
+                }
             }
 
-            else if (typeof (ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)) != 'undefined'
-                && typeof (ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)) == 'undefined') {
-                console.log("first are defined")
+            else if ((typeof (value1) == 'string')
+                && (typeof (value2) == 'undefined')) {
+                // console.log("first are defined")
 
                 html = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
                 //     console.log("resulttant html")
                 // console.log(html)
             }
-            else if (typeof (ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)) == 'undefined'
-                && typeof (ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)) != 'undefined') {
-                console.log("seconed are defined")
+            else if (typeof(value2)=='string' && typeof(value1)=='undefined') {
+                // console.log("fffffff inside")
 
                 //  html=`<h1>Not found</h1>`
                 html = ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)
@@ -295,12 +328,13 @@
 
             }
             else {
-                console.log("none is defined")
+                // console.log("not in arary")
 
                 html= `<h2>Not found</h2>`
             }
-
-            return html
+            // console.log("htmlkkkkkkkk")
+            // console.log(html1)
+           //return html1
         } else {
             return `<h1>No result found</h1>`
         }
