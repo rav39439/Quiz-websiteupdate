@@ -147,8 +147,8 @@
         }
         let html1 = []
 
-        // console.log("document")
-        // console.log(totaldocs)
+        console.log("document")
+        console.log(totaldocs)
         if (typeof (totaldocs) != 'undefined' && totaldocs.length > 0) {
             totaldocs.forEach((e) => {
                 let doc = e
@@ -243,8 +243,8 @@
 
             if (typeof (value2) != 'undefined' && value1 !== null && value2 !== null &&
                 typeof (value1) != 'undefined') {
-                    // alert("sdd")
                 if (value1 != value2) {
+                    console.log("not equal")
                     document.getElementById('sample').innerHTML = value2
                     document.getElementById('sample1').innerHTML = value1
 
@@ -255,28 +255,56 @@
                         let tags2 = d2.querySelector('p#mmrg').innerText.split(',')
                         let result1 = tags1.every(word => wordstosearch.includes(word));
                         let result2 = tags2.every(word => wordstosearch.includes(word));
+                         console.log(tags1)
+                                               console.log(tags2)
+                                                console.log(wordstosearch)
 
-                        if (result1 && result2) {
-                            html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+                     console.log(value1)
+                        //   
+                        let c1=0
+                        let c2=0                    
+                        wordstosearch.forEach((word)=>{
+                            if(tags1.includes(word)){
+                            c2++
+                            }
+                            else if(tags2.includes(word)){
+                                c1++
+                            }
+                            else{
 
-                            // console.log("not nullllllllll11")
+                            }
+                        })
+                        console.log(c1)
+                        console.log(c2)
+                        if(c1==c2){
+                            html1.push(value1)
+
+                        }
+                        else if(c1>c2){
+
+                      html1.push(value1)
+                        }
+                        else{
+                            html1.push(value2)
 
                         }
 
-                        else if (result1) {
-                            html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-                            // console.log("not nullllllllll22")
 
-                        }
-                        else if (result2) {
-                            html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-                            // console.log("not nullllllllll33")
+                        // if (result1 && result2) {
+                        //     html1.push(value2)
+                        // }
 
-                        }
-                        else {
-                            // console.log("not nullllllllll44")
+                        // else if (result1) {
+                        //     html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
 
-                        }
+                        // }
+                        // else if (result2) {
+                        //     html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+
+                        // }
+                        // else {
+
+                        // }
                     }
                     else {
                     }
