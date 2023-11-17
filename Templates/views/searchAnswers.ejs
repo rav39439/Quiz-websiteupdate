@@ -145,7 +145,7 @@
             }
 
         }
-        let html1 =[]
+        let html1 = []
 
         console.log("document")
         console.log(totaldocs)
@@ -155,11 +155,11 @@
 
 
                 if (doc != null) {
-                    let value=getExactAnsFromtext(doc, tagsTosearch,html1)[0]
+                    let value = getExactAnsFromtext(doc, tagsTosearch, html1)[0]
 
                     if (typeof (value) != 'undefined') {
                         console.log("11111111")
-                        html =value
+                        html = value
                     }
                     else {
                         console.log("222222222222")
@@ -197,7 +197,7 @@
         return arr.filter((value, index, self) => self.indexOf(value) === index);
     }
 
-    function getExactAnsFromtext(doc, tagsTosearch,html1) {
+    function getExactAnsFromtext(doc, tagsTosearch, html1) {
         let docs = []
 
         // let arrayofTexts = doc.Text.map(d => d.replace(/<[^>]*>/g, ''))
@@ -230,62 +230,95 @@
             // console.log(arrayofTexts)
 
             console.log(wordstosearch)
-            console.log(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-            console.log(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-            if (ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc) != 'undefined' &&
-            ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc) != 'undefined') {
-                document.getElementById('sample').innerHTML = ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)
-                document.getElementById('sample1').innerHTML = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
-               
+            let value1 = ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)
+            let value2 = ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)
+            console.log(typeof(value1))
+            console.log(typeof(value2))
+
+            console.log(typeof(value2)=='string')
+            console.log(typeof(value1)=='undefined')
+            console.log(typeof(value2)=='string' && typeof(value1)=='undefined')
+            console.log(value1 == value2) 
+
+            if (typeof (value2) != 'undefined' && value1 !== null && value2 !== null &&
+                typeof (value2) != 'undefined') {
+                if (value1 != value2) {
+                    document.getElementById('sample').innerHTML = value2
+                    document.getElementById('sample1').innerHTML = value1
+
                     let d1 = document.getElementById('sample')
                     let d2 = document.getElementById('sample1')
-                    console.log("xsss")
                     if (d1.querySelector('p#mmrg') != null && d2.querySelector('p#mmrg') != null) {
                         let tags1 = d1.querySelector('p#mmrg').innerText.split(',')
                         let tags2 = d2.querySelector('p#mmrg').innerText.split(',')
                         let result1 = tags1.every(word => wordstosearch.includes(word));
                         let result2 = tags2.every(word => wordstosearch.includes(word));
 
-                        if (result1) {
+                        if (result1 && result2) {
                             html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+
+                            console.log("not nullllllllll11")
+
+                        }
+
+                        else if (result1) {
+                            html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+                            console.log("not nullllllllll22")
+
                         }
                         else if (result2) {
                             html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+                            console.log("not nullllllllll33")
+
                         }
                         else {
+                            console.log("not nullllllllll44")
+
                         }
                     }
-                    else{
+                    else {
                     }
+                }
+                else {
+                    console.log("values are equal")
+                    html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+
+                }
             }
 
-            else if (typeof (ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)) != 'undefined'
-                && typeof (ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)) == 'undefined') {
+            else if ((typeof (value1) == 'string')
+                && (typeof (value2) == 'undefined')) {
+            alert("dd")
                 console.log("first are defined")
 
-                html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+                html1.push(value1)
                 //     console.log("resulttant html")
                 // console.log(html)
             }
-            else if (typeof (ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc)) == 'undefined'
-                && typeof (ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc)) != 'undefined') {
-                console.log("defiened inside")
+            else if (typeof(value2)=='string' && typeof(value1)=='undefined') {
+                console.log("fffffff inside")
+                alert("dd11")
+
                 //  html=`<h1>Not found</h1>`
-                html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+                html1.push(value2)
                 // 
                 // console.log(html)
 
             }
             else {
+                console.log("not in arary")
 
                 // html1.push(`<h2>Not found</h2>`)
             }
             console.log("htmlkkkkkkkk")
             console.log(html1)
-            return html1
+           //return html1
         } else {
+            console.log("not in arary")
+
             // return `<h1>No result found</h1>`
         }
+        return html1
 
 
     }
