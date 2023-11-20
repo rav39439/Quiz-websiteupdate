@@ -10,6 +10,12 @@
     p {
         margin-left: 12px;
     }
+
+    .newclass{
+        background-color: rgb(230, 230, 250);width: 70%;border-radius:16px;
+    font-size:20px; font-family: Arial, Helvetica, sans-serif;margin-left: 20px;
+    }
+
 </style>
 
 
@@ -35,7 +41,7 @@
         </div>
 
 
-        <div id="Ans" class="" style="width: 100%; ">
+        <div id="Ans" class="">
 
         </div>
 
@@ -125,7 +131,7 @@
         tagsinques = tagsTosearch.map(e => e.tag)
         // console.log(tagsTosearch)
 
-        console.log(tagsinques)
+     //   console.log(tagsinques)
         let doci
         for (let i = 0; i < alltopicdetails.length; i++) {
             let result1 = containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e => !e.includes('|')))
@@ -147,8 +153,8 @@
         }
         let html1 = []
 
-        console.log("document")
-        console.log(totaldocs)
+        // console.log("document")
+        // console.log(totaldocs)
         if (typeof (totaldocs) != 'undefined' && totaldocs.length > 0) {
             totaldocs.forEach((e) => {
                 let doc = e
@@ -512,6 +518,7 @@
 
     let index = 0;
     function settext(wordArray) {
+        document.getElementById('Ans').classList.add('newclass')
         let html = ``
         for (let i = 0; i < wordArray.length; i++) {
             html += wordArray[i]
