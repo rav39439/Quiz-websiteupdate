@@ -426,10 +426,16 @@ counts.push({tagscount:count,percentmatch:percentagematch})
         let ncount=counts.map(e=>e.tagscount)
         let b=Math.max(...ncount)
         let index=ncount.findIndex(e=>e==b)
-        if(counts[index].percentmatch>45){
+        if(b<4){
+            if(counts[index].percentmatch>45){
             text=htmlText[index]
 
         }
+        }
+        else{
+            text=htmlText[index]
+        }
+      
           countwithDoc.push({count:b,docum:htmlText[index]})
         return text
     }
@@ -736,8 +742,6 @@ counts.push({tagscount:count,percentmatch:percentagematch})
     function checkCommonelement(arr, arr1) {
         let result = false
         if (arr.length != 0) {
-
-
             arr.forEach((elem) => {
                 //if(elem.includes('|')){
                 let checArr = elem.split('|')
