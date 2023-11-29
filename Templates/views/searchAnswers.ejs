@@ -355,19 +355,30 @@
             })
 
         }
-
-        // console.log(wordArray)
+let nwordArr=[]
+let optionalTag=[]
+wordArray.forEach((word)=>{
+    if(word.includes('[')){
+        optTag=word.split('[')[1]
+        nwordArr.push(optTag)
+        optionalTag.push(optTag)
+    }
+    else{
+        nwordArr.push(word)
+    }
+})
         filteredwords=removeDuplicates(wordstosearch)
-        // console.log(filteredwords)
-
+    
         //---------------percent match------------------//
         let count=0
+        let netLength=nwordArr.length-optionalTag.length
         filteredwords.forEach((word)=>{
-            if(wordArray.includes(word)){
+            if(nwordArr.includes(word)){
                 count++
             }
            })
-           let percentagematch=Math.floor(count/wordArray.length*100)
+           let percentagematch=Math.floor(count/netLength*100)
+
 counts.push({tagscount:count,percentmatch:percentagematch})
 
         //-----------------------------------------------//
@@ -385,6 +396,9 @@ counts.push({tagscount:count,percentmatch:percentagematch})
 
     function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs, doc) {
         for (let i = 0; i < arrayofTexts.length; i++) {
+        //     console.log("the arrayoftext")
+        // console.log(arrayofTexts[i])
+        //let narrayofTexts=arrayofTexts[i].filter(e=>e.includes('['))
 
             if (containsAlternativewords(arrayofTexts[i], wordsToSearch)) {
                 text = htmlText[i]
@@ -780,8 +794,9 @@ counts.push({tagscount:count,percentmatch:percentagematch})
         else {
             wordArray = wordString.split(' ')
         }
+        let nwordArray=wordArray.filter(e=>!e.includes('['))
 
-        return wordArray.every(word => wordsToSearch.includes(word));
+        return nwordArray.every(word => wordsToSearch.includes(word));
     }
 
 </script>

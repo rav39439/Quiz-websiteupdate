@@ -3,6 +3,7 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const nodemailer = require('nodemailer')
 const Qs = require('query-string');
+
 const dotenv = require("dotenv");
 require('dotenv').config()
 var firebase = require('firebase')
@@ -1993,6 +1994,79 @@ const PORT = process.env.PORT
 http.listen(PORT || 8800, () => {
     console.log("listening")
 })
+
+
+function writeBinaryJson(jsonData, filePath) {
+    // Convert JSON data to a string
+    // const jsonString = JSON.stringify(jsonData);
+    // console.log(jsonString)
+
+    // // Convert the string to Buffer
+    // const jsonBuffer = Buffer.from(jsonString, 'utf-8');
+
+    // // Create a Buffer containing the length of the data
+    // // const lengthBuffer = Buffer.alloc(4);
+    // // lengthBuffer.writeUInt32LE(jsonBuffer.length);
+    // const ndata = [{ name: 'newName', age: '21' }];
+
+    // // Convert the new JSON array to Buffer
+    // const ndataBuffer = Buffer.from(JSON.stringify(ndata), 'utf-8');
+
+    // // Concatenate the length buffer and the JSON buffer
+    // const lengthBuffer = Buffer.alloc(4);
+    // lengthBuffer.writeUInt32LE(jsonBuffer.length);
+
+    // // Concatenate the length buffer, the new data buffer, and the JSON buffer
+    // const dataToWrite = Buffer.concat([ndataBuffer, jsonBuffer]);
+    // // Write to the binary file
+    // fs.writeFileSync(filePath, dataToWrite, 'binary');
+    fs.writeFile(filePath, jsonString, 'utf-8', (err) => {
+        if (err) {
+            console.error(`Error writing to file: ${err}`);
+        } else {
+            // console.log('JSON data written to note.txt');
+        }
+    });
+}
+const jsonData = [
+    {"id": 1, "content": "Note 1"},
+    {"id": 2, "content": "Note 2"},
+    {"id": 3, "content": "Note 3"}
+];
+
+// Convert JSON data to a string
+const jsonString = JSON.stringify(jsonData, null, 2); // The '2' argument adds indentation for better readability
+
+// Specify the file path
+const filePath = './note.txt';
+
+// Write JSON array to binary file
+writeBinaryJson(jsonString, filePath);
+
+function readBinaryJson(filePath) {
+    // Read the binary data from the file
+    fs.readFile(filePath, 'utf-8', (err, data) => {
+        if (err) {
+            console.error(`Error reading file: ${err}`);
+            return;
+        }
+    
+        // Parse the JSON data
+        try {
+            const jsonArray = JSON.parse(data);
+    
+            // Now 'jsonArray' contains the parsed array data
+        } catch (parseError) {
+            console.error(`Error parsing JSON: ${parseError}`);
+        }
+    });
+}
+
+// Read JSON array from binary file
+const retrievedJsonArray = readBinaryJson(filePath);
+
+// Print the retrieved JSON array
+
 
 app.get("/verify-email", function (req, res) {
     if (req.query.token) {
