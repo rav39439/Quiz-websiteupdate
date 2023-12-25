@@ -261,12 +261,12 @@
                         let tags2 = d2.querySelector('p#mmrg').innerText.split(',')
                         let result1 = tags1.every(word => wordstosearch.includes(word));
                         let result2 = tags2.every(word => wordstosearch.includes(word));
-                         console.log(tags1)
-                                               console.log(tags2)
+                    //      console.log(tags1)
+                    //                            console.log(tags2)
                                              
-                     console.log(value1)
-                    //  console.log(value2)
-                     console.log(removeDuplicates(wordstosearch))
+                    //  console.log(value1)
+                    // //  console.log(value2)
+                    //  console.log(removeDuplicates(wordstosearch))
                                                 let modData=removeDuplicates(wordstosearch)
 
                        
@@ -341,7 +341,7 @@
     }
 
 
-    function containsAllWords(wordString, wordsToSearch) {
+    function containsAllWords(wordString, wordsToSearch,counts) {
         let wordArray = []
         if (wordString.includes(',')) {
             wordString.split(',').forEach((e) => {
@@ -355,18 +355,20 @@
             })
 
         }
-        console.log(wordstosearch)
 
         console.log(wordArray)
+        filteredwords=removeDuplicates(wordstosearch)
+        console.log(filteredwords)
+
         //---------------percent match------------------//
         let count=0
-        wordstosearch.forEach((word)=>{
+        filteredwords.forEach((word)=>{
             if(wordArray.includes(word)){
                 count++
             }
            })
            let percentagematch=Math.floor(count/wordArray.length*100)
-console.log(percentagematch)
+counts.push({tagscount:count,percentmatch:percentagematch})
 
         //-----------------------------------------------//
         if(percentagematch>45){
@@ -408,18 +410,27 @@ console.log(percentagematch)
     }
 
     function ArrwithAllwordsAlt(arrayofTexts, wordsToSearch, htmlText, docs, doc) {
+        let counts=[]
+        let countwithDoc=[]
+        
         for (let i = 0; i < arrayofTexts.length; i++) {
 
-            if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
-                // console.log("matched")
+            if (containsAllWords(arrayofTexts[i], wordsToSearch,counts)) {
                 text = htmlText[i]
-                // console.log(htmlText[i])
                 break
 
             }
 
 
         }
+        let ncount=counts.map(e=>e.tagscount)
+        let b=Math.max(...ncount)
+        let index=ncount.findIndex(e=>e==b)
+        if(counts[index].percentmatch>45){
+            text=htmlText[index]
+
+        }
+          countwithDoc.push({count:b,docum:htmlText[index]})
         return text
     }
 
