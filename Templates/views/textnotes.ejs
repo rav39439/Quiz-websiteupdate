@@ -20,7 +20,7 @@
 <%- include('../partials/heading.hbs') %>
 
     <body>
-        <div class="container " style="width: 80%;  margin-bottom:40px; border-radius:12px;">
+        <!-- <div class="container " style="width: 80%;  margin-bottom:40px; border-radius:12px;">
             <div class="p-4"
                 style="border: 2px solid rgb(169, 169, 199); background-color: rgb(230, 230, 250);border-radius:16px;">
                 <h2>Create Your Content</h2>
@@ -105,10 +105,6 @@
                     <button class="btn btn-primary" style=" border-radius:17px;" onclick="uploadImage()">Insert
                         Image</button>
 
-                    <!-- <form action="/upload" method="post" id="image-form" enctype="multipart/form-data">
-                            <input type="file" name="file" id="fileInput" accept=".jpg, .jpeg, .png">
-                            <button type="submit">Upload</button>
-                          </form> -->
                 </div>
             </div>
         </div>
@@ -118,7 +114,15 @@
                 id="text-written">
 
             </div>
-        </div>
+        </div> -->
+        Enter the case <input name="case" id="case" type="text"><br><br>
+
+       Enter test input <textarea name="" id="input" cols="30" rows="10"></textarea><br><br>
+       Enter test output <textarea name="" id="output" cols="30" rows="10"></textarea><br><br>
+       <button class="btn btn-primary" onclick="getValue()">getPattern</button><br><br>
+
+       Enter the input to test pattern <textarea name="" id="" cols="30" rows="10"></textarea>
+
 
     </body>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
@@ -421,6 +425,41 @@
       console.log('Input is invalid');
     }
   });
+
+  let pattern=[]
+  let rulesArr=[
+
+  ]
+
+  function getValue(){
+        let case1=document.getElementById("case").value
+
+    let input=document.getElementById("input").value
+    let output=document.getElementById("output").value
+    //------------------------start comparision of input and output----------------------//
+let finput=input.split(' ').filter(e=>e!="")
+let filteredInput=[]
+finput.forEach((e,index)=>{
+    if(e.includes("\n")){
+        let nstring=e.replace(/\n/g, '')
+        filteredInput.push(nstring.trim())
+    }
+    else{
+        filteredInput.push(e)
+    }
+})
+
+if(case1=='usecase'){
+    
+}
+console.log(filteredInput.filter(e=>e!=""))
+
+console.log(output.split(' '))
+
+
+
+
+  }
     </script>
 
 
