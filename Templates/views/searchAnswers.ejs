@@ -261,12 +261,12 @@
                         let tags2 = d2.querySelector('p#mmrg').innerText.split(',')
                         let result1 = tags1.every(word => wordstosearch.includes(word));
                         let result2 = tags2.every(word => wordstosearch.includes(word));
-                        //  console.log(tags1)
-                        //                        console.log(tags2)
+                         console.log(tags1)
+                                               console.log(tags2)
                                              
-                    //  console.log(value1)
+                     console.log(value1)
                     //  console.log(value2)
-                    //  console.log(removeDuplicates(wordstosearch))
+                     console.log(removeDuplicates(wordstosearch))
                                                 let modData=removeDuplicates(wordstosearch)
 
                        
@@ -285,8 +285,7 @@
                                 c1++
                             }
                         })
-                        // console.log(c1)
-                        // console.log(c2)
+            
                         if(c1==c2){
                             html1.push(value1)
 
@@ -299,29 +298,11 @@
                             html1.push(value2)
 
                         }
-
-
-                        // if (result1 && result2) {
-                        //     html1.push(value2)
-                        // }
-
-                        // else if (result1) {
-                        //     html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-
-                        // }
-                        // else if (result2) {
-                        //     html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-
-                        // }
-                        // else {
-
-                        // }
                     }
                     else {
                     }
                 }
                 else {
-                    // console.log("values are equal")
                     html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
 
                 }
@@ -336,12 +317,9 @@
                 // console.log(html)
             }
             else if (typeof(value2)=='string' && typeof(value1)=='undefined') {
-                // console.log("fffffff inside")
-
-                //  html=`<h1>Not found</h1>`
-                html1.push(value2)
-                // 
-                // console.log(html)
+               
+               html1.push(value2)
+          
 
             }
             else {
@@ -377,11 +355,28 @@
             })
 
         }
-        // console.log(wordstosearch)
+        console.log(wordstosearch)
 
-        // console.log(wordArray)
+        console.log(wordArray)
+        //---------------percent match------------------//
+        let count=0
+        wordstosearch.forEach((word)=>{
+            if(wordArray.includes(word)){
+                count++
+            }
+           })
+           let percentagematch=Math.floor(count/wordArray.length*100)
+console.log(percentagematch)
 
-        return (wordsToSearch.every(word => wordArray.includes(word.toLowerCase())));
+        //-----------------------------------------------//
+        if(percentagematch>45){
+            return true
+        }
+        else{
+            return false
+        }
+
+        //return (wordsToSearch.every(word => wordArray.includes(word.toLowerCase())));
     }
 
     // Check each string of words
