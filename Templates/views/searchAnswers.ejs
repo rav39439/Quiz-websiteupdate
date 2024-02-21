@@ -10,6 +10,12 @@
     p {
         margin-left: 12px;
     }
+
+    .newclass{
+        background-color: rgb(230, 230, 250);width: 95%;border-radius:16px;
+    font-size:20px; font-family: Arial, Helvetica, sans-serif;margin-left: 20px;
+    }
+
 </style>
 
 
@@ -35,7 +41,7 @@
         </div>
 
 
-        <div id="Ans" class="" style="width: 100%; ">
+        <div id="Ans" class="">
 
         </div>
 
@@ -125,7 +131,7 @@
         tagsinques = tagsTosearch.map(e => e.tag)
         // console.log(tagsTosearch)
 
-        console.log(tagsinques)
+     //   console.log(tagsinques)
         let doci
         for (let i = 0; i < alltopicdetails.length; i++) {
             let result1 = containsAllWordsdet(tagsinques, alltopicdetails[i].filter(e => !e.includes('|')))
@@ -243,8 +249,8 @@
 
             if (typeof (value2) != 'undefined' && value1 !== null && value2 !== null &&
                 typeof (value1) != 'undefined') {
-                    // alert("sdd")
                 if (value1 != value2) {
+                    console.log("not equal")
                     document.getElementById('sample').innerHTML = value2
                     document.getElementById('sample1').innerHTML = value1
 
@@ -255,26 +261,41 @@
                         let tags2 = d2.querySelector('p#mmrg').innerText.split(',')
                         let result1 = tags1.every(word => wordstosearch.includes(word));
                         let result2 = tags2.every(word => wordstosearch.includes(word));
+                    //      console.log(tags1)
+                    //                            console.log(tags2)
+                                             
+                    //  console.log(value1)
+                    // //  console.log(value2)
+                    //  console.log(removeDuplicates(wordstosearch))
+                                                let modData=removeDuplicates(wordstosearch)
 
-                        if (result1 && result2) {
-                            html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
+                       
+                        let c1=0
+                        let c2=0                    
+                        modData.forEach((word)=>{
+                          if(tags1.includes(word.trim())){
+                            c2++
+                            }
+                           
+                        })
 
-                            // console.log("not nullllllllll11")
+                        modData.forEach((word)=>{
+
+                            if(tags2.includes(word.trim())){
+                                c1++
+                            }
+                        })
+            
+                        if(c1==c2){
+                            html1.push(value1)
 
                         }
+                        else if(c1>c2){
 
-                        else if (result1) {
-                            html1.push(ArrwithAllwordsAlt(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-                            // console.log("not nullllllllll22")
-
+                      html1.push(value1)
                         }
-                        else if (result2) {
-                            html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
-                            // console.log("not nullllllllll33")
-
-                        }
-                        else {
-                            // console.log("not nullllllllll44")
+                        else{
+                            html1.push(value2)
 
                         }
                     }
@@ -282,7 +303,6 @@
                     }
                 }
                 else {
-                    // console.log("values are equal")
                     html1.push(ArrwithAllwords(arrayofTexts, wordstosearch, doc.Text, docs, doc))
 
                 }
@@ -297,12 +317,9 @@
                 // console.log(html)
             }
             else if (typeof(value2)=='string' && typeof(value1)=='undefined') {
-                // console.log("fffffff inside")
-
-                //  html=`<h1>Not found</h1>`
-                html1.push(value2)
-                // 
-                // console.log(html)
+               
+               html1.push(value2)
+          
 
             }
             else {
@@ -324,7 +341,7 @@
     }
 
 
-    function containsAllWords(wordString, wordsToSearch) {
+    function containsAllWords(wordString, wordsToSearch,counts) {
         let wordArray = []
         if (wordString.includes(',')) {
             wordString.split(',').forEach((e) => {
@@ -338,17 +355,50 @@
             })
 
         }
-        // console.log(wordstosearch)
+let nwordArr=[]
+let optionalTag=[]
+wordArray.forEach((word)=>{
+    if(word.includes('[')){
+        optTag=word.split('[')[1]
+        nwordArr.push(optTag)
+        optionalTag.push(optTag)
+    }
+    else{
+        nwordArr.push(word)
+    }
+})
+        filteredwords=removeDuplicates(wordstosearch)
+    
+        //---------------percent match------------------//
+        let count=0
+        let netLength=nwordArr.length-optionalTag.length
+        filteredwords.forEach((word)=>{
+            if(nwordArr.includes(word)){
+                count++
+            }
+           })
+           let percentagematch=Math.floor(count/netLength*100)
 
-        // console.log(wordArray)
+counts.push({tagscount:count,percentmatch:percentagematch})
 
-        return (wordsToSearch.every(word => wordArray.includes(word.toLowerCase())));
+        //-----------------------------------------------//
+        if(percentagematch>45){
+            return true
+        }
+        else{
+            return false
+        }
+
+        //return (wordsToSearch.every(word => wordArray.includes(word.toLowerCase())));
     }
 
     // Check each string of words
 
     function ArrwithAllwords(arrayofTexts, wordsToSearch, htmlText, docs, doc) {
         for (let i = 0; i < arrayofTexts.length; i++) {
+        //     console.log("the arrayoftext")
+        // console.log(arrayofTexts[i])
+        //let narrayofTexts=arrayofTexts[i].filter(e=>e.includes('['))
 
             if (containsAlternativewords(arrayofTexts[i], wordsToSearch)) {
                 text = htmlText[i]
@@ -374,18 +424,33 @@
     }
 
     function ArrwithAllwordsAlt(arrayofTexts, wordsToSearch, htmlText, docs, doc) {
+        let counts=[]
+        let countwithDoc=[]
+        
         for (let i = 0; i < arrayofTexts.length; i++) {
 
-            if (containsAllWords(arrayofTexts[i], wordsToSearch)) {
-                // console.log("matched")
+            if (containsAllWords(arrayofTexts[i], wordsToSearch,counts)) {
                 text = htmlText[i]
-                // console.log(htmlText[i])
                 break
 
             }
 
 
         }
+        let ncount=counts.map(e=>e.tagscount)
+        let b=Math.max(...ncount)
+        let index=ncount.findIndex(e=>e==b)
+        if(b<4){
+            if(counts[index].percentmatch>45){
+            text=htmlText[index]
+
+        }
+        }
+        else{
+            text=htmlText[index]
+        }
+      
+          countwithDoc.push({count:b,docum:htmlText[index]})
         return text
     }
 
@@ -479,6 +544,7 @@
 
     let index = 0;
     function settext(wordArray) {
+        document.getElementById('Ans').classList.add('newclass')
         let html = ``
         for (let i = 0; i < wordArray.length; i++) {
             html += wordArray[i]
@@ -690,8 +756,6 @@
     function checkCommonelement(arr, arr1) {
         let result = false
         if (arr.length != 0) {
-
-
             arr.forEach((elem) => {
                 //if(elem.includes('|')){
                 let checArr = elem.split('|')
@@ -730,8 +794,9 @@
         else {
             wordArray = wordString.split(' ')
         }
+        let nwordArray=wordArray.filter(e=>!e.includes('['))
 
-        return wordArray.every(word => wordsToSearch.includes(word));
+        return nwordArray.every(word => wordsToSearch.includes(word));
     }
 
 </script>
